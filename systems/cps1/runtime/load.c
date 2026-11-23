@@ -26,6 +26,7 @@ static uint32_t place(const Cps1File *f, uint32_t i) {
     case CPS1_LOAD_ODD: return f->offset + i * 2;
     case CPS1_LOAD_SWAP16: return f->offset + (i ^ 1);
     case CPS1_LOAD_GFX4: return f->offset + (i >> 1) * 8 + (i & 1);
+    case CPS1_LOAD_GFX8: return f->offset + i * 8;
     default: return f->offset + i;
     }
 }

@@ -24,7 +24,8 @@ enum {
     CPS1_LOAD_EVEN,     /* an 8-bit chip on the 68000's upper byte: every other byte from offset */
     CPS1_LOAD_ODD,      /* the same on the lower byte (offset is odd) */
     CPS1_LOAD_SWAP16,   /* a 16-bit chip, its words byte-swapped into big-endian order */
-    CPS1_LOAD_GFX4      /* a 16-bit graphics chip: 2 bytes into every 8, at offset's slot (0, 2, 4, 6) */
+    CPS1_LOAD_GFX4,     /* a 16-bit graphics chip: 2 bytes into every 8, at offset's slot (0, 2, 4, 6) */
+    CPS1_LOAD_GFX8      /* an 8-bit graphics chip: 1 byte into every 8, at offset's slot (0-7) */
 };
 enum { CPS1_PLAIN, CPS1_QSOUND, CPS1_ODD };  /* board groups (docs/roadmap.md) */
 
@@ -32,6 +33,7 @@ typedef struct {
     uint32_t crc, size;
     uint8_t region, load;
     uint32_t offset;
+    uint8_t from_parent;         /* in the clone's parent zip, not its own */
 } Cps1File;
 
 #define CPS1_NONE 0xFF  /* a CPS-B port the board does not have */
@@ -61,6 +63,12 @@ typedef struct {
     uint8_t nfiles;
     Cps1File files[32];
     Cps1Mapper mapper;           /* the board's graphics ROM PAL */
+    uint8_t clock_mhz;           /* the 68000's: 10 or 12 */
+    uint8_t dip[3];              /* DIP switches A-C at their defaults, as read (active low) */
+    uint8_t in2, in3;            /* CPS-B ports of the extra inputs (players 3-4, kicks), or CPS1_NONE */
+    const char *parent;          /* a clone's parent zip (beside it) holding the rest of its files, or NULL */
+    uint8_t dial;                /* Forgotten Worlds' rotary dials */
+    int32_t stars;               /* the star layers' 32 KB in the graphics ROM, or -1: none */
 } Cps1Game;
 
 extern const Cps1Game cps1_games[];

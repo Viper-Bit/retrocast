@@ -70,16 +70,16 @@ static size_t zip_build(void) {  /* local headers and data, the directory, the e
 
 static uint8_t even[4] = {1, 2, 5, 6}, odd[4] = {3, 4, 7, 8}, swapped[4] = {0x22, 0x11, 0x44, 0x33};
 static uint8_t gfx[2][4] = {{0xA0, 0xA1, 0xA2, 0xA3}, {0xB0, 0xB1, 0xB2, 0xB3}}, plain[3] = {9, 8, 7};
-static Cps1Game test_game = {"test", "Test", CPS1_PLAIN, {16, 16, 3, 0}, {0}, 6, {{0}}, {{0}, 0, {{0}}}};
+static Cps1Game test_game = {"test", "Test", CPS1_PLAIN, {16, 16, 3, 0}, {0}, 6, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1};
 
 static void make_test_game(void) {
     Cps1File f[6] = {
-        {zip_crc32(even, 4), 4, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0},
-        {zip_crc32(odd, 4), 4, CPS1_R_MAIN, CPS1_LOAD_ODD, 1},
-        {zip_crc32(swapped, 4), 4, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 8},
-        {zip_crc32(gfx[0], 4), 4, CPS1_R_GFX, CPS1_LOAD_GFX4, 0},
-        {zip_crc32(gfx[1], 4), 4, CPS1_R_GFX, CPS1_LOAD_GFX4, 6},
-        {zip_crc32(plain, 3), 3, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0},
+        {zip_crc32(even, 4), 4, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0, 0},
+        {zip_crc32(odd, 4), 4, CPS1_R_MAIN, CPS1_LOAD_ODD, 1, 0},
+        {zip_crc32(swapped, 4), 4, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 8, 0},
+        {zip_crc32(gfx[0], 4), 4, CPS1_R_GFX, CPS1_LOAD_GFX4, 0, 0},
+        {zip_crc32(gfx[1], 4), 4, CPS1_R_GFX, CPS1_LOAD_GFX4, 6, 0},
+        {zip_crc32(plain, 3), 3, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0, 0},
     };
     memcpy(test_game.files, f, sizeof f);
 }
@@ -142,7 +142,7 @@ static void test_detector(void) {
 static Cps1 m;
 static uint8_t prog[1 << 20];
 static Cps1Game prog_game = {"prog", "Program", CPS1_PLAIN, {1 << 20, 0, 0, 0},
-                             {0x20, 0x0004, 0x00, 0x02, 0x04, 0x06, 0x2E, {0x26, 0x28, 0x2A, 0x2C}, 0x30, {0}}, 0, {{0}}, {{0}, 0, {{0}}}};
+                             {0x20, 0x0004, 0x00, 0x02, 0x04, 0x06, 0x2E, {0x26, 0x28, 0x2A, 0x2C}, 0x30, {0}}, 0, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1};
 static Cps1Rom prog_rom;
 
 static void w16(uint32_t a, uint16_t v) { prog[a] = (uint8_t)(v >> 8), prog[a + 1] = (uint8_t)v; }
@@ -333,6 +333,37 @@ static void test_gfx_mapper(void) {  /* S224B: a tile outside its layer's range 
     cps1_render(&m);
     assert(m.frame[(36 - 16) * CPS1_WIDTH + (99 - 64)] == 0xBFF);
     prog_game.mapper = none;
+}
+
+static void test_layout_gfx8(void) {  /* 8-bit graphics chips: one byte into every 8, at the offset's slot */
+    static uint8_t a[2] = {0xA0, 0xA1}, b[2] = {0xB0, 0xB1};
+    static Cps1Game g8 = {"g8", "G8", CPS1_PLAIN, {0, 16, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1};
+    g8.files[0] = (Cps1File){zip_crc32(a, 2), 2, CPS1_R_GFX, CPS1_LOAD_GFX8, 1, 0};
+    g8.files[1] = (Cps1File){zip_crc32(b, 2), 2, CPS1_R_GFX, CPS1_LOAD_GFX8, 6, 0};
+    zcount = 0;
+    zip_add("a", a, 2), zip_add("b", b, 2);
+    zip_build();
+    Zip z;
+    Cps1Rom r;
+    char err[128];
+    assert(zip_open(&z, zbuf, zlen) == 0 && cps1_load(&g8, &z, &r, err, sizeof err) == 0);
+    static const uint8_t want[16] = {0, 0xA0, 0, 0, 0, 0, 0xB0, 0, 0, 0xA1, 0, 0, 0, 0, 0xB1, 0};
+    assert(memcmp(r.region[CPS1_R_GFX], want, 16) == 0);
+    cps1_unload(&r);
+    zip_close(&z);
+}
+
+static void test_mapper_bounds(void) {  /* a mapper bank larger than the graphics ROM: no read past it */
+    static const Cps1Mapper big = {{0x10000}, 1, {{CPS1_GFX_SCROLL2, 0x0000, 0xFFFF, 0}}};
+    boot_video();
+    prog_rom.size[CPS1_R_GFX] = 0x10000;           /* 64 KB: tile codes up to $1FF */
+    prog_game.mapper = big;
+    cpsb(0x2E, ORDER);
+    cpsa(0x04, 0x9040);
+    for (unsigned i = 0; i < 64 * 64; i++) gram(0x4000 + i * 4, 0x7FFF), gram(0x4000 + i * 4 + 2, 0);  /* past the ROM */
+    cps1_render(&m);
+    for (int i = 0; i < CPS1_WIDTH * CPS1_HEIGHT; i++) assert(m.frame[i] == 0xBFF);
+    prog_game.mapper = (Cps1Mapper){{0}, 0, {{0}}};
 }
 
 /* ---- the YM2151 ---- */
@@ -641,6 +672,8 @@ int main(void) {
     test_sprite_flip();
     test_priority();
     test_gfx_mapper();
+    test_layout_gfx8();
+    test_mapper_bounds();
     test_opm_pitch();
     test_opm_octave();
     test_opm_timer_a();
