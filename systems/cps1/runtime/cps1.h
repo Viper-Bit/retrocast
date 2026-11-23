@@ -80,13 +80,20 @@ typedef struct {
     uint32_t size[CPS1_REGIONS];
 } Cps1Rom;
 
-/* The game whose files are all in the zip (by CRC and size), or NULL;
- * other entries (PAL dumps, clones of a merged set) do not matter. */
+/* The game whose own files are all in the zip (by CRC and size), or NULL;
+ * other entries (PAL dumps, clones of a merged set) do not matter, and a
+ * clone's files from its parent need not be there. Two matches: the one
+ * with more of its own files, then the first. */
 const Cps1Game *cps1_match(const Zip *z);
 const Cps1Game *cps1_match_in(const Zip *z, const Cps1Game *games, int n);
 /* 0, or -1 with the first missing or damaged file (its CRC) in err. */
 int cps1_load(const Cps1Game *g, const Zip *z, Cps1Rom *r, char *err, size_t errlen);
 void cps1_unload(Cps1Rom *r);
+/* A game's zip (data, read from path) matched and loaded; a clone's other
+ * files from "<parent>.zip" in the same folder. 0, or -1 with a message. */
+int cps1_open(const char *path, const uint8_t *data, size_t size, Cps1Rom *r, char *err, size_t errlen);
+int cps1_open_in(const char *path, const uint8_t *data, size_t size, const Cps1Game *games, int n, Cps1Rom *r,
+                 char *err, size_t errlen);
 
 /* ---- the machine (cps1.c) ---- */
 

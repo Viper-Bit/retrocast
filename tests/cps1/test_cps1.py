@@ -84,6 +84,12 @@ class TestHeadless(unittest.TestCase):
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             self.assertEqual(open(a, "rb").read(), open(b, "rb").read())
 
+    @unittest.skipUnless(all(os.path.exists(os.path.join(SET, z)) for z in ("sf2hf.zip", "sf2ce.zip")), "no sf2hf.zip and sf2ce.zip in " + SET)
+    def test_sf2hf(self):  # a clone zip: the rest of its chips from sf2ce.zip beside it
+        r = subprocess.run([RUNNER, os.path.join(SET, "sf2hf.zip"), "--frames", "600"], capture_output=True, text=True, timeout=300)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        self.assertGreaterEqual(int(re.search(r"colours=(\d+)", r.stdout).group(1)), 16, r.stdout)
+
 
 if __name__ == "__main__":
     unittest.main()

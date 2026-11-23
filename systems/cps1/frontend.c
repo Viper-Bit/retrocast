@@ -24,13 +24,10 @@ static int sys_open(const char *path, const Settings *settings, SysInfo *info, c
     size_t size = 0;
     uint8_t *data = SDL_LoadFile(path, &size);
     if (!data) return snprintf(err, errlen, "%s: %s", path, SDL_GetError()), 1;
-    Zip z;
-    const Cps1Game *g = zip_open(&z, data, size) ? NULL : cps1_match(&z);
-    int bad = !g ? (snprintf(err, errlen, "%s: not a CPS-1 game this program knows", path), 1)
-                 : cps1_load(g, &z, &rom, err, errlen);
-    if (g) zip_close(&z);
+    int bad = cps1_open(path, data, size, &rom, err, errlen);
     SDL_free(data);
     if (bad) return 1;
+    const Cps1Game *g = rom.game;
     loaded = 1;
     cps1_init(&machine, &rom);
     snprintf(info->name, sizeof info->name, "%s", g->title);

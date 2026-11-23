@@ -64,14 +64,11 @@ int main(int argc, char **argv) {
     size_t size;
     uint8_t *data = read_file(path, &size);
     if (!data) return fprintf(stderr, "%s: cannot read\n", path), 1;
-    Zip z;
-    const Cps1Game *g = zip_open(&z, data, size) ? NULL : cps1_match(&z);
-    if (!g) return fprintf(stderr, "%s: not a CPS-1 game this program knows\n", path), 1;
     Cps1Rom rom;
-    char err[256];
-    if (cps1_load(g, &z, &rom, err, sizeof err)) return fprintf(stderr, "%s\n", err), 1;
-    zip_close(&z);
+    char err[512];
+    if (cps1_open(path, data, size, &rom, err, sizeof err)) return fprintf(stderr, "%s\n", err), 1;
     free(data);
+    const Cps1Game *g = rom.game;
 
     cps1_init(&machine, &rom);
     if (state_in && cps1_state_load(&machine, state_in, err, sizeof err)) return fprintf(stderr, "%s\n", err), 2;

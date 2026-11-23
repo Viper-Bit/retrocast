@@ -594,6 +594,54 @@ static void test_sound_buffer(void) {
     assert(n >= 936 && n <= 940);
 }
 
+/* ---- clones and their parent's zip ---- */
+
+static void write_zip(const char *path) {
+    FILE *f = fopen(path, "wb");
+    fwrite(zbuf, 1, zlen, f), fclose(f);
+}
+
+static void test_clone_parent(void) {
+    static uint8_t own[4] = {1, 2, 3, 4}, shared[4] = {5, 6, 7, 8};
+    static Cps1Game clone = {"clone", "Clone", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "cps1_par", 0, -1};
+    clone.files[0] = (Cps1File){zip_crc32(own, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0};
+    clone.files[1] = (Cps1File){zip_crc32(shared, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 4, 1};
+    zcount = 0, zip_add("own", own, 4), zip_build(), write_zip("cps1_clone.zip");
+    static uint8_t clone_zip[256];
+    size_t clone_len = zlen;
+    memcpy(clone_zip, zbuf, zlen);
+    Zip z;
+    assert(zip_open(&z, clone_zip, clone_len) == 0);
+    assert(cps1_match_in(&z, &clone, 1) == &clone);  /* its own files are enough to know it */
+    zip_close(&z);
+    Cps1Rom r;
+    char err[256] = "";
+    remove("cps1_par.zip");
+    assert(cps1_open_in("cps1_clone.zip", clone_zip, clone_len, &clone, 1, &r, err, sizeof err) == -1);
+    assert(strstr(err, "cps1_par.zip"));
+    zcount = 0, zip_add("shared", shared, 4), zip_build(), write_zip("cps1_par.zip");
+    assert(cps1_open_in("cps1_clone.zip", clone_zip, clone_len, &clone, 1, &r, err, sizeof err) == 0);
+    static const uint8_t want[8] = {1, 2, 3, 4, 5, 6, 7, 8};
+    assert(memcmp(r.region[CPS1_R_MAIN], want, 8) == 0);
+    cps1_unload(&r);
+    remove("cps1_clone.zip"), remove("cps1_par.zip");
+}
+
+static void test_match_order(void) {  /* a zip two games match: the one with more of its own files */
+    static uint8_t a[4] = {9, 9, 9, 1}, b[4] = {9, 9, 9, 2};
+    static Cps1Game two[2] = {
+        {"small", "Small", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 1, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1},
+        {"big", "Big", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1}};
+    two[0].files[0] = (Cps1File){zip_crc32(a, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0};
+    two[1].files[0] = two[0].files[0];
+    two[1].files[1] = (Cps1File){zip_crc32(b, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 4, 0};
+    zcount = 0, zip_add("a", a, 4), zip_add("b", b, 4), zip_build();
+    Zip z;
+    assert(zip_open(&z, zbuf, zlen) == 0);
+    assert(cps1_match_in(&z, two, 2) == &two[1]);
+    zip_close(&z);
+}
+
 /* ---- save states ---- */
 
 static Cps1 m2;
@@ -691,6 +739,8 @@ int main(void) {
     test_bank();
     test_ym_irq();
     test_sound_buffer();
+    test_clone_parent();
+    test_match_order();
     test_state_roundtrip();
     test_state_refused();
     puts("cps1_tests: ok");

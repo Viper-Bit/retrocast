@@ -5,16 +5,25 @@
 
 #include "cps1.h"
 
-static int has_all(const Zip *z, const Cps1Game *g) {
-    for (int i = 0; i < g->nfiles; i++)
+/* The number of the game's own files, if all are in the zip; else 0. */
+static int own_files(const Zip *z, const Cps1Game *g) {
+    int n = 0;
+    for (int i = 0; i < g->nfiles; i++) {
+        if (g->files[i].from_parent) continue;
         if (!zip_find_crc(z, g->files[i].crc, g->files[i].size)) return 0;
-    return 1;
+        n++;
+    }
+    return n;
 }
 
 const Cps1Game *cps1_match_in(const Zip *z, const Cps1Game *games, int n) {
-    for (int i = 0; i < n; i++)
-        if (has_all(z, &games[i])) return &games[i];
-    return NULL;
+    const Cps1Game *best = NULL;
+    int most = 0;
+    for (int i = 0; i < n; i++) {
+        int k = own_files(z, &games[i]);
+        if (k > most) most = k, best = &games[i];
+    }
+    return best;
 }
 
 const Cps1Game *cps1_match(const Zip *z) { return cps1_match_in(z, cps1_games, cps1_game_count); }
@@ -31,7 +40,7 @@ static uint32_t place(const Cps1File *f, uint32_t i) {
     }
 }
 
-int cps1_load(const Cps1Game *g, const Zip *z, Cps1Rom *r, char *err, size_t errlen) {
+static int load_from(const Cps1Game *g, const Zip *z, const Zip *pz, Cps1Rom *r, char *err, size_t errlen) {
     memset(r, 0, sizeof *r);
     r->game = g;
     for (int k = 0; k < CPS1_REGIONS; k++) {
@@ -43,9 +52,10 @@ int cps1_load(const Cps1Game *g, const Zip *z, Cps1Rom *r, char *err, size_t err
     }
     for (int i = 0; i < g->nfiles; i++) {
         const Cps1File *f = &g->files[i];
-        const ZipEntry *e = zip_find_crc(z, f->crc, f->size);
+        const Zip *from = f->from_parent && pz ? pz : z;
+        const ZipEntry *e = zip_find_crc(from, f->crc, f->size);
         uint8_t *chip = e ? malloc(f->size) : NULL;
-        if (!e || !chip || zip_read(z, e, chip)) {
+        if (!e || !chip || zip_read(from, e, chip)) {
             snprintf(err, errlen, "%s: the file with CRC %08x is %s", g->id, (unsigned)f->crc, e ? "damaged" : "missing");
             free(chip);
             return cps1_unload(r), -1;
@@ -67,4 +77,47 @@ int cps1_load(const Cps1Game *g, const Zip *z, Cps1Rom *r, char *err, size_t err
 void cps1_unload(Cps1Rom *r) {
     for (int k = 0; k < CPS1_REGIONS; k++) free(r->region[k]);
     memset(r, 0, sizeof *r);
+}
+
+int cps1_load(const Cps1Game *g, const Zip *z, Cps1Rom *r, char *err, size_t errlen) {
+    return load_from(g, z, NULL, r, err, errlen);
+}
+
+int cps1_open_in(const char *path, const uint8_t *data, size_t size, const Cps1Game *games, int n, Cps1Rom *r,
+                 char *err, size_t errlen) {
+    Zip z, pz;
+    const Cps1Game *g = zip_open(&z, data, size) ? NULL : cps1_match_in(&z, games, n);
+    if (!g) {
+        if (z.entries) zip_close(&z);
+        return snprintf(err, errlen, "%s: not a CPS-1 game this program knows", path), -1;
+    }
+    uint8_t *pdata = NULL;
+    int bad = 0;
+    if (g->parent) {  /* "<folder>/<parent>.zip" */
+        char ppath[1024];
+        size_t dir = strlen(path);
+        while (dir && path[dir - 1] != '/' && path[dir - 1] != '\\') dir--;
+        snprintf(ppath, sizeof ppath, "%.*s%s.zip", (int)dir, path, g->parent);
+        FILE *f = fopen(ppath, "rb");
+        long n2 = -1;
+        if (f && !fseek(f, 0, SEEK_END)) n2 = ftell(f);
+        if (f && n2 > 0 && !fseek(f, 0, SEEK_SET) && (pdata = malloc((size_t)n2)) && fread(pdata, 1, (size_t)n2, f) == (size_t)n2 &&
+            !zip_open(&pz, pdata, (size_t)n2)) {
+            bad = load_from(g, &z, &pz, r, err, errlen);
+            zip_close(&pz);
+        } else {
+            bad = -1;
+            snprintf(err, errlen, "%s: %s needs %s.zip beside it", path, g->id, g->parent);
+        }
+        if (f) fclose(f);
+    } else {
+        bad = load_from(g, &z, NULL, r, err, errlen);
+    }
+    free(pdata);
+    zip_close(&z);
+    return bad ? -1 : 0;
+}
+
+int cps1_open(const char *path, const uint8_t *data, size_t size, Cps1Rom *r, char *err, size_t errlen) {
+    return cps1_open_in(path, data, size, cps1_games, cps1_game_count, r, err, errlen);
 }
