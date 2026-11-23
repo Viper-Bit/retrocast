@@ -70,7 +70,7 @@ static size_t zip_build(void) {  /* local headers and data, the directory, the e
 
 static uint8_t even[4] = {1, 2, 5, 6}, odd[4] = {3, 4, 7, 8}, swapped[4] = {0x22, 0x11, 0x44, 0x33};
 static uint8_t gfx[2][4] = {{0xA0, 0xA1, 0xA2, 0xA3}, {0xB0, 0xB1, 0xB2, 0xB3}}, plain[3] = {9, 8, 7};
-static Cps1Game test_game = {"test", "Test", CPS1_PLAIN, {16, 16, 3, 0}, {0}, 6, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0};
+static Cps1Game test_game = {"test", "Test", CPS1_PLAIN, {16, 16, 3, 0}, {0}, 6, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0};
 
 static void make_test_game(void) {
     Cps1File f[6] = {
@@ -142,7 +142,7 @@ static void test_detector(void) {
 static Cps1 m;
 static uint8_t prog[1 << 20];
 static Cps1Game prog_game = {"prog", "Program", CPS1_PLAIN, {1 << 20, 0, 0, 0},
-                             {0x20, 0x0004, 0x00, 0x02, 0x04, 0x06, 0x2E, {0x26, 0x28, 0x2A, 0x2C}, 0x30, {0}}, 0, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0};
+                             {0x20, 0x0004, 0x00, 0x02, 0x04, 0x06, 0x2E, {0x26, 0x28, 0x2A, 0x2C}, 0x30, {0}}, 0, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0};
 static Cps1Rom prog_rom;
 
 static void w16(uint32_t a, uint16_t v) { prog[a] = (uint8_t)(v >> 8), prog[a + 1] = (uint8_t)v; }
@@ -191,6 +191,17 @@ static void test_cpsb(void) {
     m68k_write(&m.cpu, 0x800140 + 0x02, 400, 5, 3);
     uint32_t p = (uint32_t)m68k_read(&m.cpu, 0x800140 + 0x06, 5, 3) << 16 | m68k_read(&m.cpu, 0x800140 + 0x04, 5, 3);
     assert(p == 120000);
+}
+
+static void test_cpsb_high(void) {  /* Street Fighter II revision E: the CPS-B at $8001C0, nothing at $800140 */
+    boot_program();
+    prog_game.cpsb_high = 1;
+    cps1_init(&m, &prog_rom);
+    assert(m68k_read(&m.cpu, 0x8001C0 + 0x20, 5, 3) == 0x0004);  /* the ID port */
+    assert(m68k_read(&m.cpu, 0x800140 + 0x20, 5, 3) == 0xFFFF);
+    m68k_write(&m.cpu, 0x8001C0 + 0x2E, 0x1234, 5, 3);
+    assert(m.cpsb[0x2E >> 1] == 0x1234);
+    prog_game.cpsb_high = 0;
 }
 
 static void test_unmapped(void) {
@@ -337,7 +348,7 @@ static void test_gfx_mapper(void) {  /* S224B: a tile outside its layer's range 
 
 static void test_layout_gfx8(void) {  /* 8-bit graphics chips: one byte into every 8, at the offset's slot */
     static uint8_t a[2] = {0xA0, 0xA1}, b[2] = {0xB0, 0xB1};
-    static Cps1Game g8 = {"g8", "G8", CPS1_PLAIN, {0, 16, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0};
+    static Cps1Game g8 = {"g8", "G8", CPS1_PLAIN, {0, 16, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0};
     g8.files[0] = (Cps1File){zip_crc32(a, 2), 2, CPS1_R_GFX, CPS1_LOAD_GFX8, 1, 0};
     g8.files[1] = (Cps1File){zip_crc32(b, 2), 2, CPS1_R_GFX, CPS1_LOAD_GFX8, 6, 0};
     zcount = 0;
@@ -706,7 +717,7 @@ static void write_zip(const char *path) {
 
 static void test_clone_parent(void) {
     static uint8_t own[4] = {1, 2, 3, 4}, shared[4] = {5, 6, 7, 8};
-    static Cps1Game clone = {"clone", "Clone", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "cps1_par", 0, -1, CPS1_EXTRA_NONE, 0};
+    static Cps1Game clone = {"clone", "Clone", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "cps1_par", 0, -1, CPS1_EXTRA_NONE, 0, 0};
     clone.files[0] = (Cps1File){zip_crc32(own, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0};
     clone.files[1] = (Cps1File){zip_crc32(shared, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 4, 1};
     zcount = 0, zip_add("own", own, 4), zip_build(), write_zip("cps1_clone.zip");
@@ -733,8 +744,8 @@ static void test_clone_parent(void) {
 static void test_match_order(void) {  /* a zip two games match: the one with more of its own files */
     static uint8_t a[4] = {9, 9, 9, 1}, b[4] = {9, 9, 9, 2};
     static Cps1Game two[2] = {
-        {"small", "Small", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 1, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0},
-        {"big", "Big", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0}};
+        {"small", "Small", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 1, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0},
+        {"big", "Big", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0}};
     two[0].files[0] = (Cps1File){zip_crc32(a, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0};
     two[1].files[0] = two[0].files[0];
     two[1].files[1] = (Cps1File){zip_crc32(b, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 4, 0};
@@ -815,6 +826,7 @@ int main(void) {
     test_inputs();
     test_cpsb();
     test_unmapped();
+    test_cpsb_high();
     test_byte_writes();
     test_palette();
     test_scroll1_tile();

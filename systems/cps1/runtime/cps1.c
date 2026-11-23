@@ -107,7 +107,8 @@ static uint16_t rd(Cps1 *s, uint32_t a, unsigned strobe) {
     if (a == 0x800000) return players(s);
     if (a == 0x800018) return (uint16_t)(system_in(s) << 8 | 0xFF);
     if (a >= 0x80001A && a < 0x800020) return (uint16_t)(s->dip[(a - 0x80001A) >> 1] << 8 | 0xFF);
-    if (a >= 0x800140 && a < 0x800180) return cpsb_read(s, a - 0x800140);
+    uint32_t cpsb = s->rom->game->cpsb_high ? 0x8001C0 : 0x800140;  /* revision E of Street Fighter II: higher */
+    if (a >= cpsb && a < cpsb + 0x40) return cpsb_read(s, a - cpsb);
     if (s->rom->game->dial && ((a >= 0x800052 && a < 0x800056) || (a >= 0x80005A && a < 0x80005E))) {
         int p = a >= 0x80005A;  /* the uPD4701: 12 bits since the last reset, low byte then high */
         uint32_t c = (uint32_t)(s->dial[p] - s->dial_start[p]) & 0xFFF;
@@ -124,7 +125,10 @@ static void wr(Cps1 *s, uint32_t a, uint16_t v, unsigned strobe) {
         s->cpsa[(a - 0x800100) >> 1] = merge(s->cpsa[(a - 0x800100) >> 1], v, strobe);
         if (a == 0x80010A) cps1_palette_upload(s);
     }
-    else if (a >= 0x800140 && a < 0x800180) cpsb_write(s, a - 0x800140, merge(s->cpsb[(a - 0x800140) >> 1], v, strobe));
+    else if (a >= (s->rom->game->cpsb_high ? 0x8001C0u : 0x800140u) && a < (s->rom->game->cpsb_high ? 0x800200u : 0x800180u)) {
+        uint32_t off = a - (s->rom->game->cpsb_high ? 0x8001C0u : 0x800140u);
+        cpsb_write(s, off, merge(s->cpsb[off >> 1], v, strobe));
+    }
     else if (a >= 0x800180 && a < 0x800188) s->sound_cmd = (uint8_t)v;   /* P3: the Z80 reads it */
     else if (a >= 0x800188 && a < 0x800190) s->sound_fade = (uint8_t)v;
     else if (s->rom->game->dial && (a == 0x800040 || a == 0x800048) && (strobe & 1))

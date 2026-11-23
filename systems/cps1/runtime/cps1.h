@@ -62,7 +62,7 @@ typedef struct {
     uint32_t region_size[CPS1_REGIONS];
     Cps1B b;
     uint8_t nfiles;
-    Cps1File files[32];
+    Cps1File files[48];          /* the most a board uses: 43 (Japanese boards of many small chips) */
     Cps1Mapper mapper;           /* the board's graphics ROM PAL */
     uint8_t clock_mhz;           /* the 68000's: 10 or 12 */
     uint8_t dip[3];              /* DIP switches A-C at their defaults, as read (active low) */
@@ -72,6 +72,7 @@ typedef struct {
     int32_t stars;               /* the star layers' 32 KB in the graphics ROM, or -1: none */
     uint8_t extra;               /* what the in2 port holds: CPS1_EXTRA_* */
     uint16_t rotate;             /* the monitor, as MAME's ROT: 0, or 270 (turned 90 degrees anticlockwise) */
+    uint8_t cpsb_high;           /* the CPS-B at $8001C0, not $800140 (Street Fighter II revision E, MAME's init_sf2ee) */
 } Cps1Game;
 
 extern const Cps1Game cps1_games[];

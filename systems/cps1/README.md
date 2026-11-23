@@ -6,14 +6,20 @@ A game is the zip of its chip dumps, as MAME and FBNeo sets have them
 without a window.
 
 ## Status
-- **Games** (21, the plain boards): 1941, Three Wonders, Carrier Air Wing,
-  Capcom World 2 (Japan), Dynasty Wars, Final Fight, Forgotten Worlds,
-  Ghouls'n Ghosts, Knights of the Round, The King of Dragons, Mercs,
-  Magic Sword, Mega Twins, Nemo, Street Fighter II, its Champion Edition
-  and Hyper Fighting, Strider, U.N. Squadron, Varth, Willow. Each is the
-  set MAME 0.289 knows it as, with that set's chip layout, CPS-B, graphics
-  ROM mapper, DIP switch defaults and clock (10 or 12 MHz). Not yet: the
-  Q-Sound games and the odd boards ([roadmap](docs/roadmap.md)).
+- **Games** (67 sets, the plain boards): every set of MAME 0.289's
+  `cps1.cpp` that a zip in the set here holds whole, by CRC: 1941, Three
+  Wonders, Area 88, Carrier Air Wing, Chiki Chiki Boys, Capcom World 2,
+  Daimakaimura, Dynasty Wars, Final Fight, Forgotten Worlds and Lost Worlds,
+  Ghouls'n Ghosts, Knights of the Round, The King of Dragons, Mercs, Magic
+  Sword, Mega Twins, Nemo, Street Fighter II, Champion Edition and Hyper
+  Fighting, Strider, U.N. Squadron, Varth, Willow, with their regional
+  versions and revisions (`ffightj`, `sf2ue`, ...). Each with its set's chip
+  layout, CPS-B (and where it sits: revision E of Street Fighter II has it
+  at $8001C0), graphics ROM mapper, DIP defaults and clock. Not yet: the
+  Q-Sound games and the odd boards ([roadmap](docs/roadmap.md)); bootlegs
+  needing their own protection or input wiring (MAME's `init_sf2hack`,
+  `init_sf2rb`); sets loading part of a chip (`captcomb`, `daimakr2`,
+  `wofhfh`); `sf2accp2` and `sf2rb3` (a black screen, not found yet).
 - **Clone zips**: a zip holding only a clone's own chips takes the rest
   from its parent's zip beside it (`sf2hf.zip` from `sf2ce.zip`).
   `captcomu.zip` (Captain Commando, USA) needs `captcomm.zip`, which the

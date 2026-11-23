@@ -30,16 +30,17 @@ before the thing it checks. A milestone is done when its exit test passes.
   `cps1_headless --ppm`, checked by eye.
 
 ## P5 · The plain-board games
-- [x] 20 more games from MAME 0.289's sets (layouts, CPS-B, mappers, DIP
-  defaults, clocks), an 8-bit graphics load layout; clone zips with their
+- [x] 66 more sets from MAME 0.289's (layouts, CPS-B, mappers, DIP
+  defaults, clocks; revision E's CPS-B address), an 8-bit graphics load layout; clone zips with their
   parent's; 12 MHz boards; the extra input port (Street Fighter II's
   kicks, a third player); Forgotten Worlds' dial; the two star layers,
   flip screen, vertical monitors.
-- [x] **Exit:** the boot test (`TestBoot`: 21 games, 1,800 frames of
+- [x] **Exit:** the boot test (`TestBoot`: every game in the table, 3,000 frames of
   `--play`, a picture and no halt); a contact sheet of every game next to
   MAME's picture at the same frame, checked by eye.
-- Open: captcomu (its parent `captcomm.zip` is not in the set); a third
-  and fourth player in `retrocast`.
+- Open: bootlegs needing their own protection or input wiring; sets loading
+  part of a chip; `sf2accp2` and `sf2rb3`; a fourth player (Captain
+  Commando); a third and fourth player in `retrocast`.
 
 ## P4 · The window, detection, save states
 - [x] The graphics ROM mapper per board (Final Fight's S224B): a tile code

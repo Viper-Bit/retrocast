@@ -5,6 +5,23 @@ reproducible check is not "verified".
 
 Checks of shared parts: [docs/verification-log.md](../../../docs/verification-log.md).
 
+## 2026-11-24 · P5 · every plain-board set in the new folder
+- **The folder**: rebuilt from a MAME split set (CPS-new) and the old
+  folders, by CRC against MAME 0.289; the old contents kept in
+  `D:oms\_old-cps`. All 21 earlier games are recognised in the new zips;
+  `cworld2j.zip` is the old one (the new lacks chip q5_35).
+- **The table**: generated over the whole folder: 67 sets. A zip counts
+  as a set when every chip is there by CRC (or as another dump under the
+  chip's name, as cworld2j's `q535.bin`), with its parent's zip.
+- **Revision E of Street Fighter II** (`sf2ue`): stopped on "CPS NG": its
+  B-board maps the CPS-B at $8001C0 (MAME's `init_sf2ee`); now mapped
+  there (`cps1_tests`: `test_cpsb_high`).
+- **Boot test**: the 67 games, 3,000 frames of `--play`: each shows a
+  picture and none halts.
+- **Left out, with the reason**: 10 bootlegs needing MAME's `init_sf2hack`
+  / `init_sf2rb` / `init_sf2rb2`; `captcomb`, `daimakr2`, `wofhfh` (a chip
+  loaded in part); `sf2accp2`, `sf2rb3` (a black screen).
+
 ## 2026-11-24 · P5 · the plain-board games
 - **Which set each zip is**: every zip's CRCs against MAME 0.289's sets
   (leaving out the PAL dumps, whose versions differ): 20 match a set
