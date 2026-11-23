@@ -13,7 +13,7 @@ test; it is "done" only when that test passes in CI.
 | Atari 2600 | [A1-A6](../systems/atari2600/docs/roadmap.md) | done (cartridge schemes, TIA quirks and test ROMs open) |
 | Master System / Mark III | [S1-S3](../systems/mastersystem/docs/roadmap.md) | done (public test ROMs open) |
 | Game Gear | a mode of the Master System ([S4](../systems/mastersystem/docs/roadmap.md)) | done (stereo open) |
-| Capcom Play System I | [P1-P8](../systems/cps1/docs/roadmap.md) | P1-P4 done (zips; the machine, picture and sound; `retrocast`; Final Fight) |
+| Capcom Play System I | [P1-P8](../systems/cps1/docs/roadmap.md) | P1-P5 done (zips; the machine, picture and sound; `retrocast`; 21 games) |
 | Next systems | arcade (Neo Geo, CPS-2), SNES, GBA: not started | open |
 
 A new system follows the same steps: CPU templates and interpreter

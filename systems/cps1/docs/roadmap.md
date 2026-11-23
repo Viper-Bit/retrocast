@@ -9,7 +9,7 @@ before the thing it checks. A milestone is done when its exit test passes.
 | P2 | the 68000 machine, CPS-A/CPS-B picture, the game table with Final Fight | done |
 | P3 | sound: Z80, YM2151, OKI MSM6295 | done |
 | P4 | the window (`retrocast`, `cps1.ini`), CMake detection, save states | done |
-| P5 | every plain-board game (their mappers); stars, flip screen, raster interrupts | open |
+| P5 | every plain-board game (their mappers); stars, flip screen, vertical monitors | done |
 | P6 | the recompiler (`cps1recomp`, `-DROMS`, `--diff`) | open |
 | P7 | the Q-Sound games: dino, punisher, wof, slammasu, mbombrd | open |
 | P8 | the rest: pang3, megaman, pnickj, qad, qtono2 | open |
@@ -28,6 +28,18 @@ before the thing it checks. A milestone is done when its exit test passes.
   sprites and priority; the game table (Final Fight).
 - [x] **Exit:** `cps1_tests`; Final Fight reaches its title in
   `cps1_headless --ppm`, checked by eye.
+
+## P5 · The plain-board games
+- [x] 20 more games from MAME 0.289's sets (layouts, CPS-B, mappers, DIP
+  defaults, clocks), an 8-bit graphics load layout; clone zips with their
+  parent's; 12 MHz boards; the extra input port (Street Fighter II's
+  kicks, a third player); Forgotten Worlds' dial; the two star layers,
+  flip screen, vertical monitors.
+- [x] **Exit:** the boot test (`TestBoot`: 21 games, 1,800 frames of
+  `--play`, a picture and no halt); a contact sheet of every game next to
+  MAME's picture at the same frame, checked by eye.
+- Open: captcomu (its parent `captcomm.zip` is not in the set); a third
+  and fourth player in `retrocast`.
 
 ## P4 · The window, detection, save states
 - [x] The graphics ROM mapper per board (Final Fight's S224B): a tile code

@@ -5,6 +5,37 @@ reproducible check is not "verified".
 
 Checks of shared parts: [docs/verification-log.md](../../../docs/verification-log.md).
 
+## 2026-11-24 · P5 · the plain-board games
+- **Which set each zip is**: every zip's CRCs against MAME 0.289's sets
+  (leaving out the PAL dumps, whose versions differ): 20 match a set
+  whole; cworld2j differs in one chip (another dump; its own CRC is
+  used); sf2hf holds 7 chips and takes 15 from sf2ce.zip; captcomu holds
+  4 of 15, its parent captcomm.zip is not in the set.
+- **The table**: generated from MAME's layouts, configs, mappers and DIP
+  defaults with the zips' CRCs; the generator checks it read as many
+  chips as each region lists (a first run had dropped 4 chips of willow
+  and kod, behind block comments).
+- **Self-checks** (`cps1_tests`): the 8-bit graphics layout, a mapper
+  larger than the ROM, flip screen, a star at its place and colour, a
+  picture turned for a vertical monitor, a 12 MHz frame (768 clocks a
+  line, VBlank and the sound unchanged), the extra port as player 3 and
+  as kicks, DIP defaults, the dial (+60 in 3 frames, back past zero),
+  a clone loading from its parent's zip or naming it when it is missing,
+  the zip matching two games taking the one with more of its own files.
+- **Boot test** (`TestBoot`): 21 games, 1,800 frames of `--play`: each
+  shows a picture of 8 or more colours (dynwar's frame is its text intro)
+  and none halts.
+- **Against MAME** (its snapshots at frame 1,800, a coin at 300 and Start
+  at 1,300 as `--play`; the sets MAME refuses for missing PAL dumps run
+  from copies with placeholder files): cawing, dynwar, forgottn, ghouls,
+  knights, mercs, msword, nemo, strider, unsquad, varth and willow show the
+  same picture; 1941, 3wonders, cworld2j, ffight, kod, mtwins and the
+  Street Fighter IIs the same game at another moment (the CPUs' timing is
+  not MAME's; the Street Fighter IIs: our `--play` presses button 1, which
+  picks a fighter). Ghouls'n Ghosts' grey castle is MAME's too.
+- **Not checked**: each game played by hand; three players; the dial by
+  hand.
+
 ## 2026-11-24 · P4 · the window, detection, save states
 - **Save states** (`cps1_tests`): a state with a sound command pending,
   loaded into a second machine, gives the same 20 frames and samples; a

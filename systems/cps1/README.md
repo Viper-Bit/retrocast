@@ -6,8 +6,18 @@ A game is the zip of its chip dumps, as MAME and FBNeo sets have them
 without a window.
 
 ## Status
-- **Games**: Final Fight (World). The others in the set follow by board
-  group ([roadmap](docs/roadmap.md)).
+- **Games** (21, the plain boards): 1941, Three Wonders, Carrier Air Wing,
+  Capcom World 2 (Japan), Dynasty Wars, Final Fight, Forgotten Worlds,
+  Ghouls'n Ghosts, Knights of the Round, The King of Dragons, Mercs,
+  Magic Sword, Mega Twins, Nemo, Street Fighter II, its Champion Edition
+  and Hyper Fighting, Strider, U.N. Squadron, Varth, Willow. Each is the
+  set MAME 0.289 knows it as, with that set's chip layout, CPS-B, graphics
+  ROM mapper, DIP switch defaults and clock (10 or 12 MHz). Not yet: the
+  Q-Sound games and the odd boards ([roadmap](docs/roadmap.md)).
+- **Clone zips**: a zip holding only a clone's own chips takes the rest
+  from its parent's zip beside it (`sf2hf.zip` from `sf2ce.zip`).
+  `captcomu.zip` (Captain Commando, USA) needs `captcomm.zip`, which the
+  set here lacks.
 - **Zips**: read by `core/zip.c` (our own inflate); a game is matched by the
   CRCs and sizes of its files, so names, PAL dumps and the clones of a
   merged set do not matter.
@@ -23,8 +33,10 @@ without a window.
 - **Picture**: the palette (six pages, uploaded on a palette-base write),
   scroll1-3 with flips and scroll2's row scroll, sprites of up to 16x16
   blocks, layer order and the priority masks, the board's graphics ROM
-  mapper (which tile codes each layer may use). Not yet: stars, flip
-  screen, raster interrupts.
+  mapper (which tile codes each layer may use), the two star layers,
+  flip screen, vertical monitors (1941, Mercs, Varth turned as MAME does).
+  The frame is drawn at once from VBlank's state, as MAME draws it (the
+  CPS-1 has no raster interrupt).
 - **Detection**: a zip holding every file of a game in the table, by CRC
   and size, in `retrocast` and in the build (`cmake/detect_system.cmake`
   reads the table from `games.c`).
@@ -35,7 +47,12 @@ without a window.
 ## Controls and settings
 Both players: buttons 1, 2, 3 on the pad's B, A and X (keyboard Z, X, S;
 gamepad South, East, North), a coin on Select (Right Shift, gamepad Back),
-Start. `cps1.ini` next to `retrocast` has no CPS-1 settings yet.
+Start. Street Fighter II's kicks (buttons 4-6) are on Y, L and R (keyboard
+A, Q, W). Forgotten Worlds' rotary dial turns with L and R, 20 steps a
+frame as MAME's keys turn it. A third player (Knights of the Round, The
+King of Dragons, Mercs) is read in `cps1_headless` only: `retrocast` has
+two pads. `cps1.ini` next to `retrocast` has no CPS-1 settings yet (the
+DIP switches keep each game's defaults).
 
 ## Running
 `retrocast GAME.zip` plays it. `cps1_headless GAME.zip [--frames N]
