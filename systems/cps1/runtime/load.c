@@ -52,8 +52,9 @@ static int load_from(const Cps1Game *g, const Zip *z, const Zip *pz, Cps1Rom *r,
     }
     for (int i = 0; i < g->nfiles; i++) {
         const Cps1File *f = &g->files[i];
-        const Zip *from = f->from_parent && pz ? pz : z;
-        const ZipEntry *e = zip_find_crc(from, f->crc, f->size);
+        const Zip *from = z;  /* a merged zip holds its parent's chips too */
+        const ZipEntry *e = zip_find_crc(z, f->crc, f->size);
+        if (!e && f->from_parent && pz) e = zip_find_crc(from = pz, f->crc, f->size);
         uint8_t *chip = e ? malloc(f->size) : NULL;
         if (!e || !chip || zip_read(from, e, chip)) {
             snprintf(err, errlen, "%s: the file with CRC %08x is %s", g->id, (unsigned)f->crc, e ? "damaged" : "missing");
@@ -87,13 +88,21 @@ int cps1_open_in(const char *path, const uint8_t *data, size_t size, const Cps1G
                  char *err, size_t errlen) {
     Zip z, pz;
     const Cps1Game *g = zip_open(&z, data, size) ? NULL : cps1_match_in(&z, games, n);
+    size_t base = strlen(path), end;
+    while (base && path[base - 1] != '/' && path[base - 1] != '\\') base--;
+    end = strlen(path) > base + 4 ? strlen(path) - 4 : base;
+    for (int i = 0; g && i < n; i++)  /* a merged zip matches its clones too: the set named like the zip */
+        if (strlen(games[i].id) == end - base && !strncmp(games[i].id, path + base, end - base) && own_files(&z, &games[i])) g = &games[i];
     if (!g) {
         if (z.entries) zip_close(&z);
         return snprintf(err, errlen, "%s: not a CPS-1 game this program knows", path), -1;
     }
     uint8_t *pdata = NULL;
     int bad = 0;
-    if (g->parent) {  /* "<folder>/<parent>.zip" */
+    int need_parent = 0;
+    for (int i = 0; g->parent && i < g->nfiles; i++)
+        need_parent |= g->files[i].from_parent && !zip_find_crc(&z, g->files[i].crc, g->files[i].size);
+    if (need_parent) {  /* "<folder>/<parent>.zip" */
         char ppath[1024];
         size_t dir = strlen(path);
         while (dir && path[dir - 1] != '/' && path[dir - 1] != '\\') dir--;

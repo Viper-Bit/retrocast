@@ -5,10 +5,26 @@ reproducible check is not "verified".
 
 Checks of shared parts: [docs/verification-log.md](../../../docs/verification-log.md).
 
+## 2026-11-24 · P5 · the table from MAME's list, not the folder
+- **The table**: every set of MAME 0.289's `cps1.cpp` on the plain boards
+  (147), MAME's chips and CRCs, whatever the folder holds; 18 more are left
+  out for a layout the loader cannot express (bootlegs' ROM_CONTINUE,
+  ROM_LOAD32), listed in [compatibility](compatibility.md) with the
+  Q-Sound, P8 and own-init sets.
+- **Audit** (`tools/cps1_audit.py` on the folder): 76 sets whole (21 in a zip
+  named otherwise), 14 with
+  chips missing (mostly a zip holding another revision than its name:
+  `kod.zip` is `kodr1`; `sf2hf.zip` is FBNeo's, taking graphics MAME lists
+  as its own), 57 without a zip.
+- **Boot test** (`TestBoot`): every zip in the folder that opens as a
+  table set, 3,000 frames of `--play`: a picture, none halted. A MAME split
+  clone (`sf2ua.zip`, 17 of 23 chips from `sf2.zip`) runs
+  (`test_split_clone`).
+
 ## 2026-11-24 · P5 · every plain-board set in the new folder
 - **The folder**: rebuilt from a MAME split set (CPS-new) and the old
   folders, by CRC against MAME 0.289; the old contents kept in
-  `D:oms\_old-cps`. All 21 earlier games are recognised in the new zips;
+  `D:\roms\_old-cps`. All 21 earlier games are recognised in the new zips;
   `cworld2j.zip` is the old one (the new lacks chip q5_35).
 - **The table**: generated over the whole folder: 67 sets. A zip counts
   as a set when every chip is there by CRC (or as another dump under the

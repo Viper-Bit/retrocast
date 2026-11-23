@@ -6,22 +6,15 @@ A game is the zip of its chip dumps, as MAME and FBNeo sets have them
 without a window.
 
 ## Status
-- **Games** (67 sets, the plain boards): every set of MAME 0.289's
-  `cps1.cpp` that a zip in the set here holds whole, by CRC: 1941, Three
-  Wonders, Area 88, Carrier Air Wing, Chiki Chiki Boys, Capcom World 2,
-  Daimakaimura, Dynasty Wars, Final Fight, Forgotten Worlds and Lost Worlds,
-  Ghouls'n Ghosts, Knights of the Round, The King of Dragons, Mercs, Magic
-  Sword, Mega Twins, Nemo, Street Fighter II, Champion Edition and Hyper
-  Fighting, Strider, U.N. Squadron, Varth, Willow, with their regional
-  versions and revisions (`ffightj`, `sf2ue`, ...). Each with its set's chip
-  layout, CPS-B (and where it sits: revision E of Street Fighter II has it
-  at $8001C0), graphics ROM mapper, DIP defaults and clock. Not yet: the
-  Q-Sound games and the odd boards ([roadmap](docs/roadmap.md)); bootlegs
-  needing their own protection or input wiring (MAME's `init_sf2hack`,
-  `init_sf2rb`); sets loading part of a chip (`captcomb`, `daimakr2`,
-  `wofhfh`); `sf2accp2` and `sf2rb3` (a black screen, not found yet).
+- **Games** (147 sets, the plain boards): every set MAME 0.289's
+  `cps1.cpp` lists on these boards, with MAME's chips and CRCs, the set's
+  layout, CPS-B (and where it sits), graphics ROM mapper, DIP defaults and
+  clock. A zip is matched by CRC, whatever its name. Which sets, which are
+  tested, which are not supported yet and why:
+  [compatibility](docs/compatibility.md). What your folder lacks:
+  `python tools/cps1_audit.py FOLDER`.
 - **Clone zips**: a zip holding only a clone's own chips takes the rest
-  from its parent's zip beside it (`sf2hf.zip` from `sf2ce.zip`).
+  from its parent's zip beside it (MAME's split sets: `sf2ua.zip` from `sf2.zip`); merged zips work too.
   `captcomu.zip` (Captain Commando, USA) needs `captcomm.zip`, which the
   set here lacks.
 - **Zips**: read by `core/zip.c` (our own inflate); a game is matched by the
