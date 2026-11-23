@@ -125,8 +125,8 @@ static unsigned layer_pixel(const Cps1 *s, int n, unsigned x, unsigned y, uint16
     return p;
 }
 
-/* shortcut: no stars, no flip screen, the frame drawn at once from
- * VBlank's state; P5 adds what the other games need. */
+/* The frame is drawn at once from VBlank's state, as MAME draws it: the
+ * CPS-1 has no raster interrupt to time a change within a frame by. */
 static void draw_sprites(Cps1 *s, const uint8_t *high) {
     const uint8_t *obj = base(s, A_OBJ, 0x800);
     int last = 0;
@@ -152,6 +152,31 @@ static void draw_sprites(Cps1 *s, const uint8_t *high) {
     }
 }
 
+/* The two star layers (MAME's cps1_render_stars): 4,096 star bytes 8 apart
+ * from the game's star ROM, byte +4 the first layer (scrolled by CPS-A
+ * $1C/$1E, colours $A00), byte +0 the second ($18/$1A, $800); column
+ * (index / 256) x 32 + the byte's low 5 bits, row index % 256, a low 5 bits
+ * of 15 meaning none; the colour steps every 16 frames. */
+static void draw_stars(Cps1 *s, uint16_t ctrl) {
+    const Cps1Game *g = s->rom->game;
+    if (g->stars < 0 || (uint32_t)g->stars + 0x8000 > s->rom->size[CPS1_R_GFX]) return;
+    const uint8_t *rom = s->rom->region[CPS1_R_GFX] + g->stars;
+    for (int layer = 0; layer < 2; layer++) {
+        if (!(ctrl & g->b.layer_enable[3 + layer])) continue;
+        unsigned sx_reg = areg(s, layer ? 0x18 : 0x1C), sy_reg = areg(s, layer ? 0x1A : 0x1E);
+        uint16_t base = layer ? 0x800 : 0xA00;
+        for (unsigned offs = 0; offs < 0x1000; offs++) {
+            unsigned col = rom[8 * offs + (layer ? 0 : 4)];
+            if ((col & 0x1F) == 0x0F) continue;
+            int sx = (int)(((offs / 256) * 32 - sx_reg + (col & 0x1F)) & 0x1FF) - RAW_X;
+            int sy = (int)((offs % 256 - sy_reg) & 0xFF) - RAW_Y;
+            if (sx < 0 || sx >= CPS1_WIDTH || sy < 0 || sy >= CPS1_HEIGHT) continue;
+            unsigned cnt = (unsigned)(s->frames / 16) % (col & 0x80 ? 15 : 16);
+            s->frame[sy * CPS1_WIDTH + sx] = (uint16_t)(base + ((col & 0xE0) >> 1) + cnt);
+        }
+    }
+}
+
 void cps1_render(Cps1 *s) {
     static uint8_t high[CPS1_WIDTH * CPS1_HEIGHT];
     const Cps1B *b = &s->rom->game->b;
@@ -159,6 +184,7 @@ void cps1_render(Cps1 *s) {
     int order[4] = {ctrl >> 6 & 3, ctrl >> 8 & 3, ctrl >> 10 & 3, ctrl >> 12 & 3};
     for (int i = 0; i < CPS1_WIDTH * CPS1_HEIGHT; i++) s->frame[i] = BACKGROUND;
     memset(high, 0, sizeof high);
+    draw_stars(s, ctrl);
     for (int k = 0; k < 4; k++) {
         int n = order[k];
         if (n == 0) {
@@ -176,4 +202,9 @@ void cps1_render(Cps1 *s) {
                 if (below_sprites && s->cpsb[b->prio[group] >> 1] >> p & 1) high[y * CPS1_WIDTH + x] = 1;
             }
     }
+    if (areg(s, A_VIDEO) & 0x8000)  /* flip screen: the picture turned 180 degrees */
+        for (int a = 0, b = CPS1_WIDTH * CPS1_HEIGHT - 1; a < b; a++, b--) {
+            uint16_t t = s->frame[a];
+            s->frame[a] = s->frame[b], s->frame[b] = t;
+        }
 }

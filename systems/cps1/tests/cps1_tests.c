@@ -366,6 +366,36 @@ static void test_mapper_bounds(void) {  /* a mapper bank larger than the graphic
     prog_game.mapper = (Cps1Mapper){{0}, 0, {{0}}};
 }
 
+static void test_flip(void) {  /* video control bit 15: the picture turned 180 degrees */
+    boot_video();
+    cpsb(0x2E, ORDER);
+    cpsa(0x02, 0x9080);
+    unsigned col = 9, row = 2, i = (row & 0x1F) + ((col & 0x3F) << 5) + ((row & 0x20) << 6);
+    gram(0x8000 + i * 4, 3), gram(0x8000 + i * 4 + 2, 4);
+    pixel(3 * 64, 8, 8 + 0, 0, 5);                /* the tile pixel at screen (8, 0) */
+    cpsa(0x22, 0x8000);
+    cps1_render(&m);
+    assert(m.frame[(CPS1_HEIGHT - 1) * CPS1_WIDTH + (CPS1_WIDTH - 1 - 8)] == 0x200 + 4 * 16 + 5);
+    assert(m.frame[8] == 0xBFF);
+    cpsa(0x22, 0);
+}
+
+static void test_stars(void) {  /* a star of layer 2 (ROM byte +0, scroll 1, colours $800) */
+    boot_video();
+    prog_game.stars = 0;
+    prog_game.b.layer_enable[3] = 0x10, prog_game.b.layer_enable[4] = 0x20;
+    unsigned offs = 3 * 256 + 40;
+    gfxrom[8 * offs] = 0x05;                       /* column 3 x 32 + 5, row 40: raw (101, 40) */
+    cpsb(0x2E, ORDER | 0x20);
+    cps1_render(&m);
+    assert(m.frame[(40 - 16) * CPS1_WIDTH + (101 - 64)] == 0x800);
+    cpsb(0x2E, ORDER);                             /* its enable off */
+    cps1_render(&m);
+    assert(m.frame[(40 - 16) * CPS1_WIDTH + (101 - 64)] == 0xBFF);
+    prog_game.stars = -1;
+    prog_game.b.layer_enable[3] = prog_game.b.layer_enable[4] = 0;
+}
+
 /* ---- the YM2151 ---- */
 
 static Opm opm;
@@ -779,6 +809,8 @@ int main(void) {
     test_gfx_mapper();
     test_layout_gfx8();
     test_mapper_bounds();
+    test_flip();
+    test_stars();
     test_opm_pitch();
     test_opm_octave();
     test_opm_timer_a();
