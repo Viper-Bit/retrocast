@@ -95,9 +95,12 @@ int main(int argc, char **argv) {
     if (ppm) {
         FILE *f = fopen(ppm, "wb");
         if (!f) return perror(ppm), 1;
-        fprintf(f, "P6\n%d %d\n255\n", CPS1_WIDTH, CPS1_HEIGHT);
+        static uint32_t rgb[CPS1_WIDTH * CPS1_HEIGHT];
+        int w, h;
+        cps1_picture(&machine, rgb, &w, &h);  /* turned for a vertical monitor */
+        fprintf(f, "P6\n%d %d\n255\n", w, h);
         for (int i = 0; i < CPS1_WIDTH * CPS1_HEIGHT; i++) {
-            uint32_t c = cps1_color(&machine, machine.frame[i]);
+            uint32_t c = rgb[i];
             uint8_t px[3] = {(uint8_t)(c >> 16), (uint8_t)(c >> 8), (uint8_t)c};
             fwrite(px, 1, 3, f);
         }

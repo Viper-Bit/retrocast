@@ -208,3 +208,14 @@ void cps1_render(Cps1 *s) {
             s->frame[a] = s->frame[b], s->frame[b] = t;
         }
 }
+
+void cps1_picture(const Cps1 *s, uint32_t *rgb, int *w, int *h) {
+    int turned = s->rom->game->rotate == 270;
+    *w = turned ? CPS1_HEIGHT : CPS1_WIDTH, *h = turned ? CPS1_WIDTH : CPS1_HEIGHT;
+    for (int y = 0; y < CPS1_HEIGHT; y++)
+        for (int x = 0; x < CPS1_WIDTH; x++) {
+            uint32_t c = cps1_color(s, s->frame[y * CPS1_WIDTH + x]);
+            if (turned) rgb[(CPS1_WIDTH - 1 - x) * CPS1_HEIGHT + y] = c;  /* 90 degrees anticlockwise */
+            else rgb[y * CPS1_WIDTH + x] = c;
+        }
+}

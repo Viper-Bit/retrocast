@@ -71,6 +71,7 @@ typedef struct {
     uint8_t dial;                /* Forgotten Worlds' rotary dials */
     int32_t stars;               /* the star layers' 32 KB in the graphics ROM, or -1: none */
     uint8_t extra;               /* what the in2 port holds: CPS1_EXTRA_* */
+    uint16_t rotate;             /* the monitor, as MAME's ROT: 0, or 270 (turned 90 degrees anticlockwise) */
 } Cps1Game;
 
 extern const Cps1Game cps1_games[];
@@ -158,6 +159,9 @@ int cps1_state_load(Cps1 *s, const char *path, char *err, size_t errlen);
 /* ---- the picture (video.c) ---- */
 void cps1_render(Cps1 *s);                     /* fills s->frame */
 uint32_t cps1_color(const Cps1 *s, uint16_t index);  /* 0xRRGGBB */
+/* The picture as shown, turned for the game's monitor: CPS1_WIDTH x CPS1_HEIGHT,
+ * or CPS1_HEIGHT x CPS1_WIDTH for a turned one; *w and *h say which. */
+void cps1_picture(const Cps1 *s, uint32_t *rgb, int *w, int *h);
 void cps1_palette_upload(Cps1 *s);             /* on a write to the palette base */
 
 #endif

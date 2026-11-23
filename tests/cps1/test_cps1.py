@@ -91,5 +91,24 @@ class TestHeadless(unittest.TestCase):
         self.assertGreaterEqual(int(re.search(r"colours=(\d+)", r.stdout).group(1)), 16, r.stdout)
 
 
+GAMES = ("1941", "3wonders", "cawing", "cworld2j", "dynwar", "ffight", "forgottn", "ghouls", "knights", "kod", "mercs",
+         "msword", "mtwins", "nemo", "sf2", "sf2ce", "sf2hf", "strider", "unsquad", "varth", "willow")
+
+
+@built(RUNNER, "build the CPS-1 headless program first")
+@unittest.skipUnless(os.path.isdir(SET), "no CPS-1 set in " + SET)
+class TestBoot(unittest.TestCase):
+    def test_games_show_a_picture(self):  # each plain-board game, 1,800 frames of --play: a picture, not halted
+        for game in GAMES:
+            path = os.path.join(SET, game + ".zip")
+            if not os.path.exists(path):
+                continue
+            with self.subTest(game=game):
+                r = subprocess.run([RUNNER, path, "--frames", "1800", "--play"], capture_output=True, text=True, timeout=300)
+                self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+                self.assertNotIn("halted", r.stdout)
+                self.assertGreaterEqual(int(re.search(r"colours=(\d+)", r.stdout).group(1)), 8, r.stdout)  # dynwar: its text intro
+
+
 if __name__ == "__main__":
     unittest.main()
