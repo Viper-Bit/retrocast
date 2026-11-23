@@ -70,7 +70,7 @@ static size_t zip_build(void) {  /* local headers and data, the directory, the e
 
 static uint8_t even[4] = {1, 2, 5, 6}, odd[4] = {3, 4, 7, 8}, swapped[4] = {0x22, 0x11, 0x44, 0x33};
 static uint8_t gfx[2][4] = {{0xA0, 0xA1, 0xA2, 0xA3}, {0xB0, 0xB1, 0xB2, 0xB3}}, plain[3] = {9, 8, 7};
-static Cps1Game test_game = {"test", "Test", CPS1_PLAIN, {16, 16, 3, 0}, {0}, 6, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1};
+static Cps1Game test_game = {"test", "Test", CPS1_PLAIN, {16, 16, 3, 0}, {0}, 6, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE};
 
 static void make_test_game(void) {
     Cps1File f[6] = {
@@ -142,7 +142,7 @@ static void test_detector(void) {
 static Cps1 m;
 static uint8_t prog[1 << 20];
 static Cps1Game prog_game = {"prog", "Program", CPS1_PLAIN, {1 << 20, 0, 0, 0},
-                             {0x20, 0x0004, 0x00, 0x02, 0x04, 0x06, 0x2E, {0x26, 0x28, 0x2A, 0x2C}, 0x30, {0}}, 0, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1};
+                             {0x20, 0x0004, 0x00, 0x02, 0x04, 0x06, 0x2E, {0x26, 0x28, 0x2A, 0x2C}, 0x30, {0}}, 0, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE};
 static Cps1Rom prog_rom;
 
 static void w16(uint32_t a, uint16_t v) { prog[a] = (uint8_t)(v >> 8), prog[a + 1] = (uint8_t)v; }
@@ -337,7 +337,7 @@ static void test_gfx_mapper(void) {  /* S224B: a tile outside its layer's range 
 
 static void test_layout_gfx8(void) {  /* 8-bit graphics chips: one byte into every 8, at the offset's slot */
     static uint8_t a[2] = {0xA0, 0xA1}, b[2] = {0xB0, 0xB1};
-    static Cps1Game g8 = {"g8", "G8", CPS1_PLAIN, {0, 16, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1};
+    static Cps1Game g8 = {"g8", "G8", CPS1_PLAIN, {0, 16, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE};
     g8.files[0] = (Cps1File){zip_crc32(a, 2), 2, CPS1_R_GFX, CPS1_LOAD_GFX8, 1, 0};
     g8.files[1] = (Cps1File){zip_crc32(b, 2), 2, CPS1_R_GFX, CPS1_LOAD_GFX8, 6, 0};
     zcount = 0;
@@ -594,6 +594,63 @@ static void test_sound_buffer(void) {
     assert(n >= 936 && n <= 940);
 }
 
+/* ---- per-game machine: clock, extra inputs, DIPs, the dial ---- */
+
+static void test_clock_12mhz(void) {
+    boot_program();
+    prog_game.clock_mhz = 12;
+    cps1_init(&m, &prog_rom);
+    uint64_t c0 = m.cpu.cycles;
+    int16_t out[CPS1_SND_BUF];
+    cps1_take_sound(&m, out, CPS1_SND_BUF);
+    cps1_frame(&m);
+    uint64_t ran = m.cpu.cycles - c0;
+    assert(ran >= 262 * 768 - 40 && ran <= 262 * 768 + 40);
+    assert(ram16(0xFF0000) == 1);                  /* VBlank still once a frame */
+    int n = cps1_take_sound(&m, out, CPS1_SND_BUF);
+    assert(n >= 936 && n <= 940);                  /* the Z80 and the sound as at 10 MHz */
+    prog_game.clock_mhz = 10;
+}
+
+static void test_in2_port(void) {
+    boot_program();
+    prog_game.in2 = 0x36, prog_game.extra = CPS1_EXTRA_P3;
+    cps1_init(&m, &prog_rom);
+    cps1_set_input(&m, 2, PAD_RIGHT | PAD_B | PAD_START | PAD_SELECT);
+    assert(m68k_read(&m.cpu, 0x800140 + 0x36, 5, 3) == (uint8_t)~(0x01 | 0x10 | 0x80 | 0x40));
+    prog_game.extra = CPS1_EXTRA_KICKS;
+    cps1_init(&m, &prog_rom);
+    cps1_set_input(&m, 0, PAD_Y | PAD_R), cps1_set_input(&m, 1, PAD_L);
+    assert(m68k_read(&m.cpu, 0x800140 + 0x36, 5, 3) == (uint8_t)~(0x01 | 0x04 | 0x20));  /* P1 kicks 4, 6; P2 kick 5 */
+    prog_game.in2 = CPS1_NONE, prog_game.extra = CPS1_EXTRA_NONE;
+}
+
+static void test_dip_defaults(void) {
+    boot_program();
+    prog_game.dip[0] = 0xFF, prog_game.dip[1] = 0xF4, prog_game.dip[2] = 0x9F;
+    cps1_init(&m, &prog_rom);
+    assert(m68k_read(&m.cpu, 0x80001A, 5, 3) >> 8 == 0xFF && m68k_read(&m.cpu, 0x80001C, 5, 3) >> 8 == 0xF4 &&
+           m68k_read(&m.cpu, 0x80001E, 5, 3) >> 8 == 0x9F);
+    prog_game.dip[0] = prog_game.dip[1] = prog_game.dip[2] = 0xFF;
+}
+
+static void test_dial(void) {  /* Forgotten Worlds: R turns player 1's dial 20 steps a frame */
+    boot_program();
+    prog_game.dial = 1;
+    cps1_init(&m, &prog_rom);
+    cps1_set_input(&m, 0, PAD_R);
+    for (int i = 0; i < 3; i++) cps1_frame(&m);
+    unsigned lo = m68k_read(&m.cpu, 0x800052, 5, 3) & 0xFF, hi = m68k_read(&m.cpu, 0x800054, 5, 3) & 0x0F;
+    assert((hi << 8 | lo) == 60);
+    cps1_set_input(&m, 0, PAD_L);
+    for (int i = 0; i < 4; i++) cps1_frame(&m);   /* back past zero: 12 bits */
+    lo = m68k_read(&m.cpu, 0x800052, 5, 3) & 0xFF, hi = m68k_read(&m.cpu, 0x800054, 5, 3) & 0x0F;
+    assert((hi << 8 | lo) == (unsigned)(-20 & 0xFFF));
+    m68k_write(&m.cpu, 0x800040, 0, 5, 1);         /* reset player 1's counter */
+    assert((m68k_read(&m.cpu, 0x800052, 5, 3) & 0xFF) == 0);
+    prog_game.dial = 0;
+}
+
 /* ---- clones and their parent's zip ---- */
 
 static void write_zip(const char *path) {
@@ -603,7 +660,7 @@ static void write_zip(const char *path) {
 
 static void test_clone_parent(void) {
     static uint8_t own[4] = {1, 2, 3, 4}, shared[4] = {5, 6, 7, 8};
-    static Cps1Game clone = {"clone", "Clone", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "cps1_par", 0, -1};
+    static Cps1Game clone = {"clone", "Clone", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "cps1_par", 0, -1, CPS1_EXTRA_NONE};
     clone.files[0] = (Cps1File){zip_crc32(own, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0};
     clone.files[1] = (Cps1File){zip_crc32(shared, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 4, 1};
     zcount = 0, zip_add("own", own, 4), zip_build(), write_zip("cps1_clone.zip");
@@ -630,8 +687,8 @@ static void test_clone_parent(void) {
 static void test_match_order(void) {  /* a zip two games match: the one with more of its own files */
     static uint8_t a[4] = {9, 9, 9, 1}, b[4] = {9, 9, 9, 2};
     static Cps1Game two[2] = {
-        {"small", "Small", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 1, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1},
-        {"big", "Big", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1}};
+        {"small", "Small", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 1, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE},
+        {"big", "Big", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE}};
     two[0].files[0] = (Cps1File){zip_crc32(a, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0};
     two[1].files[0] = two[0].files[0];
     two[1].files[1] = (Cps1File){zip_crc32(b, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 4, 0};
@@ -739,6 +796,10 @@ int main(void) {
     test_bank();
     test_ym_irq();
     test_sound_buffer();
+    test_clock_12mhz();
+    test_in2_port();
+    test_dip_defaults();
+    test_dial();
     test_clone_parent();
     test_match_order();
     test_state_roundtrip();

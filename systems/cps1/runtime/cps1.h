@@ -28,6 +28,7 @@ enum {
     CPS1_LOAD_GFX8      /* an 8-bit graphics chip: 1 byte into every 8, at offset's slot (0-7) */
 };
 enum { CPS1_PLAIN, CPS1_QSOUND, CPS1_ODD };  /* board groups (docs/roadmap.md) */
+enum { CPS1_EXTRA_NONE, CPS1_EXTRA_KICKS, CPS1_EXTRA_P3 };  /* buttons 4-6 of players 1-2, or player 3 (MAME's IN2) */
 
 typedef struct {
     uint32_t crc, size;
@@ -69,6 +70,7 @@ typedef struct {
     const char *parent;          /* a clone's parent zip (beside it) holding the rest of its files, or NULL */
     uint8_t dial;                /* Forgotten Worlds' rotary dials */
     int32_t stars;               /* the star layers' 32 KB in the graphics ROM, or -1: none */
+    uint8_t extra;               /* what the in2 port holds: CPS1_EXTRA_* */
 } Cps1Game;
 
 extern const Cps1Game cps1_games[];
@@ -116,7 +118,9 @@ typedef struct Cps1 {
     uint16_t cpsa[0x20], cpsb[0x20];  /* $800100 and $800140, by word */
     uint16_t mult_a, mult_b;
     uint8_t sound_cmd, sound_fade;
-    uint16_t pad[2];            /* core/input_log.h PAD_* bits, players 1-2 */
+    uint16_t pad[4];            /* core/input_log.h PAD_* bits, players 1-4 */
+    uint32_t line_clocks;       /* 68000 clocks a line: 640 at 10 MHz, 768 at 12 */
+    int32_t dial[2], dial_start[2];  /* Forgotten Worlds' uPD4701: counters, and their value at the last reset */
     uint8_t dip[3];             /* DIP switches A-C, as read (active low) */
     int line;
     uint64_t frames;            /* run since power-on */
@@ -138,7 +142,9 @@ typedef struct Cps1 {
 
 void cps1_init(Cps1 *s, const Cps1Rom *r);
 void cps1_frame(Cps1 *s);       /* 262 lines; the picture is left in s->frame */
-void cps1_set_input(Cps1 *s, int player, uint16_t pad);  /* buttons 1-3 = B, A, X; Start; Select = coin */
+/* Players 0-3: buttons 1-3 = B, A, X; Start; Select = coin; Street Fighter
+ * II's kicks (4-6) = Y, L, R; Forgotten Worlds' dial: L / R turn it. */
+void cps1_set_input(Cps1 *s, int player, uint16_t pad);
 /* Up to max samples (mono, CPS1_SAMPLE_RATE) made so far; the number taken. When
  * nobody takes them, a full buffer drops the new ones. */
 int cps1_take_sound(Cps1 *s, int16_t *out, int max);

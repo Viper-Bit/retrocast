@@ -56,8 +56,33 @@ static uint8_t system_in(const Cps1 *s) {
     return (uint8_t)~v;
 }
 
+/* MAME's IN2: Street Fighter II's kicks (P1 bits 0-2, P2 bits 4-6), or
+ * player 3 (directions, buttons 1-2, coin 3, start 3); active low. */
+static uint16_t extra_in(const Cps1 *s) {
+    uint8_t v = 0;
+    if (s->rom->game->extra == CPS1_EXTRA_KICKS) {
+        for (int p = 0; p < 2; p++) {
+            uint16_t pad = s->pad[p];
+            uint8_t b = (uint8_t)((pad & PAD_Y ? 1 : 0) | (pad & PAD_L ? 2 : 0) | (pad & PAD_R ? 4 : 0));
+            v |= (uint8_t)(b << (p * 4));
+        }
+    } else if (s->rom->game->extra == CPS1_EXTRA_P3) {
+        uint16_t pad = s->pad[2];
+        if (pad & PAD_RIGHT) v |= 0x01;
+        if (pad & PAD_LEFT) v |= 0x02;
+        if (pad & PAD_DOWN) v |= 0x04;
+        if (pad & PAD_UP) v |= 0x08;
+        if (pad & PAD_B) v |= 0x10;
+        if (pad & PAD_A) v |= 0x20;
+        if (pad & PAD_SELECT) v |= 0x40;
+        if (pad & PAD_START) v |= 0x80;
+    }
+    return (uint8_t)~v;
+}
+
 static uint16_t cpsb_read(const Cps1 *s, unsigned off) {
     const Cps1B *b = &s->rom->game->b;
+    if (s->rom->game->in2 != CPS1_NONE && off == s->rom->game->in2) return extra_in(s);
     uint32_t product = (uint32_t)s->mult_a * s->mult_b;
     if (off == b->id_reg) return b->id_val;
     if (off == b->mult_lo) return (uint16_t)product;
@@ -83,6 +108,11 @@ static uint16_t rd(Cps1 *s, uint32_t a, unsigned strobe) {
     if (a == 0x800018) return (uint16_t)(system_in(s) << 8 | 0xFF);
     if (a >= 0x80001A && a < 0x800020) return (uint16_t)(s->dip[(a - 0x80001A) >> 1] << 8 | 0xFF);
     if (a >= 0x800140 && a < 0x800180) return cpsb_read(s, a - 0x800140);
+    if (s->rom->game->dial && ((a >= 0x800052 && a < 0x800056) || (a >= 0x80005A && a < 0x80005E))) {
+        int p = a >= 0x80005A;  /* the uPD4701: 12 bits since the last reset, low byte then high */
+        uint32_t c = (uint32_t)(s->dial[p] - s->dial_start[p]) & 0xFFF;
+        return (uint16_t)(((a - (p ? 0x80005A : 0x800052)) & 2) ? c >> 8 : c & 0xFF);
+    }
     return 0xFFFF;
 }
 
@@ -97,6 +127,8 @@ static void wr(Cps1 *s, uint32_t a, uint16_t v, unsigned strobe) {
     else if (a >= 0x800140 && a < 0x800180) cpsb_write(s, a - 0x800140, merge(s->cpsb[(a - 0x800140) >> 1], v, strobe));
     else if (a >= 0x800180 && a < 0x800188) s->sound_cmd = (uint8_t)v;   /* P3: the Z80 reads it */
     else if (a >= 0x800188 && a < 0x800190) s->sound_fade = (uint8_t)v;
+    else if (s->rom->game->dial && (a == 0x800040 || a == 0x800048) && (strobe & 1))
+        s->dial_start[a == 0x800048] = s->dial[a == 0x800048];  /* reset X / Y */
 }
 
 uint16_t m68k_read(M68k *c, uint32_t a, unsigned fc, unsigned strobe) { (void)fc; return rd(c->bus, a, strobe); }
@@ -166,7 +198,8 @@ int cps1_take_sound(Cps1 *s, int16_t *out, int max) {
 void cps1_init(Cps1 *s, const Cps1Rom *r) {
     memset(s, 0, sizeof *s);
     s->rom = r;
-    memset(s->dip, 0xFF, sizeof s->dip);  /* every switch off */
+    memcpy(s->dip, r->game->dip, sizeof s->dip);  /* the game's defaults */
+    s->line_clocks = r->game->clock_mhz == 12 ? 768 : CPS1_LINE_CLOCKS;
     s->cpu.bus = s;
     m68k_reset(&s->cpu);
     s->z80.bus = s;
@@ -177,17 +210,19 @@ void cps1_init(Cps1 *s, const Cps1Rom *r) {
 }
 
 void cps1_set_input(Cps1 *s, int player, uint16_t pad) {
-    if (player >= 0 && player < 2) s->pad[player] = pad;
+    if (player >= 0 && player < 4) s->pad[player] = pad;
 }
 
 void cps1_frame(Cps1 *s) {
     s->frames++;
+    if (s->rom->game->dial)  /* L / R turn the dial 20 steps a frame, as MAME's keys do */
+        for (int p = 0; p < 2; p++) s->dial[p] += (s->pad[p] & PAD_R ? 20 : 0) - (s->pad[p] & PAD_L ? 20 : 0);
     for (s->line = 0; s->line < CPS1_LINES; s->line++) {
         if (s->line == CPS1_VBLANK_LINE) {
             cps1_render(s);
             s->cpu.ipl = 2;
         }
-        s->line_end += CPS1_LINE_CLOCKS;
+        s->line_end += s->line_clocks;
         while (s->cpu.cycles < s->line_end && !s->cpu.halted) m68k_step(&s->cpu);
         if (s->cpu.halted) s->cpu.cycles = s->line_end;
         s->lines++;
