@@ -12,15 +12,19 @@ if(NOT MSVC)
 endif()
 target_link_libraries(cps1core PUBLIC cps1_m68k core PRIVATE cps1_z80)  # Z80_PREFIX stays inside: the Master System has its own
 
+# Programs without recompiled code link this (cps1_recomp_program = NULL).
+add_library(cps1_recomp_none STATIC runtime/recomp_none.c)
+target_link_libraries(cps1_recomp_none PUBLIC cps1core)
+
 if(TESTS)
     add_executable(cps1_tests tests/cps1_tests.c)
-    target_link_libraries(cps1_tests PRIVATE cps1core)
+    target_link_libraries(cps1_tests PRIVATE cps1core cps1_recomp_none)
 endif()
 
 # Runs a game without a window (tests/cps1/test_cps1.py)
 add_executable(cps1_headless tests/cps1_headless.c)
-target_link_libraries(cps1_headless PRIVATE cps1core)
+target_link_libraries(cps1_headless PRIVATE cps1core cps1_recomp_none)
 
 if(FRONTEND)
-    frontend_system(cps1 cps1core)
+    frontend_system(cps1 cps1core cps1_recomp_none)
 endif()
