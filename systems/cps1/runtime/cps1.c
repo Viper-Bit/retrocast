@@ -128,10 +128,49 @@ static void qsound_wr(Cps1 *s, uint32_t a, uint16_t v, unsigned strobe) {
     else if (a == 0xF1C006) eeprom_write_lines(&s->eeprom, v >> 7 & 1, v >> 6 & 1, v & 1, eeprom_now(s));  /* CS, CLK, DI */
 }
 
+/* A bootleg's own reads (MAME's init functions), or -1. */
+static int32_t init_rd(const Cps1 *s, uint32_t a) {
+    uint8_t init = s->rom->game->init;
+    switch (init) {
+    case CPS1_INIT_SF2RB:
+    case CPS1_INIT_SF2RB2:
+        if (a >= 0x200000 && a < 0x300000) return a == 0x201200 ? (init == CPS1_INIT_SF2RB ? 0x0002 : 0) : a == 0x281200 ? 0x0040 : 0;
+        break;
+    case CPS1_INIT_SF2DONGB:  /* a programmed chip in the fourth ROM's socket */
+        if (a >= 0x180000 && a < 0x200000) return a == 0x180000 || a == 0x1F7040 ? 0x0210 : 0;
+        break;
+    case CPS1_INIT_SF2CEBLP:
+        if (a == 0x57A2B0) return s->prot == 0 ? 0x1992 : s->prot == 4 ? 0x0408 : 0xFFFF;
+        break;
+    case CPS1_INIT_PANG3B4:
+        if (a == 0x57A2B0) return (s->prot & 0xFF) <= 7 ? (s->prot & 0xFF) + 0x20 : s->prot == 0x17 ? 0x7321 : 0xFFFF;
+        if (a == 0x80017A) return 0xFFFF;  /* Pang! 3's EEPROM port, filtered out on this board */
+        break;
+    case CPS1_INIT_DINOHUNT:
+        if (a >= 0xF18000 && a < 0xF1A000) return 0x00FF;
+        if (a == 0xFC0000) return extra_player(s->pad[2]);
+        break;
+    case CPS1_INIT_SF2HACK:
+    case CPS1_INIT_SF2RK:  /* the system inputs and DIP switches on both bytes */
+        if (a >= 0x800018 && a < 0x800020) {
+            uint8_t in = a == 0x800018 ? system_in(s) : s->dip[(a - 0x80001A) >> 1];
+            return in << 8 | in;
+        }
+        break;
+    case CPS1_INIT_SF2THNDR:
+        if (a >= 0x8001C0 && a < 0x800200) return cpsb_read(s, a - 0x8001C0);
+        break;
+    default: break;
+    }
+    return -1;
+}
+
 static uint16_t rd(Cps1 *s, uint32_t a, unsigned strobe) {
     (void)strobe;
     a &= 0xFFFFFE;
     const Cps1Rom *r = s->rom;
+    int32_t own = r->game->init >= CPS1_INIT_SF2HACK ? init_rd(s, a) : -1;
+    if (own >= 0) return (uint16_t)own;
     if (a < 0x400000) return a + 1 < r->size[CPS1_R_MAIN] ? be16(r->region[CPS1_R_MAIN] + a) : 0xFFFF;
     if (a >= 0xFF0000) return be16(s->ram + (a & 0xFFFF));
     if (a >= 0x900000 && a < 0x930000) return be16(s->gfxram + (a - 0x900000));
@@ -162,6 +201,11 @@ static void wr(Cps1 *s, uint32_t a, uint16_t v, unsigned strobe) {
     else if (a == 0x80017A && (s->rom->game->init == CPS1_INIT_PANG3 || s->rom->game->init == CPS1_INIT_PANG3B)) {
         if (strobe & 1) eeprom_write_lines(&s->eeprom, v >> 7 & 1, v >> 6 & 1, v & 1, eeprom_now(s));  /* CS, CLK, DI */
     }
+    else if ((s->rom->game->init == CPS1_INIT_SF2CEBLP || s->rom->game->init == CPS1_INIT_PANG3B4) && (a == 0x5762B0 || a == 0x80017A)) {
+        if (a == 0x5762B0) s->prot = v;  /* the whole word, as MAME */
+    }
+    else if (s->rom->game->init == CPS1_INIT_SF2THNDR && a >= 0x8001C0 && a < 0x800200)
+        cpsb_write(s, a - 0x8001C0, merge(s->cpsb[(a - 0x8001C0) >> 1], v, strobe));
     else if (a >= (s->rom->game->cpsb_high ? 0x8001C0u : 0x800140u) && a < (s->rom->game->cpsb_high ? 0x800200u : 0x800180u)) {
         uint32_t off = a - (s->rom->game->cpsb_high ? 0x8001C0u : 0x800140u);
         cpsb_write(s, off, merge(s->cpsb[off >> 1], v, strobe));

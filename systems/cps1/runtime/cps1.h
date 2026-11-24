@@ -37,8 +37,17 @@ enum { CPS1_PLAIN, CPS1_QSOUND, CPS1_ODD };  /* board groups (docs/roadmap.md) *
 enum { CPS1_EXTRA_NONE, CPS1_EXTRA_KICKS, CPS1_EXTRA_P3, CPS1_EXTRA_P4 };
 /* What MAME's init function for a set does beyond the board: the Q-Sound
  * games' Kabuki keys (kabuki.h); Pang! 3's code decryption (not its
- * bootleg's) and its EEPROM on the CPS-B's port $80017A. */
-enum { CPS1_INIT_NONE, CPS1_INIT_WOF, CPS1_INIT_DINO, CPS1_INIT_PUNISHER, CPS1_INIT_SLAMMAST, CPS1_INIT_PANG3, CPS1_INIT_PANG3B };
+ * bootleg's) and its EEPROM on the CPS-B's port $80017A; the bootlegs'
+ * wiring and protections (cps1.c, load.c). */
+enum {
+    CPS1_INIT_NONE, CPS1_INIT_WOF, CPS1_INIT_DINO, CPS1_INIT_PUNISHER, CPS1_INIT_SLAMMAST, CPS1_INIT_PANG3, CPS1_INIT_PANG3B,
+    CPS1_INIT_SF2HACK,   /* the DIP switches on both bytes */
+    CPS1_INIT_SF2RK,     /* that, and the graphics' bits 0 and 7 swapped */
+    CPS1_INIT_SF2THNDR,  /* the CPS-B mirrored at $8001C0 */
+    CPS1_INIT_SF2RB, CPS1_INIT_SF2RB2, CPS1_INIT_SF2DONGB,  /* fixed protection reads */
+    CPS1_INIT_SF2CEBLP, CPS1_INIT_PANG3B4,  /* a protection latch: written at $5762B0, answered at $57A2B0 */
+    CPS1_INIT_DINOHUNT   /* $FF from the Q-Sound RAM it lacks; player 3 at $FC0000 */
+};
 
 typedef struct {
     uint32_t crc, size;
@@ -113,6 +122,8 @@ int cps1_load(const Cps1Game *g, const Zip *z, Cps1Rom *r, char *err, size_t err
 void cps1_unload(Cps1Rom *r);
 /* Pang! 3's 68000 code from $80000: the low byte of each word decrypted (MAME's init_pang3). */
 void cps1_pang3_decrypt(uint8_t *main, uint32_t size);
+/* sf2rk's graphics: bits 0 and 7 swapped, but in $400000-$47FFFF (MAME's init_sf2rk). */
+void cps1_sf2rk_descramble(uint8_t *gfx, uint32_t size);
 /* A game's zip (data, read from path) matched and loaded; a clone's other
  * files from "<parent>.zip" in the same folder, a Q-Sound game's chip ROM
  * from qsound.zip there (MAME's names). 0, or -1 with a message. */
@@ -187,6 +198,7 @@ typedef struct Cps1 {
     uint64_t qirq_next;         /* the T-state of the next one */
     QSound qs;
     Eeprom93c46 eeprom;
+    uint16_t prot;              /* sf2ceblp's and pang3b4's protection latch */
 } Cps1;
 
 void cps1_init(Cps1 *s, const Cps1Rom *r);  /* with cps1_recomp_program */

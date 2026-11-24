@@ -1043,6 +1043,66 @@ static void test_pang3_eeprom(void) {  /* the 16-bit EEPROM on the CPS-B's port 
     prog_game.init = CPS1_INIT_NONE;
 }
 
+/* ---- the bootlegs' inits (MAME's init functions) ---- */
+
+static void with_init(uint8_t init) {
+    boot_program();
+    prog_game.init = init;
+    cps1_init(&m, &prog_rom);
+}
+
+static void test_init_sf2hack_dsw(void) {  /* the DIP switches on both bytes */
+    with_init(CPS1_INIT_SF2HACK);
+    m.dip[1] = 0xF4;
+    assert(m68k_read(&m.cpu, 0x80001C, 5, 3) == 0xF4F4);
+    cps1_set_input(&m, 0, PAD_START);
+    assert(m68k_read(&m.cpu, 0x800018, 5, 3) == (uint16_t)(0xEF << 8 | 0xEF));
+    prog_game.init = CPS1_INIT_NONE;
+    cps1_init(&m, &prog_rom);
+    m.dip[1] = 0xF4;
+    assert(m68k_read(&m.cpu, 0x80001C, 5, 3) == 0xF4FF);  /* the boards: the high byte */
+}
+
+static void test_init_sf2thndr_mirror(void) {  /* the CPS-B also at $8001C0 */
+    with_init(CPS1_INIT_SF2THNDR);
+    m68k_write(&m.cpu, 0x8001C0 + 0x2E, 0x1234, 5, 3);
+    assert(m.cpsb[0x2E >> 1] == 0x1234 && m68k_read(&m.cpu, 0x800140 + 0x20, 5, 3) == 0x0004 &&
+           m68k_read(&m.cpu, 0x8001C0 + 0x20, 5, 3) == 0x0004);
+    prog_game.init = CPS1_INIT_NONE;
+}
+
+static void test_init_prot_reads(void) {  /* MAME's values at MAME's addresses; elsewhere in the range 0 */
+    with_init(CPS1_INIT_SF2RB);
+    assert(m68k_read(&m.cpu, 0x201200, 5, 3) == 0x0002 && m68k_read(&m.cpu, 0x281200, 5, 3) == 0x0040 &&
+           m68k_read(&m.cpu, 0x201202, 5, 3) == 0);
+    with_init(CPS1_INIT_SF2RB2);
+    assert(m68k_read(&m.cpu, 0x201200, 5, 3) == 0x0000 && m68k_read(&m.cpu, 0x281200, 5, 3) == 0x0040);
+    with_init(CPS1_INIT_SF2DONGB);
+    assert(m68k_read(&m.cpu, 0x180000, 5, 3) == 0x0210 && m68k_read(&m.cpu, 0x1F7040, 5, 3) == 0x0210 &&
+           m68k_read(&m.cpu, 0x180002, 5, 3) == 0);
+    with_init(CPS1_INIT_SF2CEBLP);  /* a latch written at $5762B0, answered at $57A2B0 */
+    m68k_write(&m.cpu, 0x5762B0, 0x0004, 5, 3);
+    assert(m68k_read(&m.cpu, 0x57A2B0, 5, 3) == 0x0408);
+    m68k_write(&m.cpu, 0x5762B0, 0x0000, 5, 3);
+    assert(m68k_read(&m.cpu, 0x57A2B0, 5, 3) == 0x1992);
+    with_init(CPS1_INIT_PANG3B4);
+    m68k_write(&m.cpu, 0x5762B0, 0x0005, 5, 3);
+    assert(m68k_read(&m.cpu, 0x57A2B0, 5, 3) == 0x0025);
+    m68k_write(&m.cpu, 0x5762B0, 0x0017, 5, 3);
+    assert(m68k_read(&m.cpu, 0x57A2B0, 5, 3) == 0x7321);
+    with_init(CPS1_INIT_DINOHUNT);
+    cps1_set_input(&m, 2, PAD_UP);
+    assert(m68k_read(&m.cpu, 0xF18000, 5, 3) == 0x00FF && m68k_read(&m.cpu, 0xFC0000, 5, 3) == (uint8_t)~0x08);
+    prog_game.init = CPS1_INIT_NONE;
+}
+
+static void test_init_gfx_bitswap(void) {  /* sf2rk: graphics bits 0 and 7 swapped, but $400000-$47FFFF */
+    static uint8_t gfx_rom[0x600000];
+    gfx_rom[0x000010] = 0x81 ^ 0x01, gfx_rom[0x400010] = 0x01, gfx_rom[0x480010] = 0x80;
+    cps1_sf2rk_descramble(gfx_rom, sizeof gfx_rom);
+    assert(gfx_rom[0x000010] == 0x01 && gfx_rom[0x400010] == 0x01 && gfx_rom[0x480010] == 0x01);
+}
+
 /* ---- the 93C46 serial EEPROM ---- */
 
 static uint64_t ee_now;  /* microseconds */
@@ -1228,6 +1288,10 @@ int main(void) {
     test_qsound_eeprom_state();
     test_pang3_decrypt();
     test_pang3_eeprom();
+    test_init_sf2hack_dsw();
+    test_init_sf2thndr_mirror();
+    test_init_prot_reads();
+    test_init_gfx_bitswap();
     puts("cps1_tests: ok");
     return 0;
 }

@@ -93,6 +93,7 @@ static int take(const Cps1Game *g, const Zip *z, Cps1Rom *r, char *done, char *e
 /* Once every chip is placed: what MAME's init does to them; -1 (err set) when out of memory. */
 static int finish(const Cps1Game *g, Cps1Rom *r, char *err, size_t errlen) {
     if (g->init == CPS1_INIT_PANG3) cps1_pang3_decrypt(r->region[CPS1_R_MAIN], r->size[CPS1_R_MAIN]);
+    if (g->init == CPS1_INIT_SF2RK) cps1_sf2rk_descramble(r->region[CPS1_R_GFX], r->size[CPS1_R_GFX]);
     if (g->group == CPS1_QSOUND && r->size[CPS1_R_SOUND] >= 0x8000) {
         uint8_t *z80 = r->region[CPS1_R_SOUND];
         if (!(r->z80_op = malloc(0x8000)) || (g->z80_raw && !(r->z80_raw = malloc(0x8000))))
@@ -123,6 +124,11 @@ void cps1_pang3_decrypt(uint8_t *main, uint32_t size) {
         if (~src & 0x80) dst ^= 0x88;
         main[a + 1] = (uint8_t)dst;
     }
+}
+
+void cps1_sf2rk_descramble(uint8_t *gfx, uint32_t size) {
+    for (uint32_t i = 0; i < size && i < 0x600000; i++)
+        if (i < 0x400000 || i >= 0x480000) gfx[i] = (uint8_t)((gfx[i] & 0x7E) | gfx[i] >> 7 | (gfx[i] & 1) << 7);
 }
 
 void cps1_unload(Cps1Rom *r) {

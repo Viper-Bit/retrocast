@@ -61,6 +61,7 @@
 #define MAPPER_WL24B {{0x8000, 0x4000, 0x0, 0x0}, 4, {{CPS1_GFX_SPRITES, 0x0000, 0x4FFF, 0}, {CPS1_GFX_SCROLL3, 0x5000, 0x6FFF, 0}, {CPS1_GFX_SCROLL1, 0x7000, 0x7FFF, 0}, {CPS1_GFX_SCROLL2, 0x0000, 0x3FFF, 1}}}
 #define MAPPER_YI22B {{0x4000, 0x4000, 0x0, 0x0}, 4, {{CPS1_GFX_SPRITES, 0x0000, 0x1FFF, 0}, {CPS1_GFX_SCROLL3, 0x2000, 0x3FFF, 0}, {CPS1_GFX_SCROLL1, 0x4000, 0x47FF, 1}, {CPS1_GFX_SCROLL2, 0x4800, 0x7FFF, 1}}}
 #define MAPPER_YI24B {{0x8000, 0x0, 0x0, 0x0}, 4, {{CPS1_GFX_SPRITES, 0x0000, 0x1FFF, 0}, {CPS1_GFX_SCROLL3, 0x2000, 0x3FFF, 0}, {CPS1_GFX_SCROLL1, 0x4000, 0x47FF, 0}, {CPS1_GFX_SCROLL2, 0x4800, 0x7FFF, 0}}}
+#define MAPPER_PANG3B4 {{0x8000, 0x8000, 0x0, 0x0}, 6, {{CPS1_GFX_SPRITES, 0x0000, 0x7FFF, 0}, {CPS1_GFX_SCROLL2, 0x0000, 0x7FFF, 0}, {CPS1_GFX_SPRITES, 0x8000, 0xFFFF, 1}, {CPS1_GFX_SCROLL1, 0x8000, 0xFFFF, 1}, {CPS1_GFX_SCROLL2, 0x8000, 0xFFFF, 1}, {CPS1_GFX_SCROLL3, 0x8000, 0xFFFF, 1}}}
 #define MAPPER_POKONYAN {{0x8000, 0x8000, 0x8000, 0x0}, 4, {{CPS1_GFX_SPRITES, 0x0000, 0x2FFF, 0}, {CPS1_GFX_SCROLL1, 0x7000, 0x7FFF, 0}, {CPS1_GFX_SCROLL3, 0x3000, 0x3FFF, 0}, {CPS1_GFX_SCROLL2, 0x4000, 0x6FFF, 0}}}
 
 /* CPS-B configs (MAME's CPS_B_* and, for hacks and bootlegs, HACK_B_*): ID port and value,
@@ -91,6 +92,7 @@
 #define CPSB_21_QS3 {0x0E, 0x0C00, CPS1_NONE, CPS1_NONE, CPS1_NONE, CPS1_NONE, 0x12, {0x14, 0x16, 0x08, 0x0A}, 0x0C, {0x04, 0x02, 0x20, 0x00, 0x00}}
 #define CPSB_21_QS4 {0x2E, 0x0C01, CPS1_NONE, CPS1_NONE, CPS1_NONE, CPS1_NONE, 0x16, {0x00, 0x02, 0x28, 0x2A}, 0x2C, {0x04, 0x08, 0x10, 0x00, 0x00}}
 #define CPSB_21_QS5 {0x1E, 0x0C02, CPS1_NONE, CPS1_NONE, CPS1_NONE, CPS1_NONE, 0x2A, {0x2C, 0x2E, 0x30, 0x32}, 0x1C, {0x04, 0x08, 0x10, 0x00, 0x00}}
+#define HACK_B_1 {CPS1_NONE, 0xFFFF, CPS1_NONE, CPS1_NONE, CPS1_NONE, CPS1_NONE, 0x14, {0x12, 0x10, 0x0E, 0x0C}, 0x0A, {0x0E, 0x0E, 0x0E, 0x30, 0x30}}
 #define HACK_B_2 {CPS1_NONE, 0xFFFF, 0x0E, 0x0C, 0x0A, 0x08, 0x28, {0x26, 0x24, 0x22, 0x20}, 0x22, {0x20, 0x04, 0x08, 0x12, 0x12}}
 #define HACK_B_4 {CPS1_NONE, 0xFFFF, CPS1_NONE, CPS1_NONE, CPS1_NONE, CPS1_NONE, 0x28, {0x26, 0x24, 0x22, 0x20}, 0x30, {0x40, 0x10, 0x02, 0x00, 0x00}}
 
@@ -2320,6 +2322,121 @@ const Cps1Game cps1_games[] = {
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* sf2j_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* sf2j_19.12c */
     }, MAPPER_STF29, 10, {0xFF, 0xF4, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE, 0, 0},
+    /* MAME sf2ebbl (cps1_10MHz), CPS_B_17 mapper_STF29 */
+    {"sf2ebbl", "Street Fighter II: The World Warrior (TAB Austria, bootleg, set 1)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_17, 27, {
+        {0xa258b4d5, 256 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* 12.bin */
+        {0x59ccd474, 256 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x000001, 0, 0, 0},  /* 09.bin */
+        {0x82097d63, 256 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x080000, 0, 0, 0},  /* 11.bin */
+        {0x0c83844d, 256 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x080001, 0, 0, 0},  /* 10.bin */
+        {0x22c9cc8e, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0, 1},  /* 1b_yf082.bin */
+        {0x57213be8, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0, 1},  /* 1d_yf028.bin */
+        {0xba529b4f, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0, 0, 1},  /* 1a_yf087.bin */
+        {0x4b1b33a8, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0, 0, 1},  /* 1c_yf088.bin */
+        {0x2c7e2229, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200000, 0, 0, 1},  /* 1f_yf085.bin */
+        {0xb5548f17, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200002, 0, 0, 1},  /* 1h_yf115.bin */
+        {0x14b84312, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200004, 0, 0, 1},  /* 1e_yf111.bin */
+        {0x5e9cd89a, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200006, 0, 0, 1},  /* 1g_yf002.bin */
+        {0x994bfa58, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400000, 0, 0, 1},  /* 1j_yf117.bin */
+        {0x3e66ad9d, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400002, 0, 0, 1},  /* 1l_ye040.bin */
+        {0xc1befaa8, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400004, 0, 0, 1},  /* 1i_yf038.bin */
+        {0x0627c831, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400006, 0, 0, 1},  /* 1k_ye039.bin */
+        {0xa505621e, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400000, 0, 0x010000, 0},  /* 05.bin */
+        {0xa505621e, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400004, 0x010000, 0x010000, 0},  /* 05.bin */
+        {0xde6271fb, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400002, 0, 0x010000, 0},  /* 07.bin */
+        {0xde6271fb, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400006, 0x010000, 0x010000, 0},  /* 07.bin */
+        {0x23775344, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400001, 0, 0x010000, 0},  /* 06.bin */
+        {0x23775344, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400005, 0x010000, 0x010000, 0},  /* 06.bin */
+        {0x81c9550f, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400003, 0, 0x010000, 0},  /* 08.bin */
+        {0x81c9550f, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400007, 0x010000, 0x010000, 0},  /* 08.bin */
+        {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* 03.bin */
+        {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* 02.bin */
+        {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* 01.bin */
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_SF2HACK, 0, 0x41},
+    /* MAME sf2ebbl2 (cps1_10MHz), CPS_B_17 mapper_STF29 */
+    {"sf2ebbl2", "Street Fighter II: The World Warrior (TAB Austria, bootleg, set 3)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_17, 23, {
+        {0xa258b4d5, 256 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* 27c020.7 */
+        {0x59ccd474, 256 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x000001, 0, 0, 0},  /* 27c020.5 */
+        {0x82097d63, 256 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x080000, 0, 0, 0},  /* 27c020.6 */
+        {0x0c83844d, 256 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x080001, 0, 0, 0},  /* 27c020.4 */
+        {0xa258de13, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0x080000, 0},  /* a-se235.bin */
+        {0xa258de13, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0x080000, 0x080000, 0},  /* a-se235.bin */
+        {0xc781bf87, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0x080000, 0},  /* c-se005.bin */
+        {0xc781bf87, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0x080000, 0x080000, 0},  /* c-se005.bin */
+        {0x5726cab8, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200000, 0, 0x080000, 0},  /* b-se194.bin */
+        {0x5726cab8, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200004, 0x080000, 0x080000, 0},  /* b-se194.bin */
+        {0x4dd24197, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200002, 0, 0x080000, 0},  /* d-se064.bin */
+        {0x4dd24197, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200006, 0x080000, 0x080000, 0},  /* d-se064.bin */
+        {0x187667cc, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400000, 0, 0x080000, 0},  /* e-sf004.bin */
+        {0x187667cc, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400004, 0x080000, 0x080000, 0},  /* e-sf004.bin */
+        {0x5b585071, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400002, 0, 0x080000, 0},  /* f-sf001.bin */
+        {0x5b585071, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400006, 0x080000, 0x080000, 0},  /* f-sf001.bin */
+        {0x84427d1b, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400000, 0, 0, 0},  /* 27c1024.10 */
+        {0x55bc790c, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400002, 0, 0, 0},  /* 27c1024.12 */
+        {0xf8725add, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400004, 0, 0, 0},  /* 27c1024.9 */
+        {0xc2a5373e, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400006, 0, 0, 0},  /* 27c1024.11 */
+        {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* 27c512.3 */
+        {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* 27c010.2 */
+        {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* 27c010.1 */
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_SF2HACK, 0, 0x41},
+    /* MAME sf2ebbl3 (cps1_10MHz), CPS_B_17 mapper_STF29 */
+    {"sf2ebbl3", "Street Fighter II: The World Warrior (TAB Austria, bootleg, set 4)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_17, 29, {
+        {0x963200d2, 512 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* ce91e-b.bin */
+        {0x02e88ec7, 512 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x000001, 0, 0, 0},  /* ce91e-a.bin */
+        {0x22c9cc8e, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0, 1},  /* 1-b-yf197.07 */
+        {0x57213be8, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0, 1},  /* 1-d-yf207.12 */
+        {0x84afb959, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000004, 0, 0, 0},  /* 27020.1 */
+        {0xab21635d, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000005, 0, 0, 0},  /* 27020.3 */
+        {0x2ce56f9f, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000006, 0, 0, 0},  /* 27020.5 */
+        {0x0ad7fb2b, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000007, 0, 0, 0},  /* 27020.7 */
+        {0x031525cc, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x200000, 0, 0, 0},  /* 27020.2 */
+        {0xc97046a5, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x200001, 0, 0, 0},  /* 27020.4 */
+        {0xb5548f17, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200002, 0, 0, 1},  /* 1-h-yg010.10 */
+        {0x14b84312, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200004, 0, 0, 1},  /* 1-e-yg003.02 */
+        {0xdbbfd400, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x200006, 0, 0, 0},  /* 27020.6 */
+        {0x37635e97, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x200007, 0, 0, 0},  /* 27020.8 */
+        {0x994bfa58, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400000, 0, 0, 1},  /* 1-j-yf213.09 */
+        {0x3e66ad9d, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400002, 0, 0, 1},  /* wm91m-11-yd025.11 */
+        {0xc1befaa8, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400004, 0, 0, 1},  /* 1-i-yf224.03 */
+        {0x0627c831, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400006, 0, 0, 1},  /* 1-k-yf036.06 */
+        {0xa505621e, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400000, 0, 0x010000, 0},  /* 27010.09hi */
+        {0xa505621e, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400004, 0x010000, 0x010000, 0},  /* 27010.09hi */
+        {0xde6271fb, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400002, 0, 0x010000, 0},  /* 27010.11 */
+        {0xde6271fb, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400006, 0x010000, 0x010000, 0},  /* 27010.11 */
+        {0x23775344, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400001, 0, 0x010000, 0},  /* 27010.09lo */
+        {0x23775344, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400005, 0x010000, 0x010000, 0},  /* 27010.09lo */
+        {0x81c9550f, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400003, 0, 0x010000, 0},  /* 27010.06 */
+        {0x81c9550f, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400007, 0x010000, 0x010000, 0},  /* 27010.06 */
+        {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* 27512.3 */
+        {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* 27010.2 */
+        {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* 27010.1 */
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_SF2HACK, 0, 0x41},
+    /* MAME sf2rk (cps1_10MHz), CPS_B_17 mapper_STF29 */
+    {"sf2rk", "Street Fighter II: The World Warrior (RK, bootleg)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_17, 24, {
+        {0x49422b6f, 512 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* w6.u222 */
+        {0x7e9c8c2f, 512 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x000001, 0, 0, 0},  /* w5.u196 */
+        {0x4296de4d, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0x080000, 0},  /* 01 rk098 */
+        {0x4296de4d, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0x080000, 0x080000, 0},  /* 01 rk098 */
+        {0x16cf11d0, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0x080000, 0},  /* 03 rk097 */
+        {0x16cf11d0, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0x080000, 0x080000, 0},  /* 03 rk097 */
+        {0x68ca7fce, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200000, 0, 0x080000, 0},  /* 02 rk037 */
+        {0x68ca7fce, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200004, 0x080000, 0x080000, 0},  /* 02 rk037 */
+        {0x9f46f926, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200002, 0, 0x080000, 0},  /* 04 rk033 */
+        {0x9f46f926, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200006, 0x080000, 0x080000, 0},  /* 04 rk033 */
+        {0x4c161fa9, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400000, 0, 0x080000, 0},  /* 05 rk116 */
+        {0x4c161fa9, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400004, 0x080000, 0x080000, 0},  /* 05 rk116 */
+        {0xec949f8c, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400002, 0, 0x080000, 0},  /* 06 rk077 */
+        {0xec949f8c, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400006, 0x080000, 0x080000, 0},  /* 06 rk077 */
+        {0x6de44671, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400004, 0, 0x010000, 0},  /* w-1 */
+        {0x6de44671, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400000, 0x010000, 0x010000, 0},  /* w-1 */
+        {0xbf0cd819, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400005, 0, 0x010000, 0},  /* w-3 */
+        {0xbf0cd819, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400001, 0x010000, 0x010000, 0},  /* w-3 */
+        {0xe8f14362, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400006, 0, 0x010000, 0},  /* w-2 */
+        {0xe8f14362, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400002, 0x010000, 0x010000, 0},  /* w-2 */
+        {0x76f9f91f, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400007, 0, 0x010000, 0},  /* w-4 */
+        {0x76f9f91f, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400003, 0x010000, 0x010000, 0},  /* w-4 */
+        {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* 1.rk */
+        {0x6cfffb11, 256 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 0},  /* w7.u210 */
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_SF2RK, 0, 0x41},
     /* MAME sf2qp1 (cps1_10MHz), CPS_B_17 mapper_STF29 */
     {"sf2qp1", "Street Fighter II: The World Warrior (Quicken Pt-I, bootleg)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_17, 19, {
         {0x3a9458ee, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0, 0x040000, 0},  /* stfii-qkn-cps-17.33 */
@@ -2364,6 +2481,85 @@ const Cps1Game cps1_games[] = {
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* sf2_18.bin */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* sf2_19.bin */
     }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE, 0, 0},
+    /* MAME sf2thndr (cps1_10MHz), CPS_B_17 mapper_STF29 */
+    {"sf2thndr", "Street Fighter II: The World Warrior (Thunder Edition, bootleg, set 1)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_17, 23, {
+        {0xd3cd6d18, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* 17_30.11e */
+        {0xe892716e, 128 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x000001, 0, 0, 0},  /* 17_37.11f */
+        {0xa673143d, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x040000, 0, 0, 0},  /* sf2u_31b.12e */
+        {0x4c2ccef7, 128 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x040001, 0, 0, 0},  /* sf2u_38b.12f */
+        {0x4009955e, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x080000, 0, 0, 0},  /* sf2u_28b.9e */
+        {0x8c1f3994, 128 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x080001, 0, 0, 0},  /* sf2u_35b.9f */
+        {0x8830b54d, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x0C0000, 0, 0, 0},  /* 17_29.10e */
+        {0x3f13ada3, 128 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x0C0001, 0, 0, 0},  /* 17_36.10f */
+        {0x22c9cc8e, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0, 1},  /* sf2_06.bin */
+        {0x57213be8, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0, 1},  /* sf2_08.bin */
+        {0xba529b4f, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0, 0, 1},  /* sf2_05.bin */
+        {0x4b1b33a8, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0, 0, 1},  /* sf2_07.bin */
+        {0x2c7e2229, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200000, 0, 0, 1},  /* sf2_15.bin */
+        {0xb5548f17, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200002, 0, 0, 1},  /* sf2_17.bin */
+        {0x14b84312, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200004, 0, 0, 1},  /* sf2_14.bin */
+        {0x5e9cd89a, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200006, 0, 0, 1},  /* sf2_16.bin */
+        {0x994bfa58, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400000, 0, 0, 1},  /* sf2_25.bin */
+        {0x3e66ad9d, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400002, 0, 0, 1},  /* sf2_27.bin */
+        {0xc1befaa8, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400004, 0, 0, 1},  /* sf2_24.bin */
+        {0x0627c831, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400006, 0, 0, 1},  /* sf2_26.bin */
+        {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* sf2_09.bin */
+        {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* sf2_18.bin */
+        {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* sf2_19.bin */
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_SF2THNDR, 0, 0},
+    /* MAME sf2thndr2 (cps1_10MHz), CPS_B_17 mapper_STF29 */
+    {"sf2thndr2", "Street Fighter II: The World Warrior (Thunder Edition, bootleg, set 2)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_17, 23, {
+        {0xeec8cbe3, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* 31.bin */
+        {0x1c0fc4e1, 128 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x000001, 0, 0, 0},  /* 38.bin */
+        {0xa673143d, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x040000, 0, 0, 0},  /* 30.bin */
+        {0x4c2ccef7, 128 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x040001, 0, 0, 0},  /* 37.bin */
+        {0x4009955e, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x080000, 0, 0, 0},  /* 28.bin */
+        {0x8c1f3994, 128 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x080001, 0, 0, 0},  /* 35.bin */
+        {0xbb4af315, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x0C0000, 0, 0, 1},  /* 29.bin */
+        {0xc02a13eb, 128 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x0C0001, 0, 0, 1},  /* 36.bin */
+        {0x22c9cc8e, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0, 1},  /* sf2_06.bin */
+        {0x57213be8, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0, 1},  /* sf2_08.bin */
+        {0xba529b4f, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0, 0, 1},  /* sf2_05.bin */
+        {0x4b1b33a8, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0, 0, 1},  /* sf2_07.bin */
+        {0x2c7e2229, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200000, 0, 0, 1},  /* sf2_15.bin */
+        {0xb5548f17, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200002, 0, 0, 1},  /* sf2_17.bin */
+        {0x14b84312, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200004, 0, 0, 1},  /* sf2_14.bin */
+        {0x5e9cd89a, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200006, 0, 0, 1},  /* sf2_16.bin */
+        {0x994bfa58, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400000, 0, 0, 1},  /* sf2_25.bin */
+        {0x3e66ad9d, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400002, 0, 0, 1},  /* sf2_27.bin */
+        {0xc1befaa8, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400004, 0, 0, 1},  /* sf2_24.bin */
+        {0x0627c831, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400006, 0, 0, 1},  /* sf2_26.bin */
+        {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* sf2_09.bin */
+        {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* sf2_18.bin */
+        {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* sf2_19.bin */
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_SF2THNDR, 0, 0},
+    /* MAME sf2rules (cps1_10MHz), HACK_B_1 mapper_S9263B */
+    {"sf2rules", "Street Fighter II: The World Warrior (bootleg with rules screen)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, HACK_B_1, 24, {
+        {0xfff85f9b, 512 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* prh2.u222 */
+        {0x65c28bc9, 512 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x000001, 0, 0, 0},  /* prl1.u196 */
+        {0xa258de13, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0x080000, 0},  /* ycecmkr001.u70 */
+        {0xa258de13, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0x080000, 0x080000, 0},  /* ycecmkr001.u70 */
+        {0xc781bf87, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0x080000, 0},  /* ycecmkr003.u69 */
+        {0xc781bf87, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0x080000, 0x080000, 0},  /* ycecmkr003.u69 */
+        {0x5726cab8, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200000, 0, 0x080000, 0},  /* ycecmkr002.u68 */
+        {0x5726cab8, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200004, 0x080000, 0x080000, 0},  /* ycecmkr002.u68 */
+        {0xbc90c12f, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200002, 0, 0x080000, 0},  /* ycecdwc011.u64 */
+        {0xbc90c12f, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200006, 0x080000, 0x080000, 0},  /* ycecdwc011.u64 */
+        {0x187667cc, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400000, 0, 0x080000, 0},  /* ycecdwc012.u19 */
+        {0x187667cc, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400004, 0x080000, 0x080000, 0},  /* ycecdwc012.u19 */
+        {0x5b585071, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400002, 0, 0x080000, 0},  /* ycecdwc013.u18 */
+        {0x5b585071, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400006, 0x080000, 0x080000, 0},  /* ycecdwc013.u18 */
+        {0x6de44671, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400004, 0, 0x010000, 0},  /* grp1.u31 */
+        {0x6de44671, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400000, 0x010000, 0x010000, 0},  /* grp1.u31 */
+        {0xe8f14362, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400006, 0, 0x010000, 0},  /* grp3.u29 */
+        {0xe8f14362, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400002, 0x010000, 0x010000, 0},  /* grp3.u29 */
+        {0xbf0cd819, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400005, 0, 0x010000, 0},  /* grp2.u30 */
+        {0xbf0cd819, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400001, 0x010000, 0x010000, 0},  /* grp2.u30 */
+        {0x76f9f91f, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400007, 0, 0x010000, 0},  /* grp4.u28 */
+        {0x76f9f91f, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400003, 0x010000, 0x010000, 0},  /* grp4.u28 */
+        {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* sound.u191 */
+        {0x6cfffb11, 256 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 0},  /* voice.u210 */
+    }, MAPPER_S9263B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_SF2HACK, 0, 0x41},
     /* MAME 3wonders (cps1_10MHz), CPS_B_21_BT1 mapper_RT24B */
     {"3wonders", "Three Wonders (World 910520)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_21_BT1, 19, {
         {0xef5b8b33, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* rte_30a.11f */
@@ -3116,6 +3312,29 @@ const Cps1Game cps1_games[] = {
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* s92_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* s92_19.12c */
     }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE, 0, 0},
+    /* MAME sf2bhh (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
+    {"sf2bhh", "Street Fighter II': Champion Edition (Hung Hsi, bootleg)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 20, {
+        {0x5cf63a9e, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0, 0x040000, 0},  /* 23 */
+        {0x5cf63a9e, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x0C0000, 0x040000, 0x040000, 0},  /* 23 */
+        {0x3ed72bca, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x080000, 0, 0x040000, 0},  /* 22 */
+        {0x3ed72bca, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x040000, 0x040000, 0x040000, 0},  /* 22 */
+        {0x925a7877, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x100000, 0, 0, 1},  /* s92_21a.6f */
+        {0x03b0d852, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0, 1},  /* s92-1m.3a */
+        {0x840289ec, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0, 1},  /* s92-3m.5a */
+        {0xcdb5f027, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0, 0, 1},  /* s92-2m.4a */
+        {0xe2799472, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0, 0, 1},  /* s92-4m.6a */
+        {0xba8a2761, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200000, 0, 0, 1},  /* s92-5m.7a */
+        {0xe584bfb5, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200002, 0, 0, 1},  /* s92-7m.9a */
+        {0x21e3f87d, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200004, 0, 0, 1},  /* s92-6m.8a */
+        {0xbefc47df, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200006, 0, 0, 1},  /* s92-8m.10a */
+        {0x960687d5, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400000, 0, 0, 1},  /* s92-10m.3c */
+        {0x978ecd18, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400002, 0, 0, 1},  /* s92-12m.5c */
+        {0xd6ec9a0a, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400004, 0, 0, 1},  /* s92-11m.4c */
+        {0xed2c67f6, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400006, 0, 0, 1},  /* s92-13m.6c */
+        {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* s92_09.11a */
+        {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* s92_18.11c */
+        {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* s92_19.12c */
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_SF2RB, 0, 0},
     /* MAME sf2cebltw (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
     {"sf2cebltw", "Street Fighter II': Champion Edition ('Taiwan' bootleg with PAL)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 24, {
         {0x035ee5d9, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* 27.12e */
@@ -3143,6 +3362,54 @@ const Cps1Game cps1_games[] = {
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* s92_18.bin */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* s92_19.bin */
     }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE, 0, 0},
+    /* MAME sf2rb (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
+    {"sf2rb", "Street Fighter II': Champion Edition (Rainbow, bootleg, set 1)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 18, {
+        {0x450532b0, 512 * K, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 0},  /* sf2d__23.rom */
+        {0xfe9d9cf5, 512 * K, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0x080000, 0, 0, 0},  /* sf2d__22.rom */
+        {0x925a7877, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x100000, 0, 0, 1},  /* s92_21a.bin */
+        {0x03b0d852, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0, 1},  /* s92_01.bin */
+        {0x840289ec, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0, 1},  /* s92_02.bin */
+        {0xcdb5f027, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0, 0, 1},  /* s92_03.bin */
+        {0xe2799472, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0, 0, 1},  /* s92_04.bin */
+        {0xba8a2761, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200000, 0, 0, 1},  /* s92_05.bin */
+        {0xe584bfb5, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200002, 0, 0, 1},  /* s92_06.bin */
+        {0x21e3f87d, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200004, 0, 0, 1},  /* s92_07.bin */
+        {0xbefc47df, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200006, 0, 0, 1},  /* s92_08.bin */
+        {0x960687d5, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400000, 0, 0, 1},  /* s92_10.bin */
+        {0x978ecd18, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400002, 0, 0, 1},  /* s92_11.bin */
+        {0xd6ec9a0a, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400004, 0, 0, 1},  /* s92_12.bin */
+        {0xed2c67f6, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400006, 0, 0, 1},  /* s92_13.bin */
+        {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* s92_09.bin */
+        {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* s92_18.bin */
+        {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* s92_19.bin */
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_SF2RB, 0, 0},
+    /* MAME sf2rb2 (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
+    {"sf2rb2", "Street Fighter II': Champion Edition (Rainbow, bootleg, set 2)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 24, {
+        {0x40296ecd, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* 27.bin */
+        {0x87954a41, 128 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x000001, 0, 0, 0},  /* 31.bin */
+        {0xa6974195, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x040000, 0, 0, 0},  /* 26.bin */
+        {0x8141fe32, 128 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x040001, 0, 0, 0},  /* 30.bin */
+        {0x9ef8f772, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x080000, 0, 0, 0},  /* 25.bin */
+        {0x7d9c479c, 128 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x080001, 0, 0, 0},  /* 29.bin */
+        {0x93579684, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x0C0000, 0, 0, 0},  /* 24.bin */
+        {0xff728865, 128 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x0C0001, 0, 0, 0},  /* 28.bin */
+        {0x925a7877, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x100000, 0, 0, 1},  /* s92_21a.bin */
+        {0x03b0d852, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0, 1},  /* s92_01.bin */
+        {0x840289ec, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0, 1},  /* s92_02.bin */
+        {0xcdb5f027, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0, 0, 1},  /* s92_03.bin */
+        {0xe2799472, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0, 0, 1},  /* s92_04.bin */
+        {0xba8a2761, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200000, 0, 0, 1},  /* s92_05.bin */
+        {0xe584bfb5, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200002, 0, 0, 1},  /* s92_06.bin */
+        {0x21e3f87d, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200004, 0, 0, 1},  /* s92_07.bin */
+        {0xbefc47df, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200006, 0, 0, 1},  /* s92_08.bin */
+        {0x960687d5, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400000, 0, 0, 1},  /* s92_10.bin */
+        {0x978ecd18, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400002, 0, 0, 1},  /* s92_11.bin */
+        {0xd6ec9a0a, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400004, 0, 0, 1},  /* s92_12.bin */
+        {0xed2c67f6, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400006, 0, 0, 1},  /* s92_13.bin */
+        {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* s92_09.bin */
+        {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* s92_18.bin */
+        {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* s92_19.bin */
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_SF2RB2, 0, 0},
     /* MAME sf2red (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
     {"sf2red", "Street Fighter II': Champion Edition (Red Wave, bootleg, set 1)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 18, {
         {0x40276abb, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0, 0, 0},  /* sf2red.23 */
@@ -3272,6 +3539,64 @@ const Cps1Game cps1_games[] = {
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* s92_18.bin */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* s92_19.bin */
     }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE, 0, 0},
+    /* MAME sf2amf2 (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
+    {"sf2amf2", "Street Fighter II': Champion Edition (L735 Test Rom, bootleg, set 1)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 26, {
+        {0x03991fba, 512 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* m5m27c401.u222 */
+        {0x39f15a1e, 512 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x000001, 0, 0, 0},  /* m5m27c401.u196 */
+        {0xaa4d55a6, 256 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x100000, 0, 0, 0},  /* 27020.u221 */
+        {0x2bffa6f9, 256 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x100001, 0, 0, 0},  /* 27020.u195 */
+        {0xa94a8b19, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0, 0x080000, 0},  /* fun-u70.bin */
+        {0xa94a8b19, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0x080000, 0x080000, 0},  /* fun-u70.bin */
+        {0x0405f21f, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0, 0x080000, 0},  /* fun-u68.bin */
+        {0x0405f21f, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0x080000, 0x080000, 0},  /* fun-u68.bin */
+        {0x05dc2043, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200004, 0, 0x080000, 0},  /* fun-u69.bin */
+        {0x05dc2043, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200000, 0x080000, 0x080000, 0},  /* fun-u69.bin */
+        {0x055b64f1, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200006, 0, 0x080000, 0},  /* fun-u67.bin */
+        {0x055b64f1, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200002, 0x080000, 0x080000, 0},  /* fun-u67.bin */
+        {0x1a518609, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400004, 0, 0x080000, 0},  /* fun-u19.bin */
+        {0x1a518609, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400000, 0x080000, 0x080000, 0},  /* fun-u19.bin */
+        {0x84f9354f, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400006, 0, 0x080000, 0},  /* fun-u18.bin */
+        {0x84f9354f, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400002, 0x080000, 0x080000, 0},  /* fun-u18.bin */
+        {0x6de44671, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400004, 0, 0x010000, 0},  /* grp1.u31 */
+        {0x6de44671, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400000, 0x010000, 0x010000, 0},  /* grp1.u31 */
+        {0xe8f14362, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400006, 0, 0x010000, 0},  /* grp3.u29 */
+        {0xe8f14362, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400002, 0x010000, 0x010000, 0},  /* grp3.u29 */
+        {0xbf0cd819, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400005, 0, 0x010000, 0},  /* grp2.u30 */
+        {0xbf0cd819, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400001, 0x010000, 0x010000, 0},  /* grp2.u30 */
+        {0x76f9f91f, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400007, 0, 0x010000, 0},  /* grp4.u28 */
+        {0x76f9f91f, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400003, 0x010000, 0x010000, 0},  /* grp4.u28 */
+        {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 0},  /* 27512.u191 */
+        {0x6cfffb11, 256 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 0},  /* fun-u210.bin */
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_SF2HACK, 0, 0x41},
+    /* MAME sf2amf3 (cps1_10MHz), CPS_B_21_DEF mapper_S9263B */
+    {"sf2amf3", "Street Fighter II': Champion Edition (L735 Test Rom, bootleg, set 2)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 26, {
+        {0x0d305e8b, 512 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* u222.bin */
+        {0x137d8665, 512 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x000001, 0, 0, 0},  /* u196.bin */
+        {0x0b3fe5dd, 256 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x100000, 0, 0, 0},  /* u221.bin */
+        {0xdbee7b18, 256 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x100001, 0, 0, 0},  /* u195.bin */
+        {0xa94a8b19, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0, 0x080000, 0},  /* fun-u70.bin */
+        {0xa94a8b19, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0x080000, 0x080000, 0},  /* fun-u70.bin */
+        {0x0405f21f, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0, 0x080000, 0},  /* fun-u68.bin */
+        {0x0405f21f, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0x080000, 0x080000, 0},  /* fun-u68.bin */
+        {0x05dc2043, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200004, 0, 0x080000, 0},  /* fun-u69.bin */
+        {0x05dc2043, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200000, 0x080000, 0x080000, 0},  /* fun-u69.bin */
+        {0x055b64f1, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200006, 0, 0x080000, 0},  /* fun-u67.bin */
+        {0x055b64f1, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200002, 0x080000, 0x080000, 0},  /* fun-u67.bin */
+        {0x1a518609, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400004, 0, 0x080000, 0},  /* fun-u19.bin */
+        {0x1a518609, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400000, 0x080000, 0x080000, 0},  /* fun-u19.bin */
+        {0x84f9354f, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400006, 0, 0x080000, 0},  /* fun-u18.bin */
+        {0x84f9354f, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400002, 0x080000, 0x080000, 0},  /* fun-u18.bin */
+        {0x6de44671, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400004, 0, 0x010000, 0},  /* grp1.u31 */
+        {0x6de44671, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400000, 0x010000, 0x010000, 0},  /* grp1.u31 */
+        {0xe8f14362, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400006, 0, 0x010000, 0},  /* grp3.u29 */
+        {0xe8f14362, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400002, 0x010000, 0x010000, 0},  /* grp3.u29 */
+        {0xbf0cd819, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400005, 0, 0x010000, 0},  /* grp2.u30 */
+        {0xbf0cd819, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400001, 0x010000, 0x010000, 0},  /* grp2.u30 */
+        {0x76f9f91f, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400007, 0, 0x010000, 0},  /* grp4.u28 */
+        {0x76f9f91f, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400003, 0x010000, 0x010000, 0},  /* grp4.u28 */
+        {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 0},  /* 27512.u191 */
+        {0x6cfffb11, 256 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 0},  /* fun-u210.bin */
+    }, MAPPER_S9263B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_SF2HACK, 0, 0x41},
     /* MAME sf2dkot2 (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
     {"sf2dkot2", "Street Fighter II': Champion Edition (Double K.O. Turbo II, bootleg)", CPS1_PLAIN, {3072 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 20, {
         {0x9bbfe420, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0, 0x080000, 0},  /* turboii.23 */
@@ -3295,6 +3620,251 @@ const Cps1Game cps1_games[] = {
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* s92_18.bin */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* s92_19.bin */
     }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE, 0, 0},
+    /* MAME sf2ceblp (cps1_10MHz), CPS_B_21_DEF mapper_S9263B */
+    {"sf2ceblp", "Street Fighter II': Champion Edition (protected bootleg on non-dash board)", CPS1_PLAIN, {1280 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 35, {
+        {0xea78f9b4, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* 1k.31.e13 */
+        {0xd30c263e, 128 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x000001, 0, 0, 0},  /* se.36.j13 */
+        {0x005b54cc, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x040000, 0, 0, 0},  /* 0e.30.e11 */
+        {0xc184d26d, 128 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x040001, 0, 0, 0},  /* de.35.j11 */
+        {0x524f5c55, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x080000, 0, 0, 0},  /* bk.29.e10 */
+        {0xf06a12f2, 128 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x080001, 0, 0, 0},  /* ff.34.j10 */
+        {0xb7ad5214, 256 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x0C0000, 0, 0, 0},  /* 8k.28.e9 */
+        {0x6340b914, 256 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x0C0001, 0, 0, 0},  /* tf.33.j9 */
+        {0xa8b5633a, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000000, 0, 0, 0},  /* 24.e7 */
+        {0x5db24ca7, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000001, 0, 0, 0},  /* 14.c7 */
+        {0x82e8e384, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000002, 0, 0, 0},  /* 26.e9 */
+        {0x1fd98ad0, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000003, 0, 0, 0},  /* 16.c9 */
+        {0x8d5d0045, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000004, 0, 0, 0},  /* 20.e3 */
+        {0xeb48f7f2, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000005, 0, 0, 0},  /* 10.c3 */
+        {0x4109d637, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000006, 0, 0, 0},  /* 22.e5 */
+        {0x5d21d8b3, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000007, 0, 0, 0},  /* 12.c5 */
+        {0x72e923df, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x200000, 0, 0, 0},  /* 25.e8 */
+        {0x9a96be48, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x200001, 0, 0, 0},  /* 15.c8 */
+        {0x4a3a8d09, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x200002, 0, 0, 0},  /* 27.e10 */
+        {0xa917a922, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x200003, 0, 0, 0},  /* 17.c10 */
+        {0x55c2b455, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x200004, 0, 0, 0},  /* 21.e4 */
+        {0xff36859e, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x200005, 0, 0, 0},  /* 11.c4 */
+        {0xef9c2d4d, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x200006, 0, 0, 0},  /* 23.e6 */
+        {0xbc937c96, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x200007, 0, 0, 0},  /* 13.c6 */
+        {0x023baa18, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400000, 0, 0, 0},  /* 6.a8 */
+        {0xa6ad6ef3, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400001, 0, 0, 0},  /* 5.a7 */
+        {0x26fb340c, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400002, 0, 0, 0},  /* 8.a10 */
+        {0xf56085ba, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400003, 0, 0, 0},  /* 7.a9 */
+        {0x877b2b18, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400004, 0, 0, 0},  /* 1.a3 */
+        {0x144aa4c9, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400005, 0, 0, 0},  /* 2.a4 */
+        {0xf2c400b4, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400006, 0, 0, 0},  /* 4.a6 */
+        {0x8053335d, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400007, 0, 0, 0},  /* 3.a5 */
+        {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* snd.9.b13 */
+        {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* 9k.18.c11 */
+        {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* lk.19.c13 */
+    }, MAPPER_S9263B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_SF2CEBLP, 0, 0},
+    /* MAME sf2m2 (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
+    {"sf2m2", "Street Fighter II': Champion Edition (M2, bootleg)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 18, {
+        {0x9e6d058a, 512 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* ch222esp */
+        {0xed2ff437, 512 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x000001, 0, 0, 0},  /* ch196esp */
+        {0x925a7877, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x100000, 0, 0, 1},  /* s92_21a.bin */
+        {0x03b0d852, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0, 1},  /* s92_01.bin */
+        {0x840289ec, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0, 1},  /* s92_02.bin */
+        {0xcdb5f027, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0, 0, 1},  /* s92_03.bin */
+        {0xe2799472, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0, 0, 1},  /* s92_04.bin */
+        {0xba8a2761, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200000, 0, 0, 1},  /* s92_05.bin */
+        {0xe584bfb5, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200002, 0, 0, 1},  /* s92_06.bin */
+        {0x21e3f87d, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200004, 0, 0, 1},  /* s92_07.bin */
+        {0xbefc47df, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200006, 0, 0, 1},  /* s92_08.bin */
+        {0x960687d5, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400000, 0, 0, 1},  /* s92_10.bin */
+        {0x978ecd18, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400002, 0, 0, 1},  /* s92_11.bin */
+        {0xd6ec9a0a, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400004, 0, 0, 1},  /* s92_12.bin */
+        {0xed2c67f6, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400006, 0, 0, 1},  /* s92_13.bin */
+        {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* s92_09.bin */
+        {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* s92_18.bin */
+        {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* s92_19.bin */
+    }, MAPPER_S9263B, 12, {0xFF, 0xEC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_SF2HACK, 0, 0x41},
+    /* MAME sf2m4 (cps1_12MHz), HACK_B_1 mapper_S9263B */
+    {"sf2m4", "Street Fighter II': Champion Edition (M4, bootleg)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, HACK_B_1, 18, {
+        {0x7133489e, 512 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* u222ne */
+        {0xb07a4f90, 512 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x000001, 0, 0, 0},  /* u196ne */
+        {0x925a7877, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x100000, 0, 0, 1},  /* s92_21a.bin */
+        {0x03b0d852, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0, 1},  /* s92_01.bin */
+        {0x840289ec, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0, 1},  /* s92_02.bin */
+        {0xcdb5f027, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0, 0, 1},  /* s92_03.bin */
+        {0xe2799472, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0, 0, 1},  /* s92_04.bin */
+        {0xba8a2761, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200000, 0, 0, 1},  /* s92_05.bin */
+        {0xe584bfb5, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200002, 0, 0, 1},  /* s92_06.bin */
+        {0x21e3f87d, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200004, 0, 0, 1},  /* s92_07.bin */
+        {0xbefc47df, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200006, 0, 0, 1},  /* s92_08.bin */
+        {0x960687d5, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400000, 0, 0, 1},  /* s92_10.bin */
+        {0x978ecd18, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400002, 0, 0, 1},  /* s92_11.bin */
+        {0xd6ec9a0a, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400004, 0, 0, 1},  /* s92_12.bin */
+        {0xed2c67f6, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400006, 0, 0, 1},  /* s92_13.bin */
+        {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* s92_09.bin */
+        {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* s92_18.bin */
+        {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* s92_19.bin */
+    }, MAPPER_S9263B, 12, {0xFF, 0xF4, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_SF2HACK, 0, 0x41},
+    /* MAME sf2m5 (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
+    {"sf2m5", "Street Fighter II': Champion Edition (M5, bootleg)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 18, {
+        {0x03991fba, 512 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* u222 */
+        {0x39f15a1e, 512 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x000001, 0, 0, 0},  /* u196 */
+        {0x925a7877, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x100000, 0, 0, 1},  /* s92_21a.bin */
+        {0x03b0d852, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0, 1},  /* s92_01.bin */
+        {0x840289ec, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0, 1},  /* s92_02.bin */
+        {0xcdb5f027, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0, 0, 1},  /* s92_03.bin */
+        {0xe2799472, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0, 0, 1},  /* s92_04.bin */
+        {0xba8a2761, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200000, 0, 0, 1},  /* s92_05.bin */
+        {0xe584bfb5, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200002, 0, 0, 1},  /* s92_06.bin */
+        {0x21e3f87d, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200004, 0, 0, 1},  /* s92_07.bin */
+        {0xbefc47df, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200006, 0, 0, 1},  /* s92_08.bin */
+        {0x960687d5, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400000, 0, 0, 1},  /* s92_10.bin */
+        {0x978ecd18, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400002, 0, 0, 1},  /* s92_11.bin */
+        {0xd6ec9a0a, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400004, 0, 0, 1},  /* s92_12.bin */
+        {0xed2c67f6, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400006, 0, 0, 1},  /* s92_13.bin */
+        {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* s92_09.bin */
+        {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* s92_18.bin */
+        {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* s92_19.bin */
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_SF2HACK, 0, 0x41},
+    /* MAME sf2m6 (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
+    {"sf2m6", "Street Fighter II': Champion Edition (M6, bootleg)", CPS1_PLAIN, {1280 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 26, {
+        {0x0a3692be, 512 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* 27c040.u222 */
+        {0x80454da7, 512 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x000001, 0, 0, 0},  /* 27c040.u196 */
+        {0x8226c11c, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x100000, 0, 0, 0},  /* 27c010.u221 */
+        {0x924c6ce2, 128 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x100001, 0, 0, 0},  /* 27c010.u195 */
+        {0xa258de13, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0x080000, 0},  /* ycecmkr001.u70 */
+        {0xa258de13, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0x080000, 0x080000, 0},  /* ycecmkr001.u70 */
+        {0xc781bf87, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0x080000, 0},  /* ycecmkr003.u69 */
+        {0xc781bf87, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0x080000, 0x080000, 0},  /* ycecmkr003.u69 */
+        {0x5726cab8, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200000, 0, 0x080000, 0},  /* ycecmkr002.u68 */
+        {0x5726cab8, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200004, 0x080000, 0x080000, 0},  /* ycecmkr002.u68 */
+        {0xbc90c12f, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200002, 0, 0x080000, 0},  /* ycecdwc011.u64 */
+        {0xbc90c12f, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200006, 0x080000, 0x080000, 0},  /* ycecdwc011.u64 */
+        {0x187667cc, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400000, 0, 0x080000, 0},  /* ycecdwc012.u19 */
+        {0x187667cc, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400004, 0x080000, 0x080000, 0},  /* ycecdwc012.u19 */
+        {0x5b585071, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400002, 0, 0x080000, 0},  /* ycecdwc013.u18 */
+        {0x5b585071, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400006, 0x080000, 0x080000, 0},  /* ycecdwc013.u18 */
+        {0x6de44671, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400004, 0, 0x010000, 0},  /* grp1.u31 */
+        {0x6de44671, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400000, 0x010000, 0x010000, 0},  /* grp1.u31 */
+        {0xe8f14362, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400006, 0, 0x010000, 0},  /* grp3.u29 */
+        {0xe8f14362, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400002, 0x010000, 0x010000, 0},  /* grp3.u29 */
+        {0xbf0cd819, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400005, 0, 0x010000, 0},  /* grp2.u30 */
+        {0xbf0cd819, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400001, 0x010000, 0x010000, 0},  /* grp2.u30 */
+        {0x76f9f91f, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400007, 0, 0x010000, 0},  /* grp4.u28 */
+        {0x76f9f91f, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x400003, 0x010000, 0x010000, 0},  /* grp4.u28 */
+        {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 0},  /* sound.u191 */
+        {0x6cfffb11, 256 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 0},  /* voice.u210 */
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_SF2HACK, 0, 0x41},
+    /* MAME sf2m7 (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
+    {"sf2m7", "Street Fighter II': Champion Edition (M7, bootleg)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 20, {
+        {0x1ca7adbd, 256 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* u222-2i */
+        {0xf758408c, 256 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x000001, 0, 0, 0},  /* u196-2i */
+        {0x720cea3e, 256 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x080000, 0, 0, 0},  /* u222-2s */
+        {0x9932832c, 256 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x080001, 0, 0, 0},  /* u196-2s */
+        {0x925a7877, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x100000, 0, 0, 1},  /* s92_21a.bin */
+        {0x03b0d852, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0, 1},  /* s92_01.bin */
+        {0x840289ec, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0, 1},  /* s92_02.bin */
+        {0xcdb5f027, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0, 0, 1},  /* s92_03.bin */
+        {0xe2799472, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0, 0, 1},  /* s92_04.bin */
+        {0xba8a2761, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200000, 0, 0, 1},  /* s92_05.bin */
+        {0xe584bfb5, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200002, 0, 0, 1},  /* s92_06.bin */
+        {0x21e3f87d, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200004, 0, 0, 1},  /* s92_07.bin */
+        {0xbefc47df, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200006, 0, 0, 1},  /* s92_08.bin */
+        {0x960687d5, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400000, 0, 0, 1},  /* s92_10.bin */
+        {0x978ecd18, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400002, 0, 0, 1},  /* s92_11.bin */
+        {0xd6ec9a0a, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400004, 0, 0, 1},  /* s92_12.bin */
+        {0xed2c67f6, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400006, 0, 0, 1},  /* s92_13.bin */
+        {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* s92_09.bin */
+        {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* s92_18.bin */
+        {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* s92_19.bin */
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_SF2HACK, 0, 0x41},
+    /* MAME sf2yyc (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
+    {"sf2yyc", "Street Fighter II': Champion Edition (YYC, bootleg)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 21, {
+        {0x8f742fd5, 512 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* b12.rom */
+        {0x8831ec7f, 512 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x000001, 0, 0, 0},  /* b14.rom */
+        {0x94a46525, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x100000, 0, 0x020000, 0},  /* b11.rom */
+        {0x94a46525, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x140000, 0, 0x020000, 0},  /* b11.rom */
+        {0x8fb3dd47, 128 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x100001, 0, 0x020000, 0},  /* b13.rom */
+        {0x8fb3dd47, 128 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x140001, 0, 0x020000, 0},  /* b13.rom */
+        {0x03b0d852, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0, 1},  /* s92_01.bin */
+        {0x840289ec, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0, 1},  /* s92_02.bin */
+        {0xcdb5f027, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0, 0, 1},  /* s92_03.bin */
+        {0xe2799472, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0, 0, 1},  /* s92_04.bin */
+        {0xba8a2761, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200000, 0, 0, 1},  /* s92_05.bin */
+        {0xe584bfb5, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200002, 0, 0, 1},  /* s92_06.bin */
+        {0x21e3f87d, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200004, 0, 0, 1},  /* s92_07.bin */
+        {0xbefc47df, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200006, 0, 0, 1},  /* s92_08.bin */
+        {0x960687d5, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400000, 0, 0, 1},  /* s92_10.bin */
+        {0x978ecd18, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400002, 0, 0, 1},  /* s92_11.bin */
+        {0xd6ec9a0a, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400004, 0, 0, 1},  /* s92_12.bin */
+        {0xed2c67f6, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400006, 0, 0, 1},  /* s92_13.bin */
+        {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* s92_09.bin */
+        {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* s92_18.bin */
+        {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* s92_19.bin */
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_SF2HACK, 0, 0x41},
+    /* MAME sf2koryu (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
+    {"sf2koryu", "Street Fighter II': Champion Edition (Xiang Long, Chinese bootleg)", CPS1_PLAIN, {1280 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 19, {
+        {0x9236a79a, 512 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* u222.rom */
+        {0xb23a869d, 512 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x000001, 0, 0, 0},  /* u196.rom */
+        {0x64e6e091, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x100000, 0, 0, 0},  /* u221.rom */
+        {0xc95e4443, 128 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x100001, 0, 0, 0},  /* u195.rom */
+        {0x03b0d852, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0, 1},  /* s92_01.bin */
+        {0x840289ec, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0, 1},  /* s92_02.bin */
+        {0xcdb5f027, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0, 0, 1},  /* s92_03.bin */
+        {0xe2799472, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0, 0, 1},  /* s92_04.bin */
+        {0xba8a2761, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200000, 0, 0, 1},  /* s92_05.bin */
+        {0xe584bfb5, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200002, 0, 0, 1},  /* s92_06.bin */
+        {0x21e3f87d, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200004, 0, 0, 1},  /* s92_07.bin */
+        {0xbefc47df, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200006, 0, 0, 1},  /* s92_08.bin */
+        {0x960687d5, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400000, 0, 0, 1},  /* s92_10.bin */
+        {0x978ecd18, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400002, 0, 0, 1},  /* s92_11.bin */
+        {0xd6ec9a0a, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400004, 0, 0, 1},  /* s92_12.bin */
+        {0xed2c67f6, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400006, 0, 0, 1},  /* s92_13.bin */
+        {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* s92_09.bin */
+        {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* s92_18.bin */
+        {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* s92_19.bin */
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_SF2HACK, 0, 0x41},
+    /* MAME sf2dongb (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
+    {"sf2dongb", "Street Fighter II': Champion Edition (Dongfang Bubai protection, bootleg)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 18, {
+        {0x19fffa37, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0, 0, 0},  /* 1.8f */
+        {0x99f1cca4, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x080000, 0, 0, 0},  /* 1.7f */
+        {0x65c2c719, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x100000, 0, 0, 0},  /* 1.6f */
+        {0x03b0d852, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0, 1},  /* s92-1m.3a */
+        {0x840289ec, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0, 1},  /* s92-3m.5a */
+        {0xcdb5f027, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0, 0, 1},  /* s92-2m.4a */
+        {0xe2799472, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0, 0, 1},  /* s92-4m.6a */
+        {0xba8a2761, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200000, 0, 0, 1},  /* s92-5m.7a */
+        {0xe584bfb5, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200002, 0, 0, 1},  /* s92-7m.9a */
+        {0x21e3f87d, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200004, 0, 0, 1},  /* s92-6m.8a */
+        {0xbefc47df, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200006, 0, 0, 1},  /* s92-8m.10a */
+        {0x960687d5, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400000, 0, 0, 1},  /* s92-10m.3c */
+        {0x978ecd18, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400002, 0, 0, 1},  /* s92-12m.5c */
+        {0xd6ec9a0a, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400004, 0, 0, 1},  /* s92-11m.4c */
+        {0xed2c67f6, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400006, 0, 0, 1},  /* s92-13m.6c */
+        {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* s92_09.11a */
+        {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* s92_18.11c */
+        {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* s92_19.12c */
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_SF2DONGB, 0, 0},
+    /* MAME sf2mkot (cps1_10MHz), CPS_B_21_DEF mapper_S9263B */
+    {"sf2mkot", "Street Fighter II': Magic KO Turbo!! - Nightmare Crack", CPS1_PLAIN, {1280 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 22, {
+        {0xb01a94b6, 512 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* u222.bin */
+        {0x20461c47, 512 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x000001, 0, 0, 0},  /* u196.bin */
+        {0x64e6e091, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x100000, 0, 0, 0},  /* u221.bin */
+        {0xc95e4443, 128 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x100001, 0, 0, 0},  /* u195.bin */
+        {0xbaa0f81f, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0x080000, 0},  /* d21.u70 */
+        {0xbaa0f81f, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0x080000, 0x080000, 0},  /* d21.u70 */
+        {0x8edff95a, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0x080000, 0},  /* d24.u68 */
+        {0x8edff95a, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0x080000, 0x080000, 0},  /* d24.u68 */
+        {0x468962b1, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200000, 0, 0x080000, 0},  /* d22.u69 */
+        {0x468962b1, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200004, 0x080000, 0x080000, 0},  /* d22.u69 */
+        {0x8165f536, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200002, 0, 0x080000, 0},  /* d25.u64 */
+        {0x8165f536, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200006, 0x080000, 0x080000, 0},  /* d25.u64 */
+        {0x39d763d3, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400000, 0, 0x080000, 0},  /* d23.u19 */
+        {0x39d763d3, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400004, 0x080000, 0x080000, 0},  /* d23.u19 */
+        {0x93ec42ae, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400002, 0, 0x080000, 0},  /* d26.u18 */
+        {0x93ec42ae, 1024 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400006, 0x080000, 0x080000, 0},  /* d26.u18 */
+        {0x7e36ec84, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400004, 0, 0x020000, 0},  /* moon-1.c173.u30 */
+        {0x7e36ec84, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400000, 0x020000, 0x020000, 0},  /* moon-1.c173.u30 */
+        {0x66403570, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400006, 0, 0x020000, 0},  /* moon-2.c132.u29 */
+        {0x66403570, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x400002, 0x020000, 0x020000, 0},  /* moon-2.c132.u29 */
+        {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* conv2.u191 */
+        {0x6cfffb11, 256 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 0},  /* voice.u210 */
+    }, MAPPER_S9263B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_SF2HACK, 0, 0x41},
     /* MAME cworld2j (cps1_12MHz), CPS_B_21_BT6 mapper_Q522B */
     {"cworld2j", "Adventure Quiz Capcom World 2 (Japan 920611)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_21_BT6, 27, {
         {0x38a08099, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* q5_36.12f */
@@ -3714,6 +4284,24 @@ const Cps1Game cps1_games[] = {
         {0x2f273ffc, 512 * K, CPS1_R_QSOUND, CPS1_LOAD_PLAIN, 0x100000, 0, 0, 1},  /* cd-q3.3k */
         {0x2c67821d, 512 * K, CPS1_R_QSOUND, CPS1_LOAD_PLAIN, 0x180000, 0, 0, 1},  /* cd-q4.4k */
     }, MAPPER_CD63B, 12, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "dino", 0, -1, CPS1_EXTRA_P3, 0, 0, CPS1_INIT_DINO, 0, 0},
+    /* MAME dinohunt (wofhfh), CPS_B_21_DEF mapper_CD63B */
+    {"dinohunt", "Dinosaur Hunter (Chinese bootleg of Cadillacs and Dinosaurs)", CPS1_PLAIN, {2048 * K, 4096 * K, 64 * K, 256 * K}, CPSB_21_DEF, 15, {
+        {0x8d5ddc5d, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0, 0, 0},  /* u23 */
+        {0xf72cd219, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x080000, 0, 0, 0},  /* u22 */
+        {0xbc275b76, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x100000, 0, 0, 0},  /* u21 */
+        {0x8987c975, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x180000, 0, 0, 0},  /* u20 */
+        {0xa01a9fb5, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0, 0},  /* u1 */
+        {0xbdf02c17, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0, 0},  /* u2 */
+        {0x058beefa, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0, 0, 0},  /* u3 */
+        {0x5028a9f1, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0, 0, 0},  /* u4 */
+        {0xd77f89ea, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200000, 0, 0, 0},  /* u5 */
+        {0xbfbcb034, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200002, 0, 0, 0},  /* u6 */
+        {0xa2544d4e, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200004, 0, 0, 0},  /* u7 */
+        {0x8869bbb1, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200006, 0, 0, 0},  /* u8 */
+        {0x2eb16a83, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 0},  /* u9 */
+        {0x8d2899ba, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 0},  /* u18 */
+        {0xb34a4b42, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 0},  /* u19 */
+    }, MAPPER_CD63B, 12, {0xFF, 0xD4, 0x9E}, CPS1_NONE, CPS1_NONE, "dino", 0, -1, CPS1_EXTRA_P3, 0, 0, CPS1_INIT_DINOHUNT, 0, 0},
     /* MAME punisher (qsound), CPS_B_21_QS3 mapper_PS63B */
     {"punisher", "The Punisher (World 930422)", CPS1_QSOUND, {1536 * K, 4096 * K, 128 * K, 2048 * K}, CPSB_21_QS3, 22, {
         {0x389a99d2, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* pse_26.11e */
@@ -4228,6 +4816,36 @@ const Cps1Game cps1_games[] = {
         {0x73a10d5d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* pa3_05.10d */
         {0xaffa4f82, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* pa3_06.11d */
     }, MAPPER_CP1B1F, 12, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "pang3", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_PANG3, 0, 0},
+    /* MAME pang3b4 (cps1_12MHz), CPS_B_21_DEF mapper_pang3b4 */
+    {"pang3b4", "Pang! 3 (bootleg, set 4)", CPS1_PLAIN, {1024 * K, 4096 * K, 32 * K, 256 * K}, CPSB_21_DEF, 27, {
+        {0xbf3ebe68, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* 22.u30 */
+        {0xd20db83c, 128 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x000001, 0, 0, 0},  /* 26.u35 */
+        {0x94d494c2, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x040000, 0, 0, 0},  /* 23.u31 */
+        {0x38e43390, 128 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x040001, 0, 0, 0},  /* 27.u36 */
+        {0x8daf3814, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x080000, 0, 0, 0},  /* 20.u28 */
+        {0xbb34e444, 128 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x080001, 0, 0, 0},  /* 24.u33 */
+        {0x54d0b680, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x0C0000, 0, 0, 0},  /* 21.u29 */
+        {0xd666ec70, 128 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x0C0001, 0, 0, 0},  /* 25.u34 */
+        {0xd2b764a9, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000000, 0, 0, 0},  /* 14.u25 */
+        {0xfb68be4e, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000001, 0, 0, 0},  /* 06.u15 */
+        {0x0c73a1c7, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x200000, 0, 0, 0},  /* 13.u24 */
+        {0x475a5ef1, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x200001, 0, 0, 0},  /* 05.u14 */
+        {0x79673708, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000004, 0, 0, 0},  /* 10.u21 */
+        {0xf706b466, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000005, 0, 0, 0},  /* 02.u11 */
+        {0x6e36e963, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x200004, 0, 0, 0},  /* 09.u20 */
+        {0x7d15b9d7, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x200005, 0, 0, 0},  /* 01.u10 */
+        {0x3e293482, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000002, 0, 0, 0},  /* 16.u27 */
+        {0x7e0ca927, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000003, 0, 0, 0},  /* 08.u17 */
+        {0xa933434f, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x200002, 0, 0, 0},  /* 15.u26 */
+        {0x83b3fa5e, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x200003, 0, 0, 0},  /* 07.u16 */
+        {0x3c4dfb4f, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000006, 0, 0, 0},  /* 12.u23 */
+        {0x44cd5e95, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000007, 0, 0, 0},  /* 04.u13 */
+        {0x29194b90, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x200006, 0, 0, 0},  /* 11.u22 */
+        {0x7e28974e, 256 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x200007, 0, 0, 0},  /* 03.u12 */
+        {0xcb1423a2, 128 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0x008000, 1},  /* pa3_11.11f */
+        {0x73a10d5d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* pa3_05.10d */
+        {0xaffa4f82, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* pa3_06.11d */
+    }, MAPPER_PANG3B4, 12, {0xFF, 0xBC, 0xBF}, CPS1_NONE, CPS1_NONE, "pang3", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_PANG3B4, 0, 0},
     /* MAME pang3b5 (pang3), CPS_B_21_DEF mapper_CP1B1F_boot */
     {"pang3b5", "Pang! 3 (bootleg, set 5)", CPS1_PLAIN, {1024 * K, 4096 * K, 32 * K, 256 * K}, CPSB_21_DEF, 13, {
         {0xd7041d32, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0, 0, 0},  /* pa3e_17.11l */
