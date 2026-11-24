@@ -11,6 +11,7 @@ import re
 import subprocess
 import tempfile
 import array
+import hashlib
 import math
 import unittest
 import wave
@@ -83,6 +84,21 @@ class TestHeadless(unittest.TestCase):
                                capture_output=True, text=True, timeout=300)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             self.assertEqual(open(a, "rb").read(), open(b, "rb").read())
+
+    @unittest.skipUnless(all(os.path.exists(os.path.join(SET, z)) for z in ("wof.zip", "qsound.zip")), "no wof.zip and qsound.zip in " + SET)
+    def test_wof_sound(self):  # Q-Sound: 600 frames of --play are stereo, not silent, and the same samples as when checked
+        with tempfile.TemporaryDirectory() as d:  # against MAME's qsoundhle (docs/verification-log.md)
+            out = os.path.join(d, "out.wav")
+            r = subprocess.run([RUNNER, os.path.join(SET, "wof.zip"), "--frames", "600", "--play", "--wav", out],
+                               capture_output=True, text=True, timeout=300)
+            self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+            with wave.open(out) as w:
+                self.assertEqual((w.getnchannels(), w.getsampwidth(), w.getframerate()), (2, 2, 24038))
+                raw = w.readframes(w.getnframes())
+            data = array.array("h", raw)
+            self.assertGreater(max(abs(x) for x in data), 1000)
+            self.assertGreater(len(set(data)), 1000)
+            self.assertEqual(hashlib.sha256(raw).hexdigest()[:16], "41d8cab1fee417e9")
 
     @unittest.skipUnless(all(os.path.exists(os.path.join(SET, z)) for z in ("sf2ua.zip", "sf2.zip")), "no sf2ua.zip and sf2.zip in " + SET)
     def test_split_clone(self):  # a MAME split clone: 17 of its 23 chips from sf2.zip beside it
