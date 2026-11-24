@@ -46,6 +46,7 @@ static uint32_t place(const Cps1File *f, uint32_t i) {
     case CPS1_LOAD_SWAP16: return f->offset + (i ^ 1);
     case CPS1_LOAD_GFX4: return f->offset + (i >> 1) * 8 + (i & 1);
     case CPS1_LOAD_GFX8: return f->offset + i * 8;
+    case CPS1_LOAD_BYTE4: return f->offset + i * 4;
     default: return f->offset + i;
     }
 }
@@ -74,8 +75,9 @@ static int take(const Cps1Game *g, const Zip *z, Cps1Rom *r, char *done, char *e
             snprintf(err, errlen, "%s: the file with CRC %08x is damaged", g->id, (unsigned)f->crc);
             return free(chip), -1;
         }
-        for (uint32_t b = 0; b < f->size; b++) {
-            uint32_t at = place(f, b);
+        uint32_t end = f->len && f->skip + f->len <= f->size ? f->skip + f->len : f->size;
+        for (uint32_t b = f->skip; b < end; b++) {
+            uint32_t at = place(f, b - f->skip);
             if (at >= r->size[f->region]) {
                 snprintf(err, errlen, "%s: the file with CRC %08x does not fit its region", g->id, (unsigned)f->crc);
                 return free(chip), -1;

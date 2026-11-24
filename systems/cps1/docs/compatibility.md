@@ -107,6 +107,8 @@ Run the same command on your own folder to see what yours lacks.
 | sf2jf | Street Fighter II: The World Warrior (Japan 910411) | sf2 | boot-tested |
 | sf2jh | Street Fighter II: The World Warrior (Japan 910522) | sf2 | boot-tested |
 | sf2jl | Street Fighter II: The World Warrior (Japan 920312) | sf2 | boot-tested |
+| sf2qp1 | Street Fighter II: The World Warrior (Quicken Pt-I, bootleg) | sf2 | no zip |
+| sf2qp2 | Street Fighter II: The World Warrior (Quicken, bootleg) | sf2 | no zip |
 | 3wonders | Three Wonders (World 910520) |  | boot-tested |
 | 3wondersr1 | Three Wonders (World 910513) | 3wonders | boot-tested |
 | 3wondersu | Three Wonders (USA 910520) | 3wonders | boot-tested (as 3wonderu.zip) |
@@ -124,10 +126,12 @@ Run the same command on your own folder to see what yours lacks.
 | captcommu | Captain Commando (USA 910928) | captcomm | boot-tested (as captcomu.zip) |
 | captcommj | Captain Commando (Japan 911202) | captcomm | boot-tested (as captcomj.zip) |
 | captcommjr1 | Captain Commando (Japan 910928) | captcomm | boot-tested |
+| captcommb | Captain Commando (bootleg) | captcomm | boot-tested (as captcomb.zip) |
 | knights | Knights of the Round (World 911127) |  | boot-tested |
 | knightsu | Knights of the Round (USA 911127) | knights | boot-tested |
 | knightsj | Knights of the Round (Japan 911127, B-Board 91634B-2) | knights | boot-tested |
 | knightsja | Knights of the Round (Japan 911127, B-Board 89625B-1) | knights | boot-tested |
+| knightsb2 | Knights of the Round (bootleg, World 911127) | knights | no zip |
 | sf2ce | Street Fighter II': Champion Edition (World 920513) |  | boot-tested |
 | sf2ceea | Street Fighter II': Champion Edition (World 920313) | sf2ce | boot-tested |
 | sf2ceec | Street Fighter II': Champion Edition (World 920803) | sf2ce | no zip |
@@ -140,12 +144,12 @@ Run the same command on your own folder to see what yours lacks.
 | sf2cejc | Street Fighter II': Champion Edition (Japan 920803) | sf2ce | boot-tested |
 | sf2cebltw | Street Fighter II': Champion Edition ('Taiwan' bootleg with PAL) | sf2ce | no zip |
 | sf2red | Street Fighter II': Champion Edition (Red Wave, bootleg, set 1) | sf2ce | boot-tested |
+| sf2reda | Street Fighter II': Champion Edition (Red Wave, bootleg, set 2) | sf2ce | no zip |
 | sf2redp2 | Street Fighter II': Champion Edition (Red Wave PtII, bootleg) | sf2ce | no zip |
 | sf2v004 | Street Fighter II': Champion Edition (V004, bootleg) | sf2ce | boot-tested |
 | sf2acc | Street Fighter II': Champion Edition (Accelerator!, bootleg, set 1) | sf2ce | boot-tested |
 | sf2acca | Street Fighter II': Champion Edition (Accelerator!, bootleg, set 2) | sf2ce | boot-tested |
-| sf2m3 | Street Fighter II': Champion Edition (M3, bootleg) | sf2ce | boot-tested |
-| sf2ceupl | Street Fighter II': Champion Edition (Japan 920322, UPL bootleg?) | sf2ce | no zip |
+| sf2dkot2 | Street Fighter II': Champion Edition (Double K.O. Turbo II, bootleg) | sf2ce | no zip |
 | cworld2j | Adventure Quiz Capcom World 2 (Japan 920611) |  | boot-tested |
 | cworld2ja | Adventure Quiz Capcom World 2 (Japan 920611, B-Board 90629B-3, no battery) | cworld2j | no zip |
 | cworld2jb | Adventure Quiz Capcom World 2 (Japan 920611, B-Board 91634B-2) | cworld2j | no zip |
@@ -193,12 +197,10 @@ Run the same command on your own folder to see what yours lacks.
 | Set | Game | Why |
 |---|---|---|
 | 3wondersbi | Three Wonders (Italian bootleg) | a ROM layout the loader cannot express |
-| captcommb | Captain Commando (bootleg) | a ROM layout the loader cannot express |
 | cps1mult | CPS1 Multi Game | its own init (init_cps1mult) |
 | dinohunt | Dinosaur Hunter (Chinese bootleg of Cadillacs and Dinosaurs) | its own init (init_dinohunt) |
 | ganbare | Ganbare! Marine Kun (Japan 2K0411) | its own init (init_ganbare) |
 | gulunpa | Gulun.Pa! (Japan 931220 L) (prototype) | a ROM layout the loader cannot express |
-| knightsb2 | Knights of the Round (bootleg, World 911127) | a ROM layout the loader cannot express |
 | pang3 | Pang! 3 (Europe 950601) | P8 |
 | pang3b | Pang! 3 (bootleg, set 1) | P8 |
 | pang3b2 | Pang! 3 (bootleg, set 2) | P8 |
@@ -214,37 +216,35 @@ Run the same command on your own folder to see what yours lacks.
 | sf2amf3 | Street Fighter II': Champion Edition (L735 Test Rom, bootleg, set 2) | its own init (init_sf2hack) |
 | sf2bhh | Street Fighter II': Champion Edition (Hung Hsi, bootleg) | its own init (init_sf2rb) |
 | sf2ceblp | Street Fighter II': Champion Edition (protected bootleg on non-dash board) | its own init (init_sf2ceblp) |
-| sf2ceds6 | Street Fighter II': Champion Edition (Dstreet-6, bootleg) | a ROM layout the loader cannot express |
-| sf2cems6a | Street Fighter II': Champion Edition (Mstreet-6, bootleg, set 1) | a ROM layout the loader cannot express |
-| sf2cems6b | Street Fighter II': Champion Edition (Mstreet-6, bootleg, set 2) | a ROM layout the loader cannot express |
-| sf2cems6c | Street Fighter II': Champion Edition (Mstreet-6, bootleg, set 3) | a ROM layout the loader cannot express |
-| sf2dkot2 | Street Fighter II': Champion Edition (Double K.O. Turbo II, bootleg) | a ROM layout the loader cannot express |
+| sf2ceds6 | Street Fighter II': Champion Edition (Dstreet-6, bootleg) | its own memory map (MAME's sf2cems6 machine) |
+| sf2cems6a | Street Fighter II': Champion Edition (Mstreet-6, bootleg, set 1) | its own memory map (MAME's sf2cems6 machine) |
+| sf2cems6b | Street Fighter II': Champion Edition (Mstreet-6, bootleg, set 2) | its own memory map (MAME's sf2cems6 machine) |
+| sf2cems6c | Street Fighter II': Champion Edition (Mstreet-6, bootleg, set 3) | its own memory map (MAME's sf2cems6 machine) |
+| sf2ceupl | Street Fighter II': Champion Edition (Japan 920322, UPL bootleg?) | its own memory map (MAME's sf2m10 machine) |
 | sf2dongb | Street Fighter II': Champion Edition (Dongfang Bubai protection, bootleg) | its own init (init_sf2dongb) |
 | sf2ebbl | Street Fighter II: The World Warrior (TAB Austria, bootleg, set 1) | its own init (init_sf2hack) |
 | sf2ebbl2 | Street Fighter II: The World Warrior (TAB Austria, bootleg, set 3) | its own init (init_sf2hack) |
 | sf2ebbl3 | Street Fighter II: The World Warrior (TAB Austria, bootleg, set 4) | its own init (init_sf2hack) |
 | sf2koryu | Street Fighter II': Champion Edition (Xiang Long, Chinese bootleg) | its own init (init_sf2hack) |
-| sf2level | Street Fighter II': Champion Edition (bootleg with level selection) | a ROM layout the loader cannot express |
-| sf2m10 | Street Fighter II': Champion Edition (M10, bootleg) | a ROM layout the loader cannot express |
+| sf2level | Street Fighter II': Champion Edition (bootleg with level selection) | its own memory map (MAME's sf2m3 machine) |
+| sf2m10 | Street Fighter II': Champion Edition (M10, bootleg) | its own memory map (MAME's sf2m10 machine) |
 | sf2m2 | Street Fighter II': Champion Edition (M2, bootleg) | its own init (init_sf2hack) |
+| sf2m3 | Street Fighter II': Champion Edition (M3, bootleg) | its own memory map (MAME's sf2m3 machine) |
 | sf2m4 | Street Fighter II': Champion Edition (M4, bootleg) | its own init (init_sf2hack) |
 | sf2m5 | Street Fighter II': Champion Edition (M5, bootleg) | its own init (init_sf2hack) |
 | sf2m6 | Street Fighter II': Champion Edition (M6, bootleg) | its own init (init_sf2hack) |
 | sf2m7 | Street Fighter II': Champion Edition (M7, bootleg) | its own init (init_sf2hack) |
 | sf2m8 | Street Fighter II': Champion Edition (M8, bootleg) | its own init (init_sf2m8) |
 | sf2mkot | Street Fighter II': Magic KO Turbo!! - Nightmare Crack | its own init (init_sf2hack) |
-| sf2qp1 | Street Fighter II: The World Warrior (Quicken Pt-I, bootleg) | a ROM layout the loader cannot express |
-| sf2qp2 | Street Fighter II: The World Warrior (Quicken, bootleg) | a ROM layout the loader cannot express |
 | sf2rb | Street Fighter II': Champion Edition (Rainbow, bootleg, set 1) | its own init (init_sf2rb) |
 | sf2rb2 | Street Fighter II': Champion Edition (Rainbow, bootleg, set 2) | its own init (init_sf2rb2) |
 | sf2rb3 | Street Fighter II': Champion Edition (Rainbow, bootleg, set 3) | a black screen |
-| sf2re | Street Fighter II': Champion Edition (RE, bootleg) | a ROM layout the loader cannot express |
-| sf2reda | Street Fighter II': Champion Edition (Red Wave, bootleg, set 2) | a ROM layout the loader cannot express |
+| sf2re | Street Fighter II': Champion Edition (RE, bootleg) | its own memory map (MAME's sf2m3 machine) |
 | sf2rk | Street Fighter II: The World Warrior (RK, bootleg) | its own init (init_sf2rk) |
 | sf2rules | Street Fighter II: The World Warrior (bootleg with rules screen) | its own init (init_sf2hack) |
 | sf2stt | Street Fighter II: The World Warrior (TAB Austria, bootleg, set 2) | its own init (init_sf2hack) |
 | sf2thndr | Street Fighter II: The World Warrior (Thunder Edition, bootleg, set 1) | its own init (init_sf2thndr) |
 | sf2thndr2 | Street Fighter II: The World Warrior (Thunder Edition, bootleg, set 2) | its own init (init_sf2thndr) |
 | sf2yyc | Street Fighter II': Champion Edition (YYC, bootleg) | its own init (init_sf2hack) |
-| varthb2 | Varth: Operation Thunderstorm (bootleg, set 2) | a ROM layout the loader cannot express |
-| varthb3 | Varth: Operation Thunderstorm (bootleg, set 3) | a ROM layout the loader cannot express |
+| varthb2 | Varth: Operation Thunderstorm (bootleg, set 2) | its own memory map (MAME's varthb2 machine) |
+| varthb3 | Varth: Operation Thunderstorm (bootleg, set 3) | its own memory map (MAME's varthb3 machine) |

@@ -73,16 +73,16 @@ static size_t zip_build(void) {  /* local headers and data, the directory, the e
 
 static uint8_t even[4] = {1, 2, 5, 6}, odd[4] = {3, 4, 7, 8}, swapped[4] = {0x22, 0x11, 0x44, 0x33};
 static uint8_t gfx[2][4] = {{0xA0, 0xA1, 0xA2, 0xA3}, {0xB0, 0xB1, 0xB2, 0xB3}}, plain[3] = {9, 8, 7};
-static Cps1Game test_game = {"test", "Test", CPS1_PLAIN, {16, 16, 3, 0}, {0}, 6, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0};
+static Cps1Game test_game = {"test", "Test", CPS1_PLAIN, {16, 16, 3, 0}, {0}, 6, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0};
 
 static void make_test_game(void) {
     Cps1File f[6] = {
-        {zip_crc32(even, 4), 4, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0, 0},
-        {zip_crc32(odd, 4), 4, CPS1_R_MAIN, CPS1_LOAD_ODD, 1, 0},
-        {zip_crc32(swapped, 4), 4, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 8, 0},
-        {zip_crc32(gfx[0], 4), 4, CPS1_R_GFX, CPS1_LOAD_GFX4, 0, 0},
-        {zip_crc32(gfx[1], 4), 4, CPS1_R_GFX, CPS1_LOAD_GFX4, 6, 0},
-        {zip_crc32(plain, 3), 3, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0, 0},
+        {zip_crc32(even, 4), 4, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0, 0, 0, 0},
+        {zip_crc32(odd, 4), 4, CPS1_R_MAIN, CPS1_LOAD_ODD, 1, 0, 0, 0},
+        {zip_crc32(swapped, 4), 4, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 8, 0, 0, 0},
+        {zip_crc32(gfx[0], 4), 4, CPS1_R_GFX, CPS1_LOAD_GFX4, 0, 0, 0, 0},
+        {zip_crc32(gfx[1], 4), 4, CPS1_R_GFX, CPS1_LOAD_GFX4, 6, 0, 0, 0},
+        {zip_crc32(plain, 3), 3, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0, 0, 0, 0},
     };
     memcpy(test_game.files, f, sizeof f);
 }
@@ -145,7 +145,7 @@ static void test_detector(void) {
 static Cps1 m;
 static uint8_t prog[1 << 20];
 static Cps1Game prog_game = {"prog", "Program", CPS1_PLAIN, {1 << 20, 0, 0, 0},
-                             {0x20, 0x0004, 0x00, 0x02, 0x04, 0x06, 0x2E, {0x26, 0x28, 0x2A, 0x2C}, 0x30, {0}}, 0, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0};
+                             {0x20, 0x0004, 0x00, 0x02, 0x04, 0x06, 0x2E, {0x26, 0x28, 0x2A, 0x2C}, 0x30, {0}}, 0, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0};
 static Cps1Rom prog_rom;
 
 static void w16(uint32_t a, uint16_t v) { prog[a] = (uint8_t)(v >> 8), prog[a + 1] = (uint8_t)v; }
@@ -396,9 +396,9 @@ static void test_gfx_mapper(void) {  /* S224B: a tile outside its layer's range 
 
 static void test_layout_gfx8(void) {  /* 8-bit graphics chips: one byte into every 8, at the offset's slot */
     static uint8_t a[2] = {0xA0, 0xA1}, b[2] = {0xB0, 0xB1};
-    static Cps1Game g8 = {"g8", "G8", CPS1_PLAIN, {0, 16, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0};
-    g8.files[0] = (Cps1File){zip_crc32(a, 2), 2, CPS1_R_GFX, CPS1_LOAD_GFX8, 1, 0};
-    g8.files[1] = (Cps1File){zip_crc32(b, 2), 2, CPS1_R_GFX, CPS1_LOAD_GFX8, 6, 0};
+    static Cps1Game g8 = {"g8", "G8", CPS1_PLAIN, {0, 16, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0};
+    g8.files[0] = (Cps1File){zip_crc32(a, 2), 2, CPS1_R_GFX, CPS1_LOAD_GFX8, 1, 0, 0, 0};
+    g8.files[1] = (Cps1File){zip_crc32(b, 2), 2, CPS1_R_GFX, CPS1_LOAD_GFX8, 6, 0, 0, 0};
     zcount = 0;
     zip_add("a", a, 2), zip_add("b", b, 2);
     zip_build();
@@ -408,6 +408,47 @@ static void test_layout_gfx8(void) {  /* 8-bit graphics chips: one byte into eve
     assert(zip_open(&z, zbuf, zlen) == 0 && cps1_load(&g8, &z, &r, err, sizeof err) == 0);
     static const uint8_t want[16] = {0, 0xA0, 0, 0, 0, 0, 0xB0, 0, 0, 0xA1, 0, 0, 0, 0, 0xB1, 0};
     assert(memcmp(r.region[CPS1_R_GFX], want, 16) == 0);
+    cps1_unload(&r);
+    zip_close(&z);
+}
+
+/* Chips loaded in parts (MAME's ROM_CONTINUE, ROM_RELOAD, ROM_IGNORE): rows
+ * with skip and len; and an 8-bit chip one byte in every 4 (ROM_LOAD32_BYTE). */
+static void test_continue(void) {
+    static uint8_t w[8] = {0xA0, 0xA1, 0xA2, 0xA3, 0xB0, 0xB1, 0xB2, 0xB3}, q[4] = {1, 2, 3, 4};
+    static Cps1Game gp = {"gp", "GP", CPS1_PLAIN, {0, 16, 4, 0}, {0}, 4, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0};
+    gp.files[0] = (Cps1File){zip_crc32(w, 8), 8, CPS1_R_GFX, CPS1_LOAD_GFX4, 0, 0, 4, 0};  /* the first half at slot 0 */
+    gp.files[1] = (Cps1File){zip_crc32(w, 8), 8, CPS1_R_GFX, CPS1_LOAD_GFX4, 4, 4, 4, 0};  /* ROM_CONTINUE: the second at slot 4 */
+    gp.files[2] = (Cps1File){zip_crc32(q, 4), 4, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0, 0, 2, 0};  /* ROM_IGNORE: 2 bytes used */
+    gp.files[3] = (Cps1File){zip_crc32(q, 4), 4, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 2, 0, 2, 0};  /* ROM_RELOAD: again at 2 */
+    zcount = 0, zip_add("w", w, 8), zip_add("q", q, 4), zip_build();
+    Zip z;
+    Cps1Rom r;
+    char err[128];
+    assert(zip_open(&z, zbuf, zlen) == 0 && cps1_load(&gp, &z, &r, err, sizeof err) == 0);
+    static const uint8_t gfx_[16] = {0xA0, 0xA1, 0, 0, 0xB0, 0xB1, 0, 0, 0xA2, 0xA3, 0, 0, 0xB2, 0xB3, 0, 0};
+    static const uint8_t snd[4] = {1, 2, 1, 2};
+    assert(!memcmp(r.region[CPS1_R_GFX], gfx_, 16) && !memcmp(r.region[CPS1_R_SOUND], snd, 4));
+    cps1_unload(&r);
+    zip_close(&z);
+}
+
+static void test_load32(void) {  /* four byte chips interleaved by 4 */
+    static uint8_t c[4][2] = {{0x10, 0x11}, {0x20, 0x21}, {0x30, 0x31}, {0x40, 0x41}};
+    static Cps1Game g4 = {"g4", "G4", CPS1_PLAIN, {0, 8, 0, 0}, {0}, 4, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0};
+    static const char *names[4] = {"c0", "c1", "c2", "c3"};
+    zcount = 0;
+    for (int i = 0; i < 4; i++) {
+        g4.files[i] = (Cps1File){zip_crc32(c[i], 2), 2, CPS1_R_GFX, CPS1_LOAD_BYTE4, (uint32_t)i, 0, 0, 0};
+        zip_add(names[i], c[i], 2);
+    }
+    zip_build();
+    Zip z;
+    Cps1Rom r;
+    char err[128];
+    assert(zip_open(&z, zbuf, zlen) == 0 && cps1_load(&g4, &z, &r, err, sizeof err) == 0);
+    static const uint8_t want[8] = {0x10, 0x20, 0x30, 0x40, 0x11, 0x21, 0x31, 0x41};
+    assert(!memcmp(r.region[CPS1_R_GFX], want, 8));
     cps1_unload(&r);
     zip_close(&z);
 }
@@ -765,9 +806,9 @@ static void write_zip(const char *path) {
 
 static void test_clone_parent(void) {
     static uint8_t own[4] = {1, 2, 3, 4}, shared[4] = {5, 6, 7, 8};
-    static Cps1Game clone = {"clone", "Clone", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "cps1_par", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0};
-    clone.files[0] = (Cps1File){zip_crc32(own, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0};
-    clone.files[1] = (Cps1File){zip_crc32(shared, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 4, 1};
+    static Cps1Game clone = {"clone", "Clone", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "cps1_par", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0};
+    clone.files[0] = (Cps1File){zip_crc32(own, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0, 0, 0};
+    clone.files[1] = (Cps1File){zip_crc32(shared, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 4, 0, 0, 1};
     zcount = 0, zip_add("own", own, 4), zip_build(), write_zip("cps1_clone.zip");
     static uint8_t clone_zip[256];
     size_t clone_len = zlen;
@@ -817,11 +858,11 @@ static void test_chip_elsewhere(void) {  /* an own chip the zip lacks, found by 
 static void test_match_order(void) {  /* a zip two games match: the one with more of its own files */
     static uint8_t a[4] = {9, 9, 9, 1}, b[4] = {9, 9, 9, 2};
     static Cps1Game two[2] = {
-        {"small", "Small", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 1, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0},
-        {"big", "Big", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0}};
-    two[0].files[0] = (Cps1File){zip_crc32(a, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0};
+        {"small", "Small", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 1, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0},
+        {"big", "Big", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0}};
+    two[0].files[0] = (Cps1File){zip_crc32(a, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0, 0, 0};
     two[1].files[0] = two[0].files[0];
-    two[1].files[1] = (Cps1File){zip_crc32(b, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 4, 0};
+    two[1].files[1] = (Cps1File){zip_crc32(b, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 4, 0, 0, 0};
     zcount = 0, zip_add("a", a, 4), zip_add("b", b, 4), zip_build();
     Zip z;
     assert(zip_open(&z, zbuf, zlen) == 0);
@@ -932,8 +973,8 @@ static void test_qsound_bank(void) {  /* $D003 = 2: $8000 shows ROM $10000 (MAME
 
 static void test_qsound_needs_zip(void) {  /* no qsound.zip beside the game: refused, the file named */
     static uint8_t chip[4] = {1, 2, 3, 4};
-    static Cps1Game qs = {"qs", "Q", CPS1_QSOUND, {4, 0, 0, 0}, {0}, 1, {{0}}, {{0}, 0, {{0}}}, 12, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0};
-    qs.files[0] = (Cps1File){zip_crc32(chip, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0};
+    static Cps1Game qs = {"qs", "Q", CPS1_QSOUND, {4, 0, 0, 0}, {0}, 1, {{0}}, {{0}, 0, {{0}}}, 12, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0};
+    qs.files[0] = (Cps1File){zip_crc32(chip, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0, 0, 0};
     zcount = 0, zip_add("chip", chip, 4), zip_build();
     Cps1Rom r;
     char err[256] = "";
@@ -1112,6 +1153,8 @@ int main(void) {
     test_gfx_mapper();
     test_layout_gfx8();
     test_mapper_bounds();
+    test_continue();
+    test_load32();
     test_flip();
     test_stars();
     test_rotate();

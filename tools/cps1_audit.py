@@ -24,7 +24,7 @@ def table():
     out = []
     for m in re.finditer(r'^    \{"(\w+)", "((?:[^"\\]|\\.)*)",(.*?)^    \}, ([^\n]*)', src, re.M | re.S):
         files = [(int(c, 16), n, fp == "1") for c, fp, n in
-                 re.findall(r"\{0x([0-9a-f]+), \d+ \* K, \w+, \w+, 0x[0-9A-F]+, ([01])\},  /\* (.+?) \*/", m.group(3))]
+                 re.findall(r"\{0x([0-9a-f]+), \d+ \* K, \w+, \w+, 0x[0-9A-F]+, (?:0|0x[0-9A-F]+), (?:0|0x[0-9A-F]+), ([01])\},  /\* (.+?) \*/", m.group(3))]
         parent = re.search(r'"(\w+)"', m.group(4))
         out.append((m.group(1), m.group(2).replace('\\"', '"'), parent.group(1) if parent else None, files,
                     m.group(3).lstrip().startswith("CPS1_QSOUND")))

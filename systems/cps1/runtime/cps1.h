@@ -28,7 +28,8 @@ enum {
     CPS1_LOAD_ODD,      /* the same on the lower byte (offset is odd) */
     CPS1_LOAD_SWAP16,   /* a 16-bit chip, its words byte-swapped into big-endian order */
     CPS1_LOAD_GFX4,     /* a 16-bit graphics chip: 2 bytes into every 8, at offset's slot (0, 2, 4, 6) */
-    CPS1_LOAD_GFX8      /* an 8-bit graphics chip: 1 byte into every 8, at offset's slot (0-7) */
+    CPS1_LOAD_GFX8,     /* an 8-bit graphics chip: 1 byte into every 8, at offset's slot (0-7) */
+    CPS1_LOAD_BYTE4     /* an 8-bit chip: 1 byte into every 4, at offset's slot (0-3; MAME's ROM_LOAD32_BYTE) */
 };
 enum { CPS1_PLAIN, CPS1_QSOUND, CPS1_ODD };  /* board groups (docs/roadmap.md) */
 /* What MAME's IN2 holds: buttons 4-6 of players 1-2, player 3, or players 3
@@ -42,6 +43,8 @@ typedef struct {
     uint32_t crc, size;
     uint8_t region, load;
     uint32_t offset;
+    uint32_t skip, len;          /* the part of the chip placed here: len bytes from skip; len 0: all of it (MAME's
+                                  * ROM_CONTINUE, ROM_RELOAD and ROM_IGNORE are rows of one chip) */
     uint8_t from_parent;         /* in the clone's parent zip, not its own */
 } Cps1File;
 
@@ -83,6 +86,7 @@ typedef struct {
     uint8_t cpsb_high;           /* the CPS-B at $8001C0, not $800140 (Street Fighter II revision E, MAME's init_sf2ee) */
     uint8_t init;                /* CPS1_INIT_* */
     uint8_t z80_raw;             /* $F00000 reads the Z80 ROM as dumped (MAME's audiorom_raw: Slam Masters' protection) */
+    uint8_t kludge;              /* a bootleg's own video wiring, MAME's bootleg_kludge (video.c) */
 } Cps1Game;
 
 extern const Cps1Game cps1_games[];
