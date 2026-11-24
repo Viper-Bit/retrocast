@@ -14,6 +14,7 @@
 
 #include "cps1.h"
 #include "detect.h"
+#include "eeprom93c46.h"
 #include "input_log.h"
 #include "kabuki.h"
 #include "oki6295.h"
@@ -840,6 +841,64 @@ static void test_kabuki(void) {  /* bytes 0..31 decoded with each key: MAME 0.28
     }
 }
 
+/* ---- the 93C46 serial EEPROM ---- */
+
+static uint64_t ee_now;  /* microseconds */
+static void ee_bit(Eeprom93c46 *e, int di) {  /* one bit clocked in */
+    eeprom_write_lines(e, 1, 0, di, ee_now), eeprom_write_lines(e, 1, 1, di, ee_now), ee_now += 2;
+}
+static void ee_command(Eeprom93c46 *e, unsigned bits, int n) {  /* CS up, then n bits, high first */
+    eeprom_write_lines(e, 0, 0, 0, ee_now), eeprom_write_lines(e, 1, 0, 0, ee_now), ee_now += 2;
+    for (int i = n - 1; i >= 0; i--) ee_bit(e, bits >> i & 1);
+}
+static unsigned ee_read(Eeprom93c46 *e, unsigned cmd, int n, int bits) {  /* a READ: the dummy 0, then the cell */
+    ee_command(e, cmd, n);
+    unsigned v = 0;
+    for (int i = 0; i <= bits; i++) v = v << 1 | (unsigned)eeprom_do(e, ee_now), ee_bit(e, 0);
+    assert(v >> bits == 0);  /* the dummy 0 */
+    eeprom_write_lines(e, 0, 0, 0, ee_now);
+    return v;
+}
+
+static void test_eeprom_write_read(void) {  /* 16 bits: start, opcode 2 bits, address 6 bits */
+    static Eeprom93c46 e;
+    eeprom_init(&e, 0);
+    ee_command(&e, 0x130, 9);                          /* EWEN: 1 00 11xxxx */
+    ee_command(&e, 0x145, 9);                          /* WRITE 5: 1 01 000101 */
+    for (int i = 15; i >= 0; i--) ee_bit(&e, 0x1234 >> i & 1);
+    eeprom_write_lines(&e, 0, 0, 0, ee_now), eeprom_write_lines(&e, 1, 0, 0, ee_now);
+    assert(eeprom_do(&e, ee_now) == 0);                /* busy: 1.75 ms */
+    ee_now += 1750;
+    assert(eeprom_do(&e, ee_now) == 1);                /* ready */
+    assert(ee_read(&e, 0x185, 9, 16) == 0x1234);       /* READ 5: 1 10 000101; the dummy 0 leads */
+    assert(e.data[10] == 0x34 && e.data[11] == 0x12);  /* MAME's layout: cells little-endian */
+}
+
+static void test_eeprom_protected(void) {  /* WRITE before EWEN changes nothing */
+    static Eeprom93c46 e;
+    eeprom_init(&e, 0);
+    ee_command(&e, 0x145, 9);
+    for (int i = 15; i >= 0; i--) ee_bit(&e, 0x1234 >> i & 1);
+    eeprom_write_lines(&e, 0, 0, 0, ee_now);
+    ee_now += 2000;
+    assert(ee_read(&e, 0x185, 9, 16) == 0xFFFF);
+}
+
+static void test_eeprom_org8(void) {  /* 8 bits: address 7 bits, byte cells */
+    static Eeprom93c46 e;
+    eeprom_init(&e, 1);
+    ee_command(&e, 0x260, 10);                         /* EWEN: 1 00 11xxxxx */
+    ee_command(&e, 0x2FF, 10);                         /* WRITE 127: 1 01 1111111 */
+    for (int i = 7; i >= 0; i--) ee_bit(&e, 0xA5 >> i & 1);
+    eeprom_write_lines(&e, 0, 0, 0, ee_now);
+    ee_now += 2000;
+    assert(ee_read(&e, 0x37F, 10, 8) == 0xA5 && e.data[127] == 0xA5);
+    ee_command(&e, 0x3FF, 10);                         /* ERASE 127: 1 11 1111111 */
+    eeprom_write_lines(&e, 0, 0, 0, ee_now);
+    ee_now += 2000;
+    assert(ee_read(&e, 0x37F, 10, 8) == 0xFF);
+}
+
 /* ---- save states ---- */
 
 static Cps1 m2;
@@ -953,6 +1012,9 @@ int main(void) {
     test_state_roundtrip();
     test_state_refused();
     test_kabuki();
+    test_eeprom_write_read();
+    test_eeprom_protected();
+    test_eeprom_org8();
     puts("cps1_tests: ok");
     return 0;
 }
