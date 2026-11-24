@@ -108,5 +108,26 @@ class TestBoot(unittest.TestCase):
                 self.assertGreaterEqual(int(re.search(r"colours=(\d+)", r.stdout).group(1)), 8, r.stdout)  # dynwar: its text intro
 
 
+class TestRecomp(unittest.TestCase):
+    """Games recompiled through -DROMS (NAME_headless), in lockstep with the
+    interpreter: no difference in 3,000 frames of --play, most of the time in
+    recompiled code. Skipped where the game was not recompiled (CI)."""
+
+    def lockstep(self, game):
+        runner = os.path.join(BUILD, game + "_headless" + EXE)
+        path = os.path.join(SET, game + ".zip")
+        if not (os.path.exists(runner) and os.path.exists(path)):
+            self.skipTest("%s not recompiled (-DROMS) or %s.zip not in %s" % (game, game, SET))
+        r = subprocess.run([runner, path, "--frames", "3000", "--play", "--diff", "--coverage"], capture_output=True, text=True, timeout=1200)
+        self.assertIn("diff: 3000 frames, no difference", r.stdout, r.stdout + r.stderr)
+        self.assertGreater(float(re.search(r"coverage: ([\d.]+)%", r.stdout).group(1)), 90, r.stdout)
+
+    def test_ffight(self):
+        self.lockstep("ffight")
+
+    def test_sf2(self):
+        self.lockstep("sf2")
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -10,7 +10,7 @@ before the thing it checks. A milestone is done when its exit test passes.
 | P3 | sound: Z80, YM2151, OKI MSM6295 | done |
 | P4 | the window (`retrocast`, `cps1.ini`), CMake detection, save states | done |
 | P5 | every plain-board game (their mappers); stars, flip screen, vertical monitors | done |
-| P6 | the recompiler (`cps1recomp`, `-DROMS`, `--diff`) | open |
+| P6 | the recompiler (`cps1recomp`, `-DROMS`, `--diff`) | done |
 | P7 | the Q-Sound games: dino, punisher, wof, slammasu, mbombrd | open |
 | P8 | the rest: pang3, megaman, pnickj, qad, qtono2 | open |
 
@@ -28,6 +28,16 @@ before the thing it checks. A milestone is done when its exit test passes.
   sprites and priority; the game table (Final Fight).
 - [x] **Exit:** `cps1_tests`; Final Fight reaches its title in
   `cps1_headless --ppm`, checked by eye.
+
+## P6 · The recompiler
+- [x] The 68000 recompiler's analysis and emitting shared with the Genesis
+  (`cpu/m68k/m68k_recomp.c`; `mdrecomp` emits the same C as before);
+  `cps1recomp`; the runtime's hook (`recomp_on` only for the code it was
+  made from), `--misses`, `--diff`, `--coverage`; `-DROMS` with a zip;
+  the window records `NAME.misses`.
+- [x] **Exit:** `TestRecomp`: ffight and sf2, 3,000 frames of `--play`
+  with `--diff`, no difference, 96% of 68000 clocks recompiled.
+- Open: the Z80 recompiled (small); played by hand in the window.
 
 ## P5 · The plain-board games
 - [x] 66 more sets from MAME 0.289's (layouts, CPS-B, mappers, DIP

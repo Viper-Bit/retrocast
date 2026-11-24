@@ -41,7 +41,15 @@ without a window.
   reads the table from `games.c`).
 - **Save states**: F2 / F4 (`GAME.state` next to the zip), refused for
   another game or version.
-- **Not yet**: the recompiler; DIP switch settings (their defaults).
+- **Recompiled**: `cmake -B build -DROMS="path/ffight.zip"` makes
+  `ffight` (and `ffight_headless`): the game's 68000 code as C, on the
+  68000 recompiler the Genesis uses (`cpu/m68k/m68k_recomp.c`). The zip is
+  not built in: give it to the program at start (a clone's: its parent's
+  zip beside it). Code the build's trace did not reach is interpreted and
+  written to `ffight.misses`; the next build recompiles it.
+  `ffight_headless ZIP --diff` runs the interpreter in lockstep and stops at
+  the first difference. The Z80 is interpreted.
+- **Not yet**: DIP switch settings (their defaults).
 
 ## Controls and settings
 Both players: buttons 1, 2, 3 on the pad's B, A and X (keyboard Z, X, S;

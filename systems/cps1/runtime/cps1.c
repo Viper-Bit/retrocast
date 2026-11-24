@@ -17,6 +17,7 @@
 
 #include "cps1.h"
 #include "input_log.h"
+#include "recomp_rt.h"
 
 static uint16_t be16(const uint8_t *p) { return (uint16_t)(p[0] << 8 | p[1]); }
 
@@ -199,9 +200,19 @@ int cps1_take_sound(Cps1 *s, int16_t *out, int max) {
     return n;
 }
 
-void cps1_init(Cps1 *s, const Cps1Rom *r) {
+uint32_t cps1_code_hash(const Cps1Rom *r) {
+    uint32_t h = 2166136261u;  /* FNV-1a, as the recompiler's m68k_recomp_hash */
+    for (uint32_t i = 0; i < r->size[CPS1_R_MAIN]; i++) h = (h ^ r->region[CPS1_R_MAIN][i]) * 16777619u;
+    return h;
+}
+
+void cps1_init(Cps1 *s, const Cps1Rom *r) { cps1_init_with(s, r, cps1_recomp_program); }
+
+void cps1_init_with(Cps1 *s, const Cps1Rom *r, const Cps1RecompProgram *p) {
     memset(s, 0, sizeof *s);
     s->rom = r;
+    s->recomp = p;
+    s->recomp_on = p && p->rom_hash == cps1_code_hash(r);
     memcpy(s->dip, r->game->dip, sizeof s->dip);  /* the game's defaults */
     s->line_clocks = r->game->clock_mhz == 12 ? 768 : CPS1_LINE_CLOCKS;
     s->cpu.bus = s;
@@ -217,19 +228,45 @@ void cps1_set_input(Cps1 *s, int player, uint16_t pad) {
     if (player >= 0 && player < 4) s->pad[player] = pad;
 }
 
-void cps1_frame(Cps1 *s) {
-    s->frames++;
-    if (s->rom->game->dial)  /* L / R turn the dial 20 steps a frame, as MAME's keys do */
-        for (int p = 0; p < 2; p++) s->dial[p] += (s->pad[p] & PAD_R ? 20 : 0) - (s->pad[p] & PAD_L ? 20 : 0);
-    for (s->line = 0; s->line < CPS1_LINES; s->line++) {
-        if (s->line == CPS1_VBLANK_LINE) {
-            cps1_render(s);
-            s->cpu.ipl = 2;
-        }
-        s->line_end += s->line_clocks;
-        while (s->cpu.cycles < s->line_end && !s->cpu.halted) m68k_step(&s->cpu);
-        if (s->cpu.halted) s->cpu.cycles = s->line_end;
-        s->lines++;
-        run_z80(s);
+/* One step of the 68000: a recompiled block when one holds the queued
+ * instruction and the interpreter would run it as a plain instruction,
+ * else one interpreted step. */
+static void cpu_step(Cps1 *s) {
+    M68k *c = &s->cpu;
+    uint32_t at = (c->pc - 4) & 0xFFFFFF;
+    uint64_t t0 = c->cycles;
+    Cps1RecompFn f = NULL;
+    if (s->recomp_on && !c->halted && !c->stopped && !c->trace && !c->ipl && !c->ipl_seen) f = s->recomp->lookup(at);
+    if (f) {
+        if (!setjmp(c->abort)) f(c);  /* an address error ends the block's instruction as the interpreter's */
+        s->cycles_native += c->cycles - t0;
+        return;
     }
+    if (s->misses && at < s->rom->size[CPS1_R_MAIN]) s->misses[at >> 1] = 1;
+    m68k_step(c);
+    s->cycles_interp += c->cycles - t0;
+}
+
+void cps1_line(Cps1 *s) {
+    if (s->line >= CPS1_LINES) s->line = 0;
+    if (s->line == 0) {
+        s->frames++;
+        if (s->rom->game->dial)  /* L / R turn the dial 20 steps a frame, as MAME's keys do */
+            for (int p = 0; p < 2; p++) s->dial[p] += (s->pad[p] & PAD_R ? 20 : 0) - (s->pad[p] & PAD_L ? 20 : 0);
+    }
+    if (s->line == CPS1_VBLANK_LINE) {
+        cps1_render(s);
+        s->cpu.ipl = 2;
+    }
+    s->line_end += s->line_clocks;
+    while (s->cpu.cycles < s->line_end && !s->cpu.halted) cpu_step(s);
+    if (s->cpu.halted) s->cpu.cycles = s->line_end;
+    s->lines++;
+    run_z80(s);
+    s->line++;
+}
+
+void cps1_frame(Cps1 *s) {
+    do cps1_line(s);
+    while (s->line < CPS1_LINES);
 }

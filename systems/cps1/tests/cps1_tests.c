@@ -172,6 +172,44 @@ static void test_vblank(void) {
     assert(ram16(0xFF0000) == 3);
 }
 
+/* ---- recompiled code (recomp_rt.h): a stand-in program whose one block
+ * runs one interpreted step and counts its calls ---- */
+static int block_calls;
+static void test_block(M68k *c) { block_calls++, m68k_step(c); }
+static Cps1RecompFn test_lookup(uint32_t at) { (void)at; return test_block; }
+static Cps1RecompProgram test_program = {0, "prog", test_lookup};
+
+static void test_recomp_gate(void) {  /* the program runs only on the code it was made from */
+    boot_program();
+    test_program.rom_hash = cps1_code_hash(&prog_rom);
+    cps1_init_with(&m, &prog_rom, &test_program);
+    assert(m.recomp_on);
+    block_calls = 0;
+    for (int i = 0; i < 3; i++) cps1_frame(&m);
+    assert(block_calls > 0 && ram16(0xFF0000) == 3);
+    test_program.rom_hash ^= 1;  /* another game's */
+    cps1_init_with(&m, &prog_rom, &test_program);
+    assert(!m.recomp_on);
+    block_calls = 0;
+    for (int i = 0; i < 3; i++) cps1_frame(&m);
+    assert(block_calls == 0 && ram16(0xFF0000) == 3);
+}
+
+static void test_recomp_state(void) {  /* a state from the interpreter, loaded with recompiled code: still on */
+    boot_program();  /* recomp_none.c: off */
+    cps1_frame(&m);
+    const char *path = "cps1_recomp_state.tmp";
+    assert(!cps1_state_save(&m, path));
+    test_program.rom_hash = cps1_code_hash(&prog_rom);
+    cps1_init_with(&m, &prog_rom, &test_program);
+    static uint8_t misses[16];
+    m.misses = misses;
+    char err[256];
+    assert(!cps1_state_load(&m, path, err, sizeof err));
+    assert(m.recomp_on && m.misses == misses && m.recomp == &test_program);
+    remove(path);
+}
+
 static void test_inputs(void) {
     boot_program();
     cps1_frame(&m);
@@ -858,6 +896,8 @@ int main(void) {
     test_ym_irq();
     test_sound_buffer();
     test_clock_12mhz();
+    test_recomp_gate();
+    test_recomp_state();
     test_in2_port();
     test_dip_defaults();
     test_dial();

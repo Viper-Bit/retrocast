@@ -112,6 +112,18 @@ int cps1_open_in(const char *path, const uint8_t *data, size_t size, const Cps1G
 #define CPS1_SAMPLE_RATE OPM_RATE  /* mono, one sample every 64 Z80 T-states */
 #define CPS1_SND_BUF 8192
 
+/* Recompiled 68000 code (recomp_rt.h, systems/cps1/recomp): made from one
+ * game's main-CPU code; runs only where cps1_code_hash matches rom_hash. */
+typedef void (*Cps1RecompFn)(M68k *c);
+typedef struct {
+    uint32_t rom_hash;
+    const char *game_id;
+    Cps1RecompFn (*lookup)(uint32_t at);  /* the block holding the instruction at `at`; NULL: none */
+} Cps1RecompProgram;
+/* Defined by the generated code; NULL in programs without it (recomp_none.c). */
+extern const Cps1RecompProgram *const cps1_recomp_program;
+uint32_t cps1_code_hash(const Cps1Rom *r);  /* FNV-1a of the main-CPU region */
+
 typedef struct Cps1 {
     M68k cpu;
     const Cps1Rom *rom;
@@ -140,10 +152,16 @@ typedef struct Cps1 {
     int snd_n;
     uint16_t pal[0xC00];        /* the colours, as uploaded (video.c) */
     uint16_t frame[CPS1_WIDTH * CPS1_HEIGHT];  /* palette indices */
+    const Cps1RecompProgram *recomp;  /* this program's recompiled code, if any */
+    uint8_t recomp_on;          /* it is this game's: blocks run where they hold the PC */
+    uint8_t *misses;            /* NULL, or a byte per main-CPU word: set where the interpreter ran */
+    uint64_t cycles_native, cycles_interp;  /* 68000 clocks run each way (--coverage) */
 } Cps1;
 
-void cps1_init(Cps1 *s, const Cps1Rom *r);
+void cps1_init(Cps1 *s, const Cps1Rom *r);  /* with cps1_recomp_program */
+void cps1_init_with(Cps1 *s, const Cps1Rom *r, const Cps1RecompProgram *p);
 void cps1_frame(Cps1 *s);       /* 262 lines; the picture is left in s->frame */
+void cps1_line(Cps1 *s);        /* one of them (s->line: the next, 262 after the last) */
 /* Players 0-3: buttons 1-3 = B, A, X; Start; Select = coin; Street Fighter
  * II's kicks (4-6) = Y, L, R; Forgotten Worlds' dial: L / R turn it. */
 void cps1_set_input(Cps1 *s, int player, uint16_t pad);

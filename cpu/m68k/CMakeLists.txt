@@ -4,7 +4,7 @@
 
 # The instruction templates (m68k.c), for recompilers and the interpreter's
 # handlers, so instruction semantics exist once.
-add_library(m68k_templates STATIC m68k.c)
+add_library(m68k_templates STATIC m68k.c m68k_recomp.c)  # m68k_recomp.c: the recompilers' shared core
 target_include_directories(m68k_templates PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(m68k_templates PUBLIC recomp_template)
 
