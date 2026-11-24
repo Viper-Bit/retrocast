@@ -136,7 +136,7 @@ static int take_folder(const char *dir, const char *skip1, const char *skip2, co
     HANDLE h = FindFirstFileA(p, &d);
     if (h == INVALID_HANDLE_VALUE) return 0;
     do {
-        snprintf(p, sizeof p, "%s%s", dir, d.cFileName);
+        if (snprintf(p, sizeof p, "%s%s", dir, d.cFileName) >= (int)sizeof p) continue;  /* too long a path: not opened cut short */
         if (_stricmp(p, skip1) && _stricmp(p, skip2)) bad = take_path(p, g, r, done, err, errlen);
     } while (!bad && missing(g, done) >= 0 && FindNextFileA(h, &d));
     FindClose(h);
@@ -146,7 +146,7 @@ static int take_folder(const char *dir, const char *skip1, const char *skip2, co
     while (dd && !bad && missing(g, done) >= 0 && (e = readdir(dd))) {
         size_t n = strlen(e->d_name);
         if (n < 4 || strcasecmp(e->d_name + n - 4, ".zip")) continue;
-        snprintf(p, sizeof p, "%s%s", dir, e->d_name);
+        if (snprintf(p, sizeof p, "%s%s", dir, e->d_name) >= (int)sizeof p) continue;  /* too long a path: not opened cut short */
         if (strcmp(p, skip1) && strcmp(p, skip2)) bad = take_path(p, g, r, done, err, errlen);
     }
     if (dd) closedir(dd);
