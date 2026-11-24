@@ -5,6 +5,24 @@ reproducible check is not "verified".
 
 Checks of shared parts: [docs/verification-log.md](../../../docs/verification-log.md).
 
+## 2026-11-24 · P6 · the recompiler
+- **Shared core**: `mdtest_random.c` generated before and after moving the
+  recompiler to `cpu/m68k/m68k_recomp.c`: byte-identical; the Genesis
+  lockstep test (`test_recomp`) passes.
+- **Hook** (`cps1_tests`): a stand-in program runs only where its hash
+  matches the main-CPU region (`test_recomp_gate`); a state saved by the
+  interpreter, loaded with recompiled code, keeps it on
+  (`test_recomp_state`). Exact-output tests (picture, sound, states)
+  unchanged after `cps1_frame` became 262 `cps1_line` calls.
+- **Lockstep** (`TestRecomp`, `-DROMS` with ffight.zip and sf2.zip,
+  6,000-frame traces): 3,000 frames of `--play --diff`, the CPUs and RAMs
+  equal after every line and the machine after every frame. ffight 5,829
+  blocks, 96.15% of 68000 clocks recompiled; sf2 4,671 blocks, 96.42%.
+- **Speed**: 6,000 frames of ffight headless: 16.05 s interpreted, 15.59 s
+  recompiled. The 68000 is a small part of a CPS-1 frame here; the picture
+  and the YM2151 take most of it.
+- **Not checked**: the recompiled window played by hand.
+
 ## 2026-11-24 · P5 · the table from MAME's list, not the folder
 - **The table**: every set of MAME 0.289's `cps1.cpp` on the plain boards
   (147), MAME's chips and CRCs, whatever the folder holds; 18 more are left

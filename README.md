@@ -18,12 +18,12 @@ own.
 | Atari 2600 | 2K/4K/F8/F6/F4 cartridges, TIA picture and sound, NTSC and PAL, joystick; recompiled; no Superchip RAM or other schemes, paddles or SECAM | [systems/atari2600/README.md](systems/atari2600/README.md) |
 | Master System / Mark III | Z80, Sega and Codemasters mappers, cartridge RAM, VDP (mode 4) and PSG, NTSC and PAL, two pads and Pause; recompiled (Z80) | [systems/mastersystem/README.md](systems/mastersystem/README.md) |
 | Game Gear | a mode of the Master System: 160x144 LCD, 12-bit palette, Start on port $00; recompiled (Z80) | [systems/mastersystem/README.md](systems/mastersystem/README.md) |
-| Capcom Play System I (arcade) | in progress: 147 sets (the plain boards) play in `retrocast`: zips, 68000 and Z80, CPS-A/CPS-B picture, YM2151 and OKI sound, save states; not yet recompiled | [systems/cps1/README.md](systems/cps1/README.md) |
+| Capcom Play System I (arcade) | in progress: 147 sets (the plain boards) play in `retrocast`: zips, 68000 and Z80, CPS-A/CPS-B picture, YM2151 and OKI sound, save states; recompiled (68000) | [systems/cps1/README.md](systems/cps1/README.md) |
 
 ## How it works
 1. Each system has a recompiler (`systems/nes/recomp/` → `nesrecomp`, `systems/gb/recomp/`
    → `gbrecomp`, `systems/genesis/recomp/` → `mdrecomp`, `systems/mastersystem/recomp/`
-   → `smsrecomp`, also for the Game Gear; C, built and run by CMake). It finds the reachable code and
+   → `smsrecomp`, also for the Game Gear, `systems/cps1/recomp/` → `cps1recomp`; C, built and run by CMake). It finds the reachable code and
    emits one C function per basic block, plus the ROM itself. Before that,
    the build plays the game for a while in the interpreter to find code
    static analysis cannot.
@@ -46,8 +46,8 @@ Details: [docs/architecture.md](docs/architecture.md); plans:
 Windows (x64, arm64), Linux (x64, arm64; glibc 2.35+) and macOS (arm64):
 `retrocast`, which plays a game of any system in the interpreter; per
 system a headless program (`nes_headless`, `gb_headless`, `genesis_headless`,
-`atari2600_headless`, `sms_headless`) and a recompiler (`nesrecomp`,
-`gbrecomp`, `mdrecomp`, `atari2600recomp`, `smsrecomp`); and a **kit** that recompiles your games
+`atari2600_headless`, `sms_headless`, `cps1_headless`) and a recompiler (`nesrecomp`,
+`gbrecomp`, `mdrecomp`, `atari2600recomp`, `smsrecomp`, `cps1recomp`); and a **kit** that recompiles your games
 into native programs with only CMake and a C compiler installed (SDL3 comes
 prebuilt). `README.txt` in the archive explains both. Archives are made by
 `tools/make_release.py` (`.github/workflows/release.yml`: push a tag `v*`
