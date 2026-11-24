@@ -18,6 +18,7 @@
 #include "input_log.h"
 #include "kabuki.h"
 #include "oki6295.h"
+#include "qsound.h"
 #include "ym2151.h"
 
 extern const SystemDetector cps1_detector;
@@ -841,6 +842,39 @@ static void test_kabuki(void) {  /* bytes 0..31 decoded with each key: MAME 0.28
     }
 }
 
+/* MAME 0.289 qsoundhle.cpp's output (copied into a C++20 harness in the scratchpad)
+ * for one voice keyed on with a pan and an echo, on a made-up chip ROM and
+ * samples: the 512 stereo samples after the 4 of the boot, as an FNV-1a hash
+ * of their 16-bit values, and the first 8 pairs. */
+static void test_qsound_as_mame(void) {
+    static uint16_t dsp[4096];
+    static uint8_t samples[0x10000];
+    static QSound q;
+    for (int i = 0; i < 4096; i++) dsp[i] = (uint16_t)((i * 7919) % 8191 - 4095);
+    for (int i = 0; i < 0x10000; i++) samples[i] = (uint8_t)((i * 73) ^ (i >> 5));
+    qsound_init(&q, dsp, samples, sizeof samples);
+    int16_t o[2];
+    for (int i = 0; i < 4; i++) qsound_sample(&q, o);  /* the boot: init, then the filters */
+    static const uint16_t writes[][2] = {
+        {0x78, 0x8000},                                                 /* voice 0's bank (voice 15's slot) */
+        {0x01, 0x0100}, {0x02, 0x1800}, {0x04, 0x0400}, {0x05, 0x0F00},  /* start, rate 1.5, loop, end */
+        {0x80, 0x0118},                                                 /* its pan */
+        {0xBA, 0x2000}, {0x93, 0x1800}, {0xD9, 0x0554 + 200},           /* its echo, the feedback, the length */
+        {0x06, 0x3000}};                                                /* key on: the volume */
+    for (unsigned i = 0; i < sizeof writes / sizeof writes[0]; i++)
+        qsound_write(&q, 0, (uint8_t)(writes[i][1] >> 8)), qsound_write(&q, 1, (uint8_t)writes[i][1]),
+            qsound_write(&q, 2, (uint8_t)writes[i][0]);
+    static const int16_t first[16] = {-156, 201, 7, -303, -4, -62, -1, -229, -15, 101, -16, 143, -28, 576, -24, 696};
+    uint32_t h = 2166136261u;
+    for (int i = 0; i < 512; i++) {
+        qsound_sample(&q, o);
+        if (i < 8) assert(o[0] == first[i * 2] && o[1] == first[i * 2 + 1]);
+        for (int c = 0; c < 2; c++) h = (h ^ (uint16_t)o[c]) * 16777619u;
+    }
+    assert(h == 0x53BEE610u);
+    assert(qsound_ready(&q) == 0x80);
+}
+
 /* ---- the 93C46 serial EEPROM ---- */
 
 static uint64_t ee_now;  /* microseconds */
@@ -1015,6 +1049,7 @@ int main(void) {
     test_eeprom_write_read();
     test_eeprom_protected();
     test_eeprom_org8();
+    test_qsound_as_mame();
     puts("cps1_tests: ok");
     return 0;
 }
