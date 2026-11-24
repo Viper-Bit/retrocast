@@ -1,4 +1,6 @@
-/* The 93C46 serial EEPROM (eeprom93c46.h), MAME's state machine. */
+/* The 93C46 serial EEPROM (eeprom93c46.h), adapted from MAME 0.289's
+ * eepromser.cpp and eeprom.cpp. license:BSD-3-Clause; copyright-holders:
+ * Aaron Giles (MAME). */
 #include "eeprom93c46.h"
 
 #include <string.h>

@@ -1,4 +1,5 @@
-/* The Q-Sound chip (qsound.h), as MAME 0.289's qsoundhle.cpp. MAME relies on
+/* The Q-Sound chip (qsound.h), adapted from MAME 0.289's qsoundhle.cpp.
+ * license:BSD-3-Clause; copyright-holders: superctr, Valley Bell (MAME). MAME relies on
  * C++20's wrapping shifts of negative numbers and on sums that wrap; here
  * that arithmetic is done unsigned (wrap) and converted back. */
 #include "qsound.h"

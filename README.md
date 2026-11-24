@@ -18,7 +18,7 @@ own.
 | Atari 2600 | 2K/4K/F8/F6/F4 cartridges, TIA picture and sound, NTSC and PAL, joystick; recompiled; no Superchip RAM or other schemes, paddles or SECAM | [systems/atari2600/README.md](systems/atari2600/README.md) |
 | Master System / Mark III | Z80, Sega and Codemasters mappers, cartridge RAM, VDP (mode 4) and PSG, NTSC and PAL, two pads and Pause; recompiled (Z80) | [systems/mastersystem/README.md](systems/mastersystem/README.md) |
 | Game Gear | a mode of the Master System: 160x144 LCD, 12-bit palette, Start on port $00; recompiled (Z80) | [systems/mastersystem/README.md](systems/mastersystem/README.md) |
-| Capcom Play System I (arcade) | in progress: 147 sets (the plain boards) play in `retrocast`: zips, 68000 and Z80, CPS-A/CPS-B picture, YM2151 and OKI sound, save states; recompiled (68000) | [systems/cps1/README.md](systems/cps1/README.md) |
+| Capcom Play System I (arcade) | in progress: 167 sets (the plain boards and the Q-Sound games) play in `retrocast`: zips, 68000 and Z80, CPS-A/CPS-B picture, YM2151, OKI and Q-Sound sound, save states; recompiled (68000) | [systems/cps1/README.md](systems/cps1/README.md) |
 
 ## How it works
 1. Each system has a recompiler (`systems/nes/recomp/` → `nesrecomp`, `systems/gb/recomp/`

@@ -1,4 +1,5 @@
-/* The Kabuki's decoding (kabuki.h), as MAME 0.289's kabuki.cpp. */
+/* The Kabuki's decoding (kabuki.h), adapted from MAME 0.289's kabuki.cpp.
+ * license:BSD-3-Clause; copyright-holders: Nicola Salmoria (MAME). */
 #include "kabuki.h"
 
 #include "cps1.h"

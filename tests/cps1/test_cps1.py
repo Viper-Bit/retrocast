@@ -144,6 +144,12 @@ class TestRecomp(unittest.TestCase):
     def test_sf2(self):
         self.lockstep("sf2")
 
+    def test_wof(self):  # the Q-Sound board
+        self.lockstep("wof")
+
+    def test_dino(self):
+        self.lockstep("dino")
+
 
 if __name__ == "__main__":
     unittest.main()

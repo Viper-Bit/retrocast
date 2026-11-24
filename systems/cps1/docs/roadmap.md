@@ -11,7 +11,7 @@ before the thing it checks. A milestone is done when its exit test passes.
 | P4 | the window (`retrocast`, `cps1.ini`), CMake detection, save states | done |
 | P5 | every plain-board game (their mappers); stars, flip screen, vertical monitors | done |
 | P6 | the recompiler (`cps1recomp`, `-DROMS`, `--diff`) | done |
-| P7 | the Q-Sound games: dino, punisher, wof, slammasu, mbombrd | open |
+| P7 | the Q-Sound games: dino, punisher, wof, slammasu, mbombrd | done |
 | P8 | the rest: pang3, megaman, pnickj, qad, qtono2 | open |
 
 ## P1 · Zips
@@ -28,6 +28,23 @@ before the thing it checks. A milestone is done when its exit test passes.
   sprites and priority; the game table (Final Fight).
 - [x] **Exit:** `cps1_tests`; Final Fight reaches its title in
   `cps1_headless --ppm`, checked by eye.
+
+## P7 · The Q-Sound games
+- [x] The game table rebuilt from MAME 0.289's `cps1.cpp` (DIP defaults
+  MAME writes through macros, whole 128 KB sound chips, MAME's 12 MHz
+  machines); Kabuki decryption (`runtime/kabuki.c`); the 93C46 serial
+  EEPROM (`core/eeprom93c46.c`); the Q-Sound board (shared RAM, the 8 MHz
+  Z80 and its 250 Hz interrupt, the bank, players 3-4, Slam Masters'
+  protection read, `GAME.eeprom`); the Q-Sound chip, MAME's high-level
+  version (`core/audio/qsound.c`), stereo at 24,038 Hz, its tables from
+  `qsound.zip`.
+- [x] **Exit:** the 18 Q-Sound sets in the table; every Q-Sound zip of the
+  folder whole by CRC boots to a picture (`TestBoot`); Warriors of Fate's
+  sound sample for sample against MAME's code (`test_wof_sound`); wof and
+  dino recompiled with `--diff`, no difference in 3,000 frames.
+- Open: a third and fourth player in `retrocast`; the Q-Sound DSP
+  emulated instruction by instruction (MAME's low-level `qsound.cpp`, which
+  its CPS-1 driver uses); pictures compared with MAME's (no MAME here).
 
 ## P6 · The recompiler
 - [x] The 68000 recompiler's analysis and emitting shared with the Genesis
