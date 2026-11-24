@@ -199,7 +199,8 @@ void cps1_render(Cps1 *s) {
                 unsigned group, p = layer_pixel(s, n, x, y, &index, &group);
                 if (p == 15) continue;
                 s->frame[y * CPS1_WIDTH + x] = index;
-                if (below_sprites && s->cpsb[b->prio[group] >> 1] >> p & 1) high[y * CPS1_WIDTH + x] = 1;
+                if (below_sprites && b->prio[group] != CPS1_NONE && s->cpsb[b->prio[group] >> 1] >> p & 1)  /* no port (qad): none */
+                    high[y * CPS1_WIDTH + x] = 1;
             }
     }
     if (areg(s, A_VIDEO) & 0x8000)  /* flip screen: the picture turned 180 degrees */

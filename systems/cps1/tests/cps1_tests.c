@@ -362,6 +362,13 @@ static void test_priority(void) {
     assert(m.frame[50 * CPS1_WIDTH + 131] == 0x400 + 0 * 16 + 7);
 }
 
+static void test_priority_none(void) {  /* a board without the mask's port (qad, CPS_B_21_BT7): no pen goes over */
+    prog_game.b.prio[1] = CPS1_NONE;
+    sprite_scene(1 << 7);
+    assert(m.frame[50 * CPS1_WIDTH + 131] == 0x13);
+    prog_game.b.prio[1] = 0x28;
+}
+
 static void test_gfx_mapper(void) {  /* S224B: a tile outside its layer's range is not drawn */
     static const Cps1Mapper s224b = {{0x8000}, 4, {{CPS1_GFX_SPRITES, 0x0000, 0x43FF, 0}, {CPS1_GFX_SCROLL1, 0x4400, 0x4BFF, 0},
                                                    {CPS1_GFX_SCROLL3, 0x4C00, 0x5FFF, 0}, {CPS1_GFX_SCROLL2, 0x6000, 0x7FFF, 0}}};
@@ -1101,6 +1108,7 @@ int main(void) {
     test_scroll3_tile();
     test_sprite_flip();
     test_priority();
+    test_priority_none();
     test_gfx_mapper();
     test_layout_gfx8();
     test_mapper_bounds();

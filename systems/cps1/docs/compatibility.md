@@ -154,6 +154,7 @@ Run the same command on your own folder to see what yours lacks.
 | varthu | Varth: Operation Thunderstorm (USA 920612) | varth | boot-tested |
 | varthj | Varth: Operation Thunderstorm (Japan 920714) | varth | boot-tested |
 | varthjr | Varth: Operation Thunderstorm (Japan Resale Ver. 920714) | varth | no zip |
+| qad | Quiz & Dragons: Capcom Quiz Game (USA 920701) |  | boot-tested |
 | qadjr | Quiz & Dragons: Capcom Quiz Game (Japan Resale Ver. 940921) | qad | boot-tested (as qadj.zip) |
 | wof | Warriors of Fate (World 921031) |  | chips missing |
 | wofr1 | Warriors of Fate (World 921002) | wof | boot-tested (as wof.zip) |
@@ -178,6 +179,11 @@ Run the same command on your own folder to see what yours lacks.
 | mbomberj | Muscle Bomber: The Body Explosion (Japan 930713) | slammast | chips missing |
 | mbombrd | Muscle Bomber Duo: Ultimate Team Battle (World 931206) |  | boot-tested |
 | mbombrdj | Muscle Bomber Duo: Heat Up Warriors (Japan 931206) | mbombrd | chips missing |
+| pnickj | Pnickies (Japan 940608) |  | boot-tested |
+| qtono2j | Quiz Tonosama no Yabou 2: Zenkoku-ban (Japan 950123) |  | no zip |
+| megaman | Mega Man: The Power Battle (CPS1, USA 951006) |  | chips missing |
+| megamana | Mega Man: The Power Battle (CPS1, Asia 951006) | megaman | boot-tested (as megaman.zip) |
+| rockmanj | Rockman: The Power Battle (CPS1, Japan 950922) | megaman | chips missing |
 | pokonyan | Pokonyan! Balloon (Japan 940322) |  | no zip |
 | mpumpkin | Magical Pumpkin: Puroland de Daibouken (Japan 960712) |  | no zip |
 <!-- /sets -->
@@ -193,8 +199,6 @@ Run the same command on your own folder to see what yours lacks.
 | ganbare | Ganbare! Marine Kun (Japan 2K0411) | its own init (init_ganbare) |
 | gulunpa | Gulun.Pa! (Japan 931220 L) (prototype) | a ROM layout the loader cannot express |
 | knightsb2 | Knights of the Round (bootleg, World 911127) | a ROM layout the loader cannot express |
-| megaman | Mega Man: The Power Battle (CPS1, USA 951006) | P8 |
-| megamana | Mega Man: The Power Battle (CPS1, Asia 951006) | P8 |
 | pang3 | Pang! 3 (Europe 950601) | P8 |
 | pang3b | Pang! 3 (bootleg, set 1) | P8 |
 | pang3b2 | Pang! 3 (bootleg, set 2) | P8 |
@@ -204,10 +208,6 @@ Run the same command on your own folder to see what yours lacks.
 | pang3j | Pang! 3: Kaitou Tachi no Karei na Gogo (Japan 950511) | P8 |
 | pang3r1 | Pang! 3 (Europe 950511) | P8 |
 | pmonster | Gamushara Battle! Puchi Monster (Japan 990519) | its own init (init_ganbare) |
-| pnickj | Pnickies (Japan 940608) | P8 |
-| qad | Quiz & Dragons: Capcom Quiz Game (USA 920701) | P8 |
-| qtono2j | Quiz Tonosama no Yabou 2: Zenkoku-ban (Japan 950123) | P8 |
-| rockmanj | Rockman: The Power Battle (CPS1, Japan 950922) | P8 |
 | sf2accp2 | Street Fighter II': Champion Edition (Accelerator Pt.II, bootleg) | a black screen |
 | sf2amf | Street Fighter II': Champion Edition (Alpha Magic-F, bootleg) | its own init (init_sf2hack) |
 | sf2amf2 | Street Fighter II': Champion Edition (L735 Test Rom, bootleg, set 1) | its own init (init_sf2hack) |
