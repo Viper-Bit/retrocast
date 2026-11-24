@@ -12,11 +12,10 @@ Checks of shared parts: [docs/verification-log.md](../../../docs/verification-lo
   ROM_LOAD32), listed in [compatibility](compatibility.md) with the
   Q-Sound, P8 and own-init sets.
 - **Audit** (`tools/cps1_audit.py` on the folder, after taking 37 zips from
-  CPS-new): 112 sets whole (some in a zip
-  named otherwise), with
-  8 chips missing (mostly a zip holding another revision than its name:
-  `kod.zip` is `kodr1`; `sf2hf.zip` is FBNeo's, taking graphics MAME lists
-  as its own), 27 without a zip.
+  CPS-new): 112 sets whole (some in a zip named otherwise), 8 with chips
+  missing (mostly a zip holding another revision than its name:
+  `forgottn.zip` is `forgottnua`, `willow.zip` is `willowu`), 27 without
+  a zip.
 - **Boot test** (`TestBoot`): every zip in the folder that opens as a
   table set, 3,000 frames of `--play`: a picture, none halted. A MAME split
   clone (`sf2ua.zip`, 17 of 23 chips from `sf2.zip`) runs
