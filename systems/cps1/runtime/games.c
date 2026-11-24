@@ -114,7 +114,7 @@ const Cps1Game cps1_games[] = {
         {0x59df2a63, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* lw_37.13c */
         {0x807d051f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* lw-03u.12e */
         {0xe6cd098e, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* lw-04u.13e */
-    }, MAPPER_LW621, 10, {0xFF, 0xFC, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 1, 0x200000, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_LW621, 10, {0xFF, 0xFC, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 1, 0x200000, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME forgottna (forgottn), CPS_B_01 mapper_LW621 */
     {"forgottna", "Forgotten Worlds (World)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_01, 28, {
         {0x73e920b7, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 1},  /* lw11.12f */
@@ -145,7 +145,7 @@ const Cps1Game cps1_games[] = {
         {0x59df2a63, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* lw_00.13c */
         {0x807d051f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* lw-03u.12e */
         {0xe6cd098e, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* lw-04u.13e */
-    }, MAPPER_LW621, 10, {0xFF, 0xFC, 0xFF}, CPS1_NONE, CPS1_NONE, "forgottn", 1, 0x200000, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_LW621, 10, {0xFF, 0xFC, 0xFF}, CPS1_NONE, CPS1_NONE, "forgottn", 1, 0x200000, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME forgottnu (forgottn), CPS_B_01 mapper_LW621 */
     {"forgottnu", "Forgotten Worlds (USA, B-Board 88621B-2, Rev. C)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_01, 25, {
         {0xe62742b6, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* lw11c.12f */
@@ -173,7 +173,7 @@ const Cps1Game cps1_games[] = {
         {0x59df2a63, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* lw_00.13c */
         {0x807d051f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* lw-03u.12e */
         {0xe6cd098e, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* lw-04u.13e */
-    }, MAPPER_LW621, 10, {0xFF, 0xFC, 0xFF}, CPS1_NONE, CPS1_NONE, "forgottn", 1, 0x200000, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_LW621, 10, {0xFF, 0xFC, 0xFF}, CPS1_NONE, CPS1_NONE, "forgottn", 1, 0x200000, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME forgottnue (forgottn), CPS_B_01 mapper_LWCHR */
     {"forgottnue", "Forgotten Worlds (USA, B-Board 88618B-2, Rev. E)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_01, 16, {
         {0x82656910, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* lw11e.14f */
@@ -192,7 +192,7 @@ const Cps1Game cps1_games[] = {
         {0x59df2a63, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* lw_00.14a */
         {0x807d051f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* lw-03u.14c */
         {0xe6cd098e, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* lw-04u.13c */
-    }, MAPPER_LWCHR, 10, {0xFF, 0xFC, 0xFF}, CPS1_NONE, CPS1_NONE, "forgottn", 1, 0x200000, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_LWCHR, 10, {0xFF, 0xFC, 0xFF}, CPS1_NONE, CPS1_NONE, "forgottn", 1, 0x200000, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME forgottnuc (forgottn), CPS_B_01 mapper_LWCHR */
     {"forgottnuc", "Forgotten Worlds (USA, B-Board 88618B-2, Rev. C)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_01, 16, {
         {0xe62742b6, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* lw11c.14f */
@@ -211,7 +211,7 @@ const Cps1Game cps1_games[] = {
         {0x59df2a63, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* lw_00.14a */
         {0x807d051f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* lw-03u.14c */
         {0xe6cd098e, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* lw-04u.13c */
-    }, MAPPER_LWCHR, 10, {0xFF, 0xFC, 0xFF}, CPS1_NONE, CPS1_NONE, "forgottn", 1, 0x200000, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_LWCHR, 10, {0xFF, 0xFC, 0xFF}, CPS1_NONE, CPS1_NONE, "forgottn", 1, 0x200000, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME forgottnua (forgottn), CPS_B_01 mapper_LWCHR */
     {"forgottnua", "Forgotten Worlds (USA, B-Board 88618B-2, Rev. A)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_01, 16, {
         {0xddf78831, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* lwu_11a.14f */
@@ -230,7 +230,7 @@ const Cps1Game cps1_games[] = {
         {0x59df2a63, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* lwu_00.14a */
         {0x807d051f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* lw-03u.14c */
         {0xe6cd098e, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* lw-04u.13c */
-    }, MAPPER_LWCHR, 10, {0xFF, 0xFC, 0xFF}, CPS1_NONE, CPS1_NONE, "forgottn", 1, 0x200000, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_LWCHR, 10, {0xFF, 0xFC, 0xFF}, CPS1_NONE, CPS1_NONE, "forgottn", 1, 0x200000, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME forgottnuaa (forgottn), CPS_B_01 mapper_LWCHR */
     {"forgottnuaa", "Forgotten Worlds (USA, B-Board 88618B-2, Rev. AA)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_01, 16, {
         {0x73e920b7, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 1},  /* lwu_11aa.14f */
@@ -249,7 +249,7 @@ const Cps1Game cps1_games[] = {
         {0x59df2a63, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* lwu_00.14a */
         {0x807d051f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* lw-03u.14c */
         {0xe6cd098e, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* lw-04u.13c */
-    }, MAPPER_LWCHR, 10, {0xFF, 0xFC, 0xFF}, CPS1_NONE, CPS1_NONE, "forgottn", 1, 0x200000, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_LWCHR, 10, {0xFF, 0xFC, 0xFF}, CPS1_NONE, CPS1_NONE, "forgottn", 1, 0x200000, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME forgottnj (forgottn), CPS_B_01 mapper_LWCHR */
     {"forgottnj", "Forgotten Worlds (Japan) (English prototype)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_01, 16, {
         {0xc9a6b319, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* 11.14f */
@@ -268,7 +268,7 @@ const Cps1Game cps1_games[] = {
         {0x3bc962ea, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* 00.14a */
         {0x807d051f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* lw-03u.14c */
         {0xe6cd098e, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* lw-04u.13c */
-    }, MAPPER_LWCHR, 10, {0xFC, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "forgottn", 1, 0x200000, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_LWCHR, 10, {0xFC, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "forgottn", 1, 0x200000, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME lostwrld (forgottn), CPS_B_01 mapper_LWCHR */
     {"lostwrld", "Lost Worlds (Japan)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_01, 16, {
         {0x67e42546, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* lw_11c.14f */
@@ -287,7 +287,7 @@ const Cps1Game cps1_games[] = {
         {0x59df2a63, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* lw_00b.14a */
         {0xce2159e7, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* lw-03.14c */
         {0x39305536, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* lw-04.13c */
-    }, MAPPER_LWCHR, 10, {0xFF, 0xFC, 0xFF}, CPS1_NONE, CPS1_NONE, "forgottn", 1, 0x200000, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_LWCHR, 10, {0xFF, 0xFC, 0xFF}, CPS1_NONE, CPS1_NONE, "forgottn", 1, 0x200000, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME lostwrldo (forgottn), CPS_B_01 mapper_LWCHR */
     {"lostwrldo", "Lost Worlds (Japan Old Ver.)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_01, 16, {
         {0x61e2cc56, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* lw_11.14f */
@@ -306,7 +306,7 @@ const Cps1Game cps1_games[] = {
         {0x59df2a63, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* lw_00b.14a */
         {0xce2159e7, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* lw-03.14c */
         {0x39305536, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* lw-04.13c */
-    }, MAPPER_LWCHR, 10, {0xFF, 0xFC, 0xFF}, CPS1_NONE, CPS1_NONE, "forgottn", 1, 0x200000, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_LWCHR, 10, {0xFF, 0xFC, 0xFF}, CPS1_NONE, CPS1_NONE, "forgottn", 1, 0x200000, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME ghouls (cps1_10MHz), CPS_B_01 mapper_DM620 */
     {"ghouls", "Ghouls'n Ghosts (World)", CPS1_PLAIN, {1024 * K, 3072 * K, 64 * K, 0 * K}, CPSB_01, 26, {
         {0x166a58a2, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* dme_29.10h */
@@ -335,7 +335,7 @@ const Cps1Game cps1_games[] = {
         {0xf187ba1c, 64 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x280006, 0},  /* 16.4h */
         {0x29f79c78, 64 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x280007, 0},  /* 25.7h */
         {0x3692f6e5, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* 26.10a */
-    }, MAPPER_DM620, 10, {0xFF, 0xFD, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_DM620, 10, {0xFF, 0xFD, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME ghoulsu (cps1_10MHz), CPS_B_01 mapper_DM620 */
     {"ghoulsu", "Ghouls'n Ghosts (USA)", CPS1_PLAIN, {1024 * K, 3072 * K, 64 * K, 0 * K}, CPSB_01, 26, {
         {0x334d85b2, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* dmu_29.10h */
@@ -364,7 +364,7 @@ const Cps1Game cps1_games[] = {
         {0xf187ba1c, 64 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x280006, 1},  /* 16.4h */
         {0x29f79c78, 64 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x280007, 1},  /* 25.7h */
         {0x3692f6e5, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* 26.10a */
-    }, MAPPER_DM620, 10, {0xFF, 0xF7, 0xFF}, CPS1_NONE, CPS1_NONE, "ghouls", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_DM620, 10, {0xFF, 0xF7, 0xFF}, CPS1_NONE, CPS1_NONE, "ghouls", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME daimakai (cps1_10MHz), CPS_B_01 mapper_DM22A */
     {"daimakai", "Daimakaimura (Japan)", CPS1_PLAIN, {1024 * K, 3072 * K, 64 * K, 0 * K}, CPSB_01, 41, {
         {0x82fd1798, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* dmj_38.12f */
@@ -408,7 +408,7 @@ const Cps1Game cps1_games[] = {
         {0xf187ba1c, 64 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x280006, 1},  /* dm_28.11e */
         {0x29f79c78, 64 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x280007, 1},  /* dm_27.11c */
         {0x3692f6e5, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* 37.13c */
-    }, MAPPER_DM22A, 10, {0xFF, 0xFD, 0xFF}, CPS1_NONE, CPS1_NONE, "ghouls", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_DM22A, 10, {0xFF, 0xFD, 0xFF}, CPS1_NONE, CPS1_NONE, "ghouls", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME daimakair (cps1_12MHz), CPS_B_21_DEF mapper_DAM63B */
     {"daimakair", "Daimakaimura (Japan Resale Ver.)", CPS1_PLAIN, {1024 * K, 4096 * K, 128 * K, 0 * K}, CPSB_21_DEF, 11, {
         {0xc3b248ec, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* damj_23.8f */
@@ -422,7 +422,7 @@ const Cps1Game cps1_games[] = {
         {0xec351d78, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200004, 0},  /* dam_07.9a */
         {0xee2acc1e, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200006, 0},  /* dam_08.10a */
         {0x0656ff53, 128 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* dam_09.12a */
-    }, MAPPER_DAM63B, 12, {0xFF, 0xFD, 0xFF}, CPS1_NONE, CPS1_NONE, "ghouls", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_DAM63B, 12, {0xFF, 0xFD, 0xFF}, CPS1_NONE, CPS1_NONE, "ghouls", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME strider (cps1_10MHz), CPS_B_01 mapper_ST24M1 */
     {"strider", "Strider (USA, B-Board 89624B-2)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_01, 16, {
         {0xda997474, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* 30.11f */
@@ -441,7 +441,7 @@ const Cps1Game cps1_games[] = {
         {0x2ed403bc, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* 09.12b */
         {0x4386bc80, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* 18.11c */
         {0x444536d7, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* 19.12c */
-    }, MAPPER_ST24M1, 10, {0xFF, 0x8D, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, 0x000000, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_ST24M1, 10, {0xFF, 0x8D, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, 0x000000, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME striderua (cps1_10MHz), CPS_B_01 mapper_ST24M1 */
     {"striderua", "Strider (USA, B-Board 89624B-3)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_01, 16, {
         {0x66aec273, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* 30.11f */
@@ -460,7 +460,7 @@ const Cps1Game cps1_games[] = {
         {0x08d63519, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* 09.12b */
         {0x4386bc80, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* 18.11c */
         {0x444536d7, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* 19.12c */
-    }, MAPPER_ST24M1, 10, {0xFF, 0x8D, 0xFF}, CPS1_NONE, CPS1_NONE, "strider", 0, 0x000000, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_ST24M1, 10, {0xFF, 0x8D, 0xFF}, CPS1_NONE, CPS1_NONE, "strider", 0, 0x000000, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME strideruc (cps1_10MHz), CPS_B_17 mapper_ST24M1 */
     {"strideruc", "Strider (USA, B-Board 90629B-3, buggy Street Fighter II conversion)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_17, 13, {
         {0xe0fb5657, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* 34.8f */
@@ -476,7 +476,7 @@ const Cps1Game cps1_games[] = {
         {0x08d63519, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* 9.12a */
         {0x4386bc80, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* 18.11c */
         {0x444536d7, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* 19.12c */
-    }, MAPPER_ST24M1, 10, {0xFF, 0x8D, 0xFF}, CPS1_NONE, CPS1_NONE, "strider", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_ST24M1, 10, {0xFF, 0x8D, 0xFF}, CPS1_NONE, CPS1_NONE, "strider", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME striderj (cps1_10MHz), CPS_B_01 mapper_ST22B */
     {"striderj", "Strider Hiryu (Japan)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_01, 43, {
         {0x53c7b006, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* sth_36.12f */
@@ -522,7 +522,7 @@ const Cps1Game cps1_games[] = {
         {0x2ed403bc, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sth_23.13c */
         {0x4386bc80, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sth_30.12e */
         {0x444536d7, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sth_31.13e */
-    }, MAPPER_ST22B, 10, {0xFF, 0x8D, 0xFF}, CPS1_NONE, CPS1_NONE, "strider", 0, 0x000000, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_ST22B, 10, {0xFF, 0x8D, 0xFF}, CPS1_NONE, CPS1_NONE, "strider", 0, 0x000000, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME striderjr (cps1_12MHz), CPS_B_21_DEF mapper_ST24M1 */
     {"striderjr", "Strider Hiryu (Japan Resale Ver.)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_21_DEF, 13, {
         {0x046e7b12, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* sthj_23.8f */
@@ -538,7 +538,7 @@ const Cps1Game cps1_games[] = {
         {0x08d63519, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* sth_09.12a */
         {0x4386bc80, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sth_18.11c */
         {0x444536d7, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sth_19.12c */
-    }, MAPPER_ST24M1, 12, {0xFF, 0x8D, 0xFF}, CPS1_NONE, CPS1_NONE, "strider", 0, 0x000000, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_ST24M1, 12, {0xFF, 0x8D, 0xFF}, CPS1_NONE, CPS1_NONE, "strider", 0, 0x000000, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME dynwar (cps1_10MHz), CPS_B_02 mapper_TK24B1 */
     {"dynwar", "Dynasty Wars (USA, B-Board 89624B-?)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_02, 16, {
         {0xf9ec6d68, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* 30.11f */
@@ -557,7 +557,7 @@ const Cps1Game cps1_games[] = {
         {0xb3b79d4f, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* tke_17.12b */
         {0xac6e307d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* tke_18.11c */
         {0x068741db, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* tke_19.12c */
-    }, MAPPER_TK24B1, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_TK24B1, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME dynwara (cps1_10MHz), CPS_B_02 mapper_TK22B */
     {"dynwara", "Dynasty Wars (USA, B-Board 88622B-3)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_02, 43, {
         {0x895991d1, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* tke_36.12f */
@@ -603,7 +603,7 @@ const Cps1Game cps1_games[] = {
         {0xb3b79d4f, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* 23.13c */
         {0xac6e307d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* tke_30.12e */
         {0x068741db, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* tke_31.13e */
-    }, MAPPER_TK22B, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "dynwar", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_TK22B, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "dynwar", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME dynwarj (cps1_10MHz), CPS_B_02 mapper_TK22B */
     {"dynwarj", "Tenchi wo Kurau (Japan)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_02, 43, {
         {0x1a516657, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* 36.12f */
@@ -649,7 +649,7 @@ const Cps1Game cps1_games[] = {
         {0xb3b79d4f, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* 23.13c */
         {0x7e5f6cb4, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* 30.12e */
         {0x4a30c737, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* 31.13e */
-    }, MAPPER_TK22B, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "dynwar", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_TK22B, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "dynwar", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME dynwarjr (cps1_12MHz), CPS_B_21_DEF mapper_TK22B */
     {"dynwarjr", "Tenchi wo Kurau (Japan Resale Ver.)", CPS1_PLAIN, {1024 * K, 4096 * K, 128 * K, 256 * K}, CPSB_21_DEF, 13, {
         {0x088a3009, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* tk1j_23.8f */
@@ -665,7 +665,7 @@ const Cps1Game cps1_games[] = {
         {0xdb77d899, 128 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* tk1_09.12a */
         {0x7e5f6cb4, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* tk1_18.11c */
         {0x4a30c737, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* tk1_19.12c */
-    }, MAPPER_TK22B, 12, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "dynwar", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_TK22B, 12, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "dynwar", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME willow (cps1_10MHz), CPS_B_03 mapper_WL24B */
     {"willow", "Willow (World)", CPS1_PLAIN, {1024 * K, 3072 * K, 64 * K, 256 * K}, CPSB_03, 20, {
         {0x15372aa2, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* wle_30.11f */
@@ -688,7 +688,7 @@ const Cps1Game cps1_games[] = {
         {0xf6b3d060, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* wl_09.12b */
         {0xbde23d4d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* wl_18.11c */
         {0x683898f5, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* wl_19.12c */
-    }, MAPPER_WL24B, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_WL24B, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME willowu (cps1_10MHz), CPS_B_03 mapper_WL24B */
     {"willowu", "Willow (USA)", CPS1_PLAIN, {1024 * K, 3072 * K, 64 * K, 256 * K}, CPSB_03, 20, {
         {0xd604dbb1, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* wlu_30.11f */
@@ -711,7 +711,7 @@ const Cps1Game cps1_games[] = {
         {0xf6b3d060, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* wl_09.12b */
         {0xbde23d4d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* wl_18.11c */
         {0x683898f5, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* wl_19.12c */
-    }, MAPPER_WL24B, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "willow", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_WL24B, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "willow", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME willowuo (cps1_10MHz), CPS_B_03 mapper_WL24B */
     {"willowuo", "Willow (USA Old Ver.)", CPS1_PLAIN, {1024 * K, 3072 * K, 64 * K, 256 * K}, CPSB_03, 20, {
         {0xd604dbb1, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* wlu_30.11f */
@@ -734,7 +734,7 @@ const Cps1Game cps1_games[] = {
         {0xf6b3d060, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* wl_09.12b */
         {0xbde23d4d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* wl_18.11c */
         {0x683898f5, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* wl_19.12c */
-    }, MAPPER_WL24B, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "willow", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_WL24B, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "willow", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME willowj (cps1_10MHz), CPS_B_03 mapper_WL22B */
     {"willowj", "Willow (Japan)", CPS1_PLAIN, {1024 * K, 3072 * K, 64 * K, 256 * K}, CPSB_03, 35, {
         {0x2b0d7cbc, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* wl_36.12f */
@@ -772,7 +772,7 @@ const Cps1Game cps1_games[] = {
         {0xf6b3d060, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* wl_23.13c */
         {0xbde23d4d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* wl_30.12e */
         {0x683898f5, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* wl_31.13e */
-    }, MAPPER_WL22B, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "willow", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_WL22B, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "willow", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME unsquad (cps1_10MHz), CPS_B_11 mapper_AR24B */
     {"unsquad", "U.N. Squadron (USA)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 128 * K}, CPSB_11, 11, {
         {0x24d8f88d, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* aru_30.11f */
@@ -786,7 +786,7 @@ const Cps1Game cps1_games[] = {
         {0xac6db17d, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0},  /* ar-3m.5a */
         {0xf3dd1367, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* ar_09.12b */
         {0x584b43a9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* aru_18.11c */
-    }, MAPPER_AR24B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_AR24B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME area88 (cps1_10MHz), CPS_B_11 mapper_AR22B */
     {"area88", "Area 88 (Japan)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 128 * K}, CPSB_11, 26, {
         {0x65030392, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* ar_36.12f */
@@ -815,7 +815,7 @@ const Cps1Game cps1_games[] = {
         {0x3968f4b5, 128 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x100007, 0},  /* ar_33.9f */
         {0xf3dd1367, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ar_23.13c */
         {0x584b43a9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ar_30.12e */
-    }, MAPPER_AR22B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "unsquad", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_AR22B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "unsquad", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME area88r (cps1_12MHz), CPS_B_21_DEF mapper_ARA63B */
     {"area88r", "Area 88 (Japan Resale Ver.)", CPS1_PLAIN, {1024 * K, 2048 * K, 128 * K, 128 * K}, CPSB_21_DEF, 8, {
         {0x7045d6cb, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* araj_23.8f */
@@ -826,7 +826,7 @@ const Cps1Game cps1_games[] = {
         {0xac6db17d, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 1},  /* ara_04.6a */
         {0xaf88359c, 128 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* ara_09.12a */
         {0x584b43a9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ara_18.11c */
-    }, MAPPER_ARA63B, 12, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "unsquad", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_ARA63B, 12, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "unsquad", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME ffight (cps1_10MHz), CPS_B_04 mapper_S224B */
     {"ffight", "Final Fight (World, set 1)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_04, 12, {
         {0xf9a5ce83, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* ff_36.11f */
@@ -841,7 +841,7 @@ const Cps1Game cps1_games[] = {
         {0xb8367eb5, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* ff_09.12b */
         {0x375c66e7, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* ff_18.11c */
         {0x1ef137f9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* ff_19.12c */
-    }, MAPPER_S224B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_S224B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME ffighta (cps1_10MHz), CPS_B_04 mapper_S224B */
     {"ffighta", "Final Fight (World, set 2)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_04, 12, {
         {0x2347bf51, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* ffe_30.11f */
@@ -856,7 +856,7 @@ const Cps1Game cps1_games[] = {
         {0xb8367eb5, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ffe_23.12b */
         {0x375c66e7, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ff_18.11c */
         {0x1ef137f9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* ff_19.12c */
-    }, MAPPER_S224B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_S224B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME ffightu (cps1_10MHz), CPS_B_04 mapper_S224B */
     {"ffightu", "Final Fight (USA, set 1)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_04, 12, {
         {0xf9a5ce83, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 1},  /* ff_36.11f */
@@ -871,7 +871,7 @@ const Cps1Game cps1_games[] = {
         {0xb8367eb5, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ff_09.12b */
         {0x375c66e7, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ff_18.11c */
         {0x1ef137f9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* ff_19.12c */
-    }, MAPPER_S224B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_S224B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME ffightu1 (cps1_10MHz), CPS_B_04 mapper_S224B */
     {"ffightu1", "Final Fight (USA, set 2)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_04, 15, {
         {0xf9a5ce83, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 1},  /* ff_36.11f */
@@ -889,7 +889,7 @@ const Cps1Game cps1_games[] = {
         {0xb8367eb5, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ff_09.12b */
         {0x375c66e7, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ff_18.11c */
         {0x1ef137f9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* ff_19.12c */
-    }, MAPPER_S224B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_S224B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME ffightua (cps1_10MHz), CPS_B_01 mapper_S224B */
     {"ffightua", "Final Fight (USA 900112)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_01, 12, {
         {0xe2a48af9, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* ffu_36.11f */
@@ -904,7 +904,7 @@ const Cps1Game cps1_games[] = {
         {0xb8367eb5, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ff_09.12b */
         {0x375c66e7, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ff_18.11c */
         {0x1ef137f9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* ff_19.12c */
-    }, MAPPER_S224B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_S224B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME ffightub (cps1_10MHz), CPS_B_03 mapper_S224B */
     {"ffightub", "Final Fight (USA 900424)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_03, 12, {
         {0xe619eb30, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* ffu_30_3.11f */
@@ -919,7 +919,7 @@ const Cps1Game cps1_games[] = {
         {0xb8367eb5, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ff_09.12b */
         {0x375c66e7, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ff_18.11c */
         {0x1ef137f9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* ff_19.12c */
-    }, MAPPER_S224B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_S224B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME ffightuc (cps1_10MHz), CPS_B_05 mapper_S224B */
     {"ffightuc", "Final Fight (USA 900613)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_05, 12, {
         {0xed988977, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* ffu_30.11f */
@@ -934,7 +934,7 @@ const Cps1Game cps1_games[] = {
         {0xb8367eb5, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ff_23.12b */
         {0x375c66e7, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ff_18.11c */
         {0x1ef137f9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* ff_19.12c */
-    }, MAPPER_S224B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_S224B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME ffightj (cps1_10MHz), CPS_B_04 mapper_S222B */
     {"ffightj", "Final Fight (Japan)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_04, 27, {
         {0xf9a5ce83, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 1},  /* ff36.bin */
@@ -964,7 +964,7 @@ const Cps1Game cps1_games[] = {
         {0xb8367eb5, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ff_23.bin */
         {0x375c66e7, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ffj_30.bin */
         {0x1ef137f9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* ffj_31.bin */
-    }, MAPPER_S222B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_S222B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME ffightj1 (cps1_10MHz), CPS_B_01 mapper_S222B */
     {"ffightj1", "Final Fight (Japan 900112)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_01, 27, {
         {0xe2a48af9, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* ffj_36.12f */
@@ -994,7 +994,7 @@ const Cps1Game cps1_games[] = {
         {0xb8367eb5, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ff_23.13b */
         {0x375c66e7, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ffj_30.12c */
         {0x1ef137f9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* ffj_31.13c */
-    }, MAPPER_S222B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_S222B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME ffightj2 (cps1_10MHz), CPS_B_02 mapper_S222B */
     {"ffightj2", "Final Fight (Japan 900305)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_02, 27, {
         {0x088ed1c9, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* ffj_36a.12f */
@@ -1024,7 +1024,7 @@ const Cps1Game cps1_games[] = {
         {0xb8367eb5, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ff_23.13c */
         {0x375c66e7, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ff_30.12e */
         {0x1ef137f9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* ff_31.13e */
-    }, MAPPER_S222B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_S222B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME ffightj3 (cps1_10MHz), CPS_B_03 mapper_S222B */
     {"ffightj3", "Final Fight (Japan 900405)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_03, 27, {
         {0xe619eb30, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* ffj_36.12f */
@@ -1054,7 +1054,7 @@ const Cps1Game cps1_games[] = {
         {0xb8367eb5, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ff_23.13b */
         {0x375c66e7, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ffj_30.12e */
         {0x1ef137f9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* ffj_31.13e */
-    }, MAPPER_S222B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_S222B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME ffightj4 (cps1_10MHz), CPS_B_05 mapper_S222B */
     {"ffightj4", "Final Fight (Japan 900613)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_05, 27, {
         {0xed988977, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* ff_36.12f */
@@ -1084,7 +1084,7 @@ const Cps1Game cps1_games[] = {
         {0xb8367eb5, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ff_23.13b */
         {0x375c66e7, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ff_30.12c */
         {0x1ef137f9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* ff_31.13c */
-    }, MAPPER_S222B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_S222B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME ffightjh (cps1_10MHz), CPS_B_01 mapper_S224B */
     {"ffightjh", "Street Smart / Final Fight (Japan, hack)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_01, 9, {
         {0xae3dda7f, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* ff_23.8f */
@@ -1096,7 +1096,7 @@ const Cps1Game cps1_games[] = {
         {0xb8367eb5, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ff_9.12a */
         {0x375c66e7, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ff_18.11c */
         {0x1ef137f9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* ff_19.12c */
-    }, MAPPER_S224B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_S224B, 10, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME ffightae (cps1_12MHz), CPS_B_21_DEF mapper_S224B */
     {"ffightae", "Final Fight 30th Anniversary Edition (World, hack)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_21_DEF, 9, {
         {0x86def74f, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* ff-23m.8h */
@@ -1108,7 +1108,7 @@ const Cps1Game cps1_games[] = {
         {0xb8367eb5, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ff_09.12b */
         {0x375c66e7, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ff_18.11c */
         {0x1ef137f9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* ff_19.12c */
-    }, MAPPER_S224B, 12, {0xFF, 0xF4, 0x9F}, 0x36, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_P3, 0, 0},
+    }, MAPPER_S224B, 12, {0xFF, 0xF4, 0x9F}, 0x36, CPS1_NONE, "ffight", 0, -1, CPS1_EXTRA_P3, 0, 0, CPS1_INIT_NONE},
     /* MAME 1941 (cps1_10MHz), CPS_B_05 mapper_YI24B */
     {"1941", "1941: Counter Attack (World 900227)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_05, 12, {
         {0x4249ec61, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* 41em_30.11f */
@@ -1123,7 +1123,7 @@ const Cps1Game cps1_games[] = {
         {0x0f9d8527, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* 41_9.12b */
         {0xd1f15aeb, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* 41_18.11c */
         {0x15aec3a6, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* 41_19.12c */
-    }, MAPPER_YI24B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 270, 0},
+    }, MAPPER_YI24B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 270, 0, CPS1_INIT_NONE},
     /* MAME 1941r1 (cps1_10MHz), CPS_B_05 mapper_YI24B */
     {"1941r1", "1941: Counter Attack (World)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_05, 12, {
         {0x9deb1e75, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* 41e_30.11f */
@@ -1138,7 +1138,7 @@ const Cps1Game cps1_games[] = {
         {0x0f9d8527, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* 41_9.12b */
         {0xd1f15aeb, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* 41_18.11c */
         {0x15aec3a6, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* 41_19.12c */
-    }, MAPPER_YI24B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "1941", 0, -1, CPS1_EXTRA_NONE, 270, 0},
+    }, MAPPER_YI24B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "1941", 0, -1, CPS1_EXTRA_NONE, 270, 0, CPS1_INIT_NONE},
     /* MAME 1941u (cps1_10MHz), CPS_B_05 mapper_YI24B */
     {"1941u", "1941: Counter Attack (USA 900227)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_05, 12, {
         {0xbe5439d0, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* 41u_30.11f */
@@ -1153,7 +1153,7 @@ const Cps1Game cps1_games[] = {
         {0x0f9d8527, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* 41_9.12b */
         {0xd1f15aeb, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* 41e_18.11c */
         {0x15aec3a6, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* 41_19.12c */
-    }, MAPPER_YI24B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "1941", 0, -1, CPS1_EXTRA_NONE, 270, 0},
+    }, MAPPER_YI24B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "1941", 0, -1, CPS1_EXTRA_NONE, 270, 0, CPS1_INIT_NONE},
     /* MAME 1941j (cps1_10MHz), CPS_B_05 mapper_YI22B */
     {"1941j", "1941: Counter Attack (Japan)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_05, 27, {
         {0x7fbd42ab, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* 41_36.12f */
@@ -1183,7 +1183,7 @@ const Cps1Game cps1_games[] = {
         {0x0f9d8527, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* 41_23.13b */
         {0xd1f15aeb, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* 41_30.12c */
         {0x15aec3a6, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* 41_31.13c */
-    }, MAPPER_YI22B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "1941", 0, -1, CPS1_EXTRA_NONE, 270, 0},
+    }, MAPPER_YI22B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "1941", 0, -1, CPS1_EXTRA_NONE, 270, 0, CPS1_INIT_NONE},
     /* MAME mercs (cps1_10MHz), CPS_B_12 mapper_O224B */
     {"mercs", "Mercs (World 900302)", CPS1_PLAIN, {1024 * K, 3072 * K, 64 * K, 256 * K}, CPSB_12, 20, {
         {0xe17f9bf7, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* so2_30e.11f */
@@ -1206,7 +1206,7 @@ const Cps1Game cps1_games[] = {
         {0xd09d7c7a, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* so2_09.12b */
         {0xbbea1643, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* so2_18.11c */
         {0xac58aa71, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* so2_19.12c */
-    }, MAPPER_O224B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_P3, 270, 0},
+    }, MAPPER_O224B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_P3, 270, 0, CPS1_INIT_NONE},
     /* MAME mercsu (cps1_10MHz), CPS_B_12 mapper_O224B */
     {"mercsu", "Mercs (USA 900608)", CPS1_PLAIN, {1024 * K, 3072 * K, 64 * K, 256 * K}, CPSB_12, 20, {
         {0xe4e725d7, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* so2_30a.11f */
@@ -1229,7 +1229,7 @@ const Cps1Game cps1_games[] = {
         {0xd09d7c7a, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* so2_09.12b */
         {0xbbea1643, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* so2_18.11c */
         {0xac58aa71, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* so2_19.12c */
-    }, MAPPER_O224B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "mercs", 0, -1, CPS1_EXTRA_P3, 270, 0},
+    }, MAPPER_O224B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "mercs", 0, -1, CPS1_EXTRA_P3, 270, 0, CPS1_INIT_NONE},
     /* MAME mercsur1 (cps1_10MHz), CPS_B_12 mapper_O224B */
     {"mercsur1", "Mercs (USA 900302)", CPS1_PLAIN, {1024 * K, 3072 * K, 64 * K, 256 * K}, CPSB_12, 20, {
         {0xe17f9bf7, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 1},  /* so2_30.11f */
@@ -1252,7 +1252,7 @@ const Cps1Game cps1_games[] = {
         {0xd09d7c7a, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* so2_09.12b */
         {0xbbea1643, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* so2_18.11c */
         {0xac58aa71, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* so2_19.12c */
-    }, MAPPER_O224B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "mercs", 0, -1, CPS1_EXTRA_P3, 270, 0},
+    }, MAPPER_O224B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "mercs", 0, -1, CPS1_EXTRA_P3, 270, 0, CPS1_INIT_NONE},
     /* MAME mercsj (cps1_10MHz), CPS_B_12 mapper_O224B */
     {"mercsj", "Senjou no Ookami II (Japan 900302)", CPS1_PLAIN, {1024 * K, 3072 * K, 64 * K, 256 * K}, CPSB_12, 35, {
         {0xe17f9bf7, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 1},  /* so2_36.12f */
@@ -1290,7 +1290,7 @@ const Cps1Game cps1_games[] = {
         {0xd09d7c7a, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* so2_23.13b */
         {0xbbea1643, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* so2_30.12c */
         {0xac58aa71, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* so2_31.13c */
-    }, MAPPER_O224B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "mercs", 0, -1, CPS1_EXTRA_P3, 270, 0},
+    }, MAPPER_O224B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "mercs", 0, -1, CPS1_EXTRA_P3, 270, 0, CPS1_INIT_NONE},
     /* MAME mtwins (cps1_10MHz), CPS_B_14 mapper_CK24B */
     {"mtwins", "Mega Twins (World 900619)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_14, 12, {
         {0x9a2a2db1, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* che_30.11f */
@@ -1305,7 +1305,7 @@ const Cps1Game cps1_games[] = {
         {0x4d4255b7, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* ch_09.12b */
         {0xf909e8de, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* ch_18.11c */
         {0xfc158cf7, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* ch_19.12c */
-    }, MAPPER_CK24B, 10, {0xFF, 0xDC, 0x9F}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_CK24B, 10, {0xFF, 0xDC, 0x9F}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME chikij (cps1_10MHz), CPS_B_14 mapper_CK22B */
     {"chikij", "Chiki Chiki Boys (Japan 900619)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_14, 27, {
         {0xec1328d8, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* chj_36a.12f */
@@ -1335,7 +1335,7 @@ const Cps1Game cps1_games[] = {
         {0x4d4255b7, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ch_23.13b */
         {0xf909e8de, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ch_30.12c */
         {0xfc158cf7, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* ch_31.13c */
-    }, MAPPER_CK22B, 10, {0xFF, 0xDC, 0x9F}, CPS1_NONE, CPS1_NONE, "mtwins", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_CK22B, 10, {0xFF, 0xDC, 0x9F}, CPS1_NONE, CPS1_NONE, "mtwins", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME msword (cps1_10MHz), CPS_B_13 mapper_MS24B */
     {"msword", "Magic Sword: Heroic Fantasy (World 900725)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_13, 12, {
         {0x03fc8dbc, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* mse_30.11f */
@@ -1350,7 +1350,7 @@ const Cps1Game cps1_games[] = {
         {0x57b29519, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* ms_09.12b */
         {0xfb64e90d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* ms_18.11c */
         {0x74f892b9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* ms_19.12c */
-    }, MAPPER_MS24B, 10, {0xFF, 0xBC, 0x9F}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_MS24B, 10, {0xFF, 0xBC, 0x9F}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME mswordr1 (cps1_10MHz), CPS_B_13 mapper_MS24B */
     {"mswordr1", "Magic Sword: Heroic Fantasy (World 900623)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_13, 12, {
         {0x21c1f078, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* ms_30.11f */
@@ -1365,7 +1365,7 @@ const Cps1Game cps1_games[] = {
         {0x57b29519, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ms_09.12b */
         {0xfb64e90d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ms_18.11c */
         {0x74f892b9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* ms_19.12c */
-    }, MAPPER_MS24B, 10, {0xFF, 0xBC, 0x9F}, CPS1_NONE, CPS1_NONE, "msword", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_MS24B, 10, {0xFF, 0xBC, 0x9F}, CPS1_NONE, CPS1_NONE, "msword", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME mswordu (cps1_10MHz), CPS_B_13 mapper_MS24B */
     {"mswordu", "Magic Sword: Heroic Fantasy (USA 900725)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_13, 12, {
         {0xd963c816, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* msu_30.11f */
@@ -1380,7 +1380,7 @@ const Cps1Game cps1_games[] = {
         {0x57b29519, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ms_09.12b */
         {0xfb64e90d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ms_18.11c */
         {0x74f892b9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* ms_19.12c */
-    }, MAPPER_MS24B, 10, {0xFF, 0xBC, 0x9F}, CPS1_NONE, CPS1_NONE, "msword", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_MS24B, 10, {0xFF, 0xBC, 0x9F}, CPS1_NONE, CPS1_NONE, "msword", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME mswordj (cps1_10MHz), CPS_B_13 mapper_MS22B */
     {"mswordj", "Magic Sword: Heroic Fantasy (Japan 900623)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_13, 27, {
         {0x04f0ef50, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* msj_36.12f */
@@ -1410,7 +1410,7 @@ const Cps1Game cps1_games[] = {
         {0x57b29519, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ms_23.13b */
         {0xfb64e90d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ms_30.12c */
         {0x74f892b9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* ms_31.13c */
-    }, MAPPER_MS22B, 10, {0xFF, 0xBC, 0x9F}, CPS1_NONE, CPS1_NONE, "msword", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_MS22B, 10, {0xFF, 0xBC, 0x9F}, CPS1_NONE, CPS1_NONE, "msword", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME cawing (cps1_10MHz), CPS_B_16 mapper_CA24B */
     {"cawing", "Carrier Air Wing (World 901012)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_16, 12, {
         {0x91fceacd, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* cae_30a.11f */
@@ -1425,7 +1425,7 @@ const Cps1Game cps1_games[] = {
         {0x96fe7485, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* ca_9.12b */
         {0x4a613a2c, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* ca_18.11c */
         {0x74584493, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* ca_19.12c */
-    }, MAPPER_CA24B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_CA24B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME cawingr1 (cps1_10MHz), CPS_B_16 mapper_CA24B */
     {"cawingr1", "Carrier Air Wing (World 901009)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_16, 12, {
         {0x23305cd5, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* cae_30.11f */
@@ -1440,7 +1440,7 @@ const Cps1Game cps1_games[] = {
         {0x96fe7485, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* cae_09.12b */
         {0x4a613a2c, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* cae_18.11c */
         {0x74584493, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* cae_19.12c */
-    }, MAPPER_CA24B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "cawing", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_CA24B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "cawing", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME cawingu (cps1_10MHz), CPS_B_05 mapper_CA22B */
     {"cawingu", "Carrier Air Wing (USA 901130)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_05, 27, {
         {0xc2574c0c, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* cau_36.12f */
@@ -1470,7 +1470,7 @@ const Cps1Game cps1_games[] = {
         {0x96fe7485, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* cau_23.13b */
         {0x4a613a2c, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* cau_30.12c */
         {0x74584493, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* cau_31.13c */
-    }, MAPPER_CA22B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "cawing", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_CA22B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "cawing", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME cawingur1 (cps1_10MHz), CPS_B_16 mapper_CA24B */
     {"cawingur1", "Carrier Air Wing (USA 901012)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_16, 12, {
         {0x91fceacd, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 1},  /* cau_30a.11f */
@@ -1485,7 +1485,7 @@ const Cps1Game cps1_games[] = {
         {0x96fe7485, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* cau_09.12b */
         {0x4a613a2c, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* cau_18.11c */
         {0x74584493, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* cau_19.12c */
-    }, MAPPER_CA24B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "cawing", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_CA24B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "cawing", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME cawingj (cps1_10MHz), CPS_B_16 mapper_CA22B */
     {"cawingj", "U.S. Navy (Japan 901012)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_16, 27, {
         {0x91fceacd, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 1},  /* caj_36a.12f */
@@ -1515,7 +1515,7 @@ const Cps1Game cps1_games[] = {
         {0x96fe7485, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* caj_23.13b */
         {0x4a613a2c, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* caj_30.12c */
         {0x74584493, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* caj_31.13c */
-    }, MAPPER_CA22B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "cawing", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_CA22B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "cawing", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME cawingjr (cps1_12MHz), CPS_B_21_DEF mapper_ARA63B */
     {"cawingjr", "U.S. Navy (Japan Resale Ver. 901130)", CPS1_PLAIN, {1024 * K, 2048 * K, 128 * K, 256 * K}, CPSB_21_DEF, 9, {
         {0xbbe45b1e, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* usnj_23.8f */
@@ -1527,7 +1527,7 @@ const Cps1Game cps1_games[] = {
         {0x0eb8a1d4, 128 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* usn_09.12f */
         {0x4a613a2c, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* usn_18.11c */
         {0x74584493, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* usn_19.12c */
-    }, MAPPER_ARA63B, 12, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "cawing", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_ARA63B, 12, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "cawing", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME nemo (cps1_10MHz), CPS_B_15 mapper_NM24B */
     {"nemo", "Nemo (World 901130)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_15, 12, {
         {0xd2c03e56, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* nme_30a.11f */
@@ -1542,7 +1542,7 @@ const Cps1Game cps1_games[] = {
         {0x0f4b0581, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* nme_09.12b */
         {0xbab333d4, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* nme_18.11c */
         {0x2650a0a8, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* nme_19.12c */
-    }, MAPPER_NM24B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_NM24B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME nemor1 (cps1_10MHz), CPS_B_15 mapper_NM24B */
     {"nemor1", "Nemo (World 901109)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_15, 12, {
         {0x71b333db, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* nme_30.11f */
@@ -1557,7 +1557,7 @@ const Cps1Game cps1_games[] = {
         {0x0f4b0581, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* nme_09.12b */
         {0xbab333d4, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* nme_18.11c */
         {0x2650a0a8, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* nme_19.12c */
-    }, MAPPER_NM24B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "nemo", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_NM24B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "nemo", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME nemoj (cps1_10MHz), CPS_B_15 mapper_NM24B */
     {"nemoj", "Nemo (Japan 901120, 88622B-3 ROM board)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_15, 27, {
         {0xdaeceabb, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* nmj_36a.12f */
@@ -1587,7 +1587,7 @@ const Cps1Game cps1_games[] = {
         {0x8d3c5a42, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* nmj_23.13b */
         {0xbab333d4, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* nmj_30.12c */
         {0x2650a0a8, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* nmj_31.13c */
-    }, MAPPER_NM24B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "nemo", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_NM24B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "nemo", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME nemoja (cps1_10MHz), CPS_B_15 mapper_NM24B */
     {"nemoja", "Nemo (Japan 901120, 89625B-1 ROM board)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_15, 27, {
         {0xdaeceabb, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* nmj_36a.12f */
@@ -1617,7 +1617,7 @@ const Cps1Game cps1_games[] = {
         {0x8d3c5a42, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* nm_23.13b */
         {0xbab333d4, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* nm_30.12c */
         {0x2650a0a8, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* nm_31.13c */
-    }, MAPPER_NM24B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "nemo", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_NM24B, 10, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "nemo", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2 (cps1_10MHz), CPS_B_11 mapper_STF29 */
     {"sf2", "Street Fighter II: The World Warrior (World 910522)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_11, 23, {
         {0xfe39ee33, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* sf2e_30g.11e */
@@ -1643,7 +1643,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* sf2_9.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* sf2_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* sf2_19.12c */
-    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2ea (cps1_10MHz), CPS_B_17 mapper_STF29 */
     {"sf2ea", "Street Fighter II: The World Warrior (World 910204)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_17, 23, {
         {0xbc02c14c, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* sf2e_30a.11e */
@@ -1669,7 +1669,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_9.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sf2_19.12c */
-    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2eb (cps1_10MHz), CPS_B_17 mapper_STF29 */
     {"sf2eb", "Street Fighter II: The World Warrior (World 910214)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_17, 23, {
         {0x57bd7051, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* sf2e_30b.11e */
@@ -1695,7 +1695,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_9.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sf2_19.12c */
-    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2ed (cps1_10MHz), CPS_B_05 mapper_STF29 */
     {"sf2ed", "Street Fighter II: The World Warrior (World 910318)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_05, 23, {
         {0x4bb2657c, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* sf2e_30d.11e */
@@ -1721,7 +1721,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_9.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sf2_19.12c */
-    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2ee (cps1_10MHz), CPS_B_18 mapper_STF29 */
     {"sf2ee", "Street Fighter II: The World Warrior (World 910228)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_18, 23, {
         {0xf37cd088, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* sf2e_30e.11e */
@@ -1747,7 +1747,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_9.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sf2_19.12c */
-    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x3C, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 1},
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x3C, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 1, CPS1_INIT_NONE},
     /* MAME sf2ef (cps1_10MHz), CPS_B_15 mapper_STF29 */
     {"sf2ef", "Street Fighter II: The World Warrior (World 910411)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_15, 23, {
         {0xfe39ee33, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 1},  /* sf2e_30f.11e */
@@ -1773,7 +1773,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_9.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sf2_19.12c */
-    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2em (cps1_10MHz), CPS_B_17 mapper_STF29 */
     {"sf2em", "Street Fighter II: The World Warrior (World 910129)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_17, 23, {
         {0x997bdac4, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* sf2e_30.11e */
@@ -1799,7 +1799,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_9.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sf2_19.12c */
-    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2en (cps1_10MHz), CPS_B_17 mapper_STF29 */
     {"sf2en", "Street Fighter II: The World Warrior (World 910204, conversion)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_17, 35, {
         {0xbc02c14c, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* epr-b-05.12f */
@@ -1837,7 +1837,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* 27c512.13b */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* epr-b-01.12c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* epr-b-02.13c */
-    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2ua (cps1_10MHz), CPS_B_17 mapper_STF29 */
     {"sf2ua", "Street Fighter II: The World Warrior (USA 910206)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_17, 23, {
         {0x08beb861, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* sf2u_30a.11e */
@@ -1863,7 +1863,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_9.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sf2_19.12c */
-    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2ub (cps1_10MHz), CPS_B_17 mapper_STF29 */
     {"sf2ub", "Street Fighter II: The World Warrior (USA 910214)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_17, 23, {
         {0x57bd7051, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* sf2u_30b.11e */
@@ -1889,7 +1889,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_9.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sf2_19.12c */
-    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2uc (cps1_10MHz), CPS_B_12 mapper_STF29 */
     {"sf2uc", "Street Fighter II: The World Warrior (USA 910306)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_12, 23, {
         {0x6cb59385, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* sf2u_30c.11e */
@@ -1915,7 +1915,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_9.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sf2_19.12c */
-    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2ud (cps1_10MHz), CPS_B_05 mapper_STF29 */
     {"sf2ud", "Street Fighter II: The World Warrior (USA 910318)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_05, 23, {
         {0x4bb2657c, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* sf2u_30d.11e */
@@ -1941,7 +1941,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_9.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sf2_19.12c */
-    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2ue (cps1_10MHz), CPS_B_18 mapper_STF29 */
     {"sf2ue", "Street Fighter II: The World Warrior (USA 910228)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_18, 23, {
         {0xf37cd088, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* sf2u_30e.11e */
@@ -1967,7 +1967,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_9.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sf2_19.12c */
-    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x3C, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 1},
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x3C, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 1, CPS1_INIT_NONE},
     /* MAME sf2uf (cps1_10MHz), CPS_B_15 mapper_STF29 */
     {"sf2uf", "Street Fighter II: The World Warrior (USA 910411)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_15, 23, {
         {0xfe39ee33, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 1},  /* sf2u_30f.11e */
@@ -1993,7 +1993,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_9.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sf2_19.12c */
-    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2ug (cps1_10MHz), CPS_B_11 mapper_STF29 */
     {"sf2ug", "Street Fighter II: The World Warrior (USA 910522, Rev. G)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_11, 23, {
         {0xfe39ee33, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 1},  /* sf2u_30g.11e */
@@ -2019,7 +2019,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_9.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sf2_19.12c */
-    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2uh (cps1_10MHz), CPS_B_13 mapper_STF29 */
     {"sf2uh", "Street Fighter II: The World Warrior (USA 910522, Rev. H)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_13, 23, {
         {0xfe39ee33, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 1},  /* sf2u_30h.11e */
@@ -2045,7 +2045,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_9.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sf2_19.12c */
-    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2ui (cps1_10MHz), CPS_B_14 mapper_STF29 */
     {"sf2ui", "Street Fighter II: The World Warrior (USA 910522, Rev. I)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_14, 23, {
         {0xfe39ee33, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 1},  /* sf2u_30i.11e */
@@ -2071,7 +2071,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_9.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sf2_19.12c */
-    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2uk (cps1_10MHz), CPS_B_17 mapper_STF29 */
     {"sf2uk", "Street Fighter II: The World Warrior (USA 911101)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_17, 23, {
         {0x8f66076c, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* sf2u_30k.11e */
@@ -2097,7 +2097,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_09.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sf2_19.12c */
-    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2um (cps1_10MHz), CPS_B_17 mapper_STF29 */
     {"sf2um", "Street Fighter II: The World Warrior (USA 920312)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_17, 23, {
         {0x34a1ce02, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* sf-2u_30m.11e */
@@ -2123,7 +2123,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_09.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sf2_19.12c */
-    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_STF29, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2j (cps1_10MHz), CPS_B_13 mapper_STF29 */
     {"sf2j", "Street Fighter II: The World Warrior (Japan 911210, CPS-B-13)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_13, 23, {
         {0x79022b31, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* sf2j30.bin */
@@ -2149,7 +2149,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_09.bin */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_18.bin */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sf2_19.bin */
-    }, MAPPER_STF29, 10, {0xFF, 0xF4, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_STF29, 10, {0xFF, 0xF4, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2j17 (cps1_10MHz), CPS_B_17 mapper_STF29 */
     {"sf2j17", "Street Fighter II: The World Warrior (Japan 911210, CPS-B-17)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_17, 23, {
         {0x79022b31, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* sf2_30l.11e */
@@ -2175,7 +2175,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_09.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sf2_19.12c */
-    }, MAPPER_STF29, 10, {0xFF, 0xF4, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_STF29, 10, {0xFF, 0xF4, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2ja (cps1_10MHz), CPS_B_17 mapper_STF29 */
     {"sf2ja", "Street Fighter II: The World Warrior (Japan 910214)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_17, 23, {
         {0x57bd7051, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* sf2j_30a.11e */
@@ -2201,7 +2201,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2j_09.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2j_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sf2j_19.12c */
-    }, MAPPER_STF29, 10, {0xFF, 0xF4, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_STF29, 10, {0xFF, 0xF4, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2jc (cps1_10MHz), CPS_B_12 mapper_STF29 */
     {"sf2jc", "Street Fighter II: The World Warrior (Japan 910306)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_12, 23, {
         {0x8add35ec, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* sf2j_30c.11e */
@@ -2227,7 +2227,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_09.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2j_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sf2j_19.12c */
-    }, MAPPER_STF29, 10, {0xFF, 0xF4, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_STF29, 10, {0xFF, 0xF4, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2jf (cps1_10MHz), CPS_B_15 mapper_STF29 */
     {"sf2jf", "Street Fighter II: The World Warrior (Japan 910411)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_15, 23, {
         {0xfe39ee33, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 1},  /* sf2j_30f.11e */
@@ -2253,7 +2253,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_09.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sf2_19.12c */
-    }, MAPPER_STF29, 10, {0xFF, 0xF4, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_STF29, 10, {0xFF, 0xF4, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2jh (cps1_10MHz), CPS_B_13 mapper_STF29 */
     {"sf2jh", "Street Fighter II: The World Warrior (Japan 910522)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_13, 23, {
         {0xfe39ee33, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 1},  /* sf2j_30h.11e */
@@ -2279,7 +2279,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_09.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sf2_19.12c */
-    }, MAPPER_STF29, 10, {0xFF, 0xF4, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_STF29, 10, {0xFF, 0xF4, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2jl (cps1_10MHz), CPS_B_17 mapper_STF29 */
     {"sf2jl", "Street Fighter II: The World Warrior (Japan 920312)", CPS1_PLAIN, {1024 * K, 6144 * K, 64 * K, 256 * K}, CPSB_17, 23, {
         {0x34a1ce02, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* sf-2_30l.11e */
@@ -2305,7 +2305,7 @@ const Cps1Game cps1_games[] = {
         {0xa4823a1b, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2j_09.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* sf2j_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* sf2j_19.12c */
-    }, MAPPER_STF29, 10, {0xFF, 0xF4, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_STF29, 10, {0xFF, 0xF4, 0x9F}, 0x36, CPS1_NONE, "sf2", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME 3wonders (cps1_10MHz), CPS_B_21_BT1 mapper_RT24B */
     {"3wonders", "Three Wonders (World 910520)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_21_BT1, 19, {
         {0xef5b8b33, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* rte_30a.11f */
@@ -2327,7 +2327,7 @@ const Cps1Game cps1_games[] = {
         {0xabfca165, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* rt_9.12b */
         {0x26b211ab, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* rt_18.11c */
         {0xdbe64ad0, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* rt_19.12c */
-    }, MAPPER_RT24B, 10, {0xFF, 0x9A, 0x99}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_RT24B, 10, {0xFF, 0x9A, 0x99}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME 3wondersr1 (cps1_10MHz), CPS_B_21_BT1 mapper_RT24B */
     {"3wondersr1", "Three Wonders (World 910513)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_21_BT1, 19, {
         {0x0d541519, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* rte_30.11f */
@@ -2349,7 +2349,7 @@ const Cps1Game cps1_games[] = {
         {0x7d5a77a7, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* rt_9.12b */
         {0xf6dc0d3d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* rt_18.11c */
         {0xdbe64ad0, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* rt_19.12c */
-    }, MAPPER_RT24B, 10, {0xFF, 0x9A, 0x99}, CPS1_NONE, CPS1_NONE, "3wonders", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_RT24B, 10, {0xFF, 0x9A, 0x99}, CPS1_NONE, CPS1_NONE, "3wonders", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME 3wondersu (cps1_10MHz), CPS_B_21_BT1 mapper_RT24B */
     {"3wondersu", "Three Wonders (USA 910520)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_21_BT1, 19, {
         {0x0b156fd8, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* rtu_30a.11f */
@@ -2371,7 +2371,7 @@ const Cps1Game cps1_games[] = {
         {0xabfca165, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* rt_9.12b */
         {0x26b211ab, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* rt_18.11c */
         {0xdbe64ad0, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* rt_19.12c */
-    }, MAPPER_RT24B, 10, {0xFF, 0x9A, 0x99}, CPS1_NONE, CPS1_NONE, "3wonders", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_RT24B, 10, {0xFF, 0x9A, 0x99}, CPS1_NONE, CPS1_NONE, "3wonders", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME wonder3 (cps1_10MHz), CPS_B_21_BT1 mapper_RT22B */
     {"wonder3", "Wonder 3 (Japan 910520)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_21_BT1, 43, {
         {0xe3741247, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* rtj_36.12f */
@@ -2417,7 +2417,7 @@ const Cps1Game cps1_games[] = {
         {0xabfca165, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* rt_23.13b */
         {0x26b211ab, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* rt_30.12c */
         {0xdbe64ad0, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* rt_31.13c */
-    }, MAPPER_RT22B, 10, {0xFF, 0x9A, 0x99}, CPS1_NONE, CPS1_NONE, "3wonders", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_RT22B, 10, {0xFF, 0x9A, 0x99}, CPS1_NONE, CPS1_NONE, "3wonders", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME 3wondersb (cps1_10MHz), CPS_B_21_BT1 mapper_RT24B */
     {"3wondersb", "Three Wonders (bootleg)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_21_BT1, 12, {
         {0x47887cf3, 512 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* 274001.4 */
@@ -2432,7 +2432,7 @@ const Cps1Game cps1_games[] = {
         {0x3f765ae8, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000007, 0},  /* 274001.5 */
         {0xabfca165, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* 27512.2 */
         {0x3c4348cf, 256 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* 27020.1 */
-    }, MAPPER_RT24B, 10, {0xFF, 0x9A, 0x99}, 0x36, CPS1_NONE, "3wonders", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_RT24B, 10, {0xFF, 0x9A, 0x99}, 0x36, CPS1_NONE, "3wonders", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME 3wondersh (cps1_10MHz), HACK_B_2 mapper_RT24B */
     {"3wondersh", "Three Wonders (hack)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, HACK_B_2, 27, {
         {0xe6071884, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* 22.bin */
@@ -2462,7 +2462,7 @@ const Cps1Game cps1_games[] = {
         {0xabfca165, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* rt_9.12b */
         {0x26b211ab, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* rt_18.11c */
         {0xdbe64ad0, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* rt_19.12c */
-    }, MAPPER_RT24B, 10, {0xFF, 0x9A, 0x99}, CPS1_NONE, CPS1_NONE, "3wonders", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_RT24B, 10, {0xFF, 0x9A, 0x99}, CPS1_NONE, CPS1_NONE, "3wonders", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME kod (cps1_10MHz), CPS_B_21_BT2 mapper_KD29B */
     {"kod", "The King of Dragons (World 910805)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_21_BT2, 19, {
         {0xfcb5efe2, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* kde_30a.11e */
@@ -2484,7 +2484,7 @@ const Cps1Game cps1_games[] = {
         {0xbac6ec26, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* kd_9.12a */
         {0x4c63181d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* kd_18.11c */
         {0x92941b80, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* kd_19.12c */
-    }, MAPPER_KD29B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_P3, 0, 0},
+    }, MAPPER_KD29B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_P3, 0, 0, CPS1_INIT_NONE},
     /* MAME kodr1 (cps1_10MHz), CPS_B_21_BT2 mapper_KD29B */
     {"kodr1", "The King of Dragons (World 910711)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_21_BT2, 19, {
         {0xc7414fd4, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* kde_30.11e */
@@ -2506,7 +2506,7 @@ const Cps1Game cps1_games[] = {
         {0xf5514510, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* kd_9.12a */
         {0x69ecb2c8, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* kd_18.11c */
         {0x02d851c1, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* kd_19.12c */
-    }, MAPPER_KD29B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "kod", 0, -1, CPS1_EXTRA_P3, 0, 0},
+    }, MAPPER_KD29B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "kod", 0, -1, CPS1_EXTRA_P3, 0, 0, CPS1_INIT_NONE},
     /* MAME kodr2 (cps1_10MHz), CPS_B_21_BT2 mapper_KD29B */
     {"kodr2", "The King of Dragons (World 910731)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_21_BT2, 19, {
         {0xf8dc4ce3, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* kde_30.11e */
@@ -2528,7 +2528,7 @@ const Cps1Game cps1_games[] = {
         {0xbac6ec26, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* kd_9.12a */
         {0x4c63181d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* kd_18.11c */
         {0x92941b80, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* kd_19.12c */
-    }, MAPPER_KD29B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "kod", 0, -1, CPS1_EXTRA_P3, 0, 0},
+    }, MAPPER_KD29B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "kod", 0, -1, CPS1_EXTRA_P3, 0, 0, CPS1_INIT_NONE},
     /* MAME kodu (cps1_10MHz), CPS_B_21_BT2 mapper_KD29B */
     {"kodu", "The King of Dragons (USA 910910)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_21_BT2, 19, {
         {0x825817f9, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* kdu_30b.11e */
@@ -2550,7 +2550,7 @@ const Cps1Game cps1_games[] = {
         {0xbac6ec26, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* kd_09.12a */
         {0x4c63181d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* kd_18.11c */
         {0x92941b80, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* kd_19.12c */
-    }, MAPPER_KD29B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "kod", 0, -1, CPS1_EXTRA_P3, 0, 0},
+    }, MAPPER_KD29B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "kod", 0, -1, CPS1_EXTRA_P3, 0, 0, CPS1_INIT_NONE},
     /* MAME kodj (cps1_10MHz), CPS_B_21_BT2 mapper_KD29B */
     {"kodj", "The King of Dragons (Japan 910805, B-Board 90629B-3)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_21_BT2, 16, {
         {0xebc788ad, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* kdj_30a.11e */
@@ -2569,7 +2569,7 @@ const Cps1Game cps1_games[] = {
         {0xbac6ec26, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* kd_09.12a */
         {0x4c63181d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* kd_18.11c */
         {0x92941b80, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* kd_19.12c */
-    }, MAPPER_KD29B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "kod", 0, -1, CPS1_EXTRA_P3, 0, 0},
+    }, MAPPER_KD29B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "kod", 0, -1, CPS1_EXTRA_P3, 0, 0, CPS1_INIT_NONE},
     /* MAME kodja (cps1_10MHz), CPS_B_21_BT2 mapper_KD22B */
     {"kodja", "The King of Dragons (Japan 910805, B-Board 89625B-1)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_21_BT2, 43, {
         {0xebc788ad, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* kdj_36a.12f */
@@ -2615,7 +2615,7 @@ const Cps1Game cps1_games[] = {
         {0xbac6ec26, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* kd_23.13b */
         {0x4c63181d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* kd_30.12c */
         {0x92941b80, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* kd_31.13c */
-    }, MAPPER_KD22B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "kod", 0, -1, CPS1_EXTRA_P3, 0, 0},
+    }, MAPPER_KD22B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "kod", 0, -1, CPS1_EXTRA_P3, 0, 0, CPS1_INIT_NONE},
     /* MAME captcomm (cps1_10MHz), CPS_B_21_BT3 mapper_CC63B */
     {"captcomm", "Captain Commando (World 911202)", CPS1_PLAIN, {1280 * K, 4096 * K, 64 * K, 256 * K}, CPSB_21_BT3, 15, {
         {0x42c814c5, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* cce_23f.8f */
@@ -2633,7 +2633,7 @@ const Cps1Game cps1_games[] = {
         {0x698e8b58, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* cc_09.11a */
         {0x6de2c2db, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* cc_18.11c */
         {0xb99091ae, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* cc_19.12c */
-    }, MAPPER_CC63B, 10, {0xFF, 0xF4, 0x9F}, 0x36, 0x38, NULL, 0, -1, CPS1_EXTRA_P3, 0, 0},
+    }, MAPPER_CC63B, 10, {0xFF, 0xF4, 0x9F}, 0x36, 0x38, NULL, 0, -1, CPS1_EXTRA_P3, 0, 0, CPS1_INIT_NONE},
     /* MAME captcommr1 (cps1_10MHz), CPS_B_21_BT3 mapper_CC63B */
     {"captcommr1", "Captain Commando (World 911014)", CPS1_PLAIN, {1280 * K, 4096 * K, 64 * K, 256 * K}, CPSB_21_BT3, 15, {
         {0x19c58ece, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* cce_23d.8f */
@@ -2651,7 +2651,7 @@ const Cps1Game cps1_games[] = {
         {0x698e8b58, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* cc_09.11a */
         {0x6de2c2db, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* cc_18.11c */
         {0xb99091ae, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* cc_19.12c */
-    }, MAPPER_CC63B, 10, {0xFF, 0xF4, 0x9F}, 0x36, 0x38, "captcomm", 0, -1, CPS1_EXTRA_P3, 0, 0},
+    }, MAPPER_CC63B, 10, {0xFF, 0xF4, 0x9F}, 0x36, 0x38, "captcomm", 0, -1, CPS1_EXTRA_P3, 0, 0, CPS1_INIT_NONE},
     /* MAME captcommu (cps1_10MHz), CPS_B_21_BT3 mapper_CC63B */
     {"captcommu", "Captain Commando (USA 910928)", CPS1_PLAIN, {1280 * K, 4096 * K, 64 * K, 256 * K}, CPSB_21_BT3, 15, {
         {0x03da44fd, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* ccu_23b.8f */
@@ -2669,7 +2669,7 @@ const Cps1Game cps1_games[] = {
         {0x698e8b58, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ccu_09.11a */
         {0x6de2c2db, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ccu_18.11c */
         {0xb99091ae, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* ccu_19.12c */
-    }, MAPPER_CC63B, 10, {0xFF, 0xF4, 0x9F}, 0x36, 0x38, "captcomm", 0, -1, CPS1_EXTRA_P3, 0, 0},
+    }, MAPPER_CC63B, 10, {0xFF, 0xF4, 0x9F}, 0x36, 0x38, "captcomm", 0, -1, CPS1_EXTRA_P3, 0, 0, CPS1_INIT_NONE},
     /* MAME captcommj (cps1_10MHz), CPS_B_21_BT3 mapper_CC63B */
     {"captcommj", "Captain Commando (Japan 911202)", CPS1_PLAIN, {1280 * K, 4096 * K, 64 * K, 256 * K}, CPSB_21_BT3, 15, {
         {0x5b482b62, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* ccj_23f.8f */
@@ -2687,7 +2687,7 @@ const Cps1Game cps1_games[] = {
         {0x698e8b58, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ccj_09.12a */
         {0x6de2c2db, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ccj_18.11c */
         {0xb99091ae, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* ccj_19.12c */
-    }, MAPPER_CC63B, 10, {0xFF, 0xF4, 0x9F}, 0x36, 0x38, "captcomm", 0, -1, CPS1_EXTRA_P3, 0, 0},
+    }, MAPPER_CC63B, 10, {0xFF, 0xF4, 0x9F}, 0x36, 0x38, "captcomm", 0, -1, CPS1_EXTRA_P3, 0, 0, CPS1_INIT_NONE},
     /* MAME captcommjr1 (cps1_10MHz), CPS_B_21_BT3 mapper_CC63B */
     {"captcommjr1", "Captain Commando (Japan 910928)", CPS1_PLAIN, {1280 * K, 4096 * K, 64 * K, 256 * K}, CPSB_21_BT3, 15, {
         {0xe2a2d80e, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* ccj_23b.8f */
@@ -2705,7 +2705,7 @@ const Cps1Game cps1_games[] = {
         {0x698e8b58, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ccj_09.12a */
         {0x6de2c2db, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* ccj_18.11c */
         {0xb99091ae, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* ccj_19.12c */
-    }, MAPPER_CC63B, 10, {0xFF, 0xF4, 0x9F}, 0x36, 0x38, "captcomm", 0, -1, CPS1_EXTRA_P3, 0, 0},
+    }, MAPPER_CC63B, 10, {0xFF, 0xF4, 0x9F}, 0x36, 0x38, "captcomm", 0, -1, CPS1_EXTRA_P3, 0, 0, CPS1_INIT_NONE},
     /* MAME knights (cps1_10MHz), CPS_B_21_BT4 mapper_KR63B */
     {"knights", "Knights of the Round (World 911127)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_21_BT4, 13, {
         {0x1b3997eb, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* kr_23e.8f */
@@ -2721,7 +2721,7 @@ const Cps1Game cps1_games[] = {
         {0x5e44d9ee, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* kr_09.11a */
         {0xda69d15f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* kr_18.11c */
         {0xbfc654e9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* kr_19.12c */
-    }, MAPPER_KR63B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_P3, 0, 0},
+    }, MAPPER_KR63B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_P3, 0, 0, CPS1_INIT_NONE},
     /* MAME knightsu (cps1_10MHz), CPS_B_21_BT4 mapper_KR63B */
     {"knightsu", "Knights of the Round (USA 911127)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_21_BT4, 13, {
         {0x252bc2ba, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* kr_23u.8f */
@@ -2737,7 +2737,7 @@ const Cps1Game cps1_games[] = {
         {0x5e44d9ee, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* kr_09.11a */
         {0xda69d15f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* kr_18.11c */
         {0xbfc654e9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* kr_19.12c */
-    }, MAPPER_KR63B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "knights", 0, -1, CPS1_EXTRA_P3, 0, 0},
+    }, MAPPER_KR63B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "knights", 0, -1, CPS1_EXTRA_P3, 0, 0, CPS1_INIT_NONE},
     /* MAME knightsj (cps1_10MHz), CPS_B_21_BT4 mapper_KR63B */
     {"knightsj", "Knights of the Round (Japan 911127, B-Board 91634B-2)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_21_BT4, 13, {
         {0xeae7417f, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* kr_23j.8f */
@@ -2753,7 +2753,7 @@ const Cps1Game cps1_games[] = {
         {0x5e44d9ee, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* kr_09.12a */
         {0xda69d15f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* kr_18.11c */
         {0xbfc654e9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* kr_19.12c */
-    }, MAPPER_KR63B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "knights", 0, -1, CPS1_EXTRA_P3, 0, 0},
+    }, MAPPER_KR63B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "knights", 0, -1, CPS1_EXTRA_P3, 0, 0, CPS1_INIT_NONE},
     /* MAME knightsja (cps1_10MHz), CPS_B_21_BT4 mapper_KR22B */
     {"knightsja", "Knights of the Round (Japan 911127, B-Board 89625B-1)", CPS1_PLAIN, {1024 * K, 4096 * K, 64 * K, 256 * K}, CPSB_21_BT4, 43, {
         {0xad3d1a8e, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* krj_36.12f */
@@ -2799,7 +2799,7 @@ const Cps1Game cps1_games[] = {
         {0x5e44d9ee, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* kr_23.13b */
         {0xda69d15f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* kr_30.12c */
         {0xbfc654e9, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* kr_31.13c */
-    }, MAPPER_KR22B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "knights", 0, -1, CPS1_EXTRA_P3, 0, 0},
+    }, MAPPER_KR22B, 10, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "knights", 0, -1, CPS1_EXTRA_P3, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2ce (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
     {"sf2ce", "Street Fighter II': Champion Edition (World 920513)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 18, {
         {0x0aaa1a3a, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* s92e_23b.8f */
@@ -2820,7 +2820,7 @@ const Cps1Game cps1_games[] = {
         {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* s92_09.11a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* s92_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* s92_19.12c */
-    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2ceea (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
     {"sf2ceea", "Street Fighter II': Champion Edition (World 920313)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 18, {
         {0x3f846b74, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* s92e_23a.8f */
@@ -2841,7 +2841,7 @@ const Cps1Game cps1_games[] = {
         {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_09.11a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* s92_19.12c */
-    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2ceec (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
     {"sf2ceec", "Street Fighter II': Champion Edition (World 920803)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 18, {
         {0x994b408d, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* s92e_23c.8f */
@@ -2862,7 +2862,7 @@ const Cps1Game cps1_games[] = {
         {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_09.11a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* s92_19.12c */
-    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2ceua (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
     {"sf2ceua", "Street Fighter II': Champion Edition (USA 920313)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 18, {
         {0xac44415b, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* s92u_23a.8f */
@@ -2883,7 +2883,7 @@ const Cps1Game cps1_games[] = {
         {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_09.11a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* s92_19.12c */
-    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2ceub (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
     {"sf2ceub", "Street Fighter II': Champion Edition (USA 920513)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 18, {
         {0x996a3015, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* s92u_23b.8f */
@@ -2904,7 +2904,7 @@ const Cps1Game cps1_games[] = {
         {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_09.11a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* s92_19.12c */
-    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2ceuc (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
     {"sf2ceuc", "Street Fighter II': Champion Edition (USA 920803)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 18, {
         {0x0a8b6aa2, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* s92u_23c.8f */
@@ -2925,7 +2925,7 @@ const Cps1Game cps1_games[] = {
         {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_09.11a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* s92_19.12c */
-    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2cet (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
     {"sf2cet", "Street Fighter II': Champion Edition (Taiwan 920313)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 18, {
         {0xd7c28ade, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* s92t_23a.8f */
@@ -2946,7 +2946,7 @@ const Cps1Game cps1_games[] = {
         {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_09.11a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* s92_19.12c */
-    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2ceja (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
     {"sf2ceja", "Street Fighter II': Champion Edition (Japan 920322)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 18, {
         {0x4f42bb5a, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* s92j_23a.8f */
@@ -2967,7 +2967,7 @@ const Cps1Game cps1_games[] = {
         {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_09.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* s92_19.12c */
-    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2cejb (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
     {"sf2cejb", "Street Fighter II': Champion Edition (Japan 920513)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 18, {
         {0x140876c5, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* s92j_23b.8f */
@@ -2988,7 +2988,7 @@ const Cps1Game cps1_games[] = {
         {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_09.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* s92_19.12c */
-    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2cejc (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
     {"sf2cejc", "Street Fighter II': Champion Edition (Japan 920803)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 18, {
         {0xf0120635, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* s92j_23c.8f */
@@ -3009,7 +3009,7 @@ const Cps1Game cps1_games[] = {
         {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_09.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* s92_19.12c */
-    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2cebltw (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
     {"sf2cebltw", "Street Fighter II': Champion Edition ('Taiwan' bootleg with PAL)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 24, {
         {0x035ee5d9, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* 27.12e */
@@ -3036,7 +3036,7 @@ const Cps1Game cps1_games[] = {
         {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_09.bin */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_18.bin */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* s92_19.bin */
-    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2red (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
     {"sf2red", "Street Fighter II': Champion Edition (Red Wave, bootleg, set 1)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 18, {
         {0x40276abb, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* sf2red.23 */
@@ -3057,7 +3057,7 @@ const Cps1Game cps1_games[] = {
         {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_09.bin */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_18.bin */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* s92_19.bin */
-    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2redp2 (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
     {"sf2redp2", "Street Fighter II': Champion Edition (Red Wave PtII, bootleg)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 18, {
         {0x2d3c4f72, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* sf2red.23 */
@@ -3078,7 +3078,7 @@ const Cps1Game cps1_games[] = {
         {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_09.bin */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_18.bin */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* s92_19.bin */
-    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2v004 (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
     {"sf2v004", "Street Fighter II': Champion Edition (V004, bootleg)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 18, {
         {0x52d19f2c, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* sf2v004.23 */
@@ -3099,7 +3099,7 @@ const Cps1Game cps1_games[] = {
         {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_09.bin */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_18.bin */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* s92_19.bin */
-    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2acc (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
     {"sf2acc", "Street Fighter II': Champion Edition (Accelerator!, bootleg, set 1)", CPS1_PLAIN, {1280 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 18, {
         {0xe7c8c5a6, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* sf2ca_23-c.bin */
@@ -3120,7 +3120,7 @@ const Cps1Game cps1_games[] = {
         {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_09.bin */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_18.bin */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* s92_19.bin */
-    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2acca (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
     {"sf2acca", "Street Fighter II': Champion Edition (Accelerator!, bootleg, set 2)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 18, {
         {0x35f9517b, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* 23-c.8f */
@@ -3141,7 +3141,7 @@ const Cps1Game cps1_games[] = {
         {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_09.bin */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_18.bin */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* s92_19.bin */
-    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2m3 (sf2m3), HACK_B_1 mapper_S9263B */
     {"sf2m3", "Street Fighter II': Champion Edition (M3, bootleg)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, HACK_B_1, 18, {
         {0xdb567b66, 512 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* u222chp */
@@ -3162,7 +3162,7 @@ const Cps1Game cps1_games[] = {
         {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_09.bin */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_18.bin */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* s92_19.bin */
-    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, CPS1_NONE, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2ceupl (sf2m10), HACK_B_1 mapper_S9263B */
     {"sf2ceupl", "Street Fighter II': Champion Edition (Japan 920322, UPL bootleg?)", CPS1_PLAIN, {1280 * K, 6144 * K, 64 * K, 256 * K}, HACK_B_1, 19, {
         {0x0804f973, 512 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* s2.u222 */
@@ -3184,7 +3184,7 @@ const Cps1Game cps1_games[] = {
         {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_09.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* s92_19.12c */
-    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2ce", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME cworld2j (cps1_12MHz), CPS_B_21_BT6 mapper_Q522B */
     {"cworld2j", "Adventure Quiz Capcom World 2 (Japan 920611)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_21_BT6, 27, {
         {0x38a08099, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* q5_36.12f */
@@ -3214,7 +3214,7 @@ const Cps1Game cps1_games[] = {
         {0xe14dc524, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* q5_23.13b */
         {0xd10c1b68, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* q5_30.12c */
         {0x7d17e496, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* q5_31.13c */
-    }, MAPPER_Q522B, 12, {0xFF, 0xFE, 0xDF}, 0x36, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_Q522B, 12, {0xFF, 0xFE, 0xDF}, 0x36, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME cworld2ja (cps1_12MHz), CPS_B_21_DEF mapper_Q522B */
     {"cworld2ja", "Adventure Quiz Capcom World 2 (Japan 920611, B-Board 90629B-3, no battery)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_21_DEF, 9, {
         {0xde54487f, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* q5 - 34_90629b.8f */
@@ -3226,7 +3226,7 @@ const Cps1Game cps1_games[] = {
         {0xe14dc524, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* q5 - 09_90629b.12a */
         {0xd10c1b68, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* q5 - 18_90629b.11c */
         {0x7d17e496, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* q5 - 19_90629b.12c */
-    }, MAPPER_Q522B, 12, {0xFF, 0xFE, 0xDF}, CPS1_NONE, CPS1_NONE, "cworld2j", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_Q522B, 12, {0xFF, 0xFE, 0xDF}, CPS1_NONE, CPS1_NONE, "cworld2j", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME cworld2jb (cps1_12MHz), CPS_B_21_BT6 mapper_Q522B */
     {"cworld2jb", "Adventure Quiz Capcom World 2 (Japan 920611, B-Board 91634B-2)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_21_BT6, 9, {
         {0x709f577f, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* q5 - 23_91634b.8f */
@@ -3238,7 +3238,7 @@ const Cps1Game cps1_games[] = {
         {0xe14dc524, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* q5 - 09_91634b.12a */
         {0xd10c1b68, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* q5 - 18_91634b.11c */
         {0x7d17e496, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* q5 - 19_91634b.12c */
-    }, MAPPER_Q522B, 12, {0xFF, 0xFE, 0xDF}, 0x36, CPS1_NONE, "cworld2j", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_Q522B, 12, {0xFF, 0xFE, 0xDF}, 0x36, CPS1_NONE, "cworld2j", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME varth (cps1_12MHz), CPS_B_04 mapper_VA24B */
     {"varth", "Varth: Operation Thunderstorm (World 920714)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_04, 15, {
         {0xadb8d391, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* vae_30b.11f */
@@ -3256,7 +3256,7 @@ const Cps1Game cps1_games[] = {
         {0x7a99446e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* va_09.12b */
         {0xde30510e, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* va_18.11c */
         {0x0610a4ac, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* va_19.12c */
-    }, MAPPER_VA24B, 12, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 270, 0},
+    }, MAPPER_VA24B, 12, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 270, 0, CPS1_INIT_NONE},
     /* MAME varthr1 (cps1_12MHz), CPS_B_04 mapper_VA24B */
     {"varthr1", "Varth: Operation Thunderstorm (World 920612)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_04, 15, {
         {0x7fcd0091, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* vae_30a.11f */
@@ -3274,7 +3274,7 @@ const Cps1Game cps1_games[] = {
         {0x7a99446e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* va_09.12b */
         {0xde30510e, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* va_18.11c */
         {0x0610a4ac, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* va_19.12c */
-    }, MAPPER_VA24B, 12, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "varth", 0, -1, CPS1_EXTRA_NONE, 270, 0},
+    }, MAPPER_VA24B, 12, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "varth", 0, -1, CPS1_EXTRA_NONE, 270, 0, CPS1_INIT_NONE},
     /* MAME varthu (cps1_12MHz), CPS_B_04 mapper_VA63B */
     {"varthu", "Varth: Operation Thunderstorm (USA 920612)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_04, 9, {
         {0xfbe68726, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* vau_23a.8f */
@@ -3286,7 +3286,7 @@ const Cps1Game cps1_games[] = {
         {0x7a99446e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* va_09.11a */
         {0xde30510e, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* va_18.11c */
         {0x0610a4ac, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* va_19.12c */
-    }, MAPPER_VA63B, 12, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "varth", 0, -1, CPS1_EXTRA_NONE, 270, 0},
+    }, MAPPER_VA63B, 12, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "varth", 0, -1, CPS1_EXTRA_NONE, 270, 0, CPS1_INIT_NONE},
     /* MAME varthj (cps1_12MHz), CPS_B_21_BT5 mapper_VA22B */
     {"varthj", "Varth: Operation Thunderstorm (Japan 920714)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_21_BT5, 27, {
         {0x1d798d6a, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* vaj_36b.12f */
@@ -3316,7 +3316,7 @@ const Cps1Game cps1_games[] = {
         {0x7a99446e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* va_23.13c */
         {0xde30510e, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* va_30.12e */
         {0x0610a4ac, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* va_31.13e */
-    }, MAPPER_VA22B, 12, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "varth", 0, -1, CPS1_EXTRA_NONE, 270, 0},
+    }, MAPPER_VA22B, 12, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "varth", 0, -1, CPS1_EXTRA_NONE, 270, 0, CPS1_INIT_NONE},
     /* MAME varthjr (cps1_12MHz), CPS_B_21_BT5 mapper_VA63B */
     {"varthjr", "Varth: Operation Thunderstorm (Japan Resale Ver. 920714)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_21_BT5, 9, {
         {0xad3d3522, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* vaj_23b.8f */
@@ -3328,7 +3328,7 @@ const Cps1Game cps1_games[] = {
         {0x7a99446e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* va_09.12a */
         {0xde30510e, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* va_18.11c */
         {0x0610a4ac, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* va_19.12c */
-    }, MAPPER_VA63B, 12, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "varth", 0, -1, CPS1_EXTRA_NONE, 270, 0},
+    }, MAPPER_VA63B, 12, {0xFF, 0xF4, 0x9F}, CPS1_NONE, CPS1_NONE, "varth", 0, -1, CPS1_EXTRA_NONE, 270, 0, CPS1_INIT_NONE},
     /* MAME qadjr (cps1_12MHz), CPS_B_21_DEF mapper_QAD63B */
     {"qadjr", "Quiz & Dragons: Capcom Quiz Game (Japan Resale Ver. 940921)", CPS1_PLAIN, {1024 * K, 2048 * K, 64 * K, 256 * K}, CPSB_21_DEF, 9, {
         {0x4d3553de, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* qad_23a.8f */
@@ -3340,7 +3340,7 @@ const Cps1Game cps1_games[] = {
         {0x733161cc, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* qad_09.12a */
         {0x2bfe6f6a, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* qad_18.11c */
         {0x13d3236b, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* qad_19.12c */
-    }, MAPPER_QAD63B, 12, {0xFF, 0xFD, 0xDF}, 0x36, 0x38, "qad", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_QAD63B, 12, {0xFF, 0xFD, 0xDF}, 0x36, 0x38, "qad", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME wofhfh (wofhfh), CPS_B_21_DEF mapper_TK263B */
     {"wofhfh", "Huo Feng Huang (Chinese bootleg of Sangokushi II)", CPS1_PLAIN, {1024 * K, 4096 * K, 128 * K, 256 * K}, CPSB_21_DEF, 13, {
         {0x6ae4b312, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* 23 */
@@ -3356,7 +3356,7 @@ const Cps1Game cps1_games[] = {
         {0x86fe8a97, 128 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* 9 */
         {0xc04be720, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* 18 */
         {0xfbb8d8c1, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* 19 */
-    }, MAPPER_TK263B, 12, {0xFF, 0xEC, 0xFF}, 0x36, CPS1_NONE, "wof", 0, -1, CPS1_EXTRA_P3, 0, 0},
+    }, MAPPER_TK263B, 12, {0xFF, 0xEC, 0xFF}, 0x36, CPS1_NONE, "wof", 0, -1, CPS1_EXTRA_P3, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2hf (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
     {"sf2hf", "Street Fighter II': Hyper Fighting (World 921209)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 18, {
         {0x2dd72514, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* s2te_23.8f */
@@ -3377,7 +3377,7 @@ const Cps1Game cps1_games[] = {
         {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* s92_09.11a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* s92_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* s92_19.12c */
-    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2hfu (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
     {"sf2hfu", "Street Fighter II': Hyper Fighting (USA 921209)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 18, {
         {0x89a1fc38, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* s2tu_23.8f */
@@ -3398,7 +3398,7 @@ const Cps1Game cps1_games[] = {
         {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_09.11a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* s92_19.12c */
-    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2hf", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2hf", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME sf2hfj (cps1_12MHz), CPS_B_21_DEF mapper_S9263B */
     {"sf2hfj", "Street Fighter II' Turbo: Hyper Fighting (Japan 921209)", CPS1_PLAIN, {1536 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 18, {
         {0xea73b4dc, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* s2tj_23.8f */
@@ -3419,7 +3419,7 @@ const Cps1Game cps1_games[] = {
         {0x08f6b60e, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_09.12a */
         {0x7f162009, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 1},  /* s92_18.11c */
         {0xbeade53f, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 1},  /* s92_19.12c */
-    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2hf", 0, -1, CPS1_EXTRA_KICKS, 0, 0},
+    }, MAPPER_S9263B, 12, {0xFF, 0xFC, 0x9F}, 0x36, CPS1_NONE, "sf2hf", 0, -1, CPS1_EXTRA_KICKS, 0, 0, CPS1_INIT_NONE},
     /* MAME punisherbz (wofhfh), CPS_B_21_DEF mapper_PS63B */
     {"punisherbz", "Biaofeng Zhanjing (Chinese bootleg of The Punisher)", CPS1_PLAIN, {2048 * K, 4096 * K, 64 * K, 256 * K}, CPSB_21_DEF, 15, {
         {0xbfa45d23, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* 23.096 */
@@ -3437,7 +3437,7 @@ const Cps1Game cps1_games[] = {
         {0xb8367eb5, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* 9.512 */
         {0x375c66e7, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* 18.010 */
         {0xeb5ca884, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* 19.010 */
-    }, MAPPER_PS63B, 12, {0xEF, 0x94, 0xFF}, CPS1_NONE, CPS1_NONE, "punisher", 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_PS63B, 12, {0xEF, 0x94, 0xFF}, CPS1_NONE, CPS1_NONE, "punisher", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME pokonyan (cps1_10MHz), CPS_B_21_DEF mapper_pokonyan */
     {"pokonyan", "Pokonyan! Balloon (Japan 940322)", CPS1_PLAIN, {512 * K, 2048 * K, 64 * K, 256 * K}, CPSB_21_DEF, 23, {
         {0x196297bf, 128 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0},  /* xmqq-12f.bin */
@@ -3463,7 +3463,7 @@ const Cps1Game cps1_games[] = {
         {0x4e8b81a8, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* xmqq-13b.bin */
         {0x71ac69ad, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* xmqq-12c.bin */
         {0x71e29699, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* xmqq-13c.bin */
-    }, MAPPER_POKONYAN, 10, {0xBE, 0xFB, 0xFF}, 0x36, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_POKONYAN, 10, {0xBE, 0xFB, 0xFF}, 0x36, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
     /* MAME mpumpkin (cps1_10MHz), CPS_B_21_DEF mapper_SFZ63B */
     {"mpumpkin", "Magical Pumpkin: Puroland de Daibouken (Japan 960712)", CPS1_PLAIN, {512 * K, 6144 * K, 64 * K, 256 * K}, CPSB_21_DEF, 16, {
         {0x38b9883a, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0},  /* mpa_23.8f */
@@ -3482,6 +3482,6 @@ const Cps1Game cps1_games[] = {
         {0x0b5b1b72, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0},  /* mpa_09.12a */
         {0xcef6d39e, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0},  /* mpa_18.11c */
         {0x24947f8e, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0},  /* mpa_19.12c */
-    }, MAPPER_SFZ63B, 10, {0xBE, 0xFB, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0},
+    }, MAPPER_SFZ63B, 10, {0xBE, 0xFB, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
 };
 const int cps1_game_count = (int)(sizeof cps1_games / sizeof cps1_games[0]);

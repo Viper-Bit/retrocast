@@ -29,6 +29,9 @@ enum {
 };
 enum { CPS1_PLAIN, CPS1_QSOUND, CPS1_ODD };  /* board groups (docs/roadmap.md) */
 enum { CPS1_EXTRA_NONE, CPS1_EXTRA_KICKS, CPS1_EXTRA_P3 };  /* buttons 4-6 of players 1-2, or player 3 (MAME's IN2) */
+/* What MAME's init function for a set does beyond the board: the Q-Sound
+ * games' Kabuki keys (kabuki.h). */
+enum { CPS1_INIT_NONE, CPS1_INIT_WOF, CPS1_INIT_DINO, CPS1_INIT_PUNISHER, CPS1_INIT_SLAMMAST };
 
 typedef struct {
     uint32_t crc, size;
@@ -73,6 +76,7 @@ typedef struct {
     uint8_t extra;               /* what the in2 port holds: CPS1_EXTRA_* */
     uint16_t rotate;             /* the monitor, as MAME's ROT: 0, or 270 (turned 90 degrees anticlockwise) */
     uint8_t cpsb_high;           /* the CPS-B at $8001C0, not $800140 (Street Fighter II revision E, MAME's init_sf2ee) */
+    uint8_t init;                /* CPS1_INIT_* */
 } Cps1Game;
 
 extern const Cps1Game cps1_games[];

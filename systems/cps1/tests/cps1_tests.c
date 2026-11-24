@@ -15,6 +15,7 @@
 #include "cps1.h"
 #include "detect.h"
 #include "input_log.h"
+#include "kabuki.h"
 #include "oki6295.h"
 #include "ym2151.h"
 
@@ -70,7 +71,7 @@ static size_t zip_build(void) {  /* local headers and data, the directory, the e
 
 static uint8_t even[4] = {1, 2, 5, 6}, odd[4] = {3, 4, 7, 8}, swapped[4] = {0x22, 0x11, 0x44, 0x33};
 static uint8_t gfx[2][4] = {{0xA0, 0xA1, 0xA2, 0xA3}, {0xB0, 0xB1, 0xB2, 0xB3}}, plain[3] = {9, 8, 7};
-static Cps1Game test_game = {"test", "Test", CPS1_PLAIN, {16, 16, 3, 0}, {0}, 6, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0};
+static Cps1Game test_game = {"test", "Test", CPS1_PLAIN, {16, 16, 3, 0}, {0}, 6, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE};
 
 static void make_test_game(void) {
     Cps1File f[6] = {
@@ -142,7 +143,7 @@ static void test_detector(void) {
 static Cps1 m;
 static uint8_t prog[1 << 20];
 static Cps1Game prog_game = {"prog", "Program", CPS1_PLAIN, {1 << 20, 0, 0, 0},
-                             {0x20, 0x0004, 0x00, 0x02, 0x04, 0x06, 0x2E, {0x26, 0x28, 0x2A, 0x2C}, 0x30, {0}}, 0, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0};
+                             {0x20, 0x0004, 0x00, 0x02, 0x04, 0x06, 0x2E, {0x26, 0x28, 0x2A, 0x2C}, 0x30, {0}}, 0, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE};
 static Cps1Rom prog_rom;
 
 static void w16(uint32_t a, uint16_t v) { prog[a] = (uint8_t)(v >> 8), prog[a + 1] = (uint8_t)v; }
@@ -386,7 +387,7 @@ static void test_gfx_mapper(void) {  /* S224B: a tile outside its layer's range 
 
 static void test_layout_gfx8(void) {  /* 8-bit graphics chips: one byte into every 8, at the offset's slot */
     static uint8_t a[2] = {0xA0, 0xA1}, b[2] = {0xB0, 0xB1};
-    static Cps1Game g8 = {"g8", "G8", CPS1_PLAIN, {0, 16, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0};
+    static Cps1Game g8 = {"g8", "G8", CPS1_PLAIN, {0, 16, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE};
     g8.files[0] = (Cps1File){zip_crc32(a, 2), 2, CPS1_R_GFX, CPS1_LOAD_GFX8, 1, 0};
     g8.files[1] = (Cps1File){zip_crc32(b, 2), 2, CPS1_R_GFX, CPS1_LOAD_GFX8, 6, 0};
     zcount = 0;
@@ -755,7 +756,7 @@ static void write_zip(const char *path) {
 
 static void test_clone_parent(void) {
     static uint8_t own[4] = {1, 2, 3, 4}, shared[4] = {5, 6, 7, 8};
-    static Cps1Game clone = {"clone", "Clone", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "cps1_par", 0, -1, CPS1_EXTRA_NONE, 0, 0};
+    static Cps1Game clone = {"clone", "Clone", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "cps1_par", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE};
     clone.files[0] = (Cps1File){zip_crc32(own, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0};
     clone.files[1] = (Cps1File){zip_crc32(shared, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 4, 1};
     zcount = 0, zip_add("own", own, 4), zip_build(), write_zip("cps1_clone.zip");
@@ -807,8 +808,8 @@ static void test_chip_elsewhere(void) {  /* an own chip the zip lacks, found by 
 static void test_match_order(void) {  /* a zip two games match: the one with more of its own files */
     static uint8_t a[4] = {9, 9, 9, 1}, b[4] = {9, 9, 9, 2};
     static Cps1Game two[2] = {
-        {"small", "Small", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 1, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0},
-        {"big", "Big", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0}};
+        {"small", "Small", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 1, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE},
+        {"big", "Big", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE}};
     two[0].files[0] = (Cps1File){zip_crc32(a, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0};
     two[1].files[0] = two[0].files[0];
     two[1].files[1] = (Cps1File){zip_crc32(b, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 4, 0};
@@ -817,6 +818,26 @@ static void test_match_order(void) {  /* a zip two games match: the one with mor
     assert(zip_open(&z, zbuf, zlen) == 0);
     assert(cps1_match_in(&z, two, 2) == &two[1]);
     zip_close(&z);
+}
+
+/* ---- the Q-Sound board ---- */
+
+static void test_kabuki(void) {  /* bytes 0..31 decoded with each key: MAME 0.289 kabuki.cpp's output */
+    static const uint8_t want[4][2][32] = {
+        {{0x46,0x66,0x56,0x6E,0xC6,0xE6,0xD6,0x2E,0x56,0x6E,0x5E,0x7E,0xD6,0xEE,0xDE,0x3E,0x44,0x64,0x54,0x6C,0xC4,0xE4,0xD4,0x2F,0x57,0x6F,0x5F,0x7F,0xD7,0xEF,0xDF,0x3C},
+         {0x86,0x82,0x8E,0x8A,0x8E,0x8A,0x9E,0x9A,0x06,0x02,0xCE,0xCA,0xCE,0xCA,0x1E,0x1A,0x84,0x80,0x8C,0x88,0x8C,0x88,0x9F,0x9B,0x07,0x03,0xCF,0xCB,0xCF,0xCB,0x1C,0x18}},
+        {{0x07,0x03,0x03,0x23,0x47,0x13,0x13,0x63,0x17,0x43,0x43,0x33,0x57,0x53,0x53,0x73,0x87,0x0B,0x0B,0x2B,0x4F,0x93,0x93,0xE3,0x97,0x4B,0x4B,0x3B,0x5F,0xD3,0xD3,0xF3},
+         {0x07,0x17,0x17,0x13,0x47,0x57,0x37,0x33,0x27,0x37,0x57,0x53,0x67,0x77,0x77,0x73,0x0F,0x1F,0x1F,0x1B,0xC7,0xD7,0xB7,0xB3,0x2F,0x3F,0x5F,0x5B,0xE7,0xF7,0xF7,0xF3}},
+        {{0x88,0x80,0xA8,0xA0,0x98,0xC0,0x90,0xE0,0xC8,0xB8,0xC0,0xB0,0xD8,0xF8,0x38,0x30,0x89,0x81,0xE8,0xE0,0x99,0x01,0xD0,0x60,0x09,0xB9,0x40,0xF0,0x19,0x39,0x78,0x7C},
+         {0x90,0x92,0xB0,0xB2,0xD0,0xB8,0xD2,0xBA,0x98,0xF0,0x9A,0xF2,0xD8,0x1A,0x38,0x3A,0x94,0xD2,0xF0,0xB6,0x14,0xF8,0x52,0xBE,0x9C,0x70,0xDA,0x36,0x1C,0x60,0x78,0xF2}},
+        {{0x58,0x50,0x18,0x10,0x78,0x70,0x38,0x30,0xD8,0xD0,0x98,0x90,0xF8,0xF0,0xB8,0x2C,0x59,0xF8,0x5D,0xFC,0x1A,0xB8,0x1E,0x2C,0xD9,0xE8,0xDD,0xEC,0x9A,0xA8,0x9E,0xAC},
+         {0xA8,0x88,0xA0,0x80,0x28,0x08,0xE0,0xC0,0xB8,0x98,0xB0,0x90,0xF8,0xD8,0x18,0x1C,0xE8,0xAD,0xF8,0xBE,0x68,0x2E,0x18,0x3D,0xC8,0xED,0xD8,0xFE,0x48,0x6E,0x58,0x1D}}};
+    static uint8_t rom[0x8000], op[0x8000], data[0x8000];
+    for (int i = 0; i < 0x8000; i++) rom[i] = (uint8_t)i;
+    for (int k = 0; k < 4; k++) {
+        cps1_kabuki(CPS1_INIT_WOF + k, rom, op, data);
+        assert(!memcmp(op, want[k][0], 32) && !memcmp(data, want[k][1], 32));
+    }
 }
 
 /* ---- save states ---- */
@@ -931,6 +952,7 @@ int main(void) {
     test_chip_elsewhere();
     test_state_roundtrip();
     test_state_refused();
+    test_kabuki();
     puts("cps1_tests: ok");
     return 0;
 }
