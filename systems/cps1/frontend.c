@@ -20,7 +20,10 @@ static int sys_setting(const char *key, const char *value) { (void)key, (void)va
 
 static int sys_open(const char *path, const Settings *settings, SysInfo *info, char *err, size_t errlen) {
     (void)settings;
-    if (!path) return snprintf(err, errlen, "usage: retrocast game.zip"), 2;  /* recompiled CPS-1 games: later */
+    if (!path && cps1_recomp_program)  /* a recompiled game: its zip is not built in (the graphics are megabytes) */
+        return snprintf(err, errlen, "%s is recompiled; open its zip: drop %s.zip on the program, or give it as an argument",
+                        cps1_recomp_program->game_id, cps1_recomp_program->game_id), 2;
+    if (!path) return snprintf(err, errlen, "usage: retrocast game.zip"), 2;
     size_t size = 0;
     uint8_t *data = SDL_LoadFile(path, &size);
     if (!data) return snprintf(err, errlen, "%s: %s", path, SDL_GetError()), 1;
