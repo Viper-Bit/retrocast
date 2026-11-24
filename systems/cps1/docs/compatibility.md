@@ -190,6 +190,13 @@ Run the same command on your own folder to see what yours lacks.
 | rockmanj | Rockman: The Power Battle (CPS1, Japan 950922) | megaman | chips missing |
 | pokonyan | Pokonyan! Balloon (Japan 940322) |  | no zip |
 | mpumpkin | Magical Pumpkin: Puroland de Daibouken (Japan 960712) |  | no zip |
+| pang3 | Pang! 3 (Europe 950601) |  | chips missing |
+| pang3r1 | Pang! 3 (Europe 950511) | pang3 | no zip |
+| pang3j | Pang! 3: Kaitou Tachi no Karei na Gogo (Japan 950511) | pang3 | chips missing |
+| pang3b | Pang! 3 (bootleg, set 1) | pang3 | boot-tested (as pang3.zip) |
+| pang3b2 | Pang! 3 (bootleg, set 2) | pang3 | no zip |
+| pang3b3 | Pang! 3 (bootleg, set 3) | pang3 | no zip |
+| pang3b5 | Pang! 3 (bootleg, set 5) | pang3 | no zip |
 <!-- /sets -->
 
 ## Not supported yet
@@ -201,14 +208,7 @@ Run the same command on your own folder to see what yours lacks.
 | dinohunt | Dinosaur Hunter (Chinese bootleg of Cadillacs and Dinosaurs) | its own init (init_dinohunt) |
 | ganbare | Ganbare! Marine Kun (Japan 2K0411) | its own init (init_ganbare) |
 | gulunpa | Gulun.Pa! (Japan 931220 L) (prototype) | a ROM layout the loader cannot express |
-| pang3 | Pang! 3 (Europe 950601) | P8 |
-| pang3b | Pang! 3 (bootleg, set 1) | P8 |
-| pang3b2 | Pang! 3 (bootleg, set 2) | P8 |
-| pang3b3 | Pang! 3 (bootleg, set 3) | P8 |
 | pang3b4 | Pang! 3 (bootleg, set 4) | its own init (init_pang3b4) |
-| pang3b5 | Pang! 3 (bootleg, set 5) | P8 |
-| pang3j | Pang! 3: Kaitou Tachi no Karei na Gogo (Japan 950511) | P8 |
-| pang3r1 | Pang! 3 (Europe 950511) | P8 |
 | pmonster | Gamushara Battle! Puchi Monster (Japan 990519) | its own init (init_ganbare) |
 | sf2accp2 | Street Fighter II': Champion Edition (Accelerator Pt.II, bootleg) | a black screen |
 | sf2amf | Street Fighter II': Champion Edition (Alpha Magic-F, bootleg) | its own init (init_sf2hack) |

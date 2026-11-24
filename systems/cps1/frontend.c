@@ -1,8 +1,8 @@
 /* The CPS-1 behind core/frontend/system.h: a game's zip matched to the game
  * table and loaded, both players' controls (buttons 1-3 = B, A, X; Start;
  * a coin on Select), the 384x224 picture on a 4:3 monitor, mono sound
- * (stereo on the Q-Sound board), save states, the Q-Sound board's EEPROM
- * in GAME.eeprom next to the zip (MAME's nvram layout). No settings yet
+ * (stereo on the Q-Sound board), save states, the EEPROM of the Q-Sound
+ * board and Pang! 3 in GAME.eeprom next to the zip (MAME's nvram layout). No settings yet
  * (the DIP switches keep their defaults). */
 #include <SDL3/SDL.h>
 #include <stdio.h>
@@ -46,7 +46,7 @@ static int sys_open(const char *path, const Settings *settings, SysInfo *info, c
     int ext = n > 4 && !SDL_strcasecmp(path + n - 4, ".zip") ? 4 : 0;
     snprintf(info->state_path, sizeof info->state_path, "%.*s.state", (int)(n - (size_t)ext), path);
     eeprom_path[0] = 0;
-    if (g->group == CPS1_QSOUND) {  /* the settings the game keeps: read back if saved */
+    if (cps1_has_eeprom(g)) {  /* the settings the game keeps: read back if saved */
         snprintf(eeprom_path, sizeof eeprom_path, "%.*s.eeprom", (int)(n - (size_t)ext), path);
         size_t got = 0;
         void *saved = SDL_LoadFile(eeprom_path, &got);

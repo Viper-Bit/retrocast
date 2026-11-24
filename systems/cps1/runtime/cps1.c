@@ -139,6 +139,8 @@ static uint16_t rd(Cps1 *s, uint32_t a, unsigned strobe) {
     if (a == 0x800000) return players(s);
     if (a == 0x800018) return (uint16_t)(system_in(s) << 8 | 0xFF);
     if (a >= 0x80001A && a < 0x800020) return (uint16_t)(s->dip[(a - 0x80001A) >> 1] << 8 | 0xFF);
+    if (a == 0x80017A && (s->rom->game->init == CPS1_INIT_PANG3 || s->rom->game->init == CPS1_INIT_PANG3B))
+        return (uint16_t)eeprom_do(&s->eeprom, eeprom_now(s));  /* Pang! 3: the EEPROM in the CPS-B's range */
     uint32_t cpsb = s->rom->game->cpsb_high ? 0x8001C0 : 0x800140;  /* revision E of Street Fighter II: higher */
     if (a >= cpsb && a < cpsb + 0x40) return cpsb_read(s, a - cpsb);
     if (s->rom->game->dial && ((a >= 0x800052 && a < 0x800056) || (a >= 0x80005A && a < 0x80005E))) {
@@ -156,6 +158,9 @@ static void wr(Cps1 *s, uint32_t a, uint16_t v, unsigned strobe) {
     else if (a >= 0x800100 && a < 0x800140) {
         s->cpsa[(a - 0x800100) >> 1] = merge(s->cpsa[(a - 0x800100) >> 1], v, strobe);
         if (a == 0x80010A) cps1_palette_upload(s);
+    }
+    else if (a == 0x80017A && (s->rom->game->init == CPS1_INIT_PANG3 || s->rom->game->init == CPS1_INIT_PANG3B)) {
+        if (strobe & 1) eeprom_write_lines(&s->eeprom, v >> 7 & 1, v >> 6 & 1, v & 1, eeprom_now(s));  /* CS, CLK, DI */
     }
     else if (a >= (s->rom->game->cpsb_high ? 0x8001C0u : 0x800140u) && a < (s->rom->game->cpsb_high ? 0x800200u : 0x800180u)) {
         uint32_t off = a - (s->rom->game->cpsb_high ? 0x8001C0u : 0x800140u);
@@ -313,9 +318,9 @@ void cps1_init_with(Cps1 *s, const Cps1Rom *r, const Cps1RecompProgram *p) {
     opm_reset(&s->opm);
     oki_reset(&s->oki, r->region[CPS1_R_OKI], r->size[CPS1_R_OKI]);
     s->snd_next = 64;
+    if (cps1_has_eeprom(r->game)) eeprom_init(&s->eeprom, r->game->group == CPS1_QSOUND);  /* 128 bytes, or Pang! 3's 64 words */
     if (r->game->group == CPS1_QSOUND) {
         qsound_init(&s->qs, r->dsp, r->region[CPS1_R_QSOUND], r->size[CPS1_R_QSOUND]);
-        eeprom_init(&s->eeprom, 1);  /* the 93C46 as 128 bytes */
         s->snd_next = QSOUND_STEP15, s->qirq_next = CPS1_QSOUND_IRQ;
     }
 }

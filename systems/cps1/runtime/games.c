@@ -19,6 +19,8 @@
 #define MAPPER_CD63B {{0x8000, 0x8000, 0x0, 0x0}, 2, {{CPS1_GFX_SPRITES | CPS1_GFX_SCROLL1 | CPS1_GFX_SCROLL2 | CPS1_GFX_SCROLL3, 0x0000, 0x7FFF, 0}, {CPS1_GFX_SPRITES | CPS1_GFX_SCROLL1 | CPS1_GFX_SCROLL2 | CPS1_GFX_SCROLL3, 0x8000, 0xFFFF, 1}}}
 #define MAPPER_CK22B {{0x4000, 0x4000, 0x0, 0x0}, 4, {{CPS1_GFX_SPRITES, 0x0000, 0x2FFF, 0}, {CPS1_GFX_SCROLL1, 0x3000, 0x3FFF, 0}, {CPS1_GFX_SCROLL2, 0x4000, 0x6FFF, 1}, {CPS1_GFX_SCROLL3, 0x7000, 0x7FFF, 1}}}
 #define MAPPER_CK24B {{0x8000, 0x0, 0x0, 0x0}, 4, {{CPS1_GFX_SPRITES, 0x0000, 0x2FFF, 0}, {CPS1_GFX_SCROLL1, 0x3000, 0x3FFF, 0}, {CPS1_GFX_SCROLL2, 0x4000, 0x6FFF, 0}, {CPS1_GFX_SCROLL3, 0x7000, 0x7FFF, 0}}}
+#define MAPPER_CP1B1F {{0x10000, 0x0, 0x0, 0x0}, 1, {{CPS1_GFX_SPRITES | CPS1_GFX_SCROLL1 | CPS1_GFX_SCROLL2 | CPS1_GFX_SCROLL3, 0x0000, 0xFFFF, 0}}}
+#define MAPPER_CP1B1F_BOOT {{0x10000, 0x10000, 0x0, 0x0}, 4, {{CPS1_GFX_SPRITES | CPS1_GFX_SCROLL1 | CPS1_GFX_SCROLL2 | CPS1_GFX_SCROLL3, 0x0000, 0x7FFF, 0}, {CPS1_GFX_SPRITES | CPS1_GFX_SCROLL1 | CPS1_GFX_SCROLL2 | CPS1_GFX_SCROLL3, 0x10000, 0x17FFF, 0}, {CPS1_GFX_SPRITES | CPS1_GFX_SCROLL1 | CPS1_GFX_SCROLL2 | CPS1_GFX_SCROLL3, 0x8000, 0xFFFF, 1}, {CPS1_GFX_SPRITES | CPS1_GFX_SCROLL1 | CPS1_GFX_SCROLL2 | CPS1_GFX_SCROLL3, 0x18000, 0x1FFFF, 1}}}
 #define MAPPER_DAM63B {{0x8000, 0x8000, 0x0, 0x0}, 5, {{CPS1_GFX_SPRITES, 0x0000, 0x1FFF, 0}, {CPS1_GFX_SCROLL1, 0x2000, 0x2FFF, 0}, {CPS1_GFX_SCROLL2, 0x4000, 0x7FFF, 0}, {CPS1_GFX_SCROLL3, 0x0000, 0x1FFFF, 1}, {CPS1_GFX_SPRITES, 0x2000, 0x3FFF, 1}}}
 #define MAPPER_DM22A {{0x4000, 0x4000, 0x2000, 0x2000}, 5, {{CPS1_GFX_SPRITES, 0x0000, 0x1FFF, 0}, {CPS1_GFX_SCROLL1, 0x2000, 0x3FFF, 0}, {CPS1_GFX_SCROLL2, 0x4000, 0x7FFF, 1}, {CPS1_GFX_SCROLL3, 0x0000, 0x1FFFF, 2}, {CPS1_GFX_SPRITES, 0x2000, 0x3FFF, 3}}}
 #define MAPPER_DM620 {{0x8000, 0x2000, 0x2000, 0x0}, 3, {{CPS1_GFX_SCROLL3, 0x8000, 0xBFFF, 1}, {CPS1_GFX_SPRITES, 0x2000, 0x3FFF, 2}, {CPS1_GFX_STARS | CPS1_GFX_SPRITES | CPS1_GFX_SCROLL1 | CPS1_GFX_SCROLL2 | CPS1_GFX_SCROLL3, 0x0000, 0x1FFFF, 0}}}
@@ -4148,5 +4150,99 @@ const Cps1Game cps1_games[] = {
         {0xcef6d39e, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 0},  /* mpa_18.11c */
         {0x24947f8e, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 0},  /* mpa_19.12c */
     }, MAPPER_SFZ63B, 10, {0xBE, 0xFB, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0},
+    /* MAME pang3 (pang3), CPS_B_21_DEF mapper_CP1B1F */
+    {"pang3", "Pang! 3 (Europe 950601)", CPS1_PLAIN, {1024 * K, 4096 * K, 32 * K, 256 * K}, CPSB_21_DEF, 9, {
+        {0xa213fa80, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0, 0, 0},  /* pa3e_17a.11l */
+        {0x7169ea67, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x080000, 0, 0, 0},  /* pa3e_16a.10l */
+        {0x068a152c, 2048 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0x100000, 0},  /* pa3-01m.2c */
+        {0x068a152c, 2048 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0x100000, 0x100000, 0},  /* pa3-01m.2c */
+        {0x3a4a619d, 2048 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0x100000, 0},  /* pa3-07m.2f */
+        {0x3a4a619d, 2048 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0x100000, 0x100000, 0},  /* pa3-07m.2f */
+        {0xcb1423a2, 128 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0x008000, 0},  /* pa3_11.11f */
+        {0x73a10d5d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 0},  /* pa3_05.10d */
+        {0xaffa4f82, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 0},  /* pa3_06.11d */
+    }, MAPPER_CP1B1F, 12, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_PANG3, 0, 0},
+    /* MAME pang3r1 (pang3), CPS_B_21_DEF mapper_CP1B1F */
+    {"pang3r1", "Pang! 3 (Europe 950511)", CPS1_PLAIN, {1024 * K, 4096 * K, 32 * K, 256 * K}, CPSB_21_DEF, 9, {
+        {0xd7041d32, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0, 0, 0},  /* pa3e_17.11l */
+        {0x1be9a483, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x080000, 0, 0, 0},  /* pa3e_16.10l */
+        {0x068a152c, 2048 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0x100000, 1},  /* pa3-01m.2c */
+        {0x068a152c, 2048 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0x100000, 0x100000, 1},  /* pa3-01m.2c */
+        {0x3a4a619d, 2048 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0x100000, 1},  /* pa3-07m.2f */
+        {0x3a4a619d, 2048 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0x100000, 0x100000, 1},  /* pa3-07m.2f */
+        {0xcb1423a2, 128 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0x008000, 1},  /* pa3_11.11f */
+        {0x73a10d5d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* pa3_05.10d */
+        {0xaffa4f82, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* pa3_06.11d */
+    }, MAPPER_CP1B1F, 12, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "pang3", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_PANG3, 0, 0},
+    /* MAME pang3j (pang3), CPS_B_21_DEF mapper_CP1B1F */
+    {"pang3j", "Pang! 3: Kaitou Tachi no Karei na Gogo (Japan 950511)", CPS1_PLAIN, {1024 * K, 4096 * K, 32 * K, 256 * K}, CPSB_21_DEF, 9, {
+        {0x21f6e51f, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0, 0, 0},  /* pa3j_17.11l */
+        {0xca1d7897, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x080000, 0, 0, 0},  /* pa3j_16.10l */
+        {0x068a152c, 2048 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0x100000, 1},  /* pa3-01m.2c */
+        {0x068a152c, 2048 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0x100000, 0x100000, 1},  /* pa3-01m.2c */
+        {0x3a4a619d, 2048 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0x100000, 1},  /* pa3-07m.2f */
+        {0x3a4a619d, 2048 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0x100000, 0x100000, 1},  /* pa3-07m.2f */
+        {0xcb1423a2, 128 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0x008000, 1},  /* pa3_11.11f */
+        {0x73a10d5d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* pa3_05.10d */
+        {0xaffa4f82, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* pa3_06.11d */
+    }, MAPPER_CP1B1F, 12, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "pang3", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_PANG3, 0, 0},
+    /* MAME pang3b (pang3), CPS_B_21_DEF mapper_CP1B1F */
+    {"pang3b", "Pang! 3 (bootleg, set 1)", CPS1_PLAIN, {1024 * K, 4096 * K, 32 * K, 256 * K}, CPSB_21_DEF, 9, {
+        {0x12138234, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0, 0, 0},  /* pa3w_17.11l */
+        {0xd1ba585c, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x080000, 0, 0, 0},  /* pa3w_16.10l */
+        {0x068a152c, 2048 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0x100000, 1},  /* pa3-01m.2c */
+        {0x068a152c, 2048 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0x100000, 0x100000, 1},  /* pa3-01m.2c */
+        {0x3a4a619d, 2048 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0x100000, 1},  /* pa3-07m.2f */
+        {0x3a4a619d, 2048 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0x100000, 0x100000, 1},  /* pa3-07m.2f */
+        {0x90a08c46, 32 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 0},  /* pa3_11.11f */
+        {0x73a10d5d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* pa3_05.10d */
+        {0xaffa4f82, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* pa3_06.11d */
+    }, MAPPER_CP1B1F, 12, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "pang3", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_PANG3B, 0, 0},
+    /* MAME pang3b2 (pang3), CPS_B_21_DEF mapper_CP1B1F */
+    {"pang3b2", "Pang! 3 (bootleg, set 2)", CPS1_PLAIN, {1024 * K, 4096 * K, 32 * K, 256 * K}, CPSB_21_DEF, 15, {
+        {0x8d3fd82c, 256 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x000000, 0, 0, 0},  /* 16.u70 */
+        {0x654904c8, 256 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x000001, 0, 0, 0},  /* 14.u72 */
+        {0x42774e37, 256 * K, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0x080000, 0, 0, 0},  /* 15.u71 */
+        {0x531ea745, 256 * K, CPS1_R_MAIN, CPS1_LOAD_ODD, 0x080001, 0, 0, 0},  /* 13.u73 */
+        {0x45fc0a81, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000000, 0, 0, 0},  /* 4.u68 */
+        {0x27668828, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000001, 0, 0, 0},  /* 2.u66 */
+        {0xe051b2e9, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000002, 0, 0, 0},  /* 10.u69 */
+        {0x4a68b194, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000003, 0, 0, 0},  /* 8.u63 */
+        {0x91c8d782, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000004, 0, 0, 0},  /* 3.u67 */
+        {0xfe32af5d, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000005, 0, 0, 0},  /* 1.u65 */
+        {0xf0bba5c7, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000006, 0, 0, 0},  /* 9.u62 */
+        {0xc60c5e75, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX8, 0x000007, 0, 0, 0},  /* 7.u64 */
+        {0xcb1423a2, 128 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0x008000, 1},  /* 11.u32 */
+        {0x73a10d5d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* 5.u34 */
+        {0xaffa4f82, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* 6.u33 */
+    }, MAPPER_CP1B1F, 12, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "pang3", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_PANG3, 0, 0},
+    /* MAME pang3b3 (pang3), CPS_B_17 mapper_CP1B1F */
+    {"pang3b3", "Pang! 3 (bootleg, set 3)", CPS1_PLAIN, {1024 * K, 4096 * K, 32 * K, 256 * K}, CPSB_17, 9, {
+        {0xdd3b95c0, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0, 0, 0},  /* u11l1_17.bin */
+        {0x1be9a483, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x080000, 0, 0, 0},  /* u10l1_16.bin */
+        {0x068a152c, 2048 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0x100000, 1},  /* pa3-01m.2c */
+        {0x068a152c, 2048 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0x100000, 0x100000, 1},  /* pa3-01m.2c */
+        {0x3a4a619d, 2048 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0x100000, 1},  /* pa3-07m.2f */
+        {0x3a4a619d, 2048 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0x100000, 0x100000, 1},  /* pa3-07m.2f */
+        {0x278d786c, 64 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0x008000, 0},  /* u11f1.bin */
+        {0x73a10d5d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* pa3_05.10d */
+        {0xaffa4f82, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* pa3_06.11d */
+    }, MAPPER_CP1B1F, 12, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "pang3", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_PANG3, 0, 0},
+    /* MAME pang3b5 (pang3), CPS_B_21_DEF mapper_CP1B1F_boot */
+    {"pang3b5", "Pang! 3 (bootleg, set 5)", CPS1_PLAIN, {1024 * K, 4096 * K, 32 * K, 256 * K}, CPSB_21_DEF, 13, {
+        {0xd7041d32, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x000000, 0, 0, 0},  /* pa3e_17.11l */
+        {0x1be9a483, 512 * K, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 0x080000, 0, 0, 0},  /* pa3e_16.10l */
+        {0x22c934c4, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000000, 0, 0, 0},  /* 1.2c */
+        {0x51031180, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000002, 0, 0, 0},  /* 7.2f */
+        {0xac119a46, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000004, 0, 0, 0},  /* 3.4c */
+        {0x2e1d35f2, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x000006, 0, 0, 0},  /* 9.4f */
+        {0x07c85e9b, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200000, 0, 0, 0},  /* 2.3c */
+        {0x325cc0b7, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200002, 0, 0, 0},  /* 8.3f */
+        {0x4ad13297, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200004, 0, 0, 0},  /* 4.5c */
+        {0x026d0cd2, 512 * K, CPS1_R_GFX, CPS1_LOAD_GFX4, 0x200006, 0, 0, 0},  /* 10.5f */
+        {0xcb1423a2, 128 * K, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0x000000, 0, 0x008000, 1},  /* pa3_11.11f */
+        {0x73a10d5d, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x000000, 0, 0, 1},  /* pa3_05.10d */
+        {0xaffa4f82, 128 * K, CPS1_R_OKI, CPS1_LOAD_PLAIN, 0x020000, 0, 0, 1},  /* pa3_06.11d */
+    }, MAPPER_CP1B1F_BOOT, 12, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "pang3", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_PANG3, 0, 0},
 };
 const int cps1_game_count = (int)(sizeof cps1_games / sizeof cps1_games[0]);

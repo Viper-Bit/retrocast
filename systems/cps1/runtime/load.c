@@ -92,6 +92,7 @@ static int take(const Cps1Game *g, const Zip *z, Cps1Rom *r, char *done, char *e
 
 /* Once every chip is placed: what MAME's init does to them; -1 (err set) when out of memory. */
 static int finish(const Cps1Game *g, Cps1Rom *r, char *err, size_t errlen) {
+    if (g->init == CPS1_INIT_PANG3) cps1_pang3_decrypt(r->region[CPS1_R_MAIN], r->size[CPS1_R_MAIN]);
     if (g->group == CPS1_QSOUND && r->size[CPS1_R_SOUND] >= 0x8000) {
         uint8_t *z80 = r->region[CPS1_R_SOUND];
         if (!(r->z80_op = malloc(0x8000)) || (g->z80_raw && !(r->z80_raw = malloc(0x8000))))
@@ -107,6 +108,21 @@ static int missing(const Cps1Game *g, const char *done) {
     for (int i = 0; i < g->nfiles; i++)
         if (!done[i]) return i;
     return -1;
+}
+
+void cps1_pang3_decrypt(uint8_t *main, uint32_t size) {
+    for (uint32_t a = 0x80000; a + 1 < size && a < 0x100000; a += 2) {
+        unsigned src = main[a + 1], dst = 0;  /* the big-endian word's low byte; the high byte stays */
+        if (src & 0x01) dst ^= 0x04;
+        if (src & 0x02) dst ^= 0x21;
+        if (src & 0x04) dst ^= 0x01;
+        if (~src & 0x08) dst ^= 0x50;
+        if (src & 0x10) dst ^= 0x40;
+        if (src & 0x20) dst ^= 0x06;
+        if (src & 0x40) dst ^= 0x08;
+        if (~src & 0x80) dst ^= 0x88;
+        main[a + 1] = (uint8_t)dst;
+    }
 }
 
 void cps1_unload(Cps1Rom *r) {

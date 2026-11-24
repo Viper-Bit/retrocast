@@ -36,8 +36,9 @@ enum { CPS1_PLAIN, CPS1_QSOUND, CPS1_ODD };  /* board groups (docs/roadmap.md) *
  * and 4 (IN3, and their buttons 3 in IN1's bits 7 and 15: Slam Masters). */
 enum { CPS1_EXTRA_NONE, CPS1_EXTRA_KICKS, CPS1_EXTRA_P3, CPS1_EXTRA_P4 };
 /* What MAME's init function for a set does beyond the board: the Q-Sound
- * games' Kabuki keys (kabuki.h). */
-enum { CPS1_INIT_NONE, CPS1_INIT_WOF, CPS1_INIT_DINO, CPS1_INIT_PUNISHER, CPS1_INIT_SLAMMAST };
+ * games' Kabuki keys (kabuki.h); Pang! 3's code decryption (not its
+ * bootleg's) and its EEPROM on the CPS-B's port $80017A. */
+enum { CPS1_INIT_NONE, CPS1_INIT_WOF, CPS1_INIT_DINO, CPS1_INIT_PUNISHER, CPS1_INIT_SLAMMAST, CPS1_INIT_PANG3, CPS1_INIT_PANG3B };
 
 typedef struct {
     uint32_t crc, size;
@@ -110,6 +111,8 @@ const Cps1Game *cps1_match_in(const Zip *z, const Cps1Game *games, int n);
 /* 0, or -1 with the first missing or damaged file (its CRC) in err. */
 int cps1_load(const Cps1Game *g, const Zip *z, Cps1Rom *r, char *err, size_t errlen);
 void cps1_unload(Cps1Rom *r);
+/* Pang! 3's 68000 code from $80000: the low byte of each word decrypted (MAME's init_pang3). */
+void cps1_pang3_decrypt(uint8_t *main, uint32_t size);
 /* A game's zip (data, read from path) matched and loaded; a clone's other
  * files from "<parent>.zip" in the same folder, a Q-Sound game's chip ROM
  * from qsound.zip there (MAME's names). 0, or -1 with a message. */
@@ -197,6 +200,10 @@ void cps1_set_input(Cps1 *s, int player, uint16_t pad);
  * Q-Sound board, left / right pairs at CPS1_QSOUND_RATE (cps1_channels); the
  * number taken. When nobody takes them, a full buffer drops the new ones. */
 int cps1_take_sound(Cps1 *s, int16_t *out, int max);
+/* The board keeps settings in a 93C46 EEPROM (GAME.eeprom next to the zip). */
+static inline int cps1_has_eeprom(const Cps1Game *g) {
+    return g->group == CPS1_QSOUND || g->init == CPS1_INIT_PANG3 || g->init == CPS1_INIT_PANG3B;
+}
 static inline int cps1_channels(const Cps1Game *g) { return g->group == CPS1_QSOUND ? 2 : 1; }
 static inline int cps1_sample_rate(const Cps1Game *g) { return g->group == CPS1_QSOUND ? CPS1_QSOUND_RATE : CPS1_SAMPLE_RATE; }
 

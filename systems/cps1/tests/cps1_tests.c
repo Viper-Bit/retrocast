@@ -1013,6 +1013,36 @@ static void test_qsound_eeprom_state(void) {  /* a byte written through the port
     end_qsound();
 }
 
+/* ---- Pang! 3 ---- */
+
+static void test_pang3_decrypt(void) {  /* MAME's init_pang3: the low byte of each word from $80000, by bit rules */
+    static uint8_t rom[0x100000];
+    rom[0x7FFFE] = 0x12, rom[0x7FFFF] = 0xAB;
+    rom[0x80000] = 0x12, rom[0x80001] = 0xAB;
+    cps1_pang3_decrypt(rom, sizeof rom);
+    assert(rom[0x7FFFE] == 0x12 && rom[0x7FFFF] == 0xAB);  /* the first half plain */
+    assert(rom[0x80000] == 0x12 && rom[0x80001] == 0x23);  /* $AB: bits 0, 1, 5 flip $04, $21, $06; bits 3, 7 only when clear */
+    assert(rom[0x80003] == (0x50 ^ 0x88));                  /* $00: the two rules for clear bits */
+}
+
+static void test_pang3_eeprom(void) {  /* the 16-bit EEPROM on the CPS-B's port $80017A: DI bit 0, CLK 6, CS 7; DO bit 0 */
+    boot_program();
+    prog_game.init = CPS1_INIT_PANG3;
+    cps1_init(&m, &prog_rom);
+    m.eeprom.data[2 * 2] = 0x34, m.eeprom.data[2 * 2 + 1] = 0x12;  /* cell 2 = $1234 */
+    unsigned bits = 0x182, v = 0;                                  /* READ 2: 1 10 000010 */
+    m68k_write(&m.cpu, 0x80017A, 0x00, 5, 1), m68k_write(&m.cpu, 0x80017A, 0x80, 5, 1);
+    for (int i = 8; i >= 0; i--)
+        m68k_write(&m.cpu, 0x80017A, (uint16_t)(0x80 | (bits >> i & 1)), 5, 1), m68k_write(&m.cpu, 0x80017A, (uint16_t)(0xC0 | (bits >> i & 1)), 5, 1);
+    for (int i = 0; i < 17; i++) {  /* the dummy 0, then 16 bits */
+        v = v << 1 | (m68k_read(&m.cpu, 0x80017A, 5, 3) & 1);
+        m68k_write(&m.cpu, 0x80017A, 0x80, 5, 1), m68k_write(&m.cpu, 0x80017A, 0xC0, 5, 1);
+    }
+    assert(v == 0x1234);
+    assert(m.cpsb[0x3A >> 1] == 0);  /* the port is the EEPROM's, not a CPS-B register */
+    prog_game.init = CPS1_INIT_NONE;
+}
+
 /* ---- the 93C46 serial EEPROM ---- */
 
 static uint64_t ee_now;  /* microseconds */
@@ -1196,6 +1226,8 @@ int main(void) {
     test_qsound_bank();
     test_qsound_needs_zip();
     test_qsound_eeprom_state();
+    test_pang3_decrypt();
+    test_pang3_eeprom();
     puts("cps1_tests: ok");
     return 0;
 }
