@@ -28,3 +28,50 @@ target_link_libraries(cps1_headless PRIVATE cps1core cps1_recomp_none)
 if(FRONTEND)
     frontend_system(cps1 cps1core cps1_recomp_none)
 endif()
+
+# cps1recomp: the 68000 recompiler, on the shared core (cpu/m68k/m68k_recomp.c).
+add_executable(cps1recomp recomp/main.c)
+target_link_libraries(cps1recomp PRIVATE cps1core cps1_recomp_none m68k_templates)
+
+# cps1_recompile(NAME ZIP) generates ${GEN_DIR}/NAME.c with cps1recomp and
+# builds NAME_headless (and NAME with the frontend), which open the zip at
+# start (a clone's: its parent's zip beside it). AUTO_HINTS: the game is
+# first traced in the interpreter with the scripted play of cps1_headless
+# --play (cps1_headless --misses), so the code that session reached is
+# recompiled; once per zip. NAME.misses next to the program: code your own
+# sessions interpreted; always passed to cps1recomp, so playing and
+# rebuilding recompiles what you reached.
+function(cps1_recompile name zip)
+    set(out ${GEN_DIR}/${name}.c)
+    set(args "")
+    set(trace "")
+    if(AUTO_HINTS)
+        set(trace ${GEN_DIR}/${name}.trace)
+        add_custom_command(
+            OUTPUT ${trace}
+            COMMAND cps1_headless "${zip}" --frames ${AUTO_HINTS_FRAMES} --play --misses ${trace}
+            DEPENDS "${zip}"  # not cps1_headless: runtime changes do not re-trace every game
+            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+            COMMENT "Tracing ${name} in the interpreter (${AUTO_HINTS_FRAMES} frames)")
+        list(APPEND args --misses ${trace})
+    endif()
+    set(played ${CMAKE_BINARY_DIR}/${name}.misses)
+    if(NOT EXISTS ${played})
+        file(TOUCH ${played})
+    endif()
+    list(APPEND args --misses ${played})
+    add_custom_command(
+        OUTPUT ${out}
+        COMMAND cps1recomp "${zip}" -o ${out} ${args}
+        DEPENDS "${zip}" ${trace} ${played} cps1recomp
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMENT "Recompiling ${name}")
+    add_library(${name}_code STATIC ${out})
+    target_link_libraries(${name}_code PUBLIC cps1core)
+    add_executable(${name}_headless ${CMAKE_SOURCE_DIR}/systems/cps1/tests/cps1_headless.c)
+    target_link_libraries(${name}_headless PRIVATE cps1core ${name}_code)
+    if(FRONTEND)
+        frontend(${name} cps1)
+        target_link_libraries(${name} PRIVATE cps1core ${name}_code)
+    endif()
+endfunction()

@@ -15,6 +15,7 @@ static const char SETTINGS[] = "";
 static Cps1 machine;
 static Cps1Rom rom;
 static int loaded;
+static char misses_path[1024];  /* a recompiled game's NAME.misses, next to the program */
 
 static int sys_setting(const char *key, const char *value) { (void)key, (void)value; return 0; }
 
@@ -33,6 +34,10 @@ static int sys_open(const char *path, const Settings *settings, SysInfo *info, c
     const Cps1Game *g = rom.game;
     loaded = 1;
     cps1_init(&machine, &rom);
+#ifdef APP_NAME
+    SDL_snprintf(misses_path, sizeof misses_path, "%s%s.misses", SDL_GetBasePath(), APP_NAME);
+#endif
+    if (machine.recomp_on && settings->record_misses) machine.misses = SDL_calloc(rom.size[CPS1_R_MAIN] / 2 + 1, 1);
     snprintf(info->name, sizeof info->name, "%s", g->title);
     snprintf(info->tag, sizeof info->tag, "%s", g->id);
     size_t n = strlen(path);
@@ -49,7 +54,32 @@ static int sys_open(const char *path, const Settings *settings, SysInfo *info, c
     return 0;
 }
 
-static void sys_reset(void) { cps1_init(&machine, &rom); }
+static void sys_reset(void) {
+    uint8_t *misses = machine.misses;  /* the session's, kept */
+    cps1_init(&machine, &rom);
+    machine.misses = misses;
+}
+
+/* NAME.misses: the file's lines and this session's; rewritten only when the
+ * session found new code, so the next build does not recompile for nothing. */
+static void save_misses(void) {
+    uint32_t n = rom.size[CPS1_R_MAIN] / 2, fresh = 0;
+    for (uint32_t i = 0; i < n; i++) fresh += machine.misses[i];
+    FILE *f = fopen(misses_path, "r");
+    char line[64];
+    unsigned pc;
+    while (f && fgets(line, sizeof line, f)) {
+        if (sscanf(line, "MISS $%x", &pc) != 1 || pc / 2 >= n) continue;
+        if (machine.misses[pc / 2] == 1) fresh--;  /* known already */
+        machine.misses[pc / 2] = 2;
+    }
+    if (f) fclose(f);
+    if (!fresh) return;
+    if (!(f = fopen(misses_path, "w"))) { SDL_Log("%s: cannot write", misses_path); return; }
+    for (uint32_t i = 0; i < n; i++)
+        if (machine.misses[i]) fprintf(f, "MISS $%06X\n", (unsigned)i * 2);
+    fclose(f);
+}
 
 static int sys_frame(const InputFrame *in, uint32_t *rgb, float *samples, int max) {
     static int16_t snd[CPS1_SND_BUF];
@@ -72,6 +102,9 @@ static int sys_state_save(const char *path) { return cps1_state_save(&machine, p
 static int sys_state_load(const char *path, char *err, size_t len) { return cps1_state_load(&machine, path, err, len) ? -1 : 0; }
 static const char *sys_key(int key, char *buf, size_t len) { (void)key, (void)buf, (void)len; return NULL; }
 static void sys_close(void) {
+    if (machine.misses && *misses_path) save_misses();
+    SDL_free(machine.misses);
+    machine.misses = NULL;
     if (loaded) cps1_unload(&rom), loaded = 0;
 }
 
