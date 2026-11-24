@@ -110,6 +110,7 @@ Run the same command on your own folder to see what yours lacks.
 | 3wonders | Three Wonders (World 910520) |  | boot-tested |
 | 3wondersr1 | Three Wonders (World 910513) | 3wonders | boot-tested |
 | 3wondersu | Three Wonders (USA 910520) | 3wonders | boot-tested (as 3wonderu.zip) |
+| wonder3 | Wonder 3 (Japan 910520) | 3wonders | boot-tested |
 | 3wondersb | Three Wonders (bootleg) | 3wonders | boot-tested |
 | 3wondersh | Three Wonders (hack) | 3wonders | boot-tested (as 3wonderh.zip) |
 | kod | The King of Dragons (World 910805) |  | boot-tested |
@@ -137,11 +138,12 @@ Run the same command on your own folder to see what yours lacks.
 | sf2ceja | Street Fighter II': Champion Edition (Japan 920322) | sf2ce | boot-tested |
 | sf2cejb | Street Fighter II': Champion Edition (Japan 920513) | sf2ce | boot-tested (as sf2cej.zip) |
 | sf2cejc | Street Fighter II': Champion Edition (Japan 920803) | sf2ce | boot-tested |
+| sf2cebltw | Street Fighter II': Champion Edition ('Taiwan' bootleg with PAL) | sf2ce | no zip |
 | sf2red | Street Fighter II': Champion Edition (Red Wave, bootleg, set 1) | sf2ce | boot-tested |
+| sf2redp2 | Street Fighter II': Champion Edition (Red Wave PtII, bootleg) | sf2ce | no zip |
 | sf2v004 | Street Fighter II': Champion Edition (V004, bootleg) | sf2ce | boot-tested |
 | sf2acc | Street Fighter II': Champion Edition (Accelerator!, bootleg, set 1) | sf2ce | boot-tested |
 | sf2acca | Street Fighter II': Champion Edition (Accelerator!, bootleg, set 2) | sf2ce | boot-tested |
-| sf2cebltw | Street Fighter II': Champion Edition ('Taiwan' bootleg with PAL) | sf2ce | no zip |
 | sf2m3 | Street Fighter II': Champion Edition (M3, bootleg) | sf2ce | boot-tested |
 | sf2ceupl | Street Fighter II': Champion Edition (Japan 920322, UPL bootleg?) | sf2ce | no zip |
 | cworld2j | Adventure Quiz Capcom World 2 (Japan 920611) |  | boot-tested |
@@ -168,6 +170,7 @@ Run the same command on your own folder to see what yours lacks.
 |---|---|---|
 | 3wondersbi | Three Wonders (Italian bootleg) | a ROM layout the loader cannot express |
 | captcommb | Captain Commando (bootleg) | a ROM layout the loader cannot express |
+| cps1mult | CPS1 Multi Game | its own init (init_cps1mult) |
 | dino | Cadillacs and Dinosaurs (World 930201) | P7 (Q-Sound) |
 | dinoa | Cadillacs and Dinosaurs (Asia TW 930223) | P7 (Q-Sound) |
 | dinohunt | Dinosaur Hunter (Chinese bootleg of Cadillacs and Dinosaurs) | its own init (init_dinohunt) |
@@ -245,4 +248,3 @@ Run the same command on your own folder to see what yours lacks.
 | wofj | Tenchi wo Kurau II: Sekiheki no Tatakai (Japan 921031) | P7 (Q-Sound) |
 | wofr1 | Warriors of Fate (World 921002) | P7 (Q-Sound) |
 | wofu | Warriors of Fate (USA 921031) | P7 (Q-Sound) |
-| wonder3 | Wonder 3 (Japan 910520) | a ROM layout the loader cannot express |
