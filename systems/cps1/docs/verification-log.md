@@ -5,6 +5,70 @@ reproducible check is not "verified".
 
 Checks of shared parts: [docs/verification-log.md](../../../docs/verification-log.md).
 
+## 2026-11-24 · P5 · the table from MAME's list, not the folder
+- **The table**: every set of MAME 0.289's `cps1.cpp` on the plain boards
+  (147), MAME's chips and CRCs, whatever the folder holds; 18 more are left
+  out for a layout the loader cannot express (bootlegs' ROM_CONTINUE,
+  ROM_LOAD32), listed in [compatibility](compatibility.md) with the
+  Q-Sound, P8 and own-init sets.
+- **Audit** (`tools/cps1_audit.py` on the folder, after taking 37 zips from
+  CPS-new): 112 sets whole (some in a zip named otherwise), 8 with chips
+  missing (mostly a zip holding another revision than its name:
+  `forgottn.zip` is `forgottnua`, `willow.zip` is `willowu`), 27 without
+  a zip.
+- **Boot test** (`TestBoot`): every zip in the folder that opens as a
+  table set, 3,000 frames of `--play`: a picture, none halted. A MAME split
+  clone (`sf2ua.zip`, 17 of 23 chips from `sf2.zip`) runs
+  (`test_split_clone`).
+
+## 2026-11-24 · P5 · every plain-board set in the new folder
+- **The folder**: rebuilt from a MAME split set (CPS-new) and the old
+  folders, by CRC against MAME 0.289; the old contents kept in
+  `D:\roms\_old-cps`. All 21 earlier games are recognised in the new zips;
+  `cworld2j.zip` is the old one (the new lacks chip q5_35).
+- **The table**: generated over the whole folder: 67 sets. A zip counts
+  as a set when every chip is there by CRC (or as another dump under the
+  chip's name, as cworld2j's `q535.bin`), with its parent's zip.
+- **Revision E of Street Fighter II** (`sf2ue`): stopped on "CPS NG": its
+  B-board maps the CPS-B at $8001C0 (MAME's `init_sf2ee`); now mapped
+  there (`cps1_tests`: `test_cpsb_high`).
+- **Boot test**: the 67 games, 3,000 frames of `--play`: each shows a
+  picture and none halts.
+- **Left out, with the reason**: 10 bootlegs needing MAME's `init_sf2hack`
+  / `init_sf2rb` / `init_sf2rb2`; `captcomb`, `daimakr2`, `wofhfh` (a chip
+  loaded in part); `sf2accp2`, `sf2rb3` (a black screen).
+
+## 2026-11-24 · P5 · the plain-board games
+- **Which set each zip is**: every zip's CRCs against MAME 0.289's sets
+  (leaving out the PAL dumps, whose versions differ): 20 match a set
+  whole; cworld2j differs in one chip (another dump; its own CRC is
+  used); sf2hf holds 7 chips and takes 15 from sf2ce.zip; captcomu holds
+  4 of 15, its parent captcomm.zip is not in the set.
+- **The table**: generated from MAME's layouts, configs, mappers and DIP
+  defaults with the zips' CRCs; the generator checks it read as many
+  chips as each region lists (a first run had dropped 4 chips of willow
+  and kod, behind block comments).
+- **Self-checks** (`cps1_tests`): the 8-bit graphics layout, a mapper
+  larger than the ROM, flip screen, a star at its place and colour, a
+  picture turned for a vertical monitor, a 12 MHz frame (768 clocks a
+  line, VBlank and the sound unchanged), the extra port as player 3 and
+  as kicks, DIP defaults, the dial (+60 in 3 frames, back past zero),
+  a clone loading from its parent's zip or naming it when it is missing,
+  the zip matching two games taking the one with more of its own files.
+- **Boot test** (`TestBoot`): 21 games, 1,800 frames of `--play`: each
+  shows a picture of 8 or more colours (dynwar's frame is its text intro)
+  and none halts.
+- **Against MAME** (its snapshots at frame 1,800, a coin at 300 and Start
+  at 1,300 as `--play`; the sets MAME refuses for missing PAL dumps run
+  from copies with placeholder files): cawing, dynwar, forgottn, ghouls,
+  knights, mercs, msword, nemo, strider, unsquad, varth and willow show the
+  same picture; 1941, 3wonders, cworld2j, ffight, kod, mtwins and the
+  Street Fighter IIs the same game at another moment (the CPUs' timing is
+  not MAME's; the Street Fighter IIs: our `--play` presses button 1, which
+  picks a fighter). Ghouls'n Ghosts' grey castle is MAME's too.
+- **Not checked**: each game played by hand; three players; the dial by
+  hand.
+
 ## 2026-11-24 · P4 · the window, detection, save states
 - **Save states** (`cps1_tests`): a state with a sound command pending,
   loaded into a second machine, gives the same 20 frames and samples; a

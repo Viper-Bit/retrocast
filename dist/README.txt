@@ -49,7 +49,8 @@ Genesis pad: A, B, C = keyboard A, Z, X (gamepad West, South, East);
 X, Y, Z = Q, S, W (left shoulder, North, right shoulder); Mode = Right Shift.
 Master System pad: button 1 = Z, button 2 = X, Pause = Enter.
 CPS-1: buttons 1, 2, 3 = Z, X, S (gamepad South, East, North); a coin =
-Right Shift (Back); Start = Enter.
+Right Shift (Back); Start = Enter; Street Fighter II's kicks = A, Q, W;
+Forgotten Worlds' dial = Q, W.
 Settings are in nes.ini / gb.ini / genesis.ini / atari2600.ini /
 mastersystem.ini / cps1.ini next to
 retrocast, one per system, created on first run.

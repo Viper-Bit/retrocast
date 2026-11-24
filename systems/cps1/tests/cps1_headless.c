@@ -64,14 +64,11 @@ int main(int argc, char **argv) {
     size_t size;
     uint8_t *data = read_file(path, &size);
     if (!data) return fprintf(stderr, "%s: cannot read\n", path), 1;
-    Zip z;
-    const Cps1Game *g = zip_open(&z, data, size) ? NULL : cps1_match(&z);
-    if (!g) return fprintf(stderr, "%s: not a CPS-1 game this program knows\n", path), 1;
     Cps1Rom rom;
-    char err[256];
-    if (cps1_load(g, &z, &rom, err, sizeof err)) return fprintf(stderr, "%s\n", err), 1;
-    zip_close(&z);
+    char err[512];
+    if (cps1_open(path, data, size, &rom, err, sizeof err)) return fprintf(stderr, "%s\n", err), 1;
     free(data);
+    const Cps1Game *g = rom.game;
 
     cps1_init(&machine, &rom);
     if (state_in && cps1_state_load(&machine, state_in, err, sizeof err)) return fprintf(stderr, "%s\n", err), 2;
@@ -98,9 +95,12 @@ int main(int argc, char **argv) {
     if (ppm) {
         FILE *f = fopen(ppm, "wb");
         if (!f) return perror(ppm), 1;
-        fprintf(f, "P6\n%d %d\n255\n", CPS1_WIDTH, CPS1_HEIGHT);
+        static uint32_t rgb[CPS1_WIDTH * CPS1_HEIGHT];
+        int w, h;
+        cps1_picture(&machine, rgb, &w, &h);  /* turned for a vertical monitor */
+        fprintf(f, "P6\n%d %d\n255\n", w, h);
         for (int i = 0; i < CPS1_WIDTH * CPS1_HEIGHT; i++) {
-            uint32_t c = cps1_color(&machine, machine.frame[i]);
+            uint32_t c = rgb[i];
             uint8_t px[3] = {(uint8_t)(c >> 16), (uint8_t)(c >> 8), (uint8_t)c};
             fwrite(px, 1, 3, f);
         }

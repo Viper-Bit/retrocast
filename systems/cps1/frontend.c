@@ -24,13 +24,10 @@ static int sys_open(const char *path, const Settings *settings, SysInfo *info, c
     size_t size = 0;
     uint8_t *data = SDL_LoadFile(path, &size);
     if (!data) return snprintf(err, errlen, "%s: %s", path, SDL_GetError()), 1;
-    Zip z;
-    const Cps1Game *g = zip_open(&z, data, size) ? NULL : cps1_match(&z);
-    int bad = !g ? (snprintf(err, errlen, "%s: not a CPS-1 game this program knows", path), 1)
-                 : cps1_load(g, &z, &rom, err, errlen);
-    if (g) zip_close(&z);
+    int bad = cps1_open(path, data, size, &rom, err, errlen);
     SDL_free(data);
     if (bad) return 1;
+    const Cps1Game *g = rom.game;
     loaded = 1;
     cps1_init(&machine, &rom);
     snprintf(info->name, sizeof info->name, "%s", g->title);
@@ -38,10 +35,12 @@ static int sys_open(const char *path, const Settings *settings, SysInfo *info, c
     size_t n = strlen(path);
     int ext = n > 4 && !SDL_strcasecmp(path + n - 4, ".zip") ? 4 : 0;
     snprintf(info->state_path, sizeof info->state_path, "%.*s.state", (int)(n - (size_t)ext), path);
-    info->width = info->cols = CPS1_WIDTH;
-    info->height = info->lines = CPS1_HEIGHT;
+    int turned = g->rotate == 270;  /* a vertical monitor */
+    info->width = info->cols = turned ? CPS1_HEIGHT : CPS1_WIDTH;
+    info->height = info->lines = turned ? CPS1_WIDTH : CPS1_HEIGHT;
     info->fps = 8000000.0 / 512 / CPS1_LINES;  /* 59.64 */
-    info->aspect = (4.0 / 3) / ((double)CPS1_WIDTH / CPS1_HEIGHT);  /* the picture fills a 4:3 monitor */
+    info->aspect = turned ? (3.0 / 4) / ((double)CPS1_HEIGHT / CPS1_WIDTH)  /* the picture fills a 4:3 monitor */
+                          : (4.0 / 3) / ((double)CPS1_WIDTH / CPS1_HEIGHT);
     info->sample_rate = CPS1_SAMPLE_RATE;
     info->channels = 1;
     return 0;
@@ -54,7 +53,8 @@ static int sys_frame(const InputFrame *in, uint32_t *rgb, float *samples, int ma
     cps1_set_input(&machine, 0, in->pad[0]);
     cps1_set_input(&machine, 1, in->pad[1]);
     cps1_frame(&machine);
-    for (int i = 0; i < CPS1_WIDTH * CPS1_HEIGHT; i++) rgb[i] = cps1_color(&machine, machine.frame[i]);
+    int w, h;
+    cps1_picture(&machine, rgb, &w, &h);
     int n = cps1_take_sound(&machine, snd, max < CPS1_SND_BUF ? max : CPS1_SND_BUF);
     for (int i = 0; i < n; i++) samples[i] = snd[i] / 32768.0f;
     return n;

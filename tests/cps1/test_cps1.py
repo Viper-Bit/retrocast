@@ -84,6 +84,29 @@ class TestHeadless(unittest.TestCase):
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             self.assertEqual(open(a, "rb").read(), open(b, "rb").read())
 
+    @unittest.skipUnless(all(os.path.exists(os.path.join(SET, z)) for z in ("sf2ua.zip", "sf2.zip")), "no sf2ua.zip and sf2.zip in " + SET)
+    def test_split_clone(self):  # a MAME split clone: 17 of its 23 chips from sf2.zip beside it
+        r = subprocess.run([RUNNER, os.path.join(SET, "sf2ua.zip"), "--frames", "1500"], capture_output=True, text=True, timeout=300)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        self.assertGreaterEqual(int(re.search(r"colours=(\d+)", r.stdout).group(1)), 16, r.stdout)
+
+
+
+
+@built(RUNNER, "build the CPS-1 headless program first")
+@unittest.skipUnless(os.path.isdir(SET), "no CPS-1 set in " + SET)
+class TestBoot(unittest.TestCase):
+    def test_games_show_a_picture(self):  # each zip in the set that is a whole game of the table, 3,000 frames of --play
+        for z in sorted(f for f in os.listdir(SET) if f.endswith(".zip")):
+            path = os.path.join(SET, z)
+            with self.subTest(zip=z):
+                r = subprocess.run([RUNNER, path, "--frames", "3000", "--play"], capture_output=True, text=True, timeout=300)
+                if re.search(r"not a CPS-1 game|is missing|needs \S+ beside it", r.stderr):
+                    continue  # not one of the table's sets, or not whole: tools/cps1_audit.py lists it
+                self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+                self.assertNotIn("halted", r.stdout)
+                self.assertGreaterEqual(int(re.search(r"colours=(\d+)", r.stdout).group(1)), 8, r.stdout)  # dynwar: its text intro
+
 
 if __name__ == "__main__":
     unittest.main()
