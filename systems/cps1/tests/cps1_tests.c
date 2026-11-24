@@ -119,7 +119,7 @@ static void test_missing(void) {
     char err[128] = "";
     zip_test_game(2);
     assert(zip_open(&z, zbuf, zlen) == 0);
-    assert(cps1_match_in(&z, &test_game, 1) == NULL);
+    assert(cps1_match_in(&z, &test_game, 1) == &test_game);  /* most of its own chips: still known, the rest looked for */
     assert(cps1_load(&test_game, &z, &r, err, sizeof err) == -1);
     char crc[16];
     snprintf(crc, sizeof crc, "%08x", (unsigned)test_game.files[2].crc);
@@ -779,6 +779,31 @@ static void test_clone_parent(void) {
     remove("cps1_clone.zip"), remove("cps1_par.zip");
 }
 
+static void test_chip_elsewhere(void) {  /* an own chip the zip lacks, found by CRC in another zip of the folder */
+    static uint8_t a[4] = {1, 2, 3, 4}, b[4] = {5, 6, 7, 8}, c[4] = {9, 10, 11, 12};
+    static Cps1Game g = {"cps1_lack", "Lack", CPS1_PLAIN, {12, 0, 0, 0}, {0}, 3, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0};
+    g.files[0] = (Cps1File){zip_crc32(a, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0};
+    g.files[1] = (Cps1File){zip_crc32(b, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 4, 0};
+    g.files[2] = (Cps1File){zip_crc32(c, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 8, 0};
+    zcount = 0, zip_add("a", a, 4), zip_add("b", b, 4), zip_build();
+    static uint8_t mine[256];
+    size_t len = zlen;
+    memcpy(mine, zbuf, zlen);
+    Cps1Rom r;
+    char err[256] = "";
+    remove("cps1_other.zip");
+    assert(cps1_open_in("cps1_lack.zip", mine, len, &g, 1, &r, err, sizeof err) == -1);
+    char crc[16];
+    snprintf(crc, sizeof crc, "%08x", (unsigned)g.files[2].crc);
+    assert(strstr(err, crc));
+    zcount = 0, zip_add("whatever.bin", c, 4), zip_build(), write_zip("cps1_other.zip");
+    assert(cps1_open_in("cps1_lack.zip", mine, len, &g, 1, &r, err, sizeof err) == 0);
+    static const uint8_t want[12] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+    assert(memcmp(r.region[CPS1_R_MAIN], want, 12) == 0);
+    cps1_unload(&r);
+    remove("cps1_other.zip");
+}
+
 static void test_match_order(void) {  /* a zip two games match: the one with more of its own files */
     static uint8_t a[4] = {9, 9, 9, 1}, b[4] = {9, 9, 9, 2};
     static Cps1Game two[2] = {
@@ -903,6 +928,7 @@ int main(void) {
     test_dial();
     test_clone_parent();
     test_match_order();
+    test_chip_elsewhere();
     test_state_roundtrip();
     test_state_refused();
     puts("cps1_tests: ok");

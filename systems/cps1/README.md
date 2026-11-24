@@ -13,13 +13,8 @@ without a window.
   tested, which are not supported yet and why:
   [compatibility](docs/compatibility.md). What your folder lacks:
   `python tools/cps1_audit.py FOLDER`.
-- **Clone zips**: a zip holding only a clone's own chips takes the rest
-  from its parent's zip beside it (MAME's split sets: `sf2ua.zip` from `sf2.zip`); merged zips work too.
-  `captcomu.zip` (Captain Commando, USA) needs `captcomm.zip`, which the
-  set here lacks.
-- **Zips**: read by `core/zip.c` (our own inflate); a game is matched by the
-  CRCs and sizes of its files, so names, PAL dumps and the clones of a
-  merged set do not matter.
+- **Zips**: read by `core/zip.c` (our own inflate); how a game is found
+  and loaded: [Loading a game](#loading-a-game).
 - **CPUs**: the shared 68000 and Z80 (`cpu/m68k`, `cpu/z80`), their own
   copies (`cps1_` prefix) so they and the Genesis and Master System fit in
   one program; the Z80 runs line by line after the 68000.
@@ -36,8 +31,8 @@ without a window.
   flip screen, vertical monitors (1941, Mercs, Varth turned as MAME does).
   The frame is drawn at once from VBlank's state, as MAME draws it (the
   CPS-1 has no raster interrupt).
-- **Detection**: a zip holding every file of a game in the table, by CRC
-  and size, in `retrocast` and in the build (`cmake/detect_system.cmake`
+- **Detection**: a zip holding at least half of a game's own files, by CRC
+  and size, in `retrocast`; in the build (`cmake/detect_system.cmake`
   reads the table from `games.c`).
 - **Save states**: F2 / F4 (`GAME.state` next to the zip), refused for
   another game or version.
@@ -50,6 +45,35 @@ without a window.
   `ffight_headless ZIP --diff` runs the interpreter in lockstep and stops at
   the first difference. The Z80 is interpreted.
 - **Not yet**: DIP switch settings (their defaults).
+
+## Loading a game
+MAME's set list is the reference for which games exist and what each
+chip's CRC is; its strictness is not. A dump that works keeps working,
+whatever its zip is called and whichever MAME release it was made for:
+
+1. **The zip's set**: found by the CRCs and sizes of the chips in it, not by
+   names. A zip holding at least half of a set's own chips is that set;
+   a whole set wins over a partial one, and where a zip holds several
+   (a merged set), the set named like the zip.
+2. **Only the chips the machine reads**: program, graphics, sound. PAL
+   dumps and other files MAME lists but never reads are not asked for, so
+   an older dump is not refused for lacking them.
+3. **A chip the zip lacks** is looked for by CRC, in this order: the
+   parent's zip beside it (`sf2.zip` for `sf2ua.zip`, MAME's split sets),
+   then every other zip in the same folder, whatever it is called.
+   Versions of a game share most chips, so a partial zip often plays from
+   what the folder already holds. The search stops at the first zip that
+   completes the set.
+4. **Still missing**: the game does not start, and the message names the
+   first missing chip's CRC and the parent's zip.
+
+`python tools/cps1_audit.py FOLDER` lists which sets a folder holds whole,
+partly or not at all, by the same rules. `python tools/cps1_fix.py DIR...
+--to OUT` copies zips into OUT under MAME 0.289's names, adding to each
+the chips it lacked from the other zips (so the copies work in MAME as
+well, PAL dumps aside); it overwrites nothing whole. With `--whole`, each
+copy also holds its parent's chips (MAME's non-merged sets): every zip
+plays alone, in any folder.
 
 ## Controls and settings
 Both players: buttons 1, 2, 3 on the pad's B, A and X (keyboard Z, X, S;

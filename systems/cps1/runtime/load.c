@@ -5,23 +5,32 @@
 
 #include "cps1.h"
 
-/* The number of the game's own files, if all are in the zip; else 0. */
-static int own_files(const Zip *z, const Cps1Game *g) {
-    int n = 0;
+#ifdef _WIN32
+#include <windows.h>
+#else
+#include <dirent.h>
+#include <strings.h>
+#endif
+
+/* How many of the game's own files the zip holds (*all: every one). */
+static int own_files(const Zip *z, const Cps1Game *g, int *all) {
+    int n = 0, total = 0;
     for (int i = 0; i < g->nfiles; i++) {
         if (g->files[i].from_parent) continue;
-        if (!zip_find_crc(z, g->files[i].crc, g->files[i].size)) return 0;
-        n++;
+        total++;
+        n += zip_find_crc(z, g->files[i].crc, g->files[i].size) != NULL;
     }
-    return n;
+    if (all) *all = n == total;
+    return n * 2 >= total && n ? n : 0;  /* under half its own files: not this game */
 }
 
+/* The game the zip holds most of: whole ones first (the rest of a partial one is looked for in the folder). */
 const Cps1Game *cps1_match_in(const Zip *z, const Cps1Game *games, int n) {
     const Cps1Game *best = NULL;
-    int most = 0;
+    int most = 0, best_all = 0;
     for (int i = 0; i < n; i++) {
-        int k = own_files(z, &games[i]);
-        if (k > most) most = k, best = &games[i];
+        int all, k = own_files(z, &games[i], &all);
+        if (k && (all > best_all || (all == best_all && k > most))) most = k, best_all = all, best = &games[i];
     }
     return best;
 }
@@ -40,7 +49,7 @@ static uint32_t place(const Cps1File *f, uint32_t i) {
     }
 }
 
-static int load_from(const Cps1Game *g, const Zip *z, const Zip *pz, Cps1Rom *r, char *err, size_t errlen) {
+static int alloc_regions(const Cps1Game *g, Cps1Rom *r, char *err, size_t errlen) {
     memset(r, 0, sizeof *r);
     r->game = g;
     for (int k = 0; k < CPS1_REGIONS; k++) {
@@ -50,29 +59,38 @@ static int load_from(const Cps1Game *g, const Zip *z, const Zip *pz, Cps1Rom *r,
             return cps1_unload(r), -1;
         }
     }
+    return 0;
+}
+
+/* Places each chip not yet done[] that z holds, by CRC, whatever its name; -1 (err set) when one is damaged. */
+static int take(const Cps1Game *g, const Zip *z, Cps1Rom *r, char *done, char *err, size_t errlen) {
     for (int i = 0; i < g->nfiles; i++) {
         const Cps1File *f = &g->files[i];
-        const Zip *from = z;  /* a merged zip holds its parent's chips too */
-        const ZipEntry *e = zip_find_crc(z, f->crc, f->size);
-        if (!e && f->from_parent && pz) e = zip_find_crc(from = pz, f->crc, f->size);
-        uint8_t *chip = e ? malloc(f->size) : NULL;
-        if (!e || !chip || zip_read(from, e, chip)) {
-            snprintf(err, errlen, "%s: the file with CRC %08x is %s", g->id, (unsigned)f->crc, e ? "damaged" : "missing");
-            free(chip);
-            return cps1_unload(r), -1;
+        const ZipEntry *e = done[i] ? NULL : zip_find_crc(z, f->crc, f->size);
+        if (!e) continue;
+        uint8_t *chip = malloc(f->size);
+        if (!chip || zip_read(z, e, chip)) {
+            snprintf(err, errlen, "%s: the file with CRC %08x is damaged", g->id, (unsigned)f->crc);
+            return free(chip), -1;
         }
         for (uint32_t b = 0; b < f->size; b++) {
             uint32_t at = place(f, b);
             if (at >= r->size[f->region]) {
                 snprintf(err, errlen, "%s: the file with CRC %08x does not fit its region", g->id, (unsigned)f->crc);
-                free(chip);
-                return cps1_unload(r), -1;
+                return free(chip), -1;
             }
             r->region[f->region][at] = chip[b];
         }
         free(chip);
+        done[i] = 1;
     }
     return 0;
+}
+
+static int missing(const Cps1Game *g, const char *done) {
+    for (int i = 0; i < g->nfiles; i++)
+        if (!done[i]) return i;
+    return -1;
 }
 
 void cps1_unload(Cps1Rom *r) {
@@ -81,49 +99,93 @@ void cps1_unload(Cps1Rom *r) {
 }
 
 int cps1_load(const Cps1Game *g, const Zip *z, Cps1Rom *r, char *err, size_t errlen) {
-    return load_from(g, z, NULL, r, err, errlen);
+    char done[sizeof ((Cps1Game *)0)->files / sizeof (Cps1File)] = {0};
+    if (alloc_regions(g, r, err, errlen) || take(g, z, r, done, err, errlen)) return cps1_unload(r), -1;
+    int i = missing(g, done);
+    if (i < 0) return 0;
+    snprintf(err, errlen, "%s: the file with CRC %08x is missing", g->id, (unsigned)g->files[i].crc);
+    return cps1_unload(r), -1;
+}
+
+/* take() from the zip at path; -1 when a chip there is damaged. */
+static int take_path(const char *path, const Cps1Game *g, Cps1Rom *r, char *done, char *err, size_t errlen) {
+    FILE *f = fopen(path, "rb");
+    long n = -1;
+    uint8_t *data = NULL;
+    Zip z;
+    int bad = 0;
+    if (f && !fseek(f, 0, SEEK_END)) n = ftell(f);
+    if (f && n > 0 && !fseek(f, 0, SEEK_SET) && (data = malloc((size_t)n)) && fread(data, 1, (size_t)n, f) == (size_t)n &&
+        !zip_open(&z, data, (size_t)n)) {
+        bad = take(g, &z, r, done, err, errlen);
+        zip_close(&z);
+    }
+    if (f) fclose(f);
+    free(data);
+    return bad;
+}
+
+/* take_path() on each .zip of dir but skip1 and skip2, until no chip is missing. */
+static int take_folder(const char *dir, const char *skip1, const char *skip2, const Cps1Game *g, Cps1Rom *r, char *done,
+                       char *err, size_t errlen) {
+    char p[1024];
+    int bad = 0;
+#ifdef _WIN32
+    WIN32_FIND_DATAA d;
+    snprintf(p, sizeof p, "%s*.zip", *dir ? dir : "./");
+    HANDLE h = FindFirstFileA(p, &d);
+    if (h == INVALID_HANDLE_VALUE) return 0;
+    do {
+        snprintf(p, sizeof p, "%s%s", dir, d.cFileName);
+        if (_stricmp(p, skip1) && _stricmp(p, skip2)) bad = take_path(p, g, r, done, err, errlen);
+    } while (!bad && missing(g, done) >= 0 && FindNextFileA(h, &d));
+    FindClose(h);
+#else
+    DIR *dd = opendir(*dir ? dir : ".");
+    struct dirent *e;
+    while (dd && !bad && missing(g, done) >= 0 && (e = readdir(dd))) {
+        size_t n = strlen(e->d_name);
+        if (n < 4 || strcasecmp(e->d_name + n - 4, ".zip")) continue;
+        snprintf(p, sizeof p, "%s%s", dir, e->d_name);
+        if (strcmp(p, skip1) && strcmp(p, skip2)) bad = take_path(p, g, r, done, err, errlen);
+    }
+    if (dd) closedir(dd);
+#endif
+    return bad;
 }
 
 int cps1_open_in(const char *path, const uint8_t *data, size_t size, const Cps1Game *games, int n, Cps1Rom *r,
                  char *err, size_t errlen) {
-    Zip z, pz;
+    Zip z;
     const Cps1Game *g = zip_open(&z, data, size) ? NULL : cps1_match_in(&z, games, n);
     size_t base = strlen(path), end;
     while (base && path[base - 1] != '/' && path[base - 1] != '\\') base--;
     end = strlen(path) > base + 4 ? strlen(path) - 4 : base;
     for (int i = 0; g && i < n; i++)  /* a merged zip matches its clones too: the set named like the zip */
-        if (strlen(games[i].id) == end - base && !strncmp(games[i].id, path + base, end - base) && own_files(&z, &games[i])) g = &games[i];
+        if (strlen(games[i].id) == end - base && !strncmp(games[i].id, path + base, end - base) && own_files(&z, &games[i], NULL)) g = &games[i];
     if (!g) {
         if (z.entries) zip_close(&z);
         return snprintf(err, errlen, "%s: not a CPS-1 game this program knows", path), -1;
     }
-    uint8_t *pdata = NULL;
-    int bad = 0;
-    int need_parent = 0;
-    for (int i = 0; g->parent && i < g->nfiles; i++)
-        need_parent |= g->files[i].from_parent && !zip_find_crc(&z, g->files[i].crc, g->files[i].size);
-    if (need_parent) {  /* "<folder>/<parent>.zip" */
-        char ppath[1024];
-        size_t dir = strlen(path);
-        while (dir && path[dir - 1] != '/' && path[dir - 1] != '\\') dir--;
-        snprintf(ppath, sizeof ppath, "%.*s%s.zip", (int)dir, path, g->parent);
-        FILE *f = fopen(ppath, "rb");
-        long n2 = -1;
-        if (f && !fseek(f, 0, SEEK_END)) n2 = ftell(f);
-        if (f && n2 > 0 && !fseek(f, 0, SEEK_SET) && (pdata = malloc((size_t)n2)) && fread(pdata, 1, (size_t)n2, f) == (size_t)n2 &&
-            !zip_open(&pz, pdata, (size_t)n2)) {
-            bad = load_from(g, &z, &pz, r, err, errlen);
-            zip_close(&pz);
-        } else {
-            bad = -1;
-            snprintf(err, errlen, "%s: %s needs %s.zip beside it", path, g->id, g->parent);
-        }
-        if (f) fclose(f);
-    } else {
-        bad = load_from(g, &z, NULL, r, err, errlen);
-    }
-    free(pdata);
+    /* the zip, then "<folder>/<parent>.zip", then every zip of the folder: a chip by CRC wherever it is */
+    char done[sizeof ((Cps1Game *)0)->files / sizeof (Cps1File)] = {0}, ppath[1024] = "", dir[1024];
+    int bad = alloc_regions(g, r, err, errlen) || take(g, &z, r, done, err, errlen);
     zip_close(&z);
+    if (!bad && g->parent && missing(g, done) >= 0) {
+        snprintf(ppath, sizeof ppath, "%.*s%s.zip", (int)base, path, g->parent);
+        bad = take_path(ppath, g, r, done, err, errlen);
+    }
+    snprintf(dir, sizeof dir, "%.*s", (int)base, path);
+    if (!bad && missing(g, done) >= 0) bad = take_folder(dir, path, ppath, g, r, done, err, errlen);
+    int i = bad ? -1 : missing(g, done);
+    if (i >= 0) {
+        bad = 1;
+        if (g->parent)
+            snprintf(err, errlen, "%s: %s lacks the file with CRC %08x; its parent %s.zip, or any zip holding it, beside it", path, g->id, (unsigned)g->files[i].crc, g->parent);
+        else
+            snprintf(err, errlen, "%s: %s lacks the file with CRC %08x; any zip holding it beside it", path, g->id, (unsigned)g->files[i].crc);
+    }
+    if (bad) cps1_unload(r);
     return bad ? -1 : 0;
 }
 

@@ -1,6 +1,7 @@
 """Which of the CPS-1 sets retrocast knows (systems/cps1/runtime/games.c, MAME
 0.289's) a folder of zips holds whole, which lack chips and which are absent.
-A set's chips are found by CRC in its own zip, then its parent's (split sets).
+A set's own chips are found by CRC in its zip; the rest in any zip of the
+folder (a split clone's parent's, or another version sharing them), as the loader does.
 
     python tools/cps1_audit.py [FOLDER]        the lists, on the console
     python tools/cps1_audit.py FOLDER --md     also rewrites the supported-sets
@@ -43,9 +44,10 @@ def audit(folder):
     zips = {f[:-4]: crcs(os.path.join(folder, f)) for f in os.listdir(folder) if f.endswith(".zip")} if os.path.isdir(folder) else {}
     zips = {k: v for k, v in zips.items() if v is not None}
     games = table()
+    every = set().union(*zips.values())  # the loader takes a chip by CRC from any zip of the folder
 
-    def holds(z, files, parent):  # the zip has the set's own chips, the rest beside it in the parent's
-        have = zips[z] | zips.get(parent, set())
+    def holds(z, files, parent):  # the zip has the set's own chips, the rest anywhere in the folder
+        have = every
         return all(c in zips[z] for c, _, fp in files if not fp) and all(c in have for c, _, _ in files)
 
     sets_in = {z: [g for g, _, p, f in games if holds(z, f, p)] for z in zips}
@@ -55,7 +57,7 @@ def audit(folder):
         if at:
             out[gid] = (title, parent, "whole", [] if at[0] == gid else ["as %s.zip" % at[0]])
         elif gid in zips:
-            have = zips[gid] | zips.get(parent, set())
+            have = every
             other = sets_in[gid]
             out[gid] = (title, parent, "lacking", (["%s.zip holds %s" % (gid, ", ".join(other))] if other else []) +
                         ["missing %s (%08x)" % (n, c) for c, n, _ in files if c not in have])
