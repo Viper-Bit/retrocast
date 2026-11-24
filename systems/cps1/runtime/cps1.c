@@ -45,6 +45,8 @@ static uint16_t players(const Cps1 *s) {
         if (pad & PAD_X) b |= 0x40;  /* button 3 */
         v |= (uint16_t)(b << (p * 8));
     }
+    if (s->rom->game->extra == CPS1_EXTRA_P4)  /* Slam Masters: players 3 and 4's button 3 */
+        v |= (uint16_t)((s->pad[2] & PAD_X ? 0x0080 : 0) | (s->pad[3] & PAD_X ? 0x8000 : 0));
     return (uint16_t)~v;
 }
 
@@ -57,8 +59,23 @@ static uint8_t system_in(const Cps1 *s) {
     return (uint8_t)~v;
 }
 
+/* Player 3 or 4's port (MAME's IN2, IN3): directions, buttons 1-2, coin,
+ * start; active low. */
+static uint8_t extra_player(uint16_t pad) {
+    uint8_t v = 0;
+    if (pad & PAD_RIGHT) v |= 0x01;
+    if (pad & PAD_LEFT) v |= 0x02;
+    if (pad & PAD_DOWN) v |= 0x04;
+    if (pad & PAD_UP) v |= 0x08;
+    if (pad & PAD_B) v |= 0x10;
+    if (pad & PAD_A) v |= 0x20;
+    if (pad & PAD_SELECT) v |= 0x40;
+    if (pad & PAD_START) v |= 0x80;
+    return (uint8_t)~v;
+}
+
 /* MAME's IN2: Street Fighter II's kicks (P1 bits 0-2, P2 bits 4-6), or
- * player 3 (directions, buttons 1-2, coin 3, start 3); active low. */
+ * player 3; active low. */
 static uint16_t extra_in(const Cps1 *s) {
     uint8_t v = 0;
     if (s->rom->game->extra == CPS1_EXTRA_KICKS) {
@@ -67,18 +84,9 @@ static uint16_t extra_in(const Cps1 *s) {
             uint8_t b = (uint8_t)((pad & PAD_Y ? 1 : 0) | (pad & PAD_L ? 2 : 0) | (pad & PAD_R ? 4 : 0));
             v |= (uint8_t)(b << (p * 4));
         }
-    } else if (s->rom->game->extra == CPS1_EXTRA_P3) {
-        uint16_t pad = s->pad[2];
-        if (pad & PAD_RIGHT) v |= 0x01;
-        if (pad & PAD_LEFT) v |= 0x02;
-        if (pad & PAD_DOWN) v |= 0x04;
-        if (pad & PAD_UP) v |= 0x08;
-        if (pad & PAD_B) v |= 0x10;
-        if (pad & PAD_A) v |= 0x20;
-        if (pad & PAD_SELECT) v |= 0x40;
-        if (pad & PAD_START) v |= 0x80;
+        return (uint8_t)~v;
     }
-    return (uint8_t)~v;
+    return s->rom->game->extra >= CPS1_EXTRA_P3 ? extra_player(s->pad[2]) : 0xFF;
 }
 
 static uint16_t cpsb_read(const Cps1 *s, unsigned off) {
@@ -98,6 +106,28 @@ static void cpsb_write(Cps1 *s, unsigned off, uint16_t v) {
     s->cpsb[off >> 1] = v;
 }
 
+/* The EEPROM's clock: microseconds of 68000 time. */
+static uint64_t eeprom_now(const Cps1 *s) { return s->cpu.cycles / s->rom->game->clock_mhz; }
+
+/* The Q-Sound board's own 68000 addresses (MAME's qsound_main_map). */
+static uint16_t qsound_rd(const Cps1 *s, uint32_t a) {
+    if (a < 0xF10000)  /* Slam Masters' protection: the Z80 ROM's bytes */
+        return s->rom->z80_raw ? (uint16_t)(0xFF00 | s->rom->z80_raw[(a - 0xF00000) >> 1]) : 0;
+    if (a >= 0xF18000 && a < 0xF1A000) return (uint16_t)(0xFF00 | s->qram[0][(a - 0xF18000) >> 1]);
+    if (a >= 0xF1E000 && a < 0xF20000) return (uint16_t)(0xFF00 | s->qram[1][(a - 0xF1E000) >> 1]);
+    if (a == 0xF1C000) return s->rom->game->extra >= CPS1_EXTRA_P3 ? extra_player(s->pad[2]) : 0xFF;
+    if (a == 0xF1C002) return s->rom->game->extra == CPS1_EXTRA_P4 ? extra_player(s->pad[3]) : 0xFF;
+    if (a == 0xF1C006) return (uint16_t)eeprom_do(&s->eeprom, eeprom_now(s));
+    return 0xFFFF;
+}
+
+static void qsound_wr(Cps1 *s, uint32_t a, uint16_t v, unsigned strobe) {
+    if (!(strobe & 1)) return;  /* all on the low byte */
+    if (a < 0xF1A000) s->qram[0][(a - 0xF18000) >> 1] = (uint8_t)v;
+    else if (a >= 0xF1E000) s->qram[1][(a - 0xF1E000) >> 1] = (uint8_t)v;
+    else if (a == 0xF1C006) eeprom_write_lines(&s->eeprom, v >> 7 & 1, v >> 6 & 1, v & 1, eeprom_now(s));  /* CS, CLK, DI */
+}
+
 static uint16_t rd(Cps1 *s, uint32_t a, unsigned strobe) {
     (void)strobe;
     a &= 0xFFFFFE;
@@ -105,6 +135,7 @@ static uint16_t rd(Cps1 *s, uint32_t a, unsigned strobe) {
     if (a < 0x400000) return a + 1 < r->size[CPS1_R_MAIN] ? be16(r->region[CPS1_R_MAIN] + a) : 0xFFFF;
     if (a >= 0xFF0000) return be16(s->ram + (a & 0xFFFF));
     if (a >= 0x900000 && a < 0x930000) return be16(s->gfxram + (a - 0x900000));
+    if (a >= 0xF00000 && s->rom->game->group == CPS1_QSOUND) return qsound_rd(s, a);
     if (a == 0x800000) return players(s);
     if (a == 0x800018) return (uint16_t)(system_in(s) << 8 | 0xFF);
     if (a >= 0x80001A && a < 0x800020) return (uint16_t)(s->dip[(a - 0x80001A) >> 1] << 8 | 0xFF);
@@ -132,6 +163,7 @@ static void wr(Cps1 *s, uint32_t a, uint16_t v, unsigned strobe) {
     }
     else if (a >= 0x800180 && a < 0x800188) s->sound_cmd = (uint8_t)v;   /* P3: the Z80 reads it */
     else if (a >= 0x800188 && a < 0x800190) s->sound_fade = (uint8_t)v;
+    else if (a >= 0xF18000 && a < 0xF20000 && s->rom->game->group == CPS1_QSOUND) qsound_wr(s, a, v, strobe);
     else if (s->rom->game->dial && (a == 0x800040 || a == 0x800048) && (strobe & 1))
         s->dial_start[a == 0x800048] = s->dial[a == 0x800048];  /* reset X / Y */
 }
@@ -159,10 +191,42 @@ static uint8_t zrd(Cps1 *s, uint16_t a) {
     }
 }
 
-uint8_t z80_fetch(Z80 *z, uint16_t pc) { return zrd(z->bus, pc); }
-uint8_t z80_read(Z80 *z, uint16_t a) { return zrd(z->bus, a); }
+/* The Q-Sound Z80 (MAME's qsound_sub_map): $0000-$7FFF ROM (its opcodes
+ * Kabuki-decoded apart from its data), $8000-$BFFF a 16 KB bank ($D003),
+ * $C000-$CFFF and $F000-$FFFF RAM shared with the 68000, $D000-$D002 the
+ * chip's data and register, $D007 its ready flag. */
+static uint8_t qzrd(const Cps1 *s, uint16_t a) {
+    const uint8_t *rom = s->rom->region[CPS1_R_SOUND];
+    uint32_t size = s->rom->size[CPS1_R_SOUND], at = a < 0x8000 ? a : 0x8000u + s->qbank * 0x4000u + (a - 0x8000u);
+    if (a < 0xC000) return at < size ? rom[at] : 0xFF;
+    if (a < 0xD000) return s->qram[0][a - 0xC000];
+    if (a >= 0xF000) return s->qram[1][a - 0xF000];
+    return a == 0xD007 ? qsound_ready(&s->qs) : 0xFF;
+}
+
+static void qzwr(Cps1 *s, uint16_t a, uint8_t v) {
+    if (a >= 0xC000 && a < 0xD000) s->qram[0][a - 0xC000] = v;
+    else if (a >= 0xF000) s->qram[1][a - 0xF000] = v;
+    else if (a >= 0xD000 && a <= 0xD002) qsound_write(&s->qs, a - 0xD000, v);
+    else if (a == 0xD003)  /* a bank past the ROM is bank 0, as MAME */
+        s->qbank = (uint8_t)(0x8000u + (v & 15u) * 0x4000u >= s->rom->size[CPS1_R_SOUND] ? 0 : v & 15);
+}
+
+uint8_t z80_fetch(Z80 *z, uint16_t pc) {
+    const Cps1 *s = z->bus;
+    if (s->rom->game->group == CPS1_QSOUND) return pc < 0x8000 && s->rom->z80_op ? s->rom->z80_op[pc] : qzrd(s, pc);
+    return zrd(z->bus, pc);
+}
+uint8_t z80_read(Z80 *z, uint16_t a) {
+    const Cps1 *s = z->bus;
+    return s->rom->game->group == CPS1_QSOUND ? qzrd(s, a) : zrd(z->bus, a);
+}
 void z80_write(Z80 *z, uint16_t a, uint8_t v) {
     Cps1 *s = z->bus;
+    if (s->rom->game->group == CPS1_QSOUND) {
+        qzwr(s, a, v);
+        return;
+    }
     if (a >= 0xD000 && a < 0xD800) s->z80_ram[a - 0xD000] = v;
     else if (a == 0xF000 || a == 0xF001) opm_write(&s->opm, a & 1, v);
     else if (a == 0xF002) oki_write(&s->oki, v);
@@ -184,7 +248,33 @@ static void sample(Cps1 *s) {
     if (s->snd_n < CPS1_SND_BUF) s->snd[s->snd_n++] = (int16_t)(v > 32767 ? 32767 : v < -32768 ? -32768 : v);
 }
 
+/* A Q-Sound sample in 1/15 Z80 T-states: 2,496 clocks at 60 MHz are 332.8 T-states at 8 MHz. */
+#define QSOUND_STEP15 (QSOUND_CLOCKS_PER_SAMPLE * 2)
+
+static void qsample(Cps1 *s) {
+    int16_t o[2];
+    qsound_sample(&s->qs, o);
+    if (s->snd_n + 2 <= CPS1_SND_BUF) s->snd[s->snd_n++] = o[0], s->snd[s->snd_n++] = o[1];
+}
+
+/* shortcut: the chip's samples are made after each Z80 instruction, so a
+ * register write or ready read lands up to one instruction later in the
+ * sample stream than in MAME (which brings the stream up to the access). */
+static void run_qsound_z80(Cps1 *s) {
+    uint64_t end = s->lines * 512;  /* 8 MHz: 512 T-states a line */
+    while (s->z80.tstates < end) {
+        if (s->z80.tstates >= s->qirq_next) s->qirq = 1, s->qirq_next += CPS1_QSOUND_IRQ;
+        if (s->qirq && z80_interrupt(&s->z80)) s->qirq = 0;  /* held until taken, as MAME's HOLD_LINE */
+        else z80_step(&s->z80);
+        while (s->z80.tstates * 15 >= s->snd_next) qsample(s), s->snd_next += QSOUND_STEP15;
+    }
+}
+
 static void run_z80(Cps1 *s) {
+    if (s->rom->game->group == CPS1_QSOUND) {
+        run_qsound_z80(s);
+        return;
+    }
     uint64_t end = s->lines * CPS1_Z80_CLOCK * 512 / 8000000;  /* 229.09 a line */
     while (s->z80.tstates < end) {
         if (!s->opm.irq || !z80_interrupt(&s->z80)) z80_step(&s->z80);
@@ -194,6 +284,7 @@ static void run_z80(Cps1 *s) {
 
 int cps1_take_sound(Cps1 *s, int16_t *out, int max) {
     int n = s->snd_n < max ? s->snd_n : max;
+    n -= n % cps1_channels(s->rom->game);  /* whole left / right pairs */
     memcpy(out, s->snd, (size_t)n * sizeof *out);
     memmove(s->snd, s->snd + n, (size_t)(s->snd_n - n) * sizeof *out);
     s->snd_n -= n;
@@ -222,6 +313,11 @@ void cps1_init_with(Cps1 *s, const Cps1Rom *r, const Cps1RecompProgram *p) {
     opm_reset(&s->opm);
     oki_reset(&s->oki, r->region[CPS1_R_OKI], r->size[CPS1_R_OKI]);
     s->snd_next = 64;
+    if (r->game->group == CPS1_QSOUND) {
+        qsound_init(&s->qs, r->dsp, r->region[CPS1_R_QSOUND], r->size[CPS1_R_QSOUND]);
+        eeprom_init(&s->eeprom, 1);  /* the 93C46 as 128 bytes */
+        s->snd_next = QSOUND_STEP15, s->qirq_next = CPS1_QSOUND_IRQ;
+    }
 }
 
 void cps1_set_input(Cps1 *s, int player, uint16_t pad) {

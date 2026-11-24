@@ -11,7 +11,9 @@
 #include <stdint.h>
 
 #include "m68k_cpu.h"
+#include "eeprom93c46.h"
 #include "oki6295.h"
+#include "qsound.h"
 #include "ym2151.h"
 #include "z80_cpu.h"
 #include "zip.h"
@@ -19,6 +21,7 @@
 /* ---- the game table (games.c) and loading (load.c) ---- */
 
 enum { CPS1_R_MAIN, CPS1_R_GFX, CPS1_R_SOUND, CPS1_R_OKI, CPS1_REGIONS };
+#define CPS1_R_QSOUND CPS1_R_OKI  /* the Q-Sound board's samples: where the others' OKI samples are */
 enum {
     CPS1_LOAD_PLAIN,    /* the bytes as they are */
     CPS1_LOAD_EVEN,     /* an 8-bit chip on the 68000's upper byte: every other byte from offset */
@@ -28,7 +31,9 @@ enum {
     CPS1_LOAD_GFX8      /* an 8-bit graphics chip: 1 byte into every 8, at offset's slot (0-7) */
 };
 enum { CPS1_PLAIN, CPS1_QSOUND, CPS1_ODD };  /* board groups (docs/roadmap.md) */
-enum { CPS1_EXTRA_NONE, CPS1_EXTRA_KICKS, CPS1_EXTRA_P3 };  /* buttons 4-6 of players 1-2, or player 3 (MAME's IN2) */
+/* What MAME's IN2 holds: buttons 4-6 of players 1-2, player 3, or players 3
+ * and 4 (IN3, and their buttons 3 in IN1's bits 7 and 15: Slam Masters). */
+enum { CPS1_EXTRA_NONE, CPS1_EXTRA_KICKS, CPS1_EXTRA_P3, CPS1_EXTRA_P4 };
 /* What MAME's init function for a set does beyond the board: the Q-Sound
  * games' Kabuki keys (kabuki.h). */
 enum { CPS1_INIT_NONE, CPS1_INIT_WOF, CPS1_INIT_DINO, CPS1_INIT_PUNISHER, CPS1_INIT_SLAMMAST };
@@ -77,6 +82,7 @@ typedef struct {
     uint16_t rotate;             /* the monitor, as MAME's ROT: 0, or 270 (turned 90 degrees anticlockwise) */
     uint8_t cpsb_high;           /* the CPS-B at $8001C0, not $800140 (Street Fighter II revision E, MAME's init_sf2ee) */
     uint8_t init;                /* CPS1_INIT_* */
+    uint8_t z80_raw;             /* $F00000 reads the Z80 ROM as dumped (MAME's audiorom_raw: Slam Masters' protection) */
 } Cps1Game;
 
 extern const Cps1Game cps1_games[];
@@ -86,6 +92,9 @@ typedef struct {
     const Cps1Game *game;
     uint8_t *region[CPS1_REGIONS];
     uint32_t size[CPS1_REGIONS];
+    uint8_t *z80_op;             /* Q-Sound: the Z80's first 32 KB as opcodes (the region holds it as data) */
+    uint8_t *z80_raw;            /* Q-Sound: those 32 KB as dumped, when the game reads them (z80_raw) */
+    uint16_t dsp[4096];          /* Q-Sound: the chip ROM's tables (dl-1425.bin from qsound.zip) */
 } Cps1Rom;
 
 /* The game whose own files are all in the zip (by CRC and size), or NULL;
@@ -98,7 +107,8 @@ const Cps1Game *cps1_match_in(const Zip *z, const Cps1Game *games, int n);
 int cps1_load(const Cps1Game *g, const Zip *z, Cps1Rom *r, char *err, size_t errlen);
 void cps1_unload(Cps1Rom *r);
 /* A game's zip (data, read from path) matched and loaded; a clone's other
- * files from "<parent>.zip" in the same folder. 0, or -1 with a message. */
+ * files from "<parent>.zip" in the same folder, a Q-Sound game's chip ROM
+ * from qsound.zip there (MAME's names). 0, or -1 with a message. */
 int cps1_open(const char *path, const uint8_t *data, size_t size, Cps1Rom *r, char *err, size_t errlen);
 int cps1_open_in(const char *path, const uint8_t *data, size_t size, const Cps1Game *games, int n, Cps1Rom *r,
                  char *err, size_t errlen);
@@ -114,6 +124,9 @@ int cps1_open_in(const char *path, const uint8_t *data, size_t size, const Cps1G
 #define CPS1_LINE_CLOCKS 640    /* 10 MHz / (8 MHz / 512) */
 #define CPS1_Z80_CLOCK 3579545
 #define CPS1_SAMPLE_RATE OPM_RATE  /* mono, one sample every 64 Z80 T-states */
+#define CPS1_QSOUND_Z80_CLOCK 8000000
+#define CPS1_QSOUND_RATE (QSOUND_CLOCK / QSOUND_CLOCKS_PER_SAMPLE)  /* stereo, 24,038 Hz (24,038.46) */
+#define CPS1_QSOUND_IRQ 32000   /* the Q-Sound Z80's interrupt: every 32,000 T-states (250 Hz) */
 #define CPS1_SND_BUF 8192
 
 /* Recompiled 68000 code (recomp_rt.h, systems/cps1/recomp): made from one
@@ -160,6 +173,13 @@ typedef struct Cps1 {
     uint8_t recomp_on;          /* it is this game's: blocks run where they hold the PC */
     uint8_t *misses;            /* NULL, or a byte per main-CPU word: set where the interpreter ran */
     uint64_t cycles_native, cycles_interp;  /* 68000 clocks run each way (--coverage) */
+    /* The Q-Sound board: the Z80 shares $C000-$CFFF and $F000-$FFFF with the
+     * 68000 ($F18000 and $F1E000, a byte a word); a 16 KB bank; the chip; the EEPROM. */
+    uint8_t qram[2][0x1000];
+    uint8_t qbank, qirq;        /* qirq: the Z80's interrupt, held until taken */
+    uint64_t qirq_next;         /* the T-state of the next one */
+    QSound qs;
+    Eeprom93c46 eeprom;
 } Cps1;
 
 void cps1_init(Cps1 *s, const Cps1Rom *r);  /* with cps1_recomp_program */
@@ -169,9 +189,12 @@ void cps1_line(Cps1 *s);        /* one of them (s->line: the next, 262 after the
 /* Players 0-3: buttons 1-3 = B, A, X; Start; Select = coin; Street Fighter
  * II's kicks (4-6) = Y, L, R; Forgotten Worlds' dial: L / R turn it. */
 void cps1_set_input(Cps1 *s, int player, uint16_t pad);
-/* Up to max samples (mono, CPS1_SAMPLE_RATE) made so far; the number taken. When
- * nobody takes them, a full buffer drops the new ones. */
+/* Up to max sample values made so far: mono at CPS1_SAMPLE_RATE, or, on the
+ * Q-Sound board, left / right pairs at CPS1_QSOUND_RATE (cps1_channels); the
+ * number taken. When nobody takes them, a full buffer drops the new ones. */
 int cps1_take_sound(Cps1 *s, int16_t *out, int max);
+static inline int cps1_channels(const Cps1Game *g) { return g->group == CPS1_QSOUND ? 2 : 1; }
+static inline int cps1_sample_rate(const Cps1Game *g) { return g->group == CPS1_QSOUND ? CPS1_QSOUND_RATE : CPS1_SAMPLE_RATE; }
 
 /* ---- save states (state.c) ---- */
 int cps1_state_save(const Cps1 *s, const char *path);  /* 0, or 1 */

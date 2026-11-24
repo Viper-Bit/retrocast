@@ -1,7 +1,7 @@
 /* Runs a CPS-1 game (a zip) without a window, for tests and scripts:
  * --frames N, --play (a coin and Start for player 1, then walking right and
  * tapping button 1), --ppm FILE (the last frame), --wav FILE (the sound:
- * mono, 16-bit, at CPS1_SAMPLE_RATE), --state-at N FILE (a save state after
+ * 16-bit, mono at CPS1_SAMPLE_RATE or Q-Sound stereo at CPS1_QSOUND_RATE), --state-at N FILE (a save state after
  * frame N), --load-state FILE (start from one; --play goes on from its frame),
  * --misses FILE (the main-CPU code the interpreter ran: "MISS $PC" lines, for
  * cps1recomp), --diff (an interpreter-only machine in lockstep: the CPUs and
@@ -22,6 +22,7 @@
 static void comparable(const Cps1 *src, Cps1 *out) {
     *out = *src;
     out->rom = NULL, out->cpu.bus = out->z80.bus = NULL, out->oki.rom = NULL, out->recomp = NULL, out->misses = NULL;
+    out->qs.dsp = NULL, out->qs.rom = NULL;
     memset(&out->cpu.abort, 0, sizeof out->cpu.abort);
     out->recomp_on = 0, out->cycles_native = out->cycles_interp = 0;
 }
@@ -32,7 +33,8 @@ static int same_line(const Cps1 *a, const Cps1 *b) {
     Z80 p = a->z80, q = b->z80;
     p.bus = q.bus = NULL;
     return !memcmp(&x, &y, sizeof x) && !memcmp(&p, &q, sizeof p) && !memcmp(a->ram, b->ram, sizeof a->ram) &&
-           !memcmp(a->gfxram, b->gfxram, sizeof a->gfxram) && !memcmp(a->z80_ram, b->z80_ram, sizeof a->z80_ram);
+           !memcmp(a->gfxram, b->gfxram, sizeof a->gfxram) && !memcmp(a->z80_ram, b->z80_ram, sizeof a->z80_ram) &&
+           !memcmp(a->qram, b->qram, sizeof a->qram);
 }
 
 static uint16_t scripted(long frame) {
@@ -45,10 +47,11 @@ static uint16_t scripted(long frame) {
     return pad;
 }
 
-static int write_wav(FILE *w, long n) {  /* the header, once the sizes are known */
-    uint32_t data = (uint32_t)n * 2, riff = data + 36, rate = CPS1_SAMPLE_RATE, bps = rate * 2;
+static int write_wav(FILE *w, long n, int channels, uint32_t rate) {  /* the header, once the sizes are known; n values */
+    uint32_t data = (uint32_t)n * 2, riff = data + 36, bps = rate * 2 * (uint32_t)channels;
     uint8_t h[44] = {'R', 'I', 'F', 'F', 0, 0, 0, 0, 'W', 'A', 'V', 'E', 'f', 'm', 't', ' ', 16, 0, 0, 0, 1, 0, 1, 0,
                       0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 16, 0, 'd', 'a', 't', 'a'};
+    h[22] = (uint8_t)channels, h[32] = (uint8_t)(2 * channels);
     memcpy(h + 4, &riff, 4), memcpy(h + 24, &rate, 4), memcpy(h + 28, &bps, 4), memcpy(h + 40, &data, 4);
     return fseek(w, 0, SEEK_SET) || fwrite(h, 1, 44, w) != 44;
 }
@@ -135,7 +138,7 @@ int main(int argc, char **argv) {
         samples += n;
         if (state_out && (long)machine.frames == state_at && cps1_state_save(&machine, state_out)) return perror(state_out), 2;
     }
-    if (w && (write_wav(w, samples) || fclose(w))) return perror(wav), 2;
+    if (w && (write_wav(w, samples, cps1_channels(g), (uint32_t)cps1_sample_rate(g)) || fclose(w))) return perror(wav), 2;
 
     static uint8_t seen[0xC00];
     int colours = 0;

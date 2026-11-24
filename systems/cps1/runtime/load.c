@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "cps1.h"
+#include "kabuki.h"
 
 #ifdef _WIN32
 #include <windows.h>
@@ -87,6 +88,19 @@ static int take(const Cps1Game *g, const Zip *z, Cps1Rom *r, char *done, char *e
     return 0;
 }
 
+/* Once every chip is placed: what MAME's init does to them; -1 (err set) when out of memory. */
+static int finish(const Cps1Game *g, Cps1Rom *r, char *err, size_t errlen) {
+    if (g->group == CPS1_QSOUND && r->size[CPS1_R_SOUND] >= 0x8000) {
+        uint8_t *z80 = r->region[CPS1_R_SOUND];
+        if (!(r->z80_op = malloc(0x8000)) || (g->z80_raw && !(r->z80_raw = malloc(0x8000))))
+            return snprintf(err, errlen, "out of memory"), -1;
+        if (r->z80_raw) memcpy(r->z80_raw, z80, 0x8000);
+        if (g->init >= CPS1_INIT_WOF && g->init <= CPS1_INIT_SLAMMAST) cps1_kabuki(g->init, z80, r->z80_op, z80);  /* data in place, as MAME */
+        else memcpy(r->z80_op, z80, 0x8000);  /* no key: plain code (the tests' boards) */
+    }
+    return 0;
+}
+
 static int missing(const Cps1Game *g, const char *done) {
     for (int i = 0; i < g->nfiles; i++)
         if (!done[i]) return i;
@@ -95,6 +109,7 @@ static int missing(const Cps1Game *g, const char *done) {
 
 void cps1_unload(Cps1Rom *r) {
     for (int k = 0; k < CPS1_REGIONS; k++) free(r->region[k]);
+    free(r->z80_op), free(r->z80_raw);
     memset(r, 0, sizeof *r);
 }
 
@@ -102,7 +117,7 @@ int cps1_load(const Cps1Game *g, const Zip *z, Cps1Rom *r, char *err, size_t err
     char done[sizeof ((Cps1Game *)0)->files / sizeof (Cps1File)] = {0};
     if (alloc_regions(g, r, err, errlen) || take(g, z, r, done, err, errlen)) return cps1_unload(r), -1;
     int i = missing(g, done);
-    if (i < 0) return 0;
+    if (i < 0) return finish(g, r, err, errlen) ? (cps1_unload(r), -1) : 0;
     snprintf(err, errlen, "%s: the file with CRC %08x is missing", g->id, (unsigned)g->files[i].crc);
     return cps1_unload(r), -1;
 }
@@ -154,6 +169,40 @@ static int take_folder(const char *dir, const char *skip1, const char *skip2, co
     return bad;
 }
 
+/* "<folder of path><name>.zip" read whole and opened; NULL if it cannot be. */
+static uint8_t *open_beside(const char *path, const char *name, Zip *z) {
+    char p[1024];
+    size_t dir = strlen(path);
+    while (dir && path[dir - 1] != '/' && path[dir - 1] != '\\') dir--;
+    snprintf(p, sizeof p, "%.*s%s.zip", (int)dir, path, name);
+    FILE *f = fopen(p, "rb");
+    long n = -1;
+    uint8_t *data = NULL;
+    if (f && !fseek(f, 0, SEEK_END)) n = ftell(f);
+    if (f && n > 0 && !fseek(f, 0, SEEK_SET) && (data = malloc((size_t)n)) && fread(data, 1, (size_t)n, f) == (size_t)n &&
+        !zip_open(z, data, (size_t)n)) {
+        fclose(f);
+        return data;
+    }
+    if (f) fclose(f);
+    free(data);
+    return NULL;
+}
+
+/* The Q-Sound chip ROM, dl-1425.bin (24 KB) from qsound.zip: its first 4,096
+ * words, little-endian, as MAME loads them. */
+static int load_dsp(const char *path, const Cps1Game *g, Cps1Rom *r, char *err, size_t errlen) {
+    Zip z;
+    uint8_t *data = open_beside(path, "qsound", &z), *dsp = NULL;
+    const ZipEntry *e = data ? zip_find_crc(&z, 0xD6CF5EF5u, 0x6000) : NULL;
+    int bad = !e || !(dsp = malloc(0x6000)) || zip_read(&z, e, dsp);
+    if (bad) snprintf(err, errlen, "%s: %s needs qsound.zip beside it (dl-1425.bin, CRC d6cf5ef5)", path, g->id);
+    else for (int i = 0; i < 4096; i++) r->dsp[i] = (uint16_t)(dsp[i * 2] | dsp[i * 2 + 1] << 8);
+    if (data) zip_close(&z);
+    free(dsp), free(data);
+    return bad ? -1 : 0;
+}
+
 int cps1_open_in(const char *path, const uint8_t *data, size_t size, const Cps1Game *games, int n, Cps1Rom *r,
                  char *err, size_t errlen) {
     Zip z;
@@ -185,6 +234,7 @@ int cps1_open_in(const char *path, const uint8_t *data, size_t size, const Cps1G
         else
             snprintf(err, errlen, "%s: %s lacks the file with CRC %08x; any zip holding it beside it", path, g->id, (unsigned)g->files[i].crc);
     }
+    if (!bad) bad = finish(g, r, err, errlen) || (g->group == CPS1_QSOUND && load_dsp(path, g, r, err, errlen));
     if (bad) cps1_unload(r);
     return bad ? -1 : 0;
 }

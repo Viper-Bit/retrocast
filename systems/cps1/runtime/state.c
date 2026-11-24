@@ -7,7 +7,7 @@
 
 #include "cps1.h"
 
-static const char MAGIC[8] = {'C', 'P', 'S', '1', 'S', 'T', '0', '2'};
+static const char MAGIC[8] = {'C', 'P', 'S', '1', 'S', 'T', '0', '3'};
 
 int cps1_state_save(const Cps1 *s, const char *path) {
     static Cps1 copy;
@@ -15,6 +15,7 @@ int cps1_state_save(const Cps1 *s, const char *path) {
     strncpy(id, s->rom->game->id, sizeof id - 1);
     copy = *s;
     copy.rom = NULL, copy.cpu.bus = NULL, copy.z80.bus = NULL, copy.oki.rom = NULL, copy.recomp = NULL, copy.misses = NULL;
+    copy.qs.dsp = NULL, copy.qs.rom = NULL;
     uint32_t size = sizeof copy, crc = zip_crc32((const uint8_t *)&copy, sizeof copy);
     FILE *f = fopen(path, "wb");
     if (!f) return 1;
@@ -44,6 +45,7 @@ int cps1_state_load(Cps1 *s, const char *path, char *err, size_t errlen) {
     s->rom = rom, s->cpu.bus = s, s->z80.bus = s;
     s->recomp = recomp, s->recomp_on = recomp_on, s->misses = misses;
     s->oki.rom = rom->region[CPS1_R_OKI], s->oki.size = rom->size[CPS1_R_OKI];  /* the ROM's, not the file's */
+    s->qs.dsp = rom->dsp, s->qs.rom = rom->region[CPS1_R_QSOUND], s->qs.size = rom->size[CPS1_R_QSOUND];
     if (s->snd_n < 0 || s->snd_n > CPS1_SND_BUF) s->snd_n = 0;
     return 0;
 }

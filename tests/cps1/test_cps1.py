@@ -101,7 +101,7 @@ class TestBoot(unittest.TestCase):
             path = os.path.join(SET, z)
             with self.subTest(zip=z):
                 r = subprocess.run([RUNNER, path, "--frames", "3000", "--play"], capture_output=True, text=True, timeout=300)
-                if re.search(r"not a CPS-1 game|is missing|lacks the file", r.stderr):
+                if re.search(r"not a CPS-1 game|is missing|lacks the file|needs qsound.zip", r.stderr):
                     continue  # not one of the table's sets, or not whole: tools/cps1_audit.py lists it
                 self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
                 self.assertNotIn("halted", r.stdout)
