@@ -1,6 +1,6 @@
 retrocast - static recompiler for NES, Famicom Disk System, Game Boy, Game Boy Color,
-Genesis / Mega Drive, Atari 2600, Master System and Game Gear games, and a
-player for Capcom Play System I (CPS-1) arcade games
+Genesis / Mega Drive, Atari 2600, Master System, Game Gear and Capcom Play
+System I (CPS-1) arcade games
 https://github.com/Viper-Bit/retrocast
 
 No games are included. Use your own legally dumped games (.nes, .fds, .gb, .gbc,
@@ -30,7 +30,9 @@ WHAT IS IN HERE
                   --ppm FILE, --wav FILE, --diff, --coverage).
   smsrecomp       The Master System recompiler (Z80 code into C source).
   cps1_headless   CPS-1 interpreter without a window (--frames N, --ppm FILE,
-                  --wav FILE, --state-at N FILE, --load-state FILE).
+                  --wav FILE, --state-at N FILE, --load-state FILE, --diff,
+                  --coverage).
+  cps1recomp      The CPS-1 recompiler (68000 code into C source).
   kit/            Everything needed to build a recompiled game into a
                   native program (see below), with SDL3 prebuilt.
 
@@ -79,11 +81,15 @@ Code the recompiler cannot find on its own runs in the interpreter. Two
 things recompile more of it:
   - the build plays each game for a while first (scripted, about 6 seconds)
     and recompiles everything that ran; -DAUTO_HINTS=OFF skips this;
-  - your own play (NES, Game Boy, Genesis and Master System games): the game notes code it had to
+  - your own play (NES, Game Boy, Genesis, Master System and CPS-1 games): the game notes code it had to
     interpret in build/my_game.misses, and the next
     "cmake --build build --config Release" recompiles it.
 
 DO NOT SHARE RECOMPILED PROGRAMS: they contain the game.
+
+CPS-1: give the game's .zip to -DROMS. The program does not contain the zip
+(the graphics are megabytes): start it with the zip, e.g.
+build/ffight "/path/to/ffight.zip" (a clone's zip needs its parent's beside it).
 
 
 NES AND FAMICOM DISK SYSTEM
