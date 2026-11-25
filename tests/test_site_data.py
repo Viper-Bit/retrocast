@@ -19,6 +19,7 @@ class Classify(unittest.TestCase):
         self.assertEqual(c(0, "frames=300 jammed=0\n", ppm(50)), "ok")
         self.assertEqual(c(0, "", ppm(1)), "partial")
         self.assertEqual(c(1, "", ppm(50)), "no")
+        self.assertEqual(c(1, "result: timeout\n", ppm(50)), "ok")  # gb_headless: a game, not a test ROM
         self.assertEqual(c(0, "", None), "no")
 
 

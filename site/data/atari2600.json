@@ -1,0 +1,6184 @@
+{
+"system": "atari2600",
+"made": "2026-11-26",
+"games": [
+{
+"title": "3-D Genesis",
+"id": "3-D Genesis (USA) (Proto)",
+"status": "ok",
+"versions": [
+"3-D Genesis (USA) (Proto)"
+],
+"image": "3-d-genesis-usa-proto-e5d9c1"
+},
+{
+"title": "3-D Ghost Attack",
+"id": "3-D Ghost Attack (USA) (Proto)",
+"status": "ok",
+"versions": [
+"3-D Ghost Attack (USA) (Proto)"
+],
+"image": "3-d-ghost-attack-usa-proto-da807e"
+},
+{
+"title": "3-D Havoc",
+"id": "3-D Havoc (USA) (Proto)",
+"status": "ok",
+"versions": [
+"3-D Havoc (USA) (Proto)"
+],
+"image": "3-d-havoc-usa-proto-848c2b"
+},
+{
+"title": "3-D Tic-Tac-Toe",
+"id": "3-D Tic-Tac-Toe (USA)",
+"status": "ok",
+"versions": [
+"3-D Tic-Tac-Toe (USA)",
+"3-D Tic-Tac-Toe (Europe)"
+],
+"image": "3-d-tic-tac-toe-usa-205aa4"
+},
+{
+"title": "3-D Zapper",
+"id": "3-D Zapper (USA) (Proto) (1982-12-15)",
+"status": "ok",
+"versions": [
+"3-D Zapper (USA) (Proto) (1982-12-15)",
+"3-D Zapper (USA) (Proto) (Earlier)"
+],
+"image": "3-d-zapper-usa-proto-earlier-097342"
+},
+{
+"title": "32 in 1 Game Cartridge",
+"id": "32 in 1 Game Cartridge (Europe, Australia)",
+"status": "no",
+"versions": [
+"32 in 1 Game Cartridge (Europe, Australia)"
+],
+"image": null
+},
+{
+"title": "4 Game in One",
+"id": "4 Game in One (Europe) (Bit Corporation)",
+"status": "ok",
+"versions": [
+"4 Game in One (Europe) (Bit Corporation)"
+],
+"image": "4-game-in-one-europe-bit-corporation-a9d44a"
+},
+{
+"title": "Abre-te, Sesamo!",
+"id": "Abre-te, Sesamo! (Brazil) (En) (Unl)",
+"status": "ok",
+"versions": [
+"Abre-te, Sesamo! (Brazil) (En) (Unl)"
+],
+"image": "abre-te-sesamo-brazil-en-unl-97afda"
+},
+{
+"title": "Acid Drop",
+"id": "Acid Drop (Europe)",
+"status": "ok",
+"versions": [
+"Acid Drop (Europe)"
+],
+"image": "acid-drop-europe-b66381"
+},
+{
+"title": "Action Man - Action Force",
+"id": "Action Man - Action Force (Europe)",
+"status": "ok",
+"versions": [
+"Action Man - Action Force (Europe)"
+],
+"image": "action-man-action-force-europe-e81cf1"
+},
+{
+"title": "Actionauts",
+"id": "Actionauts (USA) (Proto) (1984-06-22)",
+"status": "ok",
+"versions": [
+"Actionauts (USA) (Proto) (1984-06-22)"
+],
+"image": "actionauts-usa-proto-1984-06-22-22bd03"
+},
+{
+"title": "Activision Decathlon, The",
+"id": "Activision Decathlon, The (USA)",
+"status": "ok",
+"versions": [
+"Activision Decathlon, The (USA)",
+"Activision Decathlon, The (Europe)",
+"Activision Decathlon, The (France)"
+],
+"image": "activision-decathlon-the-usa-061930"
+},
+{
+"title": "Adventure",
+"id": "Adventure (USA)",
+"status": "ok",
+"versions": [
+"Adventure (USA)",
+"Adventure (Europe)"
+],
+"image": "adventure-usa-dc449c"
+},
+{
+"title": "Adventures of TRON",
+"id": "Adventures of TRON (USA)",
+"status": "ok",
+"versions": [
+"Adventures of TRON (USA)"
+],
+"image": "adventures-of-tron-usa-848a13"
+},
+{
+"title": "Adventures on GX-12",
+"id": "Adventures on GX-12 (Europe)",
+"status": "ok",
+"versions": [
+"Adventures on GX-12 (Europe)"
+],
+"image": "adventures-on-gx-12-europe-436844"
+},
+{
+"title": "Air Raid",
+"id": "Air Raid (USA)",
+"status": "ok",
+"versions": [
+"Air Raid (USA)"
+],
+"image": "air-raid-usa-9e5fcb"
+},
+{
+"title": "Air Raiders",
+"id": "Air Raiders (USA)",
+"status": "ok",
+"versions": [
+"Air Raiders (USA)",
+"Air Raiders (Europe)"
+],
+"image": "air-raiders-usa-7189c1"
+},
+{
+"title": "Air-Sea Battle",
+"id": "Air-Sea Battle (Europe)",
+"status": "ok",
+"versions": [
+"Air-Sea Battle (Europe)"
+],
+"image": "air-sea-battle-europe-e889c4"
+},
+{
+"title": "Air-Sea Battle ~ Target Fun",
+"id": "Air-Sea Battle ~ Target Fun (Japan, USA) (En)",
+"status": "ok",
+"versions": [
+"Air-Sea Battle ~ Target Fun (Japan, USA) (En)",
+"Air-Sea Battle ~ Target Fun (Japan, USA) (En) (Atari Anthology)"
+],
+"image": "air-sea-battle-target-fun-japan-usa-en-25bbad"
+},
+{
+"title": "Airlock",
+"id": "Airlock (USA)",
+"status": "ok",
+"versions": [
+"Airlock (USA)",
+"Airlock (USA) (Proto)",
+"Airlock (Europe)"
+],
+"image": "airlock-usa-1bd347"
+},
+{
+"title": "Alien",
+"id": "Alien (USA)",
+"status": "ok",
+"versions": [
+"Alien (USA)",
+"Alien (Brazil) (En) (Unl)"
+],
+"image": "alien-usa-4bd62d"
+},
+{
+"title": "Alien's Return",
+"id": "Alien's Return (Europe)",
+"status": "ok",
+"versions": [
+"Alien's Return (Europe)"
+],
+"image": "alien-s-return-europe-fb9803"
+},
+{
+"title": "Alligator People",
+"id": "Alligator People (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Alligator People (USA) (Proto)"
+],
+"image": "alligator-people-usa-proto-e27888"
+},
+{
+"title": "Alpha Beam",
+"id": "Alpha Beam (Europe) (Beta) (1983-06-03)",
+"status": "ok",
+"versions": [
+"Alpha Beam (Europe) (Beta) (1983-06-03)",
+"Alpha Beam (Japan, USA) (En) (Beta) (1982-12-22)"
+],
+"image": "alpha-beam-europe-beta-1983-06-03-d785a5"
+},
+{
+"title": "Alpha Beam with Ernie",
+"id": "Alpha Beam with Ernie (Europe)",
+"status": "ok",
+"versions": [
+"Alpha Beam with Ernie (Europe)",
+"Alpha Beam with Ernie (Europe) (Alt)",
+"Alpha Beam with Ernie (Japan, USA) (En)"
+],
+"image": "alpha-beam-with-ernie-europe-59efd6"
+},
+{
+"title": "Amidar",
+"id": "Amidar (USA)",
+"status": "ok",
+"versions": [
+"Amidar (USA)",
+"Amidar (Europe)"
+],
+"image": "amidar-usa-06710d"
+},
+{
+"title": "AndroMan on the Moon",
+"id": "AndroMan on the Moon (USA) (Proto)",
+"status": "ok",
+"versions": [
+"AndroMan on the Moon (USA) (Proto)"
+],
+"image": "androman-on-the-moon-usa-proto-56a6bc"
+},
+{
+"title": "Angriff der Luftflotten",
+"id": "Angriff der Luftflotten (Germany)",
+"status": "ok",
+"versions": [
+"Angriff der Luftflotten (Germany)"
+],
+"image": "angriff-der-luftflotten-germany-c35d74"
+},
+{
+"title": "Apples and Dolls",
+"id": "Apples and Dolls (Brazil) (En) (Unl)",
+"status": "ok",
+"versions": [
+"Apples and Dolls (Brazil) (En) (Unl)"
+],
+"image": "apples-and-dolls-brazil-en-unl-446c16"
+},
+{
+"title": "Aquaventure",
+"id": "Aquaventure (USA) (Proto) (1983-08-12)",
+"status": "ok",
+"versions": [
+"Aquaventure (USA) (Proto) (1983-08-12)",
+"Aquaventure (Brazil) (En) (Proto) (Unl)"
+],
+"image": "aquaventure-usa-proto-1983-08-12-47eb4b"
+},
+{
+"title": "Armor Ambush",
+"id": "Armor Ambush (USA)",
+"status": "ok",
+"versions": [
+"Armor Ambush (USA)",
+"Armor Ambush (Europe)"
+],
+"image": "armor-ambush-usa-e0293d"
+},
+{
+"title": "Artillery Duel",
+"id": "Artillery Duel (USA)",
+"status": "ok",
+"versions": [
+"Artillery Duel (USA)",
+"Artillery Duel (USA) (Alt)",
+"Artillery Duel (Europe)"
+],
+"image": "artillery-duel-usa-148ba1"
+},
+{
+"title": "Assault",
+"id": "Assault (USA)",
+"status": "ok",
+"versions": [
+"Assault (USA)"
+],
+"image": "assault-usa-460b63"
+},
+{
+"title": "Asteroids",
+"id": "Asteroids (USA) (Alt)",
+"status": "ok",
+"versions": [
+"Asteroids (USA) (Alt)",
+"Asteroids (USA) (Atari Anthology)",
+"Asteroids (Europe)",
+"Asteroids (Japan, USA) (En)"
+],
+"image": "asteroids-usa-alt-9431e8"
+},
+{
+"title": "Astroblast",
+"id": "Astroblast (USA)",
+"status": "ok",
+"versions": [
+"Astroblast (USA)",
+"Astroblast (USA) (v1.1)",
+"Astroblast (Europe)"
+],
+"image": "astroblast-usa-e68c48"
+},
+{
+"title": "Astrowar",
+"id": "Astrowar (Brazil) (En) (Unl)",
+"status": "ok",
+"versions": [
+"Astrowar (Brazil) (En) (Unl)"
+],
+"image": "astrowar-brazil-en-unl-300041"
+},
+{
+"title": "Atari Video Cube",
+"id": "Atari Video Cube (USA)",
+"status": "ok",
+"versions": [
+"Atari Video Cube (USA)",
+"Atari Video Cube (USA, Europe) (Atari Anthology)"
+],
+"image": "atari-video-cube-usa-994862"
+},
+{
+"title": "Atlantis",
+"id": "Atlantis (USA)",
+"status": "ok",
+"versions": [
+"Atlantis (USA)",
+"Atlantis (Europe)"
+],
+"image": "atlantis-usa-4d7987"
+},
+{
+"title": "Atlantis II",
+"id": "Atlantis II (USA)",
+"status": "ok",
+"versions": [
+"Atlantis II (USA)"
+],
+"image": "atlantis-ii-usa-113ab8"
+},
+{
+"title": "Atom Smasher",
+"id": "Atom Smasher (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Atom Smasher (USA) (Proto)"
+],
+"image": "atom-smasher-usa-proto-0b0a7b"
+},
+{
+"title": "Bachelor Party",
+"id": "Bachelor Party (USA)",
+"status": "ok",
+"versions": [
+"Bachelor Party (USA)"
+],
+"image": "bachelor-party-usa-2ec5a7"
+},
+{
+"title": "Bachelorette Party",
+"id": "Bachelorette Party (USA)",
+"status": "ok",
+"versions": [
+"Bachelorette Party (USA)"
+],
+"image": "bachelorette-party-usa-1c0c72"
+},
+{
+"title": "Backgammon",
+"id": "Backgammon (USA)",
+"status": "ok",
+"versions": [
+"Backgammon (USA)",
+"Backgammon (Europe)"
+],
+"image": "backgammon-usa-043ed9"
+},
+{
+"title": "Bank Heist",
+"id": "Bank Heist (USA)",
+"status": "ok",
+"versions": [
+"Bank Heist (USA)",
+"Bank Heist (Europe)"
+],
+"image": "bank-heist-usa-5543ae"
+},
+{
+"title": "Barnstorming",
+"id": "Barnstorming (USA)",
+"status": "ok",
+"versions": [
+"Barnstorming (USA)",
+"Barnstorming (Brazil) (En) (Unl)",
+"Barnstorming (Europe)"
+],
+"image": "barnstorming-usa-37b11c"
+},
+{
+"title": "Base Attack",
+"id": "Base Attack (Europe)",
+"status": "ok",
+"versions": [
+"Base Attack (Europe)"
+],
+"image": "base-attack-europe-586435"
+},
+{
+"title": "Baseball",
+"id": "Baseball (USA) (Activision Anthology - Remix Edition)",
+"status": "ok",
+"versions": [
+"Baseball (USA) (Activision Anthology - Remix Edition)"
+],
+"image": "baseball-usa-activision-anthology-remix--3f417c"
+},
+{
+"title": "Basic Math",
+"id": "Basic Math (USA)",
+"status": "ok",
+"versions": [
+"Basic Math (USA)",
+"Basic Math (Europe)"
+],
+"image": "basic-math-usa-4302e5"
+},
+{
+"title": "BASIC Programming",
+"id": "BASIC Programming (USA)",
+"status": "ok",
+"versions": [
+"BASIC Programming (USA)",
+"BASIC Programming (Europe)"
+],
+"image": "basic-programming-usa-59c323"
+},
+{
+"title": "Basketball",
+"id": "Basketball (USA)",
+"status": "ok",
+"versions": [
+"Basketball (USA)",
+"Basketball (Europe)"
+],
+"image": "basketball-usa-b2f2f2"
+},
+{
+"title": "Battlezone",
+"id": "Battlezone (Europe)",
+"status": "ok",
+"versions": [
+"Battlezone (Europe)",
+"Battlezone (Japan, USA) (En)",
+"Battlezone (Japan, USA) (En) (Beta) (1983-05-02)",
+"Battlezone (Japan, USA) (En) (Beta) (1983-05-12)"
+],
+"image": "battlezone-europe-5a7a2f"
+},
+{
+"title": "Beamrider",
+"id": "Beamrider (USA)",
+"status": "ok",
+"versions": [
+"Beamrider (USA)",
+"Beamrider (Europe)"
+],
+"image": "beamrider-usa-58b2ea"
+},
+{
+"title": "Beany Bopper",
+"id": "Beany Bopper (USA)",
+"status": "ok",
+"versions": [
+"Beany Bopper (USA)",
+"Beany Bopper (Brazil) (En) (Unl)"
+],
+"image": "beany-bopper-usa-d796fa"
+},
+{
+"title": "Beat'Em & Eat'Em",
+"id": "Beat'Em & Eat'Em (USA)",
+"status": "ok",
+"versions": [
+"Beat'Em & Eat'Em (USA)",
+"Beat'Em & Eat'Em (Brazil) (En) (Unl)",
+"Beat'Em & Eat'Em (Europe)"
+],
+"image": "beat-em-eat-em-usa-0b033a"
+},
+{
+"title": "Berenstain Bears",
+"id": "Berenstain Bears (USA)",
+"status": "ok",
+"versions": [
+"Berenstain Bears (USA)"
+],
+"image": "berenstain-bears-usa-14da99"
+},
+{
+"title": "Bermuda Triangle",
+"id": "Bermuda Triangle (USA)",
+"status": "ok",
+"versions": [
+"Bermuda Triangle (USA)",
+"Bermuda Triangle (Europe)"
+],
+"image": "bermuda-triangle-usa-9b6039"
+},
+{
+"title": "Berzerk",
+"id": "Berzerk (World) (Enhanced Edition)",
+"status": "ok",
+"versions": [
+"Berzerk (World) (Enhanced Edition)",
+"Berzerk (Brazil) (En) (Unl)",
+"Berzerk (Europe)",
+"Berzerk (Japan, USA) (En)"
+],
+"image": "berzerk-world-enhanced-edition-95f6a8"
+},
+{
+"title": "Big Bird's Egg Catch",
+"id": "Big Bird's Egg Catch (Europe)",
+"status": "ok",
+"versions": [
+"Big Bird's Egg Catch (Europe)",
+"Big Bird's Egg Catch (Japan, USA) (En)",
+"Big Bird's Egg Catch (Japan, USA) (En) (Beta) (1982-12-08)",
+"Big Bird's Egg Catch (Japan, USA) (En) (Beta) (1983-05-02)",
+"Big Bird's Egg Catch (Japan, USA) (En) (Beta) (1983-05-17)"
+],
+"image": "big-bird-s-egg-catch-europe-1640b2"
+},
+{
+"title": "Bionic Breakthrough",
+"id": "Bionic Breakthrough (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Bionic Breakthrough (USA) (Proto)"
+],
+"image": "bionic-breakthrough-usa-proto-62f2ff"
+},
+{
+"title": "Birthday Mania",
+"id": "Birthday Mania (USA) (Robert A. Tokar)",
+"status": "ok",
+"versions": [
+"Birthday Mania (USA) (Robert A. Tokar)"
+],
+"image": "birthday-mania-usa-robert-a-tokar-6569c9"
+},
+{
+"title": "Black Jack",
+"id": "Black Jack (USA)",
+"status": "ok",
+"versions": [
+"Black Jack (USA)",
+"Black Jack (Europe)"
+],
+"image": "black-jack-usa-1d9cfa"
+},
+{
+"title": "Bloody Human Freeway",
+"id": "Bloody Human Freeway (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Bloody Human Freeway (USA) (Proto)"
+],
+"image": "bloody-human-freeway-usa-proto-801505"
+},
+{
+"title": "Blueprint",
+"id": "Blueprint (USA)",
+"status": "ok",
+"versions": [
+"Blueprint (USA)",
+"Blueprint (USA) (Beta)",
+"Blueprint (Europe)"
+],
+"image": "blueprint-usa-86729d"
+},
+{
+"title": "BMX Air Master",
+"id": "BMX Air Master (USA)",
+"status": "ok",
+"versions": [
+"BMX Air Master (USA)",
+"BMX Air Master (Australia)",
+"BMX Air Master (Europe)"
+],
+"image": "bmx-air-master-usa-88f2da"
+},
+{
+"title": "Bobby Is Going Home",
+"id": "Bobby Is Going Home (USA)",
+"status": "ok",
+"versions": [
+"Bobby Is Going Home (USA)",
+"Bobby Is Going Home (Brazil) (En) (NTSC) (Unl)",
+"Bobby Is Going Home (Brazil) (En) (PAL) (Unl)",
+"Bobby Is Going Home (Europe)",
+"Bobby Is Going Home (Europe) (Beta)"
+],
+"image": "bobby-is-going-home-usa-4d3f0d"
+},
+{
+"title": "Bogey Blaster",
+"id": "Bogey Blaster (Europe)",
+"status": "ok",
+"versions": [
+"Bogey Blaster (Europe)"
+],
+"image": "bogey-blaster-europe-96689f"
+},
+{
+"title": "Boggle",
+"id": "Boggle (USA) (Proto) (1978-08-07)",
+"status": "ok",
+"versions": [
+"Boggle (USA) (Proto) (1978-08-07)"
+],
+"image": "boggle-usa-proto-1978-08-07-3a2323"
+},
+{
+"title": "Boing!",
+"id": "Boing! (USA)",
+"status": "ok",
+"versions": [
+"Boing! (USA)",
+"Boing! (Europe)"
+],
+"image": "boing-usa-0e4bdd"
+},
+{
+"title": "Boom Bang",
+"id": "Boom Bang (Europe)",
+"status": "ok",
+"versions": [
+"Boom Bang (Europe)"
+],
+"image": "boom-bang-europe-702da1"
+},
+{
+"title": "Bouncin' Baby Bunnies",
+"id": "Bouncin' Baby Bunnies (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Bouncin' Baby Bunnies (USA) (Proto)"
+],
+"image": "bouncin-baby-bunnies-usa-proto-6adab1"
+},
+{
+"title": "Bowling",
+"id": "Bowling (USA)",
+"status": "ok",
+"versions": [
+"Bowling (USA)",
+"Bowling (Europe)"
+],
+"image": "bowling-usa-e28264"
+},
+{
+"title": "Boxen",
+"id": "Boxen (Germany) (En)",
+"status": "ok",
+"versions": [
+"Boxen (Germany) (En)"
+],
+"image": "boxen-germany-en-39cc2b"
+},
+{
+"title": "Boxing",
+"id": "Boxing (USA)",
+"status": "ok",
+"versions": [
+"Boxing (USA)",
+"Boxing (Brazil) (En) (Unl)",
+"Boxing (Europe)"
+],
+"image": "boxing-usa-92e8c3"
+},
+{
+"title": "Brain Games",
+"id": "Brain Games (USA)",
+"status": "ok",
+"versions": [
+"Brain Games (USA)",
+"Brain Games (Europe)"
+],
+"image": "brain-games-usa-c1772a"
+},
+{
+"title": "Breakout",
+"id": "Breakout (Europe)",
+"status": "ok",
+"versions": [
+"Breakout (Europe)"
+],
+"image": "breakout-europe-f7acc6"
+},
+{
+"title": "Breakout ~ Breakaway IV",
+"id": "Breakout ~ Breakaway IV (Japan, USA) (En)",
+"status": "ok",
+"versions": [
+"Breakout ~ Breakaway IV (Japan, USA) (En)"
+],
+"image": "breakout-breakaway-iv-japan-usa-en-3a9395"
+},
+{
+"title": "Bridge",
+"id": "Bridge (USA)",
+"status": "ok",
+"versions": [
+"Bridge (USA)",
+"Bridge (USA) (v1.1)",
+"Bridge (Europe)"
+],
+"image": "bridge-usa-8ca4ee"
+},
+{
+"title": "Buck Rogers - Planet of Zoom",
+"id": "Buck Rogers - Planet of Zoom (USA)",
+"status": "ok",
+"versions": [
+"Buck Rogers - Planet of Zoom (USA)",
+"Buck Rogers - Planet of Zoom (Europe)"
+],
+"image": "buck-rogers-planet-of-zoom-usa-b87494"
+},
+{
+"title": "Bugs",
+"id": "Bugs (USA)",
+"status": "ok",
+"versions": [
+"Bugs (USA)",
+"Bugs (Europe)"
+],
+"image": "bugs-usa-609149"
+},
+{
+"title": "Bugs Bunny",
+"id": "Bugs Bunny (USA) (Proto 1)",
+"status": "ok",
+"versions": [
+"Bugs Bunny (USA) (Proto 1)",
+"Bugs Bunny (USA) (Proto 2)"
+],
+"image": "bugs-bunny-usa-proto-1-06ce8c"
+},
+{
+"title": "Bump 'n' Jump",
+"id": "Bump 'n' Jump (USA)",
+"status": "ok",
+"versions": [
+"Bump 'n' Jump (USA)",
+"Bump 'n' Jump (Europe)"
+],
+"image": "bump-n-jump-europe-26130e"
+},
+{
+"title": "Bumper Bash",
+"id": "Bumper Bash (USA)",
+"status": "ok",
+"versions": [
+"Bumper Bash (USA)",
+"Bumper Bash (Europe)"
+],
+"image": "bumper-bash-usa-fdb261"
+},
+{
+"title": "BurgerTime",
+"id": "BurgerTime (USA)",
+"status": "no",
+"versions": [
+"BurgerTime (USA)"
+],
+"image": null
+},
+{
+"title": "Burgertime",
+"id": "Burgertime (USA) (PROPER 12K)",
+"status": "no",
+"versions": [
+"Burgertime (USA) (PROPER 12K)"
+],
+"image": null
+},
+{
+"title": "Burning Desire",
+"id": "Burning Desire (USA)",
+"status": "ok",
+"versions": [
+"Burning Desire (USA)",
+"Burning Desire (Europe)"
+],
+"image": "burning-desire-usa-ee8e63"
+},
+{
+"title": "Cabbage Patch Kids - Adventures in the Park",
+"id": "Cabbage Patch Kids - Adventures in the Park (USA) (Proto) (1984-09-13)",
+"status": "ok",
+"versions": [
+"Cabbage Patch Kids - Adventures in the Park (USA) (Proto) (1984-09-13)"
+],
+"image": "cabbage-patch-kids-adventures-in-the-par-158a20"
+},
+{
+"title": "Cakewalk",
+"id": "Cakewalk (USA)",
+"status": "ok",
+"versions": [
+"Cakewalk (USA)",
+"Cakewalk (Europe)"
+],
+"image": "cakewalk-usa-2ce84d"
+},
+{
+"title": "California Games",
+"id": "California Games (USA)",
+"status": "ok",
+"versions": [
+"California Games (USA)",
+"California Games (Europe)"
+],
+"image": "california-games-usa-acbd3c"
+},
+{
+"title": "Canyon Bomber",
+"id": "Canyon Bomber (USA)",
+"status": "ok",
+"versions": [
+"Canyon Bomber (USA)"
+],
+"image": "canyon-bomber-usa-21a9b1"
+},
+{
+"title": "Care Bears",
+"id": "Care Bears (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Care Bears (USA) (Proto)"
+],
+"image": "care-bears-usa-proto-f376c4"
+},
+{
+"title": "Carnival",
+"id": "Carnival (USA)",
+"status": "ok",
+"versions": [
+"Carnival (USA)",
+"Carnival (Europe)"
+],
+"image": "carnival-usa-a37b4c"
+},
+{
+"title": "Casino",
+"id": "Casino (Europe)",
+"status": "ok",
+"versions": [
+"Casino (Europe)"
+],
+"image": "casino-europe-1999a5"
+},
+{
+"title": "Casino ~ Poker Plus",
+"id": "Casino ~ Poker Plus (USA)",
+"status": "ok",
+"versions": [
+"Casino ~ Poker Plus (USA)"
+],
+"image": "casino-poker-plus-usa-5eafb2"
+},
+{
+"title": "Cat Trax",
+"id": "Cat Trax (USA)",
+"status": "ok",
+"versions": [
+"Cat Trax (USA)"
+],
+"image": "cat-trax-usa-13603e"
+},
+{
+"title": "Cathouse Blues",
+"id": "Cathouse Blues (USA)",
+"status": "ok",
+"versions": [
+"Cathouse Blues (USA)"
+],
+"image": "cathouse-blues-usa-673c6a"
+},
+{
+"title": "Centipede",
+"id": "Centipede (Europe)",
+"status": "ok",
+"versions": [
+"Centipede (Europe)",
+"Centipede (Europe) (Beta)",
+"Centipede (Japan, USA) (En)"
+],
+"image": "centipede-europe-5a76ec"
+},
+{
+"title": "Challenge",
+"id": "Challenge (Canada)",
+"status": "ok",
+"versions": [
+"Challenge (Canada)"
+],
+"image": "challenge-canada-a76517"
+},
+{
+"title": "Challenge of.... NEXAR, The",
+"id": "Challenge of.... NEXAR, The (USA)",
+"status": "ok",
+"versions": [
+"Challenge of.... NEXAR, The (USA)",
+"Challenge of.... NEXAR, The (Europe)"
+],
+"image": "challenge-of-nexar-the-usa-a25c69"
+},
+{
+"title": "Championship Soccer",
+"id": "Championship Soccer (Europe)",
+"status": "ok",
+"versions": [
+"Championship Soccer (Europe)"
+],
+"image": "championship-soccer-europe-abff74"
+},
+{
+"title": "Championship Soccer ~ Soccer",
+"id": "Championship Soccer ~ Soccer (USA)",
+"status": "ok",
+"versions": [
+"Championship Soccer ~ Soccer (USA)"
+],
+"image": "championship-soccer-soccer-usa-a94411"
+},
+{
+"title": "Chase the Chuck Wagon",
+"id": "Chase the Chuck Wagon (USA)",
+"status": "ok",
+"versions": [
+"Chase the Chuck Wagon (USA)"
+],
+"image": "chase-the-chuck-wagon-usa-09d584"
+},
+{
+"title": "Checkers",
+"id": "Checkers (USA)",
+"status": "ok",
+"versions": [
+"Checkers (USA)"
+],
+"image": "checkers-usa-f85457"
+},
+{
+"title": "Chess",
+"id": "Chess (Europe)",
+"status": "ok",
+"versions": [
+"Chess (Europe)"
+],
+"image": "chess-europe-12f663"
+},
+{
+"title": "China Syndrome",
+"id": "China Syndrome (USA)",
+"status": "ok",
+"versions": [
+"China Syndrome (USA)",
+"China Syndrome (Europe)"
+],
+"image": "china-syndrome-usa-42b6e5"
+},
+{
+"title": "Chopper Command",
+"id": "Chopper Command (USA)",
+"status": "ok",
+"versions": [
+"Chopper Command (USA)",
+"Chopper Command (Europe)"
+],
+"image": "chopper-command-usa-8419a8"
+},
+{
+"title": "Chuck Norris Superkicks",
+"id": "Chuck Norris Superkicks (USA)",
+"status": "ok",
+"versions": [
+"Chuck Norris Superkicks (USA)"
+],
+"image": "chuck-norris-superkicks-usa-15c4d8"
+},
+{
+"title": "Circus Atari",
+"id": "Circus Atari (Europe)",
+"status": "ok",
+"versions": [
+"Circus Atari (Europe)",
+"Circus Atari (Japan, USA) (En)"
+],
+"image": "circus-atari-europe-ff0b6e"
+},
+{
+"title": "Coco Nuts",
+"id": "Coco Nuts (USA)",
+"status": "ok",
+"versions": [
+"Coco Nuts (USA)"
+],
+"image": "coco-nuts-usa-4f8e64"
+},
+{
+"title": "Codebreaker",
+"id": "Codebreaker (USA)",
+"status": "ok",
+"versions": [
+"Codebreaker (USA)",
+"Codebreaker (Europe)"
+],
+"image": "codebreaker-usa-fc7394"
+},
+{
+"title": "Col 'N'",
+"id": "Col 'N' (Europe) (Unl)",
+"status": "ok",
+"versions": [
+"Col 'N' (Europe) (Unl)"
+],
+"image": "col-n-europe-unl-6df755"
+},
+{
+"title": "Color Bar Generator",
+"id": "Color Bar Generator (USA)",
+"status": "ok",
+"versions": [
+"Color Bar Generator (USA)"
+],
+"image": "color-bar-generator-usa-aaf5f1"
+},
+{
+"title": "Colors",
+"id": "Colors (Europe) (Proto)",
+"status": "ok",
+"versions": [
+"Colors (Europe) (Proto)"
+],
+"image": "colors-europe-proto-b4beb8"
+},
+{
+"title": "Colours",
+"id": "Colours (USA, Europe) (Demo) (Atari Anthology)",
+"status": "ok",
+"versions": [
+"Colours (USA, Europe) (Demo) (Atari Anthology)"
+],
+"image": "colours-usa-europe-demo-atari-anthology-cf37d8"
+},
+{
+"title": "Combat",
+"id": "Combat (USA, Europe) (Atari Anthology)",
+"status": "ok",
+"versions": [
+"Combat (USA, Europe) (Atari Anthology)",
+"Combat (Europe)"
+],
+"image": "combat-usa-europe-atari-anthology-21eec6"
+},
+{
+"title": "Combat Two",
+"id": "Combat Two (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Combat Two (USA) (Proto)"
+],
+"image": "combat-two-usa-proto-728f33"
+},
+{
+"title": "Combat ~ Tank-Plus",
+"id": "Combat ~ Tank-Plus (USA)",
+"status": "ok",
+"versions": [
+"Combat ~ Tank-Plus (USA)"
+],
+"image": "combat-tank-plus-usa-4be30e"
+},
+{
+"title": "Commando",
+"id": "Commando (USA)",
+"status": "ok",
+"versions": [
+"Commando (USA)",
+"Commando (USA) (Alt)",
+"Commando (Europe)"
+],
+"image": "commando-usa-8df43d"
+},
+{
+"title": "Commando Raid",
+"id": "Commando Raid (USA)",
+"status": "ok",
+"versions": [
+"Commando Raid (USA)",
+"Commando Raid (Europe)"
+],
+"image": "commando-raid-usa-ff6efc"
+},
+{
+"title": "Communist Mutants from Space",
+"id": "Communist Mutants from Space (USA)",
+"status": "no",
+"versions": [
+"Communist Mutants from Space (USA)",
+"Communist Mutants from Space (USA) (Beta)",
+"Communist Mutants from Space (Europe)",
+"Communist Mutants from Space (Europe) (Beta)"
+],
+"image": null
+},
+{
+"title": "Computer Chess",
+"id": "Computer Chess (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Computer Chess (USA) (Proto)"
+],
+"image": "computer-chess-usa-proto-707fa5"
+},
+{
+"title": "Condor Attack",
+"id": "Condor Attack (USA)",
+"status": "ok",
+"versions": [
+"Condor Attack (USA)"
+],
+"image": "condor-attack-usa-41fb18"
+},
+{
+"title": "Confrontation",
+"id": "Confrontation (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Confrontation (USA) (Proto)"
+],
+"image": "confrontation-usa-proto-8fbd30"
+},
+{
+"title": "Congo Bongo",
+"id": "Congo Bongo (USA)",
+"status": "ok",
+"versions": [
+"Congo Bongo (USA)"
+],
+"image": "congo-bongo-usa-62fdab"
+},
+{
+"title": "Cookie Monster Munch",
+"id": "Cookie Monster Munch (USA)",
+"status": "ok",
+"versions": [
+"Cookie Monster Munch (USA)",
+"Cookie Monster Munch (Europe)"
+],
+"image": "cookie-monster-munch-usa-ed8a6d"
+},
+{
+"title": "Cosmic Ark",
+"id": "Cosmic Ark (USA)",
+"status": "ok",
+"versions": [
+"Cosmic Ark (USA)",
+"Cosmic Ark (USA) (Rev 1)"
+],
+"image": "cosmic-ark-usa-da61fa"
+},
+{
+"title": "Cosmic Commuter",
+"id": "Cosmic Commuter (USA)",
+"status": "ok",
+"versions": [
+"Cosmic Commuter (USA)"
+],
+"image": "cosmic-commuter-usa-2a69f5"
+},
+{
+"title": "Cosmic Creeps",
+"id": "Cosmic Creeps (USA)",
+"status": "ok",
+"versions": [
+"Cosmic Creeps (USA)"
+],
+"image": "cosmic-creeps-usa-c1ef90"
+},
+{
+"title": "Cosmic Swarm",
+"id": "Cosmic Swarm (USA)",
+"status": "ok",
+"versions": [
+"Cosmic Swarm (USA)"
+],
+"image": "cosmic-swarm-usa-8434cd"
+},
+{
+"title": "Crack'ed",
+"id": "Crack'ed (USA) (Proto)",
+"status": "no",
+"versions": [
+"Crack'ed (USA) (Proto)"
+],
+"image": null
+},
+{
+"title": "Crackpots",
+"id": "Crackpots (USA)",
+"status": "ok",
+"versions": [
+"Crackpots (USA)"
+],
+"image": "crackpots-usa-44e063"
+},
+{
+"title": "Crash Dive",
+"id": "Crash Dive (USA)",
+"status": "ok",
+"versions": [
+"Crash Dive (USA)"
+],
+"image": "crash-dive-usa-f0e53f"
+},
+{
+"title": "Crazy Climber",
+"id": "Crazy Climber (USA)",
+"status": "ok",
+"versions": [
+"Crazy Climber (USA)"
+],
+"image": "crazy-climber-usa-90e2b4"
+},
+{
+"title": "Cross Force",
+"id": "Cross Force (USA)",
+"status": "ok",
+"versions": [
+"Cross Force (USA)",
+"Cross Force (Europe)"
+],
+"image": "cross-force-usa-737303"
+},
+{
+"title": "Crossbow",
+"id": "Crossbow (USA)",
+"status": "ok",
+"versions": [
+"Crossbow (USA)"
+],
+"image": "crossbow-usa-5a04e0"
+},
+{
+"title": "Crypts of Chaos",
+"id": "Crypts of Chaos (USA)",
+"status": "ok",
+"versions": [
+"Crypts of Chaos (USA)"
+],
+"image": "crypts-of-chaos-usa-c7edb2"
+},
+{
+"title": "Crystal Castles",
+"id": "Crystal Castles (USA)",
+"status": "ok",
+"versions": [
+"Crystal Castles (USA)",
+"Crystal Castles (Europe)"
+],
+"image": "crystal-castles-usa-27d519"
+},
+{
+"title": "Cubicolor",
+"id": "Cubicolor (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Cubicolor (USA) (Proto)"
+],
+"image": "cubicolor-usa-proto-c826c4"
+},
+{
+"title": "Custer's Revenge",
+"id": "Custer's Revenge (USA)",
+"status": "ok",
+"versions": [
+"Custer's Revenge (USA)"
+],
+"image": "custer-s-revenge-usa-c5ff10"
+},
+{
+"title": "Dan Kitchen's Tomcat - The F-14 Fighter Simulator",
+"id": "Dan Kitchen's Tomcat - The F-14 Fighter Simulator (USA)",
+"status": "ok",
+"versions": [
+"Dan Kitchen's Tomcat - The F-14 Fighter Simulator (USA)",
+"Dan Kitchen's Tomcat - The F-14 Fighter Simulator (Europe)"
+],
+"image": "dan-kitchen-s-tomcat-the-f-14-fighter-si-691fe7"
+},
+{
+"title": "Dancing Plate",
+"id": "Dancing Plate (Europe) (Puzzy)",
+"status": "ok",
+"versions": [
+"Dancing Plate (Europe) (Puzzy)"
+],
+"image": "dancing-plate-europe-puzzy-414f9b"
+},
+{
+"title": "Dark Cavern",
+"id": "Dark Cavern (USA)",
+"status": "ok",
+"versions": [
+"Dark Cavern (USA)"
+],
+"image": "dark-cavern-usa-22904c"
+},
+{
+"title": "Dark Chambers",
+"id": "Dark Chambers (USA)",
+"status": "ok",
+"versions": [
+"Dark Chambers (USA)",
+"Dark Chambers (Europe)"
+],
+"image": "dark-chambers-usa-0053cc"
+},
+{
+"title": "David Crane's Pitfall II - Lost Caverns",
+"id": "David Crane's Pitfall II - Lost Caverns (USA)",
+"status": "no",
+"versions": [
+"David Crane's Pitfall II - Lost Caverns (USA)"
+],
+"image": null
+},
+{
+"title": "Deadly Duck",
+"id": "Deadly Duck (USA)",
+"status": "ok",
+"versions": [
+"Deadly Duck (USA)"
+],
+"image": "deadly-duck-usa-25eb30"
+},
+{
+"title": "Death Trap",
+"id": "Death Trap (USA)",
+"status": "ok",
+"versions": [
+"Death Trap (USA)"
+],
+"image": "death-trap-usa-7c2114"
+},
+{
+"title": "Defender",
+"id": "Defender (USA)",
+"status": "ok",
+"versions": [
+"Defender (USA)",
+"Defender (Europe)"
+],
+"image": "defender-usa-fd3d21"
+},
+{
+"title": "Defender II",
+"id": "Defender II (USA) (Alt)",
+"status": "ok",
+"versions": [
+"Defender II (USA) (Alt)"
+],
+"image": "defender-ii-usa-alt-034e2a"
+},
+{
+"title": "Demolition Herby",
+"id": "Demolition Herby (USA)",
+"status": "ok",
+"versions": [
+"Demolition Herby (USA)"
+],
+"image": "demolition-herby-usa-28a77c"
+},
+{
+"title": "Demon Attack",
+"id": "Demon Attack (USA) (Rev 1)",
+"status": "ok",
+"versions": [
+"Demon Attack (USA) (Rev 1)",
+"Demon Attack (Europe)"
+],
+"image": "demon-attack-usa-rev-1-f70e69"
+},
+{
+"title": "Demons to Diamonds",
+"id": "Demons to Diamonds (USA)",
+"status": "ok",
+"versions": [
+"Demons to Diamonds (USA)"
+],
+"image": "demons-to-diamonds-usa-fce172"
+},
+{
+"title": "Depth Charge",
+"id": "Depth Charge (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Depth Charge (USA) (Proto)"
+],
+"image": "depth-charge-usa-proto-961ed9"
+},
+{
+"title": "Desert Falcon",
+"id": "Desert Falcon (USA)",
+"status": "ok",
+"versions": [
+"Desert Falcon (USA)"
+],
+"image": "desert-falcon-usa-37f986"
+},
+{
+"title": "Dice Puzzle",
+"id": "Dice Puzzle (USA)",
+"status": "ok",
+"versions": [
+"Dice Puzzle (USA)",
+"Dice Puzzle (Europe)"
+],
+"image": "dice-puzzle-usa-a77aed"
+},
+{
+"title": "Dig Dug",
+"id": "Dig Dug (USA)",
+"status": "ok",
+"versions": [
+"Dig Dug (USA)"
+],
+"image": "dig-dug-usa-109ca4"
+},
+{
+"title": "Dishaster",
+"id": "Dishaster (USA)",
+"status": "ok",
+"versions": [
+"Dishaster (USA)"
+],
+"image": "dishaster-usa-6600d1"
+},
+{
+"title": "Dodge 'Em",
+"id": "Dodge 'Em (Europe)",
+"status": "ok",
+"versions": [
+"Dodge 'Em (Europe)",
+"Dodge 'Em (Europe) (Rev 1)"
+],
+"image": "dodge-em-europe-c9f811"
+},
+{
+"title": "Dodge 'Em ~ Dodger Cars",
+"id": "Dodge 'Em ~ Dodger Cars (USA)",
+"status": "ok",
+"versions": [
+"Dodge 'Em ~ Dodger Cars (USA)"
+],
+"image": "dodge-em-dodger-cars-usa-18ce4d"
+},
+{
+"title": "Dolphin",
+"id": "Dolphin (USA)",
+"status": "ok",
+"versions": [
+"Dolphin (USA)"
+],
+"image": "dolphin-usa-655db1"
+},
+{
+"title": "Donald Duck's Speedboat",
+"id": "Donald Duck's Speedboat (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Donald Duck's Speedboat (USA) (Proto)"
+],
+"image": "donald-duck-s-speedboat-usa-proto-84c3db"
+},
+{
+"title": "Donkey Kong",
+"id": "Donkey Kong (USA)",
+"status": "ok",
+"versions": [
+"Donkey Kong (USA)"
+],
+"image": "donkey-kong-usa-7edf0c"
+},
+{
+"title": "Donkey Kong Junior",
+"id": "Donkey Kong Junior (USA)",
+"status": "ok",
+"versions": [
+"Donkey Kong Junior (USA)",
+"Donkey Kong Junior (Australia) (En,De)"
+],
+"image": "donkey-kong-junior-usa-7c6df0"
+},
+{
+"title": "Double Dragon",
+"id": "Double Dragon (USA)",
+"status": "ok",
+"versions": [
+"Double Dragon (USA)"
+],
+"image": "double-dragon-usa-d110ce"
+},
+{
+"title": "Double Dunk",
+"id": "Double Dunk (USA)",
+"status": "ok",
+"versions": [
+"Double Dunk (USA)",
+"Double Dunk (Europe)"
+],
+"image": "double-dunk-usa-d4d8bb"
+},
+{
+"title": "Dragon Defender",
+"id": "Dragon Defender (Europe)",
+"status": "ok",
+"versions": [
+"Dragon Defender (Europe)"
+],
+"image": "dragon-defender-europe-012845"
+},
+{
+"title": "Dragonfire",
+"id": "Dragonfire (USA)",
+"status": "ok",
+"versions": [
+"Dragonfire (USA)"
+],
+"image": "dragonfire-usa-ad59e3"
+},
+{
+"title": "Dragonstomper",
+"id": "Dragonstomper (USA)",
+"status": "no",
+"versions": [
+"Dragonstomper (USA)"
+],
+"image": null
+},
+{
+"title": "Dragster",
+"id": "Dragster (USA)",
+"status": "ok",
+"versions": [
+"Dragster (USA)",
+"Dragster (Europe)"
+],
+"image": "dragster-usa-591c20"
+},
+{
+"title": "Dschungel Boy",
+"id": "Dschungel Boy (Europe)",
+"status": "ok",
+"versions": [
+"Dschungel Boy (Europe)"
+],
+"image": "dschungel-boy-europe-8ce84c"
+},
+{
+"title": "Dukes of Hazzard",
+"id": "Dukes of Hazzard (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Dukes of Hazzard (USA) (Proto)"
+],
+"image": "dukes-of-hazzard-usa-proto-952783"
+},
+{
+"title": "Dumbo's Flying Circus",
+"id": "Dumbo's Flying Circus (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Dumbo's Flying Circus (USA) (Proto)"
+],
+"image": "dumbo-s-flying-circus-usa-proto-4a75cc"
+},
+{
+"title": "Dune",
+"id": "Dune (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Dune (USA) (Proto)"
+],
+"image": "dune-usa-proto-1e04a4"
+},
+{
+"title": "E.T. - The Extra-Terrestrial",
+"id": "E.T. - The Extra-Terrestrial (USA)",
+"status": "ok",
+"versions": [
+"E.T. - The Extra-Terrestrial (USA)",
+"E.T. - The Extra-Terrestrial (Europe)"
+],
+"image": "e-t-the-extra-terrestrial-usa-627371"
+},
+{
+"title": "Earth Dies Screaming, The",
+"id": "Earth Dies Screaming, The (USA)",
+"status": "ok",
+"versions": [
+"Earth Dies Screaming, The (USA)"
+],
+"image": "earth-dies-screaming-the-usa-c8a3ed"
+},
+{
+"title": "Eggomania",
+"id": "Eggomania (USA)",
+"status": "ok",
+"versions": [
+"Eggomania (USA)"
+],
+"image": "eggomania-usa-f7ea39"
+},
+{
+"title": "Elevator Action",
+"id": "Elevator Action (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Elevator Action (USA) (Proto)"
+],
+"image": "elevator-action-usa-proto-06fbd8"
+},
+{
+"title": "Elf Adventure",
+"id": "Elf Adventure (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Elf Adventure (USA) (Proto)"
+],
+"image": "elf-adventure-usa-proto-a68e4b"
+},
+{
+"title": "Eli's Ladder",
+"id": "Eli's Ladder (USA)",
+"status": "ok",
+"versions": [
+"Eli's Ladder (USA)"
+],
+"image": "eli-s-ladder-usa-64cfb7"
+},
+{
+"title": "Elk Attack",
+"id": "Elk Attack (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Elk Attack (USA) (Proto)"
+],
+"image": "elk-attack-usa-proto-aeff6a"
+},
+{
+"title": "Encounter at L-5",
+"id": "Encounter at L-5 (USA)",
+"status": "ok",
+"versions": [
+"Encounter at L-5 (USA)"
+],
+"image": "encounter-at-l-5-usa-96361b"
+},
+{
+"title": "Enduro",
+"id": "Enduro (USA)",
+"status": "ok",
+"versions": [
+"Enduro (USA)",
+"Enduro (Europe)"
+],
+"image": "enduro-usa-174b9d"
+},
+{
+"title": "Ente und der Wolf, Die",
+"id": "Ente und der Wolf, Die (Germany)",
+"status": "ok",
+"versions": [
+"Ente und der Wolf, Die (Germany)"
+],
+"image": "ente-und-der-wolf-die-germany-548578"
+},
+{
+"title": "Entity, The",
+"id": "Entity, The (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Entity, The (USA) (Proto)"
+],
+"image": "entity-the-usa-proto-5eb386"
+},
+{
+"title": "Entombed",
+"id": "Entombed (USA)",
+"status": "ok",
+"versions": [
+"Entombed (USA)"
+],
+"image": "entombed-usa-ac3a80"
+},
+{
+"title": "Escape from the Mindmaster",
+"id": "Escape from the Mindmaster (USA)",
+"status": "no",
+"versions": [
+"Escape from the Mindmaster (USA)"
+],
+"image": null
+},
+{
+"title": "Espial",
+"id": "Espial (USA)",
+"status": "no",
+"versions": [
+"Espial (USA)"
+],
+"image": null
+},
+{
+"title": "Exocet",
+"id": "Exocet (Europe)",
+"status": "ok",
+"versions": [
+"Exocet (Europe)",
+"Exocet (Netherlands) (En) (Unl)"
+],
+"image": "exocet-europe-44aa33"
+},
+{
+"title": "Extra Terrestrials",
+"id": "Extra Terrestrials (USA)",
+"status": "ok",
+"versions": [
+"Extra Terrestrials (USA)"
+],
+"image": "extra-terrestrials-usa-11c319"
+},
+{
+"title": "Fantastic Voyage",
+"id": "Fantastic Voyage (USA)",
+"status": "ok",
+"versions": [
+"Fantastic Voyage (USA)"
+],
+"image": "fantastic-voyage-usa-5f503a"
+},
+{
+"title": "Farmyard Fun",
+"id": "Farmyard Fun (USA)",
+"status": "ok",
+"versions": [
+"Farmyard Fun (USA)"
+],
+"image": "farmyard-fun-usa-90a7bb"
+},
+{
+"title": "Fast Eddie",
+"id": "Fast Eddie (USA)",
+"status": "ok",
+"versions": [
+"Fast Eddie (USA)"
+],
+"image": "fast-eddie-usa-016cc3"
+},
+{
+"title": "Fast Food",
+"id": "Fast Food (USA)",
+"status": "ok",
+"versions": [
+"Fast Food (USA)"
+],
+"image": "fast-food-usa-d063ad"
+},
+{
+"title": "Fatal Run",
+"id": "Fatal Run (USA)",
+"status": "ok",
+"versions": [
+"Fatal Run (USA)",
+"Fatal Run (Europe)",
+"Fatal Run (Europe) (Alt)"
+],
+"image": "fatal-run-usa-69ea20"
+},
+{
+"title": "Fathom",
+"id": "Fathom (USA)",
+"status": "ok",
+"versions": [
+"Fathom (USA)"
+],
+"image": "fathom-usa-5eb7e5"
+},
+{
+"title": "Feuerwehr im Einsatz",
+"id": "Feuerwehr im Einsatz (Germany)",
+"status": "ok",
+"versions": [
+"Feuerwehr im Einsatz (Germany)"
+],
+"image": "feuerwehr-im-einsatz-germany-9e1e83"
+},
+{
+"title": "Final Approach",
+"id": "Final Approach (USA)",
+"status": "ok",
+"versions": [
+"Final Approach (USA)"
+],
+"image": "final-approach-usa-473cef"
+},
+{
+"title": "Fire Birds",
+"id": "Fire Birds (Europe)",
+"status": "ok",
+"versions": [
+"Fire Birds (Europe)"
+],
+"image": "fire-birds-europe-8bc5be"
+},
+{
+"title": "Fire Fighter",
+"id": "Fire Fighter (USA)",
+"status": "ok",
+"versions": [
+"Fire Fighter (USA)",
+"Fire Fighter (Europe)"
+],
+"image": "fire-fighter-usa-674c4d"
+},
+{
+"title": "Fire Fly",
+"id": "Fire Fly (USA)",
+"status": "ok",
+"versions": [
+"Fire Fly (USA)"
+],
+"image": "fire-fly-usa-f4d109"
+},
+{
+"title": "Fire Spinner",
+"id": "Fire Spinner (USA)",
+"status": "ok",
+"versions": [
+"Fire Spinner (USA)"
+],
+"image": "fire-spinner-usa-8185a7"
+},
+{
+"title": "Fireball",
+"id": "Fireball (USA)",
+"status": "no",
+"versions": [
+"Fireball (USA)"
+],
+"image": null
+},
+{
+"title": "Fishing Derby",
+"id": "Fishing Derby (USA)",
+"status": "ok",
+"versions": [
+"Fishing Derby (USA)"
+],
+"image": "fishing-derby-usa-fa0a45"
+},
+{
+"title": "Flag Capture ~ Capture",
+"id": "Flag Capture ~ Capture (USA)",
+"status": "ok",
+"versions": [
+"Flag Capture ~ Capture (USA)"
+],
+"image": "flag-capture-capture-usa-f63111"
+},
+{
+"title": "Flash Gordon",
+"id": "Flash Gordon (USA)",
+"status": "ok",
+"versions": [
+"Flash Gordon (USA)"
+],
+"image": "flash-gordon-usa-b19bda"
+},
+{
+"title": "FM Sound Tool",
+"id": "FM Sound Tool (Unknown) (Proto) [b]",
+"status": "partial",
+"versions": [
+"FM Sound Tool (Unknown) (Proto) [b]"
+],
+"image": null
+},
+{
+"title": "Football",
+"id": "Football (USA)",
+"status": "ok",
+"versions": [
+"Football (USA)"
+],
+"image": "football-usa-a2a739"
+},
+{
+"title": "Forest",
+"id": "Forest (Europe)",
+"status": "ok",
+"versions": [
+"Forest (Europe)"
+],
+"image": "forest-europe-45a3e2"
+},
+{
+"title": "Fox & Goat",
+"id": "Fox & Goat (Europe)",
+"status": "ok",
+"versions": [
+"Fox & Goat (Europe)"
+],
+"image": "fox-goat-europe-e3f549"
+},
+{
+"title": "Frankenstein's Monster",
+"id": "Frankenstein's Monster (USA)",
+"status": "ok",
+"versions": [
+"Frankenstein's Monster (USA)"
+],
+"image": "frankenstein-s-monster-usa-edb7c2"
+},
+{
+"title": "Freeway",
+"id": "Freeway (USA)",
+"status": "ok",
+"versions": [
+"Freeway (USA)"
+],
+"image": "freeway-usa-fad554"
+},
+{
+"title": "Frisco",
+"id": "Frisco (USA)",
+"status": "ok",
+"versions": [
+"Frisco (USA)"
+],
+"image": "frisco-usa-859b91"
+},
+{
+"title": "Frog Demo",
+"id": "Frog Demo (Europe) (Demo)",
+"status": "ok",
+"versions": [
+"Frog Demo (Europe) (Demo)"
+],
+"image": "frog-demo-europe-demo-555d89"
+},
+{
+"title": "Frog Pond",
+"id": "Frog Pond (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Frog Pond (USA) (Proto)"
+],
+"image": "frog-pond-usa-proto-e435d5"
+},
+{
+"title": "Frogger",
+"id": "Frogger (USA)",
+"status": "ok",
+"versions": [
+"Frogger (USA)"
+],
+"image": "frogger-usa-6b1aa6"
+},
+{
+"title": "Frogger II - Threeedeep!",
+"id": "Frogger II - Threeedeep! (USA)",
+"status": "ok",
+"versions": [
+"Frogger II - Threeedeep! (USA)"
+],
+"image": "frogger-ii-threeedeep-usa-6e2369"
+},
+{
+"title": "Frogs and Flies",
+"id": "Frogs and Flies (USA)",
+"status": "ok",
+"versions": [
+"Frogs and Flies (USA)"
+],
+"image": "frogs-and-flies-usa-dc6ae2"
+},
+{
+"title": "Front Line",
+"id": "Front Line (USA)",
+"status": "ok",
+"versions": [
+"Front Line (USA)"
+],
+"image": "front-line-usa-e3010d"
+},
+{
+"title": "Frostbite",
+"id": "Frostbite (USA)",
+"status": "ok",
+"versions": [
+"Frostbite (USA)"
+],
+"image": "frostbite-usa-d2c1bb"
+},
+{
+"title": "Funky Fish",
+"id": "Funky Fish (USA) (Proto)",
+"status": "partial",
+"versions": [
+"Funky Fish (USA) (Proto)"
+],
+"image": null
+},
+{
+"title": "G.I. Joe - Cobra Strike",
+"id": "G.I. Joe - Cobra Strike (USA)",
+"status": "ok",
+"versions": [
+"G.I. Joe - Cobra Strike (USA)"
+],
+"image": "g-i-joe-cobra-strike-usa-60f4c2"
+},
+{
+"title": "Galaxian",
+"id": "Galaxian (USA)",
+"status": "ok",
+"versions": [
+"Galaxian (USA)",
+"Galaxian (Europe)"
+],
+"image": "galaxian-usa-573d84"
+},
+{
+"title": "Gamma-Attack",
+"id": "Gamma-Attack (USA)",
+"status": "ok",
+"versions": [
+"Gamma-Attack (USA)"
+],
+"image": "gamma-attack-usa-1c0804"
+},
+{
+"title": "Gangster Alley",
+"id": "Gangster Alley (USA)",
+"status": "ok",
+"versions": [
+"Gangster Alley (USA)",
+"Gangster Alley (Europe)"
+],
+"image": "gangster-alley-usa-66c05c"
+},
+{
+"title": "Garfield",
+"id": "Garfield (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Garfield (USA) (Proto)"
+],
+"image": "garfield-usa-proto-5461eb"
+},
+{
+"title": "Gas Hog",
+"id": "Gas Hog (USA)",
+"status": "ok",
+"versions": [
+"Gas Hog (USA)"
+],
+"image": "gas-hog-usa-781838"
+},
+{
+"title": "Gauntlet",
+"id": "Gauntlet (USA)",
+"status": "ok",
+"versions": [
+"Gauntlet (USA)"
+],
+"image": "gauntlet-usa-8ec8f1"
+},
+{
+"title": "Ghost Manor",
+"id": "Ghost Manor (USA)",
+"status": "ok",
+"versions": [
+"Ghost Manor (USA)",
+"Ghost Manor (Europe)"
+],
+"image": "ghost-manor-usa-1611d4"
+},
+{
+"title": "Ghostbusters",
+"id": "Ghostbusters (USA)",
+"status": "ok",
+"versions": [
+"Ghostbusters (USA)",
+"Ghostbusters (Europe)"
+],
+"image": "ghostbusters-usa-7e6fdc"
+},
+{
+"title": "Ghostbusters II",
+"id": "Ghostbusters II (Europe)",
+"status": "ok",
+"versions": [
+"Ghostbusters II (Europe)"
+],
+"image": "ghostbusters-ii-europe-5a1734"
+},
+{
+"title": "Gigolo",
+"id": "Gigolo (USA)",
+"status": "ok",
+"versions": [
+"Gigolo (USA)"
+],
+"image": "gigolo-usa-9736b8"
+},
+{
+"title": "Glacier Patrol",
+"id": "Glacier Patrol (USA)",
+"status": "ok",
+"versions": [
+"Glacier Patrol (USA)"
+],
+"image": "glacier-patrol-usa-6243c0"
+},
+{
+"title": "Glib - Video Word Game",
+"id": "Glib - Video Word Game (USA)",
+"status": "ok",
+"versions": [
+"Glib - Video Word Game (USA)"
+],
+"image": "glib-video-word-game-usa-97087b"
+},
+{
+"title": "Going-Up",
+"id": "Going-Up (USA) (Proto)",
+"status": "no",
+"versions": [
+"Going-Up (USA) (Proto)"
+],
+"image": null
+},
+{
+"title": "Golf",
+"id": "Golf (USA)",
+"status": "ok",
+"versions": [
+"Golf (USA)"
+],
+"image": "golf-usa-bf648f"
+},
+{
+"title": "Good Luck, Charlie Brown",
+"id": "Good Luck, Charlie Brown (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Good Luck, Charlie Brown (USA) (Proto)"
+],
+"image": "good-luck-charlie-brown-usa-proto-f7f059"
+},
+{
+"title": "Gopher",
+"id": "Gopher (USA)",
+"status": "ok",
+"versions": [
+"Gopher (USA)"
+],
+"image": "gopher-usa-d50a2b"
+},
+{
+"title": "Gorf",
+"id": "Gorf (USA)",
+"status": "ok",
+"versions": [
+"Gorf (USA)",
+"Gorf (Europe)"
+],
+"image": "gorf-usa-05d48c"
+},
+{
+"title": "Grand Prix",
+"id": "Grand Prix (USA)",
+"status": "ok",
+"versions": [
+"Grand Prix (USA)"
+],
+"image": "grand-prix-usa-253279"
+},
+{
+"title": "Gravitar",
+"id": "Gravitar (USA)",
+"status": "ok",
+"versions": [
+"Gravitar (USA)"
+],
+"image": "gravitar-usa-6e1284"
+},
+{
+"title": "Great Escape",
+"id": "Great Escape (USA)",
+"status": "ok",
+"versions": [
+"Great Escape (USA)",
+"Great Escape (Europe)"
+],
+"image": "great-escape-usa-ed6991"
+},
+{
+"title": "Gremlins",
+"id": "Gremlins (USA)",
+"status": "ok",
+"versions": [
+"Gremlins (USA)"
+],
+"image": "gremlins-usa-b4546b"
+},
+{
+"title": "Grover's Music Maker",
+"id": "Grover's Music Maker (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Grover's Music Maker (USA) (Proto)"
+],
+"image": "grover-s-music-maker-usa-proto-a0d756"
+},
+{
+"title": "Guardian",
+"id": "Guardian (USA)",
+"status": "ok",
+"versions": [
+"Guardian (USA)"
+],
+"image": "guardian-usa-27f50c"
+},
+{
+"title": "Gyruss",
+"id": "Gyruss (USA)",
+"status": "no",
+"versions": [
+"Gyruss (USA)"
+],
+"image": null
+},
+{
+"title": "H.E.R.O.",
+"id": "H.E.R.O. (USA)",
+"status": "ok",
+"versions": [
+"H.E.R.O. (USA)",
+"H.E.R.O. (Europe)"
+],
+"image": "h-e-r-o-usa-312634"
+},
+{
+"title": "Halloween",
+"id": "Halloween (USA)",
+"status": "ok",
+"versions": [
+"Halloween (USA)"
+],
+"image": "halloween-usa-493942"
+},
+{
+"title": "Hangman ~ Spelling",
+"id": "Hangman ~ Spelling (USA)",
+"status": "ok",
+"versions": [
+"Hangman ~ Spelling (USA)"
+],
+"image": "hangman-spelling-usa-c5788d"
+},
+{
+"title": "Hard-Head",
+"id": "Hard-Head (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Hard-Head (USA) (Proto)"
+],
+"image": "hard-head-usa-proto-dc3c5c"
+},
+{
+"title": "Harem",
+"id": "Harem (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Harem (USA) (Proto)"
+],
+"image": "harem-usa-proto-7e9815"
+},
+{
+"title": "Haunted House",
+"id": "Haunted House (USA)",
+"status": "ok",
+"versions": [
+"Haunted House (USA)",
+"Haunted House (Europe)"
+],
+"image": "haunted-house-usa-af2db8"
+},
+{
+"title": "Hell Driver",
+"id": "Hell Driver (Europe)",
+"status": "ok",
+"versions": [
+"Hell Driver (Europe)"
+],
+"image": "hell-driver-europe-760e06"
+},
+{
+"title": "Hobo",
+"id": "Hobo (USA) (Proto)",
+"status": "partial",
+"versions": [
+"Hobo (USA) (Proto)"
+],
+"image": null
+},
+{
+"title": "Hole Hunter",
+"id": "Hole Hunter (USA)",
+"status": "ok",
+"versions": [
+"Hole Hunter (USA)"
+],
+"image": "hole-hunter-usa-3b29e5"
+},
+{
+"title": "Holey Moley",
+"id": "Holey Moley (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Holey Moley (USA) (Proto)"
+],
+"image": "holey-moley-usa-proto-256871"
+},
+{
+"title": "Home Run ~ Baseball",
+"id": "Home Run ~ Baseball (USA)",
+"status": "ok",
+"versions": [
+"Home Run ~ Baseball (USA)"
+],
+"image": "home-run-baseball-usa-ec0246"
+},
+{
+"title": "Human Cannonball ~ Cannon Man",
+"id": "Human Cannonball ~ Cannon Man (USA)",
+"status": "ok",
+"versions": [
+"Human Cannonball ~ Cannon Man (USA)"
+],
+"image": "human-cannonball-cannon-man-usa-d35479"
+},
+{
+"title": "Hunt & Score ~ Memory Match",
+"id": "Hunt & Score ~ Memory Match (USA)",
+"status": "ok",
+"versions": [
+"Hunt & Score ~ Memory Match (USA)"
+],
+"image": "hunt-score-memory-match-usa-feae29"
+},
+{
+"title": "I Want My Mommy",
+"id": "I Want My Mommy (USA)",
+"status": "ok",
+"versions": [
+"I Want My Mommy (USA)"
+],
+"image": "i-want-my-mommy-usa-b3bd80"
+},
+{
+"title": "I.Q. 180",
+"id": "I.Q. 180 (USA)",
+"status": "ok",
+"versions": [
+"I.Q. 180 (USA)"
+],
+"image": "i-q-180-usa-eb64bb"
+},
+{
+"title": "I.Q. Memory Teaser",
+"id": "I.Q. Memory Teaser (Europe)",
+"status": "ok",
+"versions": [
+"I.Q. Memory Teaser (Europe)"
+],
+"image": "i-q-memory-teaser-europe-d61e9d"
+},
+{
+"title": "Ice Hockey",
+"id": "Ice Hockey (USA)",
+"status": "ok",
+"versions": [
+"Ice Hockey (USA)"
+],
+"image": "ice-hockey-usa-abcdb1"
+},
+{
+"title": "Ikari Warriors",
+"id": "Ikari Warriors (USA)",
+"status": "ok",
+"versions": [
+"Ikari Warriors (USA)"
+],
+"image": "ikari-warriors-usa-ac7d0f"
+},
+{
+"title": "Immies & Aggies",
+"id": "Immies & Aggies (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Immies & Aggies (USA) (Proto)"
+],
+"image": "immies-aggies-usa-proto-615cfb"
+},
+{
+"title": "Indy 500",
+"id": "Indy 500 (Europe)",
+"status": "ok",
+"versions": [
+"Indy 500 (Europe)"
+],
+"image": "indy-500-europe-7c9854"
+},
+{
+"title": "Indy 500 ~ Race",
+"id": "Indy 500 ~ Race (USA)",
+"status": "ok",
+"versions": [
+"Indy 500 ~ Race (USA)"
+],
+"image": "indy-500-race-usa-8ffefc"
+},
+{
+"title": "Infiltrate",
+"id": "Infiltrate (USA)",
+"status": "ok",
+"versions": [
+"Infiltrate (USA)"
+],
+"image": "infiltrate-usa-09d840"
+},
+{
+"title": "International Soccer",
+"id": "International Soccer (USA)",
+"status": "ok",
+"versions": [
+"International Soccer (USA)"
+],
+"image": "international-soccer-usa-0913b5"
+},
+{
+"title": "IQ 180",
+"id": "IQ 180 (USA)",
+"status": "ok",
+"versions": [
+"IQ 180 (USA)"
+],
+"image": "iq-180-usa-151641"
+},
+{
+"title": "Ixion",
+"id": "Ixion (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Ixion (USA) (Proto)"
+],
+"image": "ixion-usa-proto-c6f0ba"
+},
+{
+"title": "James Bond 007",
+"id": "James Bond 007 (USA)",
+"status": "partial",
+"versions": [
+"James Bond 007 (USA)"
+],
+"image": null
+},
+{
+"title": "Jawbreaker",
+"id": "Jawbreaker (USA)",
+"status": "ok",
+"versions": [
+"Jawbreaker (USA)"
+],
+"image": "jawbreaker-usa-4be3ac"
+},
+{
+"title": "Journey Escape",
+"id": "Journey Escape (USA)",
+"status": "ok",
+"versions": [
+"Journey Escape (USA)"
+],
+"image": "journey-escape-usa-8dd013"
+},
+{
+"title": "Joust",
+"id": "Joust (USA)",
+"status": "ok",
+"versions": [
+"Joust (USA)"
+],
+"image": "joust-usa-e50090"
+},
+{
+"title": "Jr. Pac-Man",
+"id": "Jr. Pac-Man (USA)",
+"status": "ok",
+"versions": [
+"Jr. Pac-Man (USA)"
+],
+"image": "jr-pac-man-usa-783d03"
+},
+{
+"title": "Jungle Fever",
+"id": "Jungle Fever (USA)",
+"status": "ok",
+"versions": [
+"Jungle Fever (USA)"
+],
+"image": "jungle-fever-usa-a23c40"
+},
+{
+"title": "Jungle Hunt",
+"id": "Jungle Hunt (USA)",
+"status": "ok",
+"versions": [
+"Jungle Hunt (USA)",
+"Jungle Hunt (Europe)"
+],
+"image": "jungle-hunt-usa-803a08"
+},
+{
+"title": "Kabobber",
+"id": "Kabobber (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Kabobber (USA) (Proto)"
+],
+"image": "kabobber-usa-proto-6f7202"
+},
+{
+"title": "Kaboom!",
+"id": "Kaboom! (USA)",
+"status": "ok",
+"versions": [
+"Kaboom! (USA)"
+],
+"image": "kaboom-usa-1d16bd"
+},
+{
+"title": "Kamikaze Saucers",
+"id": "Kamikaze Saucers (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Kamikaze Saucers (USA) (Proto)"
+],
+"image": "kamikaze-saucers-usa-proto-ec1660"
+},
+{
+"title": "Kangaroo",
+"id": "Kangaroo (USA)",
+"status": "ok",
+"versions": [
+"Kangaroo (USA)"
+],
+"image": "kangaroo-usa-23604e"
+},
+{
+"title": "Karate",
+"id": "Karate (USA)",
+"status": "ok",
+"versions": [
+"Karate (USA)"
+],
+"image": "karate-usa-874756"
+},
+{
+"title": "Keystone Kapers",
+"id": "Keystone Kapers (USA)",
+"status": "ok",
+"versions": [
+"Keystone Kapers (USA)"
+],
+"image": "keystone-kapers-usa-db24e4"
+},
+{
+"title": "Kid Vid Voice Module",
+"id": "Kid Vid Voice Module (USA) (Audio Tapes)",
+"status": "no",
+"versions": [
+"Kid Vid Voice Module (USA) (Audio Tapes)"
+],
+"image": null
+},
+{
+"title": "Killer Satellites",
+"id": "Killer Satellites (USA)",
+"status": "no",
+"versions": [
+"Killer Satellites (USA)"
+],
+"image": null
+},
+{
+"title": "King Kong",
+"id": "King Kong (USA)",
+"status": "ok",
+"versions": [
+"King Kong (USA)"
+],
+"image": "king-kong-usa-1e771c"
+},
+{
+"title": "Klax",
+"id": "Klax (USA)",
+"status": "ok",
+"versions": [
+"Klax (USA)",
+"Klax (Europe)"
+],
+"image": "klax-usa-4301c6"
+},
+{
+"title": "kleine Bar, Der",
+"id": "kleine Bar, Der (Germany)",
+"status": "ok",
+"versions": [
+"kleine Bar, Der (Germany)"
+],
+"image": "kleine-bar-der-germany-d16d9f"
+},
+{
+"title": "Knight on the Town",
+"id": "Knight on the Town (USA)",
+"status": "ok",
+"versions": [
+"Knight on the Town (USA)"
+],
+"image": "knight-on-the-town-usa-76579e"
+},
+{
+"title": "Kool-Aid Man",
+"id": "Kool-Aid Man (USA)",
+"status": "ok",
+"versions": [
+"Kool-Aid Man (USA)"
+],
+"image": "kool-aid-man-usa-a61de2"
+},
+{
+"title": "Krull",
+"id": "Krull (USA)",
+"status": "ok",
+"versions": [
+"Krull (USA)"
+],
+"image": "krull-usa-c1d49c"
+},
+{
+"title": "Kung Fu Superkicks",
+"id": "Kung Fu Superkicks (Europe)",
+"status": "ok",
+"versions": [
+"Kung Fu Superkicks (Europe)"
+],
+"image": "kung-fu-superkicks-europe-80e2f2"
+},
+{
+"title": "Kung-Fu Master",
+"id": "Kung-Fu Master (USA)",
+"status": "ok",
+"versions": [
+"Kung-Fu Master (USA)"
+],
+"image": "kung-fu-master-usa-9e9d1c"
+},
+{
+"title": "Kyphus",
+"id": "Kyphus (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Kyphus (USA) (Proto)"
+],
+"image": "kyphus-usa-proto-ea624e"
+},
+{
+"title": "Laaser Voley",
+"id": "Laaser Voley (Europe) (Pirate)",
+"status": "ok",
+"versions": [
+"Laaser Voley (Europe) (Pirate)"
+],
+"image": "laaser-voley-europe-pirate-dea558"
+},
+{
+"title": "Labyrinth",
+"id": "Labyrinth (Europe)",
+"status": "ok",
+"versions": [
+"Labyrinth (Europe)"
+],
+"image": "labyrinth-europe-26d71b"
+},
+{
+"title": "Lady in Wading",
+"id": "Lady in Wading (USA)",
+"status": "ok",
+"versions": [
+"Lady in Wading (USA)"
+],
+"image": "lady-in-wading-usa-d80bca"
+},
+{
+"title": "Laser Blast",
+"id": "Laser Blast (USA)",
+"status": "ok",
+"versions": [
+"Laser Blast (USA)"
+],
+"image": "laser-blast-usa-9a4d1b"
+},
+{
+"title": "Laser Gates",
+"id": "Laser Gates (USA)",
+"status": "ok",
+"versions": [
+"Laser Gates (USA)",
+"Laser Gates (Europe)"
+],
+"image": "laser-gates-usa-d20583"
+},
+{
+"title": "Lasercade",
+"id": "Lasercade (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Lasercade (USA) (Proto)"
+],
+"image": "lasercade-usa-proto-a92183"
+},
+{
+"title": "Lilly Adventure",
+"id": "Lilly Adventure (USA)",
+"status": "ok",
+"versions": [
+"Lilly Adventure (USA)",
+"Lilly Adventure (Europe)"
+],
+"image": "lilly-adventure-usa-452c5f"
+},
+{
+"title": "Lochjaw",
+"id": "Lochjaw (USA)",
+"status": "ok",
+"versions": [
+"Lochjaw (USA)"
+],
+"image": "lochjaw-usa-266ab7"
+},
+{
+"title": "Lock 'n' Chase",
+"id": "Lock 'n' Chase (USA)",
+"status": "ok",
+"versions": [
+"Lock 'n' Chase (USA)"
+],
+"image": "lock-n-chase-usa-d53db8"
+},
+{
+"title": "Lock'N'Chase",
+"id": "Lock'N'Chase (Europe)",
+"status": "ok",
+"versions": [
+"Lock'N'Chase (Europe)"
+],
+"image": "lock-n-chase-europe-82bdd6"
+},
+{
+"title": "London Blitz",
+"id": "London Blitz (USA)",
+"status": "ok",
+"versions": [
+"London Blitz (USA)"
+],
+"image": "london-blitz-usa-7bdf55"
+},
+{
+"title": "Looping",
+"id": "Looping (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Looping (USA) (Proto)"
+],
+"image": "looping-usa-proto-9dd19d"
+},
+{
+"title": "Lord of the Rings, The - Journey to Rivendell",
+"id": "Lord of the Rings, The - Journey to Rivendell (USA) (Proto)",
+"status": "partial",
+"versions": [
+"Lord of the Rings, The - Journey to Rivendell (USA) (Proto)"
+],
+"image": null
+},
+{
+"title": "Lost Luggage",
+"id": "Lost Luggage (USA)",
+"status": "ok",
+"versions": [
+"Lost Luggage (USA)"
+],
+"image": "lost-luggage-usa-f7b3f6"
+},
+{
+"title": "M.A.D.",
+"id": "M.A.D. (USA)",
+"status": "ok",
+"versions": [
+"M.A.D. (USA)"
+],
+"image": "m-a-d-usa-1298ed"
+},
+{
+"title": "M.A.S.H",
+"id": "M.A.S.H (USA)",
+"status": "ok",
+"versions": [
+"M.A.S.H (USA)"
+],
+"image": "m-a-s-h-usa-32f5f0"
+},
+{
+"title": "MagiCard",
+"id": "MagiCard (USA)",
+"status": "partial",
+"versions": [
+"MagiCard (USA)"
+],
+"image": null
+},
+{
+"title": "Malagai",
+"id": "Malagai (USA)",
+"status": "ok",
+"versions": [
+"Malagai (USA)"
+],
+"image": "malagai-usa-485b55"
+},
+{
+"title": "Mangia'",
+"id": "Mangia' (USA)",
+"status": "ok",
+"versions": [
+"Mangia' (USA)"
+],
+"image": "mangia-usa-1d6a85"
+},
+{
+"title": "Marauder",
+"id": "Marauder (USA)",
+"status": "ok",
+"versions": [
+"Marauder (USA)"
+],
+"image": "marauder-usa-30b009"
+},
+{
+"title": "Marine Wars",
+"id": "Marine Wars (USA)",
+"status": "ok",
+"versions": [
+"Marine Wars (USA)"
+],
+"image": "marine-wars-usa-525ba5"
+},
+{
+"title": "Marineflieger",
+"id": "Marineflieger (Europe)",
+"status": "ok",
+"versions": [
+"Marineflieger (Europe)"
+],
+"image": "marineflieger-europe-e527e0"
+},
+{
+"title": "Mario Bros.",
+"id": "Mario Bros. (USA)",
+"status": "ok",
+"versions": [
+"Mario Bros. (USA)"
+],
+"image": "mario-bros-usa-643e9f"
+},
+{
+"title": "Master Builder",
+"id": "Master Builder (USA)",
+"status": "ok",
+"versions": [
+"Master Builder (USA)"
+],
+"image": "master-builder-usa-067594"
+},
+{
+"title": "Masters of the Universe - The Power of He-Man",
+"id": "Masters of the Universe - The Power of He-Man (USA)",
+"status": "no",
+"versions": [
+"Masters of the Universe - The Power of He-Man (USA)"
+],
+"image": null
+},
+{
+"title": "Math Gran Prix",
+"id": "Math Gran Prix (USA)",
+"status": "ok",
+"versions": [
+"Math Gran Prix (USA)",
+"Math Gran Prix (Europe)"
+],
+"image": "math-gran-prix-usa-b43019"
+},
+{
+"title": "Maze Craze - A Game of Cops 'n Robbers ~ Maze Mania - A Game of Cops 'n Robbers",
+"id": "Maze Craze - A Game of Cops 'n Robbers ~ Maze Mania - A Game of Cops 'n Robbers (USA)",
+"status": "ok",
+"versions": [
+"Maze Craze - A Game of Cops 'n Robbers ~ Maze Mania - A Game of Cops 'n Robbers (USA)"
+],
+"image": "maze-craze-a-game-of-cops-n-robbers-maze-aa07cc"
+},
+{
+"title": "Mazy Match",
+"id": "Mazy Match (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Mazy Match (USA) (Proto)"
+],
+"image": "mazy-match-usa-proto-a08fe5"
+},
+{
+"title": "McDonald's - Golden Arches Adventure",
+"id": "McDonald's - Golden Arches Adventure (USA) (Proto)",
+"status": "ok",
+"versions": [
+"McDonald's - Golden Arches Adventure (USA) (Proto)"
+],
+"image": "mcdonald-s-golden-arches-adventure-usa-p-a07e7c"
+},
+{
+"title": "Mega Force",
+"id": "Mega Force (USA)",
+"status": "ok",
+"versions": [
+"Mega Force (USA)"
+],
+"image": "mega-force-usa-f6eeca"
+},
+{
+"title": "MegaBoy",
+"id": "MegaBoy (USA)",
+"status": "no",
+"versions": [
+"MegaBoy (USA)"
+],
+"image": null
+},
+{
+"title": "MegaMania - A Space Nightmare",
+"id": "MegaMania - A Space Nightmare (USA)",
+"status": "ok",
+"versions": [
+"MegaMania - A Space Nightmare (USA)"
+],
+"image": "megamania-a-space-nightmare-usa-39f6d9"
+},
+{
+"title": "Mein Weg",
+"id": "Mein Weg (Germany) (En)",
+"status": "ok",
+"versions": [
+"Mein Weg (Germany) (En)"
+],
+"image": "mein-weg-germany-en-4fe21a"
+},
+{
+"title": "Meltdown",
+"id": "Meltdown (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Meltdown (USA) (Proto)"
+],
+"image": "meltdown-usa-proto-d7ffcf"
+},
+{
+"title": "Midnight Magic",
+"id": "Midnight Magic (USA)",
+"status": "ok",
+"versions": [
+"Midnight Magic (USA)",
+"Midnight Magic (Europe)"
+],
+"image": "midnight-magic-usa-4ce1b8"
+},
+{
+"title": "Millipede",
+"id": "Millipede (USA)",
+"status": "ok",
+"versions": [
+"Millipede (USA)"
+],
+"image": "millipede-usa-55e609"
+},
+{
+"title": "Mind Maze",
+"id": "Mind Maze (USA)",
+"status": "ok",
+"versions": [
+"Mind Maze (USA)"
+],
+"image": "mind-maze-usa-c22de2"
+},
+{
+"title": "Miner 2049er - Starring Bounty Bob",
+"id": "Miner 2049er - Starring Bounty Bob (USA)",
+"status": "ok",
+"versions": [
+"Miner 2049er - Starring Bounty Bob (USA)",
+"Miner 2049er - Starring Bounty Bob (Europe)"
+],
+"image": "miner-2049er-starring-bounty-bob-usa-46e619"
+},
+{
+"title": "Miner 2049er Volume II",
+"id": "Miner 2049er Volume II (USA)",
+"status": "partial",
+"versions": [
+"Miner 2049er Volume II (USA)"
+],
+"image": null
+},
+{
+"title": "Mines of Minos",
+"id": "Mines of Minos (USA)",
+"status": "ok",
+"versions": [
+"Mines of Minos (USA)"
+],
+"image": "mines-of-minos-usa-354758"
+},
+{
+"title": "Miniature Golf ~ Arcade Golf",
+"id": "Miniature Golf ~ Arcade Golf (USA)",
+"status": "ok",
+"versions": [
+"Miniature Golf ~ Arcade Golf (USA)"
+],
+"image": "miniature-golf-arcade-golf-usa-8774b3"
+},
+{
+"title": "Miss Piggy's Wedding",
+"id": "Miss Piggy's Wedding (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Miss Piggy's Wedding (USA) (Proto)"
+],
+"image": "miss-piggy-s-wedding-usa-proto-4980c9"
+},
+{
+"title": "Missile Command",
+"id": "Missile Command (USA)",
+"status": "ok",
+"versions": [
+"Missile Command (USA)",
+"Missile Command (Europe)"
+],
+"image": "missile-command-usa-037cd5"
+},
+{
+"title": "Missile Control",
+"id": "Missile Control (Europe)",
+"status": "ok",
+"versions": [
+"Missile Control (Europe)"
+],
+"image": "missile-control-europe-a7557b"
+},
+{
+"title": "Missile War ~ Astro War",
+"id": "Missile War ~ Astro War (Europe)",
+"status": "ok",
+"versions": [
+"Missile War ~ Astro War (Europe)"
+],
+"image": "missile-war-astro-war-europe-2c889e"
+},
+{
+"title": "Mission 3,000 A.D.",
+"id": "Mission 3,000 A.D. (USA)",
+"status": "ok",
+"versions": [
+"Mission 3,000 A.D. (USA)"
+],
+"image": "mission-3-000-a-d-usa-fd4ccb"
+},
+{
+"title": "Mission 3000",
+"id": "Mission 3000 (Europe)",
+"status": "ok",
+"versions": [
+"Mission 3000 (Europe)"
+],
+"image": "mission-3000-europe-542527"
+},
+{
+"title": "Mission Survive",
+"id": "Mission Survive (Europe)",
+"status": "ok",
+"versions": [
+"Mission Survive (Europe)"
+],
+"image": "mission-survive-europe-22b414"
+},
+{
+"title": "Mogul Maniac",
+"id": "Mogul Maniac (USA)",
+"status": "ok",
+"versions": [
+"Mogul Maniac (USA)"
+],
+"image": "mogul-maniac-usa-e5adfa"
+},
+{
+"title": "Monkey Music",
+"id": "Monkey Music (Unknown) (1982-08-18) (Proto)",
+"status": "ok",
+"versions": [
+"Monkey Music (Unknown) (1982-08-18) (Proto)"
+],
+"image": "monkey-music-unknown-1982-08-18-proto-ca2dc0"
+},
+{
+"title": "Monster Cise",
+"id": "Monster Cise (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Monster Cise (USA) (Proto)"
+],
+"image": "monster-cise-usa-proto-a2c26a"
+},
+{
+"title": "Montezuma's Revenge - Featuring Panama Joe",
+"id": "Montezuma's Revenge - Featuring Panama Joe (USA)",
+"status": "partial",
+"versions": [
+"Montezuma's Revenge - Featuring Panama Joe (USA)"
+],
+"image": null
+},
+{
+"title": "Moon Patrol",
+"id": "Moon Patrol (USA)",
+"status": "ok",
+"versions": [
+"Moon Patrol (USA)",
+"Moon Patrol (Europe)"
+],
+"image": "moon-patrol-usa-cefafa"
+},
+{
+"title": "Moonsweeper",
+"id": "Moonsweeper (USA)",
+"status": "ok",
+"versions": [
+"Moonsweeper (USA)"
+],
+"image": "moonsweeper-usa-dd6a2d"
+},
+{
+"title": "Morse Code Tutor",
+"id": "Morse Code Tutor (USA)",
+"status": "ok",
+"versions": [
+"Morse Code Tutor (USA)"
+],
+"image": "morse-code-tutor-usa-9632af"
+},
+{
+"title": "Motocross",
+"id": "Motocross (Europe)",
+"status": "ok",
+"versions": [
+"Motocross (Europe)",
+"Motocross (Europe) (Alt)"
+],
+"image": "motocross-europe-c8ba45"
+},
+{
+"title": "Motocross Racer",
+"id": "Motocross Racer (USA)",
+"status": "ok",
+"versions": [
+"Motocross Racer (USA)"
+],
+"image": "motocross-racer-usa-2bc897"
+},
+{
+"title": "MotoRodeo",
+"id": "MotoRodeo (USA)",
+"status": "ok",
+"versions": [
+"MotoRodeo (USA)"
+],
+"image": "motorodeo-usa-d6c840"
+},
+{
+"title": "Mountain King",
+"id": "Mountain King (USA)",
+"status": "no",
+"versions": [
+"Mountain King (USA)"
+],
+"image": null
+},
+{
+"title": "Mountain Man",
+"id": "Mountain Man (Europe)",
+"status": "ok",
+"versions": [
+"Mountain Man (Europe)"
+],
+"image": "mountain-man-europe-dc1f90"
+},
+{
+"title": "Mouse Trap",
+"id": "Mouse Trap (USA)",
+"status": "ok",
+"versions": [
+"Mouse Trap (USA)",
+"Mouse Trap (Europe)"
+],
+"image": "mouse-trap-usa-87714e"
+},
+{
+"title": "Mr. Do!",
+"id": "Mr. Do! (USA)",
+"status": "ok",
+"versions": [
+"Mr. Do! (USA)"
+],
+"image": "mr-do-usa-8d40ca"
+},
+{
+"title": "Mr. Do!'s Castle",
+"id": "Mr. Do!'s Castle (USA)",
+"status": "ok",
+"versions": [
+"Mr. Do!'s Castle (USA)"
+],
+"image": "mr-do-s-castle-usa-e868fb"
+},
+{
+"title": "Mr. Postman",
+"id": "Mr. Postman (USA)",
+"status": "ok",
+"versions": [
+"Mr. Postman (USA)",
+"Mr. Postman (Europe)"
+],
+"image": "mr-postman-usa-52c40b"
+},
+{
+"title": "Mr. Run and Jump",
+"id": "Mr. Run and Jump (World)",
+"status": "ok",
+"versions": [
+"Mr. Run and Jump (World)"
+],
+"image": "mr-run-and-jump-world-80d624"
+},
+{
+"title": "Mr. T + moderne Ritter, Der",
+"id": "Mr. T + moderne Ritter, Der (Europe) (En,De)",
+"status": "ok",
+"versions": [
+"Mr. T + moderne Ritter, Der (Europe) (En,De)"
+],
+"image": "mr-t-moderne-ritter-der-europe-en-de-19fdd2"
+},
+{
+"title": "Ms. Pac-Man",
+"id": "Ms. Pac-Man (USA)",
+"status": "ok",
+"versions": [
+"Ms. Pac-Man (USA)",
+"Ms. Pac-Man (Europe)"
+],
+"image": "ms-pac-man-usa-bb1102"
+},
+{
+"title": "Music Machine, The",
+"id": "Music Machine, The (USA)",
+"status": "ok",
+"versions": [
+"Music Machine, The (USA)"
+],
+"image": "music-machine-the-usa-7b64a6"
+},
+{
+"title": "My Golf",
+"id": "My Golf (Germany) (En,De)",
+"status": "ok",
+"versions": [
+"My Golf (Germany) (En,De)"
+],
+"image": "my-golf-germany-en-de-55fcab"
+},
+{
+"title": "Mysterious Thief, A",
+"id": "Mysterious Thief, A (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Mysterious Thief, A (USA) (Proto)"
+],
+"image": "mysterious-thief-a-usa-proto-3a9271"
+},
+{
+"title": "Name This Game",
+"id": "Name This Game (USA)",
+"status": "ok",
+"versions": [
+"Name This Game (USA)"
+],
+"image": "name-this-game-usa-9c3951"
+},
+{
+"title": "Night Driver",
+"id": "Night Driver (USA)",
+"status": "ok",
+"versions": [
+"Night Driver (USA)",
+"Night Driver (Europe)"
+],
+"image": "night-driver-usa-41ae52"
+},
+{
+"title": "Nightmare",
+"id": "Nightmare (Europe)",
+"status": "ok",
+"versions": [
+"Nightmare (Europe)"
+],
+"image": "nightmare-europe-756603"
+},
+{
+"title": "No Escape!",
+"id": "No Escape! (USA)",
+"status": "ok",
+"versions": [
+"No Escape! (USA)"
+],
+"image": "no-escape-usa-3e0d4b"
+},
+{
+"title": "Nuts",
+"id": "Nuts (USA)",
+"status": "ok",
+"versions": [
+"Nuts (USA)",
+"Nuts (Europe)"
+],
+"image": "nuts-usa-7360cd"
+},
+{
+"title": "O Monstro Marinho",
+"id": "O Monstro Marinho (Europe)",
+"status": "ok",
+"versions": [
+"O Monstro Marinho (Europe)"
+],
+"image": "o-monstro-marinho-europe-c0c594"
+},
+{
+"title": "Obelix",
+"id": "Obelix (USA)",
+"status": "ok",
+"versions": [
+"Obelix (USA)"
+],
+"image": "obelix-usa-afbcd9"
+},
+{
+"title": "Off the Wall",
+"id": "Off the Wall (USA)",
+"status": "ok",
+"versions": [
+"Off the Wall (USA)",
+"Off the Wall (Europe)"
+],
+"image": "off-the-wall-usa-910bc3"
+},
+{
+"title": "Off Your Rocker",
+"id": "Off Your Rocker (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Off Your Rocker (USA) (Proto)"
+],
+"image": "off-your-rocker-usa-proto-3bc2f0"
+},
+{
+"title": "Official Frogger, The",
+"id": "Official Frogger, The (USA)",
+"status": "no",
+"versions": [
+"Official Frogger, The (USA)"
+],
+"image": null
+},
+{
+"title": "Oink!",
+"id": "Oink! (USA)",
+"status": "ok",
+"versions": [
+"Oink! (USA)"
+],
+"image": "oink-usa-bd25a5"
+},
+{
+"title": "Omega Race",
+"id": "Omega Race (USA)",
+"status": "no",
+"versions": [
+"Omega Race (USA)"
+],
+"image": null
+},
+{
+"title": "Open Sesame",
+"id": "Open Sesame (Europe) (Goliath)",
+"status": "ok",
+"versions": [
+"Open Sesame (Europe) (Goliath)"
+],
+"image": "open-sesame-europe-goliath-f4da37"
+},
+{
+"title": "Oscar's Trash Race",
+"id": "Oscar's Trash Race (USA)",
+"status": "ok",
+"versions": [
+"Oscar's Trash Race (USA)"
+],
+"image": "oscar-s-trash-race-usa-d771ba"
+},
+{
+"title": "Othello",
+"id": "Othello (USA)",
+"status": "ok",
+"versions": [
+"Othello (USA)",
+"Othello (Europe)"
+],
+"image": "othello-usa-1b9637"
+},
+{
+"title": "Out of Control",
+"id": "Out of Control (USA)",
+"status": "ok",
+"versions": [
+"Out of Control (USA)"
+],
+"image": "out-of-control-usa-dad334"
+},
+{
+"title": "Outlaw",
+"id": "Outlaw (Europe)",
+"status": "ok",
+"versions": [
+"Outlaw (Europe)"
+],
+"image": "outlaw-europe-d82b26"
+},
+{
+"title": "Outlaw ~ Gunslinger",
+"id": "Outlaw ~ Gunslinger (USA)",
+"status": "ok",
+"versions": [
+"Outlaw ~ Gunslinger (USA)"
+],
+"image": "outlaw-gunslinger-usa-d04d83"
+},
+{
+"title": "Pac-Man",
+"id": "Pac-Man (USA)",
+"status": "ok",
+"versions": [
+"Pac-Man (USA)"
+],
+"image": "pac-man-usa-25a573"
+},
+{
+"title": "Panda Chase",
+"id": "Panda Chase (Europe)",
+"status": "ok",
+"versions": [
+"Panda Chase (Europe)"
+],
+"image": "panda-chase-europe-54d88a"
+},
+{
+"title": "Parachute",
+"id": "Parachute (Europe)",
+"status": "ok",
+"versions": [
+"Parachute (Europe)"
+],
+"image": "parachute-europe-970c50"
+},
+{
+"title": "Party Mix",
+"id": "Party Mix (USA)",
+"status": "no",
+"versions": [
+"Party Mix (USA)"
+],
+"image": null
+},
+{
+"title": "Peek-A-Boo",
+"id": "Peek-A-Boo (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Peek-A-Boo (USA) (Proto)"
+],
+"image": "peek-a-boo-usa-proto-3d9be6"
+},
+{
+"title": "Pengo",
+"id": "Pengo (USA)",
+"status": "ok",
+"versions": [
+"Pengo (USA)"
+],
+"image": "pengo-usa-352610"
+},
+{
+"title": "Pete Rose Baseball",
+"id": "Pete Rose Baseball (USA)",
+"status": "ok",
+"versions": [
+"Pete Rose Baseball (USA)"
+],
+"image": "pete-rose-baseball-usa-a252ab"
+},
+{
+"title": "Peter Penguin",
+"id": "Peter Penguin (Europe)",
+"status": "ok",
+"versions": [
+"Peter Penguin (Europe)"
+],
+"image": "peter-penguin-europe-656245"
+},
+{
+"title": "Phantom Tank",
+"id": "Phantom Tank (Europe)",
+"status": "ok",
+"versions": [
+"Phantom Tank (Europe)"
+],
+"image": "phantom-tank-europe-f7b058"
+},
+{
+"title": "Phantom UFO",
+"id": "Phantom UFO (USA)",
+"status": "ok",
+"versions": [
+"Phantom UFO (USA)"
+],
+"image": "phantom-ufo-usa-a5610c"
+},
+{
+"title": "Phantom-Panzer + Phantom Tank",
+"id": "Phantom-Panzer + Phantom Tank (Germany)",
+"status": "ok",
+"versions": [
+"Phantom-Panzer + Phantom Tank (Germany)"
+],
+"image": "phantom-panzer-phantom-tank-germany-2bb38c"
+},
+{
+"title": "Pharaoh's Curse",
+"id": "Pharaoh's Curse (USA)",
+"status": "ok",
+"versions": [
+"Pharaoh's Curse (USA)",
+"Pharaoh's Curse (Europe)"
+],
+"image": "pharaoh-s-curse-usa-d1a40b"
+},
+{
+"title": "Phaser Patrol",
+"id": "Phaser Patrol (USA)",
+"status": "no",
+"versions": [
+"Phaser Patrol (USA)"
+],
+"image": null
+},
+{
+"title": "Phoenix",
+"id": "Phoenix (USA)",
+"status": "ok",
+"versions": [
+"Phoenix (USA)",
+"Phoenix (Europe)"
+],
+"image": "phoenix-usa-851dfd"
+},
+{
+"title": "Pick 'n' Pile",
+"id": "Pick 'n' Pile (Europe)",
+"status": "ok",
+"versions": [
+"Pick 'n' Pile (Europe)"
+],
+"image": "pick-n-pile-europe-c9f17f"
+},
+{
+"title": "Pick Up",
+"id": "Pick Up (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Pick Up (USA) (Proto)"
+],
+"image": "pick-up-usa-proto-c6080f"
+},
+{
+"title": "Picnic",
+"id": "Picnic (USA)",
+"status": "ok",
+"versions": [
+"Picnic (USA)"
+],
+"image": "picnic-usa-f14093"
+},
+{
+"title": "Piece o' Cake",
+"id": "Piece o' Cake (USA)",
+"status": "ok",
+"versions": [
+"Piece o' Cake (USA)"
+],
+"image": "piece-o-cake-usa-4dae15"
+},
+{
+"title": "Pigs in Space - Starring Miss Piggy",
+"id": "Pigs in Space - Starring Miss Piggy (USA)",
+"status": "ok",
+"versions": [
+"Pigs in Space - Starring Miss Piggy (USA)"
+],
+"image": "pigs-in-space-starring-miss-piggy-usa-89dff4"
+},
+{
+"title": "Piraten Schiff",
+"id": "Piraten Schiff (Germany)",
+"status": "ok",
+"versions": [
+"Piraten Schiff (Germany)"
+],
+"image": "piraten-schiff-germany-807845"
+},
+{
+"title": "Pitfall! - Pitfall Harry's Jungle Adventure",
+"id": "Pitfall! - Pitfall Harry's Jungle Adventure (USA)",
+"status": "ok",
+"versions": [
+"Pitfall! - Pitfall Harry's Jungle Adventure (USA)"
+],
+"image": "pitfall-pitfall-harry-s-jungle-adventure-7d313e"
+},
+{
+"title": "Pizza Chef",
+"id": "Pizza Chef (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Pizza Chef (USA) (Proto)"
+],
+"image": "pizza-chef-usa-proto-3678c0"
+},
+{
+"title": "Planet of the Apes",
+"id": "Planet of the Apes (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Planet of the Apes (USA) (Proto)"
+],
+"image": "planet-of-the-apes-usa-proto-2e9ad3"
+},
+{
+"title": "Planet Patrol",
+"id": "Planet Patrol (USA)",
+"status": "ok",
+"versions": [
+"Planet Patrol (USA)"
+],
+"image": "planet-patrol-usa-cdf031"
+},
+{
+"title": "Plaque Attack",
+"id": "Plaque Attack (USA)",
+"status": "ok",
+"versions": [
+"Plaque Attack (USA)"
+],
+"image": "plaque-attack-usa-6d59a9"
+},
+{
+"title": "Pleiades",
+"id": "Pleiades (USA) (Proto 1) (1983-xx-xx)",
+"status": "ok",
+"versions": [
+"Pleiades (USA) (Proto 1) (1983-xx-xx)",
+"Pleiades (USA) (Proto 2) (1983-05-06)"
+],
+"image": "pleiades-usa-proto-1-1983-xx-xx-5276b8"
+},
+{
+"title": "Polaris",
+"id": "Polaris (USA)",
+"status": "ok",
+"versions": [
+"Polaris (USA)"
+],
+"image": "polaris-usa-f756bc"
+},
+{
+"title": "Pole Position",
+"id": "Pole Position (USA)",
+"status": "ok",
+"versions": [
+"Pole Position (USA)",
+"Pole Position (Europe)"
+],
+"image": "pole-position-usa-c85255"
+},
+{
+"title": "Polo",
+"id": "Polo (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Polo (USA) (Proto)"
+],
+"image": "polo-usa-proto-db2f7b"
+},
+{
+"title": "Pompeii",
+"id": "Pompeii (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Pompeii (USA) (Proto)"
+],
+"image": "pompeii-usa-proto-c2ba6d"
+},
+{
+"title": "Pooyan",
+"id": "Pooyan (USA)",
+"status": "ok",
+"versions": [
+"Pooyan (USA)"
+],
+"image": "pooyan-usa-d3404b"
+},
+{
+"title": "Popeye",
+"id": "Popeye (USA)",
+"status": "ok",
+"versions": [
+"Popeye (USA)",
+"Popeye (Europe)"
+],
+"image": "popeye-usa-753d56"
+},
+{
+"title": "Porky's",
+"id": "Porky's (USA)",
+"status": "ok",
+"versions": [
+"Porky's (USA)"
+],
+"image": "porky-s-usa-6edeae"
+},
+{
+"title": "Power Lords",
+"id": "Power Lords (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Power Lords (USA) (Proto)"
+],
+"image": "power-lords-usa-proto-29f1b5"
+},
+{
+"title": "Pressure Cooker",
+"id": "Pressure Cooker (USA)",
+"status": "ok",
+"versions": [
+"Pressure Cooker (USA)"
+],
+"image": "pressure-cooker-usa-8d01f9"
+},
+{
+"title": "Private Eye",
+"id": "Private Eye (USA)",
+"status": "ok",
+"versions": [
+"Private Eye (USA)"
+],
+"image": "private-eye-usa-0ac4db"
+},
+{
+"title": "Pursuit of the Pink Panther",
+"id": "Pursuit of the Pink Panther (USA) (Proto) [b]",
+"status": "no",
+"versions": [
+"Pursuit of the Pink Panther (USA) (Proto) [b]"
+],
+"image": null
+},
+{
+"title": "Pygmy",
+"id": "Pygmy (Europe)",
+"status": "ok",
+"versions": [
+"Pygmy (Europe)"
+],
+"image": "pygmy-europe-534dc2"
+},
+{
+"title": "Q-bert",
+"id": "Q-bert (USA)",
+"status": "ok",
+"versions": [
+"Q-bert (USA)",
+"Q-bert (Europe)"
+],
+"image": "q-bert-usa-a8efa6"
+},
+{
+"title": "Q-bert's Qubes",
+"id": "Q-bert's Qubes (USA)",
+"status": "no",
+"versions": [
+"Q-bert's Qubes (USA)"
+],
+"image": null
+},
+{
+"title": "Quadrun",
+"id": "Quadrun (USA)",
+"status": "ok",
+"versions": [
+"Quadrun (USA)",
+"Quadrun (USA, Europe) (Atari Anthology)"
+],
+"image": "quadrun-usa-1c0bc9"
+},
+{
+"title": "Quest for Quintana Roo",
+"id": "Quest for Quintana Roo (USA)",
+"status": "ok",
+"versions": [
+"Quest for Quintana Roo (USA)"
+],
+"image": "quest-for-quintana-roo-usa-52a756"
+},
+{
+"title": "Quick Step",
+"id": "Quick Step (Europe)",
+"status": "ok",
+"versions": [
+"Quick Step (Europe)"
+],
+"image": "quick-step-europe-faef9f"
+},
+{
+"title": "Quick Step!",
+"id": "Quick Step! (USA)",
+"status": "ok",
+"versions": [
+"Quick Step! (USA)"
+],
+"image": "quick-step-usa-804f30"
+},
+{
+"title": "R2D Tank",
+"id": "R2D Tank (USA) (Proto)",
+"status": "ok",
+"versions": [
+"R2D Tank (USA) (Proto)"
+],
+"image": "r2d-tank-usa-proto-fdacfa"
+},
+{
+"title": "Rabbit Transit",
+"id": "Rabbit Transit (USA)",
+"status": "no",
+"versions": [
+"Rabbit Transit (USA)"
+],
+"image": null
+},
+{
+"title": "Racer",
+"id": "Racer (USA) (Proto)",
+"status": "partial",
+"versions": [
+"Racer (USA) (Proto)"
+],
+"image": null
+},
+{
+"title": "Racing Car",
+"id": "Racing Car (USA)",
+"status": "ok",
+"versions": [
+"Racing Car (USA)"
+],
+"image": "racing-car-usa-88ba04"
+},
+{
+"title": "Racquetball",
+"id": "Racquetball (USA)",
+"status": "ok",
+"versions": [
+"Racquetball (USA)"
+],
+"image": "racquetball-usa-b8eb09"
+},
+{
+"title": "Radar",
+"id": "Radar (USA)",
+"status": "ok",
+"versions": [
+"Radar (USA)"
+],
+"image": "radar-usa-1d1402"
+},
+{
+"title": "Radar Lock",
+"id": "Radar Lock (USA)",
+"status": "partial",
+"versions": [
+"Radar Lock (USA)",
+"Radar Lock (Europe)"
+],
+"image": null
+},
+{
+"title": "Raft Rider",
+"id": "Raft Rider (USA)",
+"status": "ok",
+"versions": [
+"Raft Rider (USA)"
+],
+"image": "raft-rider-usa-73a775"
+},
+{
+"title": "Raiders of the Lost Ark",
+"id": "Raiders of the Lost Ark (USA)",
+"status": "ok",
+"versions": [
+"Raiders of the Lost Ark (USA)"
+],
+"image": "raiders-of-the-lost-ark-usa-f667fc"
+},
+{
+"title": "Ram It",
+"id": "Ram It (USA)",
+"status": "ok",
+"versions": [
+"Ram It (USA)"
+],
+"image": "ram-it-usa-9506dd"
+},
+{
+"title": "Rampage!",
+"id": "Rampage! (USA)",
+"status": "ok",
+"versions": [
+"Rampage! (USA)"
+],
+"image": "rampage-usa-fc5f62"
+},
+{
+"title": "Raumpatrouille",
+"id": "Raumpatrouille (USA)",
+"status": "ok",
+"versions": [
+"Raumpatrouille (USA)"
+],
+"image": "raumpatrouille-usa-3cbcc3"
+},
+{
+"title": "Reactor",
+"id": "Reactor (USA)",
+"status": "ok",
+"versions": [
+"Reactor (USA)"
+],
+"image": "reactor-usa-f6e71b"
+},
+{
+"title": "RealSports Baseball",
+"id": "RealSports Baseball (USA)",
+"status": "ok",
+"versions": [
+"RealSports Baseball (USA)"
+],
+"image": "realsports-baseball-usa-37a0f3"
+},
+{
+"title": "RealSports Basketball",
+"id": "RealSports Basketball (Europe) (Proto)",
+"status": "ok",
+"versions": [
+"RealSports Basketball (Europe) (Proto)"
+],
+"image": "realsports-basketball-europe-proto-bb0136"
+},
+{
+"title": "RealSports Boxing",
+"id": "RealSports Boxing (USA)",
+"status": "ok",
+"versions": [
+"RealSports Boxing (USA)",
+"RealSports Boxing (Europe)"
+],
+"image": "realsports-boxing-usa-b0e37d"
+},
+{
+"title": "RealSports Football",
+"id": "RealSports Football (USA)",
+"status": "ok",
+"versions": [
+"RealSports Football (USA)"
+],
+"image": "realsports-football-usa-f4d3dc"
+},
+{
+"title": "RealSports Soccer",
+"id": "RealSports Soccer (USA)",
+"status": "ok",
+"versions": [
+"RealSports Soccer (USA)"
+],
+"image": "realsports-soccer-usa-9c2dee"
+},
+{
+"title": "Realsports Soccer",
+"id": "Realsports Soccer (Europe)",
+"status": "ok",
+"versions": [
+"Realsports Soccer (Europe)"
+],
+"image": "realsports-soccer-europe-c6ac13"
+},
+{
+"title": "RealSports Tennis",
+"id": "RealSports Tennis (USA)",
+"status": "ok",
+"versions": [
+"RealSports Tennis (USA)",
+"RealSports Tennis (Europe)"
+],
+"image": "realsports-tennis-usa-d9dee5"
+},
+{
+"title": "RealSports Volleyball",
+"id": "RealSports Volleyball (USA)",
+"status": "ok",
+"versions": [
+"RealSports Volleyball (USA)"
+],
+"image": "realsports-volleyball-usa-c3cf33"
+},
+{
+"title": "Realsports Volleyball",
+"id": "Realsports Volleyball (Europe)",
+"status": "ok",
+"versions": [
+"Realsports Volleyball (Europe)"
+],
+"image": "realsports-volleyball-europe-5b9ead"
+},
+{
+"title": "Red Sea Crossing",
+"id": "Red Sea Crossing (USA)",
+"status": "ok",
+"versions": [
+"Red Sea Crossing (USA)"
+],
+"image": "red-sea-crossing-usa-358f86"
+},
+{
+"title": "Rescue Terra I",
+"id": "Rescue Terra I (USA)",
+"status": "ok",
+"versions": [
+"Rescue Terra I (USA)"
+],
+"image": "rescue-terra-i-usa-901859"
+},
+{
+"title": "Revenge of the Beefsteak Tomatoes",
+"id": "Revenge of the Beefsteak Tomatoes (USA)",
+"status": "ok",
+"versions": [
+"Revenge of the Beefsteak Tomatoes (USA)"
+],
+"image": "revenge-of-the-beefsteak-tomatoes-usa-31cbbc"
+},
+{
+"title": "Riddle of the Sphinx",
+"id": "Riddle of the Sphinx (USA)",
+"status": "ok",
+"versions": [
+"Riddle of the Sphinx (USA)"
+],
+"image": "riddle-of-the-sphinx-usa-35c6f5"
+},
+{
+"title": "River Patrol",
+"id": "River Patrol (USA)",
+"status": "partial",
+"versions": [
+"River Patrol (USA)"
+],
+"image": null
+},
+{
+"title": "River Raid",
+"id": "River Raid (USA)",
+"status": "ok",
+"versions": [
+"River Raid (USA)",
+"River Raid (Europe)"
+],
+"image": "river-raid-usa-ba15bc"
+},
+{
+"title": "River Raid II",
+"id": "River Raid II (USA)",
+"status": "ok",
+"versions": [
+"River Raid II (USA)"
+],
+"image": "river-raid-ii-usa-ec268a"
+},
+{
+"title": "Road Runner",
+"id": "Road Runner (USA)",
+"status": "ok",
+"versions": [
+"Road Runner (USA)"
+],
+"image": "road-runner-usa-8f51a7"
+},
+{
+"title": "Robin Hood",
+"id": "Robin Hood (USA)",
+"status": "ok",
+"versions": [
+"Robin Hood (USA)",
+"Robin Hood (Europe)"
+],
+"image": "robin-hood-usa-016994"
+},
+{
+"title": "Robot Tank",
+"id": "Robot Tank (USA)",
+"status": "ok",
+"versions": [
+"Robot Tank (USA)"
+],
+"image": "robot-tank-usa-56f113"
+},
+{
+"title": "Roc 'n Rope",
+"id": "Roc 'n Rope (USA)",
+"status": "ok",
+"versions": [
+"Roc 'n Rope (USA)"
+],
+"image": "roc-n-rope-usa-ad0e52"
+},
+{
+"title": "Rocky & Bullwinkle",
+"id": "Rocky & Bullwinkle (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Rocky & Bullwinkle (USA) (Proto)"
+],
+"image": "rocky-bullwinkle-usa-proto-4058c0"
+},
+{
+"title": "Room of Doom",
+"id": "Room of Doom (USA)",
+"status": "ok",
+"versions": [
+"Room of Doom (USA)"
+],
+"image": "room-of-doom-usa-096d49"
+},
+{
+"title": "Rubik's Cube",
+"id": "Rubik's Cube (USA)",
+"status": "ok",
+"versions": [
+"Rubik's Cube (USA)"
+],
+"image": "rubik-s-cube-usa-b58d4e"
+},
+{
+"title": "Rubik's Cube 3-D",
+"id": "Rubik's Cube 3-D (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Rubik's Cube 3-D (USA) (Proto)"
+],
+"image": "rubik-s-cube-3-d-usa-proto-81b974"
+},
+{
+"title": "Rush Hour",
+"id": "Rush Hour (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Rush Hour (USA) (Proto)"
+],
+"image": "rush-hour-usa-proto-3b0680"
+},
+{
+"title": "S.A.C. Alert",
+"id": "S.A.C. Alert (USA) (Proto)",
+"status": "ok",
+"versions": [
+"S.A.C. Alert (USA) (Proto)"
+],
+"image": "s-a-c-alert-usa-proto-73a4a9"
+},
+{
+"title": "Saboteur",
+"id": "Saboteur (USA) (Proto) (1983-09-02)",
+"status": "ok",
+"versions": [
+"Saboteur (USA) (Proto) (1983-09-02)",
+"Saboteur (USA) (Proto) (1983-12-20)"
+],
+"image": "saboteur-usa-proto-1983-09-02-02bc18"
+},
+{
+"title": "Save Mary!",
+"id": "Save Mary! (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Save Mary! (USA) (Proto)"
+],
+"image": "save-mary-usa-proto-6ca535"
+},
+{
+"title": "Save Our Ship",
+"id": "Save Our Ship (USA)",
+"status": "ok",
+"versions": [
+"Save Our Ship (USA)",
+"Save Our Ship (Europe)"
+],
+"image": "save-our-ship-usa-cfc5dc"
+},
+{
+"title": "Save the Whales",
+"id": "Save the Whales (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Save the Whales (USA) (Proto)"
+],
+"image": "save-the-whales-usa-proto-710175"
+},
+{
+"title": "SCRMNN",
+"id": "SCRMNN (USA) (Proto)",
+"status": "ok",
+"versions": [
+"SCRMNN (USA) (Proto)"
+],
+"image": "scrmnn-usa-proto-52a8a9"
+},
+{
+"title": "Sea Battle",
+"id": "Sea Battle (USA)",
+"status": "ok",
+"versions": [
+"Sea Battle (USA)"
+],
+"image": "sea-battle-usa-77e417"
+},
+{
+"title": "Sea Hawk",
+"id": "Sea Hawk (USA)",
+"status": "ok",
+"versions": [
+"Sea Hawk (USA)"
+],
+"image": "sea-hawk-usa-ac9581"
+},
+{
+"title": "Sea Hunt ~ Scuba Diver",
+"id": "Sea Hunt ~ Scuba Diver (USA)",
+"status": "ok",
+"versions": [
+"Sea Hunt ~ Scuba Diver (USA)"
+],
+"image": "sea-hunt-scuba-diver-usa-d0078c"
+},
+{
+"title": "Sea Monster",
+"id": "Sea Monster (USA)",
+"status": "ok",
+"versions": [
+"Sea Monster (USA)"
+],
+"image": "sea-monster-usa-86f4fa"
+},
+{
+"title": "Seahawk",
+"id": "Seahawk (Europe)",
+"status": "ok",
+"versions": [
+"Seahawk (Europe)"
+],
+"image": "seahawk-europe-438e25"
+},
+{
+"title": "Seaquest",
+"id": "Seaquest (USA)",
+"status": "ok",
+"versions": [
+"Seaquest (USA)"
+],
+"image": "seaquest-usa-911a6f"
+},
+{
+"title": "Seaquest - International Edition",
+"id": "Seaquest - International Edition (Europe)",
+"status": "ok",
+"versions": [
+"Seaquest - International Edition (Europe)"
+],
+"image": "seaquest-international-edition-europe-8d9299"
+},
+{
+"title": "Secret Agent",
+"id": "Secret Agent (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Secret Agent (USA) (Proto)"
+],
+"image": "secret-agent-usa-proto-af70c4"
+},
+{
+"title": "Secret Quest",
+"id": "Secret Quest (USA)",
+"status": "ok",
+"versions": [
+"Secret Quest (USA)"
+],
+"image": "secret-quest-usa-25f69e"
+},
+{
+"title": "See Saw",
+"id": "See Saw (Europe)",
+"status": "ok",
+"versions": [
+"See Saw (Europe)"
+],
+"image": "see-saw-europe-0e3538"
+},
+{
+"title": "Sentinel",
+"id": "Sentinel (USA)",
+"status": "ok",
+"versions": [
+"Sentinel (USA)"
+],
+"image": "sentinel-usa-b93be3"
+},
+{
+"title": "Sesam Offne Dich!",
+"id": "Sesam Offne Dich! (Germany)",
+"status": "ok",
+"versions": [
+"Sesam Offne Dich! (Germany)"
+],
+"image": "sesam-offne-dich-germany-f8418d"
+},
+{
+"title": "Shootin' Gallery",
+"id": "Shootin' Gallery (USA)",
+"status": "ok",
+"versions": [
+"Shootin' Gallery (USA)",
+"Shootin' Gallery (Europe) (Proto)"
+],
+"image": "shootin-gallery-usa-22686b"
+},
+{
+"title": "Shooting Arcade",
+"id": "Shooting Arcade (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Shooting Arcade (USA) (Proto)"
+],
+"image": "shooting-arcade-usa-proto-f2a06b"
+},
+{
+"title": "Shuttle Orbiter",
+"id": "Shuttle Orbiter (USA)",
+"status": "ok",
+"versions": [
+"Shuttle Orbiter (USA)"
+],
+"image": "shuttle-orbiter-usa-d2834d"
+},
+{
+"title": "Sinistar",
+"id": "Sinistar (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Sinistar (USA) (Proto)"
+],
+"image": "sinistar-usa-proto-15485f"
+},
+{
+"title": "Sir Lancelot",
+"id": "Sir Lancelot (USA)",
+"status": "ok",
+"versions": [
+"Sir Lancelot (USA)",
+"Sir Lancelot (Europe)"
+],
+"image": "sir-lancelot-usa-b3eba2"
+},
+{
+"title": "Six Pack",
+"id": "Six Pack (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Six Pack (USA) (Proto)"
+],
+"image": "six-pack-usa-proto-ed2ef7"
+},
+{
+"title": "Skate Boardin'",
+"id": "Skate Boardin' (USA)",
+"status": "ok",
+"versions": [
+"Skate Boardin' (USA)",
+"Skate Boardin' (USA) (Activision Anthology - Remix Edition)"
+],
+"image": "skate-boardin-usa-181ac1"
+},
+{
+"title": "Skeet Shoot",
+"id": "Skeet Shoot (USA)",
+"status": "ok",
+"versions": [
+"Skeet Shoot (USA)"
+],
+"image": "skeet-shoot-usa-9ecbdb"
+},
+{
+"title": "Ski Hunt",
+"id": "Ski Hunt (Europe)",
+"status": "ok",
+"versions": [
+"Ski Hunt (Europe)"
+],
+"image": "ski-hunt-europe-f73c81"
+},
+{
+"title": "Ski Run",
+"id": "Ski Run (USA)",
+"status": "ok",
+"versions": [
+"Ski Run (USA)",
+"Ski Run (Europe)"
+],
+"image": "ski-run-usa-5d0598"
+},
+{
+"title": "Skiing",
+"id": "Skiing (USA)",
+"status": "ok",
+"versions": [
+"Skiing (USA)"
+],
+"image": "skiing-usa-7178e3"
+},
+{
+"title": "Skindiver",
+"id": "Skindiver (Europe)",
+"status": "ok",
+"versions": [
+"Skindiver (Europe)"
+],
+"image": "skindiver-europe-c09d7f"
+},
+{
+"title": "Sky Alien ~ Assault",
+"id": "Sky Alien ~ Assault (Europe)",
+"status": "ok",
+"versions": [
+"Sky Alien ~ Assault (Europe)"
+],
+"image": "sky-alien-assault-europe-fa7b2f"
+},
+{
+"title": "Sky Diver",
+"id": "Sky Diver (Europe)",
+"status": "ok",
+"versions": [
+"Sky Diver (Europe)"
+],
+"image": "sky-diver-europe-a681bb"
+},
+{
+"title": "Sky Diver ~ Dare Diver",
+"id": "Sky Diver ~ Dare Diver (USA)",
+"status": "ok",
+"versions": [
+"Sky Diver ~ Dare Diver (USA)"
+],
+"image": "sky-diver-dare-diver-usa-722c1d"
+},
+{
+"title": "Sky Jinks",
+"id": "Sky Jinks (USA)",
+"status": "ok",
+"versions": [
+"Sky Jinks (USA)"
+],
+"image": "sky-jinks-usa-bc666b"
+},
+{
+"title": "Sky Patrol",
+"id": "Sky Patrol (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Sky Patrol (USA) (Proto)"
+],
+"image": "sky-patrol-usa-proto-5edf18"
+},
+{
+"title": "Sky Skipper",
+"id": "Sky Skipper (USA)",
+"status": "ok",
+"versions": [
+"Sky Skipper (USA)"
+],
+"image": "sky-skipper-usa-fd1eb6"
+},
+{
+"title": "Slot Machine ~ Slots",
+"id": "Slot Machine ~ Slots (USA)",
+"status": "ok",
+"versions": [
+"Slot Machine ~ Slots (USA)"
+],
+"image": "slot-machine-slots-usa-bc7a07"
+},
+{
+"title": "Slot Racers",
+"id": "Slot Racers (Europe)",
+"status": "ok",
+"versions": [
+"Slot Racers (Europe)"
+],
+"image": "slot-racers-europe-9f79a0"
+},
+{
+"title": "Slot Racers ~ Maze",
+"id": "Slot Racers ~ Maze (USA)",
+"status": "ok",
+"versions": [
+"Slot Racers ~ Maze (USA)"
+],
+"image": "slot-racers-maze-usa-1ad35d"
+},
+{
+"title": "Smurf - Rescue in Gargamel's Castle",
+"id": "Smurf - Rescue in Gargamel's Castle (USA)",
+"status": "ok",
+"versions": [
+"Smurf - Rescue in Gargamel's Castle (USA)"
+],
+"image": "smurf-rescue-in-gargamel-s-castle-usa-e9dd5d"
+},
+{
+"title": "Smurfs Save the Day",
+"id": "Smurfs Save the Day (USA)",
+"status": "ok",
+"versions": [
+"Smurfs Save the Day (USA)"
+],
+"image": "smurfs-save-the-day-usa-1c40b5"
+},
+{
+"title": "Snail Against Squirrel",
+"id": "Snail Against Squirrel (Europe)",
+"status": "ok",
+"versions": [
+"Snail Against Squirrel (Europe)"
+],
+"image": "snail-against-squirrel-europe-9b7267"
+},
+{
+"title": "Sneak 'n Peek",
+"id": "Sneak 'n Peek (USA)",
+"status": "ok",
+"versions": [
+"Sneak 'n Peek (USA)"
+],
+"image": "sneak-n-peek-usa-acfbef"
+},
+{
+"title": "Snoopy and the Red Baron",
+"id": "Snoopy and the Red Baron (USA)",
+"status": "ok",
+"versions": [
+"Snoopy and the Red Baron (USA)"
+],
+"image": "snoopy-and-the-red-baron-usa-3e9f7b"
+},
+{
+"title": "Snow White and the Seven Dwarfs",
+"id": "Snow White and the Seven Dwarfs (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Snow White and the Seven Dwarfs (USA) (Proto)"
+],
+"image": "snow-white-and-the-seven-dwarfs-usa-prot-9ff6f6"
+},
+{
+"title": "Solar Fox",
+"id": "Solar Fox (USA)",
+"status": "ok",
+"versions": [
+"Solar Fox (USA)"
+],
+"image": "solar-fox-usa-2fe886"
+},
+{
+"title": "Solar Storm",
+"id": "Solar Storm (USA)",
+"status": "ok",
+"versions": [
+"Solar Storm (USA)"
+],
+"image": "solar-storm-usa-14977c"
+},
+{
+"title": "Solaris",
+"id": "Solaris (USA)",
+"status": "ok",
+"versions": [
+"Solaris (USA)"
+],
+"image": "solaris-usa-24c6e3"
+},
+{
+"title": "Sonar",
+"id": "Sonar (Unknown) (Proto)",
+"status": "ok",
+"versions": [
+"Sonar (Unknown) (Proto)"
+],
+"image": "sonar-unknown-proto-717d1a"
+},
+{
+"title": "Sorcerer",
+"id": "Sorcerer (USA)",
+"status": "ok",
+"versions": [
+"Sorcerer (USA)"
+],
+"image": "sorcerer-usa-e406b4"
+},
+{
+"title": "Sorcerer's Apprentice",
+"id": "Sorcerer's Apprentice (USA)",
+"status": "ok",
+"versions": [
+"Sorcerer's Apprentice (USA)"
+],
+"image": "sorcerer-s-apprentice-usa-dfdae8"
+},
+{
+"title": "Sound",
+"id": "Sound (USA, Europe) (Demo) (Atari Anthology)",
+"status": "partial",
+"versions": [
+"Sound (USA, Europe) (Demo) (Atari Anthology)"
+],
+"image": null
+},
+{
+"title": "Space Attack",
+"id": "Space Attack (USA)",
+"status": "ok",
+"versions": [
+"Space Attack (USA)"
+],
+"image": "space-attack-usa-37ebcf"
+},
+{
+"title": "Space Cavern",
+"id": "Space Cavern (USA)",
+"status": "ok",
+"versions": [
+"Space Cavern (USA)"
+],
+"image": "space-cavern-usa-11f74d"
+},
+{
+"title": "Space Invaders",
+"id": "Space Invaders (USA)",
+"status": "ok",
+"versions": [
+"Space Invaders (USA)",
+"Space Invaders (Europe)",
+"Space Invaders (Europe) (Alt)"
+],
+"image": "space-invaders-usa-89f536"
+},
+{
+"title": "Space Jockey",
+"id": "Space Jockey (USA)",
+"status": "ok",
+"versions": [
+"Space Jockey (USA)"
+],
+"image": "space-jockey-usa-093f94"
+},
+{
+"title": "Space Shuttle - A Journey into Space",
+"id": "Space Shuttle - A Journey into Space (USA)",
+"status": "ok",
+"versions": [
+"Space Shuttle - A Journey into Space (USA)"
+],
+"image": "space-shuttle-a-journey-into-space-usa-1e4ed0"
+},
+{
+"title": "Space Tunnel",
+"id": "Space Tunnel (USA)",
+"status": "ok",
+"versions": [
+"Space Tunnel (USA)"
+],
+"image": "space-tunnel-usa-056a8a"
+},
+{
+"title": "Space Tunnel & Weltraum-Tunnel",
+"id": "Space Tunnel & Weltraum-Tunnel (Europe)",
+"status": "ok",
+"versions": [
+"Space Tunnel & Weltraum-Tunnel (Europe)"
+],
+"image": "space-tunnel-weltraum-tunnel-europe-8260d0"
+},
+{
+"title": "Space War",
+"id": "Space War (Europe)",
+"status": "ok",
+"versions": [
+"Space War (Europe)"
+],
+"image": "space-war-europe-a5543c"
+},
+{
+"title": "Space War ~ Space Combat",
+"id": "Space War ~ Space Combat (USA)",
+"status": "ok",
+"versions": [
+"Space War ~ Space Combat (USA)"
+],
+"image": "space-war-space-combat-usa-7d1578"
+},
+{
+"title": "Spacechase",
+"id": "Spacechase (USA)",
+"status": "ok",
+"versions": [
+"Spacechase (USA)"
+],
+"image": "spacechase-usa-735d77"
+},
+{
+"title": "SpaceMaster X-7",
+"id": "SpaceMaster X-7 (USA)",
+"status": "ok",
+"versions": [
+"SpaceMaster X-7 (USA)"
+],
+"image": "spacemaster-x-7-usa-0a27da"
+},
+{
+"title": "Spider Fighter",
+"id": "Spider Fighter (USA)",
+"status": "ok",
+"versions": [
+"Spider Fighter (USA)"
+],
+"image": "spider-fighter-usa-ee09ea"
+},
+{
+"title": "Spider Maze",
+"id": "Spider Maze (USA)",
+"status": "ok",
+"versions": [
+"Spider Maze (USA)"
+],
+"image": "spider-maze-usa-ba999f"
+},
+{
+"title": "Spider-Man",
+"id": "Spider-Man (USA)",
+"status": "ok",
+"versions": [
+"Spider-Man (USA)",
+"Spider-Man (Europe)"
+],
+"image": "spider-man-usa-2f1bb8"
+},
+{
+"title": "Spiders",
+"id": "Spiders (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Spiders (USA) (Proto)"
+],
+"image": "spiders-usa-proto-401f69"
+},
+{
+"title": "Spike's Peak",
+"id": "Spike's Peak (USA)",
+"status": "ok",
+"versions": [
+"Spike's Peak (USA)",
+"Spike's Peak (Europe)"
+],
+"image": "spike-s-peak-usa-e02222"
+},
+{
+"title": "Spinning Fireball",
+"id": "Spinning Fireball (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Spinning Fireball (USA) (Proto)"
+],
+"image": "spinning-fireball-usa-proto-c43b1f"
+},
+{
+"title": "Spitfire Attack",
+"id": "Spitfire Attack (USA)",
+"status": "ok",
+"versions": [
+"Spitfire Attack (USA)"
+],
+"image": "spitfire-attack-usa-124b76"
+},
+{
+"title": "Springer",
+"id": "Springer (USA)",
+"status": "partial",
+"versions": [
+"Springer (USA)"
+],
+"image": null
+},
+{
+"title": "Springteufel, Die",
+"id": "Springteufel, Die (Germany)",
+"status": "ok",
+"versions": [
+"Springteufel, Die (Germany)"
+],
+"image": "springteufel-die-germany-b3fd35"
+},
+{
+"title": "Sprint Master",
+"id": "Sprint Master (USA)",
+"status": "ok",
+"versions": [
+"Sprint Master (USA)"
+],
+"image": "sprint-master-usa-760990"
+},
+{
+"title": "Spy Hunter",
+"id": "Spy Hunter (USA)",
+"status": "ok",
+"versions": [
+"Spy Hunter (USA)"
+],
+"image": "spy-hunter-usa-ab234f"
+},
+{
+"title": "Squeeze Box",
+"id": "Squeeze Box (USA)",
+"status": "ok",
+"versions": [
+"Squeeze Box (USA)"
+],
+"image": "squeeze-box-usa-0526f1"
+},
+{
+"title": "Squirrel ~ O Esquilo",
+"id": "Squirrel ~ O Esquilo (USA)",
+"status": "ok",
+"versions": [
+"Squirrel ~ O Esquilo (USA)"
+],
+"image": "squirrel-o-esquilo-usa-19adb5"
+},
+{
+"title": "Squoosh",
+"id": "Squoosh (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Squoosh (USA) (Proto)"
+],
+"image": "squoosh-usa-proto-aeba77"
+},
+{
+"title": "Sssnake",
+"id": "Sssnake (USA)",
+"status": "ok",
+"versions": [
+"Sssnake (USA)"
+],
+"image": "sssnake-usa-ad2c7c"
+},
+{
+"title": "Stampede",
+"id": "Stampede (USA)",
+"status": "ok",
+"versions": [
+"Stampede (USA)"
+],
+"image": "stampede-usa-0dba56"
+},
+{
+"title": "Star Fox",
+"id": "Star Fox (USA)",
+"status": "ok",
+"versions": [
+"Star Fox (USA)"
+],
+"image": "star-fox-usa-e60149"
+},
+{
+"title": "Star Raiders",
+"id": "Star Raiders (USA)",
+"status": "ok",
+"versions": [
+"Star Raiders (USA)"
+],
+"image": "star-raiders-usa-6e434a"
+},
+{
+"title": "Star Ship ~ Outer Space",
+"id": "Star Ship ~ Outer Space (USA)",
+"status": "ok",
+"versions": [
+"Star Ship ~ Outer Space (USA)"
+],
+"image": "star-ship-outer-space-usa-1adb79"
+},
+{
+"title": "Star Strike",
+"id": "Star Strike (USA)",
+"status": "ok",
+"versions": [
+"Star Strike (USA)"
+],
+"image": "star-strike-usa-6d089d"
+},
+{
+"title": "Star Trek - Strategic Operations Simulator",
+"id": "Star Trek - Strategic Operations Simulator (USA)",
+"status": "ok",
+"versions": [
+"Star Trek - Strategic Operations Simulator (USA)"
+],
+"image": "star-trek-strategic-operations-simulator-f2dcde"
+},
+{
+"title": "Star Voyager",
+"id": "Star Voyager (USA)",
+"status": "ok",
+"versions": [
+"Star Voyager (USA)",
+"Star Voyager (World)"
+],
+"image": "star-voyager-usa-93785b"
+},
+{
+"title": "Star Wars - Jedi Arena",
+"id": "Star Wars - Jedi Arena (USA)",
+"status": "ok",
+"versions": [
+"Star Wars - Jedi Arena (USA)"
+],
+"image": "star-wars-jedi-arena-usa-43b11d"
+},
+{
+"title": "Star Wars - Return of the Jedi - Death Star Battle",
+"id": "Star Wars - Return of the Jedi - Death Star Battle (USA)",
+"status": "partial",
+"versions": [
+"Star Wars - Return of the Jedi - Death Star Battle (USA)",
+"Star Wars - Return of the Jedi - Death Star Battle (Europe)"
+],
+"image": null
+},
+{
+"title": "Star Wars - Return of the Jedi - Ewok Adventure",
+"id": "Star Wars - Return of the Jedi - Ewok Adventure (USA) (Proto)",
+"status": "partial",
+"versions": [
+"Star Wars - Return of the Jedi - Ewok Adventure (USA) (Proto)"
+],
+"image": null
+},
+{
+"title": "Star Wars - The Arcade Game",
+"id": "Star Wars - The Arcade Game (USA)",
+"status": "ok",
+"versions": [
+"Star Wars - The Arcade Game (USA)"
+],
+"image": "star-wars-the-arcade-game-usa-6c56b8"
+},
+{
+"title": "Star Wars - The Empire Strikes Back",
+"id": "Star Wars - The Empire Strikes Back (USA)",
+"status": "ok",
+"versions": [
+"Star Wars - The Empire Strikes Back (USA)",
+"Star Wars - The Empire Strikes Back (Europe)"
+],
+"image": "star-wars-the-empire-strikes-back-usa-748dfd"
+},
+{
+"title": "Stargate",
+"id": "Stargate (USA)",
+"status": "ok",
+"versions": [
+"Stargate (USA)",
+"Stargate (Europe)"
+],
+"image": "stargate-usa-ef2e76"
+},
+{
+"title": "Stargunner",
+"id": "Stargunner (USA)",
+"status": "ok",
+"versions": [
+"Stargunner (USA)"
+],
+"image": "stargunner-usa-955339"
+},
+{
+"title": "StarMaster",
+"id": "StarMaster (USA)",
+"status": "ok",
+"versions": [
+"StarMaster (USA)"
+],
+"image": "starmaster-usa-0b287b"
+},
+{
+"title": "Starmaster - International Edition",
+"id": "Starmaster - International Edition (Europe)",
+"status": "ok",
+"versions": [
+"Starmaster - International Edition (Europe)"
+],
+"image": "starmaster-international-edition-europe-7651ce"
+},
+{
+"title": "Steeplechase",
+"id": "Steeplechase (USA)",
+"status": "ok",
+"versions": [
+"Steeplechase (USA)",
+"Steeplechase (Europe)"
+],
+"image": "steeplechase-usa-6343ea"
+},
+{
+"title": "Stellar Track",
+"id": "Stellar Track (USA)",
+"status": "ok",
+"versions": [
+"Stellar Track (USA)"
+],
+"image": "stellar-track-usa-e0264c"
+},
+{
+"title": "Stone Age",
+"id": "Stone Age (USA)",
+"status": "ok",
+"versions": [
+"Stone Age (USA)"
+],
+"image": "stone-age-usa-19dd45"
+},
+{
+"title": "Strahlen der Teufelsvogel",
+"id": "Strahlen der Teufelsvogel (Germany)",
+"status": "ok",
+"versions": [
+"Strahlen der Teufelsvogel (Germany)"
+],
+"image": "strahlen-der-teufelsvogel-germany-b7c6ec"
+},
+{
+"title": "Strategy X",
+"id": "Strategy X (USA)",
+"status": "ok",
+"versions": [
+"Strategy X (USA)"
+],
+"image": "strategy-x-usa-e380e7"
+},
+{
+"title": "Strawberry Shortcake - Musical Match-Ups",
+"id": "Strawberry Shortcake - Musical Match-Ups (USA)",
+"status": "ok",
+"versions": [
+"Strawberry Shortcake - Musical Match-Ups (USA)"
+],
+"image": "strawberry-shortcake-musical-match-ups-u-034f33"
+},
+{
+"title": "Street Racer - Speedway II",
+"id": "Street Racer - Speedway II (Europe)",
+"status": "ok",
+"versions": [
+"Street Racer - Speedway II (Europe)"
+],
+"image": "street-racer-speedway-ii-europe-5a1eb2"
+},
+{
+"title": "Street Racer ~ Speedway II",
+"id": "Street Racer ~ Speedway II (USA)",
+"status": "ok",
+"versions": [
+"Street Racer ~ Speedway II (USA)"
+],
+"image": "street-racer-speedway-ii-usa-2a050b"
+},
+{
+"title": "Stronghold",
+"id": "Stronghold (USA)",
+"status": "ok",
+"versions": [
+"Stronghold (USA)"
+],
+"image": "stronghold-usa-51ed02"
+},
+{
+"title": "Stunt Cycle",
+"id": "Stunt Cycle (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Stunt Cycle (USA) (Proto)"
+],
+"image": "stunt-cycle-usa-proto-74a3e4"
+},
+{
+"title": "Stunt Man",
+"id": "Stunt Man (USA)",
+"status": "ok",
+"versions": [
+"Stunt Man (USA)"
+],
+"image": "stunt-man-usa-08ba5f"
+},
+{
+"title": "Sub-Scan",
+"id": "Sub-Scan (USA)",
+"status": "ok",
+"versions": [
+"Sub-Scan (USA)"
+],
+"image": "sub-scan-usa-e26e72"
+},
+{
+"title": "Submarine Commander",
+"id": "Submarine Commander (USA)",
+"status": "ok",
+"versions": [
+"Submarine Commander (USA)"
+],
+"image": "submarine-commander-usa-823cbc"
+},
+{
+"title": "Subterranea",
+"id": "Subterranea (USA)",
+"status": "ok",
+"versions": [
+"Subterranea (USA)"
+],
+"image": "subterranea-usa-e6e512"
+},
+{
+"title": "Suicide Mission",
+"id": "Suicide Mission (USA)",
+"status": "no",
+"versions": [
+"Suicide Mission (USA)"
+],
+"image": null
+},
+{
+"title": "Summer Games",
+"id": "Summer Games (USA)",
+"status": "ok",
+"versions": [
+"Summer Games (USA)",
+"Summer Games (Europe)"
+],
+"image": "summer-games-usa-349458"
+},
+{
+"title": "Super Baseball",
+"id": "Super Baseball (USA)",
+"status": "ok",
+"versions": [
+"Super Baseball (USA)",
+"Super Baseball (USA, Europe) (Atari Anthology)"
+],
+"image": "super-baseball-usa-d44ac2"
+},
+{
+"title": "Super Breakout",
+"id": "Super Breakout (USA)",
+"status": "ok",
+"versions": [
+"Super Breakout (USA)",
+"Super Breakout (USA) (Alt)",
+"Super Breakout (Europe)"
+],
+"image": "super-breakout-usa-a3220d"
+},
+{
+"title": "Super Challenge Baseball",
+"id": "Super Challenge Baseball (USA)",
+"status": "ok",
+"versions": [
+"Super Challenge Baseball (USA)"
+],
+"image": "super-challenge-baseball-usa-452154"
+},
+{
+"title": "Super Challenge Football",
+"id": "Super Challenge Football (USA)",
+"status": "ok",
+"versions": [
+"Super Challenge Football (USA)"
+],
+"image": "super-challenge-football-usa-767f1f"
+},
+{
+"title": "Super Cobra",
+"id": "Super Cobra (USA)",
+"status": "ok",
+"versions": [
+"Super Cobra (USA)"
+],
+"image": "super-cobra-usa-f20c6a"
+},
+{
+"title": "Super Football",
+"id": "Super Football (USA)",
+"status": "partial",
+"versions": [
+"Super Football (USA)"
+],
+"image": null
+},
+{
+"title": "Super-Ferrari",
+"id": "Super-Ferrari (Germany)",
+"status": "ok",
+"versions": [
+"Super-Ferrari (Germany)"
+],
+"image": "super-ferrari-germany-6da82f"
+},
+{
+"title": "Superman",
+"id": "Superman (USA)",
+"status": "ok",
+"versions": [
+"Superman (USA)"
+],
+"image": "superman-usa-c2223c"
+},
+{
+"title": "Surf's Up",
+"id": "Surf's Up (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Surf's Up (USA) (Proto)"
+],
+"image": "surf-s-up-usa-proto-bcbe9c"
+},
+{
+"title": "Surfer's Paradise - But Danger Below!",
+"id": "Surfer's Paradise - But Danger Below! (Europe)",
+"status": "ok",
+"versions": [
+"Surfer's Paradise - But Danger Below! (Europe)"
+],
+"image": "surfer-s-paradise-but-danger-below-europ-4f08e4"
+},
+{
+"title": "Surround",
+"id": "Surround (Europe)",
+"status": "ok",
+"versions": [
+"Surround (Europe)"
+],
+"image": "surround-europe-8a1e37"
+},
+{
+"title": "Surround ~ Chase",
+"id": "Surround ~ Chase (USA)",
+"status": "ok",
+"versions": [
+"Surround ~ Chase (USA)"
+],
+"image": "surround-chase-usa-0e2b88"
+},
+{
+"title": "Survival Island",
+"id": "Survival Island (USA)",
+"status": "no",
+"versions": [
+"Survival Island (USA)"
+],
+"image": null
+},
+{
+"title": "Survival Run",
+"id": "Survival Run (USA)",
+"status": "ok",
+"versions": [
+"Survival Run (USA)",
+"Survival Run (USA) (Proto)"
+],
+"image": "survival-run-usa-27ec35"
+},
+{
+"title": "Sweat! The Decathlon Game",
+"id": "Sweat! The Decathlon Game (USA)",
+"status": "no",
+"versions": [
+"Sweat! The Decathlon Game (USA)"
+],
+"image": null
+},
+{
+"title": "Sword of Saros",
+"id": "Sword of Saros (USA)",
+"status": "no",
+"versions": [
+"Sword of Saros (USA)"
+],
+"image": null
+},
+{
+"title": "Swordfight",
+"id": "Swordfight (USA)",
+"status": "ok",
+"versions": [
+"Swordfight (USA)"
+],
+"image": "swordfight-usa-fdb8d9"
+},
+{
+"title": "SwordQuest - EarthWorld",
+"id": "SwordQuest - EarthWorld (USA)",
+"status": "ok",
+"versions": [
+"SwordQuest - EarthWorld (USA)",
+"SwordQuest - EarthWorld (USA, Europe) (Atari Anthology)"
+],
+"image": "swordquest-earthworld-usa-c02b40"
+},
+{
+"title": "SwordQuest - FireWorld",
+"id": "SwordQuest - FireWorld (USA)",
+"status": "ok",
+"versions": [
+"SwordQuest - FireWorld (USA)"
+],
+"image": "swordquest-fireworld-usa-5b6753"
+},
+{
+"title": "SwordQuest - WaterWorld",
+"id": "SwordQuest - WaterWorld (USA)",
+"status": "ok",
+"versions": [
+"SwordQuest - WaterWorld (USA)"
+],
+"image": "swordquest-waterworld-usa-a42aed"
+},
+{
+"title": "Tac-Scan",
+"id": "Tac-Scan (USA)",
+"status": "ok",
+"versions": [
+"Tac-Scan (USA)"
+],
+"image": "tac-scan-usa-c7cf2c"
+},
+{
+"title": "Tanks but No Tanks",
+"id": "Tanks but No Tanks (USA)",
+"status": "ok",
+"versions": [
+"Tanks but No Tanks (USA)"
+],
+"image": "tanks-but-no-tanks-usa-2d204f"
+},
+{
+"title": "Tanzende Teller",
+"id": "Tanzende Teller (Germany)",
+"status": "ok",
+"versions": [
+"Tanzende Teller (Germany)"
+],
+"image": "tanzende-teller-germany-8fc19a"
+},
+{
+"title": "Tapeworm",
+"id": "Tapeworm (USA)",
+"status": "ok",
+"versions": [
+"Tapeworm (USA)"
+],
+"image": "tapeworm-usa-75b1e3"
+},
+{
+"title": "Tapper",
+"id": "Tapper (USA)",
+"status": "ok",
+"versions": [
+"Tapper (USA)"
+],
+"image": "tapper-usa-141c68"
+},
+{
+"title": "Tax Avoiders",
+"id": "Tax Avoiders (USA)",
+"status": "ok",
+"versions": [
+"Tax Avoiders (USA)"
+],
+"image": "tax-avoiders-usa-b1ec63"
+},
+{
+"title": "Taz",
+"id": "Taz (USA)",
+"status": "ok",
+"versions": [
+"Taz (USA)"
+],
+"image": "taz-usa-18d6c9"
+},
+{
+"title": "Telepathy",
+"id": "Telepathy (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Telepathy (USA) (Proto)"
+],
+"image": "telepathy-usa-proto-b8982c"
+},
+{
+"title": "Tempest",
+"id": "Tempest (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Tempest (USA) (Proto)",
+"Tempest (USA) (Proto) (Atari Anthology)"
+],
+"image": "tempest-usa-proto-16cb1d"
+},
+{
+"title": "Tennis",
+"id": "Tennis (USA)",
+"status": "ok",
+"versions": [
+"Tennis (USA)"
+],
+"image": "tennis-usa-8f2da1"
+},
+{
+"title": "Tennis - International Edition",
+"id": "Tennis - International Edition (Europe)",
+"status": "ok",
+"versions": [
+"Tennis - International Edition (Europe)"
+],
+"image": "tennis-international-edition-europe-bbf591"
+},
+{
+"title": "Texas Chainsaw Massacre, The",
+"id": "Texas Chainsaw Massacre, The (USA)",
+"status": "ok",
+"versions": [
+"Texas Chainsaw Massacre, The (USA)",
+"Texas Chainsaw Massacre, The (USA) (Beta)"
+],
+"image": "texas-chainsaw-massacre-the-usa-c40100"
+},
+{
+"title": "Threshold",
+"id": "Threshold (USA)",
+"status": "ok",
+"versions": [
+"Threshold (USA)"
+],
+"image": "threshold-usa-02441f"
+},
+{
+"title": "Thunderground",
+"id": "Thunderground (USA)",
+"status": "ok",
+"versions": [
+"Thunderground (USA)"
+],
+"image": "thunderground-usa-d84ae9"
+},
+{
+"title": "Thwocker",
+"id": "Thwocker (USA) (Proto)",
+"status": "partial",
+"versions": [
+"Thwocker (USA) (Proto)"
+],
+"image": null
+},
+{
+"title": "Time Pilot",
+"id": "Time Pilot (USA)",
+"status": "ok",
+"versions": [
+"Time Pilot (USA)"
+],
+"image": "time-pilot-usa-100858"
+},
+{
+"title": "Time Warp",
+"id": "Time Warp (USA)",
+"status": "ok",
+"versions": [
+"Time Warp (USA)",
+"Time Warp (Europe)"
+],
+"image": "time-warp-usa-528ef5"
+},
+{
+"title": "Title Match Pro Wrestling",
+"id": "Title Match Pro Wrestling (USA)",
+"status": "ok",
+"versions": [
+"Title Match Pro Wrestling (USA)",
+"Title Match Pro Wrestling (USA) (Activision Anthology - Remix Edition)",
+"Title Match Pro Wrestling (Europe)"
+],
+"image": "title-match-pro-wrestling-usa-7b73fb"
+},
+{
+"title": "Tomarc the Barbarian",
+"id": "Tomarc the Barbarian (USA)",
+"status": "ok",
+"versions": [
+"Tomarc the Barbarian (USA)"
+],
+"image": "tomarc-the-barbarian-usa-b5b7ae"
+},
+{
+"title": "Tomcat - The F-14 Fighter Simulator",
+"id": "Tomcat - The F-14 Fighter Simulator (Europe) (Activision Anthology - Remix Edition) (PAL)",
+"status": "ok",
+"versions": [
+"Tomcat - The F-14 Fighter Simulator (Europe) (Activision Anthology - Remix Edition) (PAL)"
+],
+"image": "tomcat-the-f-14-fighter-simulator-europe-f648cb"
+},
+{
+"title": "Tooth Protectors",
+"id": "Tooth Protectors (USA)",
+"status": "ok",
+"versions": [
+"Tooth Protectors (USA)"
+],
+"image": "tooth-protectors-usa-742307"
+},
+{
+"title": "Top Gun",
+"id": "Top Gun (Germany)",
+"status": "ok",
+"versions": [
+"Top Gun (Germany)"
+],
+"image": "top-gun-germany-937ff0"
+},
+{
+"title": "Towering Inferno",
+"id": "Towering Inferno (USA)",
+"status": "ok",
+"versions": [
+"Towering Inferno (USA)"
+],
+"image": "towering-inferno-usa-6e4faf"
+},
+{
+"title": "Track and Field",
+"id": "Track and Field (USA)",
+"status": "ok",
+"versions": [
+"Track and Field (USA)"
+],
+"image": "track-and-field-usa-f900eb"
+},
+{
+"title": "Treasure Below",
+"id": "Treasure Below (Europe)",
+"status": "ok",
+"versions": [
+"Treasure Below (Europe)"
+],
+"image": "treasure-below-europe-7941b6"
+},
+{
+"title": "Treasure Island",
+"id": "Treasure Island (Europe)",
+"status": "ok",
+"versions": [
+"Treasure Island (Europe)"
+],
+"image": "treasure-island-europe-2371e3"
+},
+{
+"title": "Trick Shot",
+"id": "Trick Shot (USA)",
+"status": "ok",
+"versions": [
+"Trick Shot (USA)",
+"Trick Shot (Europe)"
+],
+"image": "trick-shot-usa-0360ce"
+},
+{
+"title": "TRON - Deadly Discs",
+"id": "TRON - Deadly Discs (USA)",
+"status": "ok",
+"versions": [
+"TRON - Deadly Discs (USA)"
+],
+"image": "tron-deadly-discs-usa-055a04"
+},
+{
+"title": "Tunnel de L'Espace, Le",
+"id": "Tunnel de L'Espace, Le (Europe)",
+"status": "ok",
+"versions": [
+"Tunnel de L'Espace, Le (Europe)"
+],
+"image": "tunnel-de-l-espace-le-europe-16d82c"
+},
+{
+"title": "Tunnel Runner",
+"id": "Tunnel Runner (USA)",
+"status": "no",
+"versions": [
+"Tunnel Runner (USA)"
+],
+"image": null
+},
+{
+"title": "Turbo",
+"id": "Turbo (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Turbo (USA) (Proto)"
+],
+"image": "turbo-usa-proto-e44c9f"
+},
+{
+"title": "Turmoil",
+"id": "Turmoil (USA)",
+"status": "ok",
+"versions": [
+"Turmoil (USA)"
+],
+"image": "turmoil-usa-22fd79"
+},
+{
+"title": "Tutankham",
+"id": "Tutankham (USA)",
+"status": "partial",
+"versions": [
+"Tutankham (USA)"
+],
+"image": null
+},
+{
+"title": "Universal Chaos",
+"id": "Universal Chaos (USA)",
+"status": "ok",
+"versions": [
+"Universal Chaos (USA)",
+"Universal Chaos (Europe)"
+],
+"image": "universal-chaos-usa-b9e536"
+},
+{
+"title": "Up 'n Down",
+"id": "Up 'n Down (USA)",
+"status": "ok",
+"versions": [
+"Up 'n Down (USA)"
+],
+"image": "up-n-down-usa-8e5ab8"
+},
+{
+"title": "Vanguard",
+"id": "Vanguard (USA)",
+"status": "ok",
+"versions": [
+"Vanguard (USA)"
+],
+"image": "vanguard-usa-03c1ad"
+},
+{
+"title": "Vault Assault",
+"id": "Vault Assault (USA) (Unl)",
+"status": "ok",
+"versions": [
+"Vault Assault (USA) (Unl)"
+],
+"image": "vault-assault-usa-unl-8c28eb"
+},
+{
+"title": "Venetian Blinds Demo",
+"id": "Venetian Blinds Demo (USA) (Demo)",
+"status": "ok",
+"versions": [
+"Venetian Blinds Demo (USA) (Demo)"
+],
+"image": "venetian-blinds-demo-usa-demo-4799b6"
+},
+{
+"title": "Venture",
+"id": "Venture (USA)",
+"status": "ok",
+"versions": [
+"Venture (USA)",
+"Venture (Europe)"
+],
+"image": "venture-usa-b2457f"
+},
+{
+"title": "Video Checkers ~ Checkers",
+"id": "Video Checkers ~ Checkers (USA)",
+"status": "ok",
+"versions": [
+"Video Checkers ~ Checkers (USA)"
+],
+"image": "video-checkers-checkers-usa-add433"
+},
+{
+"title": "Video Chess",
+"id": "Video Chess (USA)",
+"status": "ok",
+"versions": [
+"Video Chess (USA)"
+],
+"image": "video-chess-usa-f850ee"
+},
+{
+"title": "Video Jogger",
+"id": "Video Jogger (USA)",
+"status": "ok",
+"versions": [
+"Video Jogger (USA)"
+],
+"image": "video-jogger-usa-22a49b"
+},
+{
+"title": "Video Life",
+"id": "Video Life (USA)",
+"status": "ok",
+"versions": [
+"Video Life (USA)"
+],
+"image": "video-life-usa-5d1416"
+},
+{
+"title": "Video Olympics ~ Pong Sports",
+"id": "Video Olympics ~ Pong Sports (USA)",
+"status": "ok",
+"versions": [
+"Video Olympics ~ Pong Sports (USA)"
+],
+"image": "video-olympics-pong-sports-usa-4106d2"
+},
+{
+"title": "Video Pinball",
+"id": "Video Pinball (Europe)",
+"status": "ok",
+"versions": [
+"Video Pinball (Europe)"
+],
+"image": "video-pinball-europe-b2f201"
+},
+{
+"title": "Video Pinball ~ Arcade Pinball",
+"id": "Video Pinball ~ Arcade Pinball (USA)",
+"status": "ok",
+"versions": [
+"Video Pinball ~ Arcade Pinball (USA)"
+],
+"image": "video-pinball-arcade-pinball-usa-5cfe51"
+},
+{
+"title": "Video Reflex",
+"id": "Video Reflex (USA)",
+"status": "ok",
+"versions": [
+"Video Reflex (USA)"
+],
+"image": "video-reflex-usa-5dd457"
+},
+{
+"title": "Vogel Flieh",
+"id": "Vogel Flieh (Europe)",
+"status": "ok",
+"versions": [
+"Vogel Flieh (Europe)"
+],
+"image": "vogel-flieh-europe-246cc9"
+},
+{
+"title": "Wabbit",
+"id": "Wabbit (USA)",
+"status": "ok",
+"versions": [
+"Wabbit (USA)"
+],
+"image": "wabbit-usa-8a91af"
+},
+{
+"title": "Walker ~ Schussel, der Polizistenschreck",
+"id": "Walker ~ Schussel, der Polizistenschreck (Europe)",
+"status": "ok",
+"versions": [
+"Walker ~ Schussel, der Polizistenschreck (Europe)"
+],
+"image": "walker-schussel-der-polizistenschreck-eu-f1e2a6"
+},
+{
+"title": "Wall Ball",
+"id": "Wall Ball (USA)",
+"status": "ok",
+"versions": [
+"Wall Ball (USA)"
+],
+"image": "wall-ball-usa-29390b"
+},
+{
+"title": "Wall Break",
+"id": "Wall Break (Europe)",
+"status": "ok",
+"versions": [
+"Wall Break (Europe)"
+],
+"image": "wall-break-europe-38a642"
+},
+{
+"title": "Wall-Defender",
+"id": "Wall-Defender (USA)",
+"status": "ok",
+"versions": [
+"Wall-Defender (USA)"
+],
+"image": "wall-defender-usa-f6c77f"
+},
+{
+"title": "Warlords",
+"id": "Warlords (USA)",
+"status": "ok",
+"versions": [
+"Warlords (USA)"
+],
+"image": "warlords-usa-6e6ec1"
+},
+{
+"title": "Warplock",
+"id": "Warplock (USA)",
+"status": "ok",
+"versions": [
+"Warplock (USA)"
+],
+"image": "warplock-usa-d7ecae"
+},
+{
+"title": "Wing War",
+"id": "Wing War (Europe)",
+"status": "ok",
+"versions": [
+"Wing War (Europe)"
+],
+"image": "wing-war-europe-3d24fd"
+},
+{
+"title": "Wings",
+"id": "Wings (USA) (Proto)",
+"status": "no",
+"versions": [
+"Wings (USA) (Proto)"
+],
+"image": null
+},
+{
+"title": "Winter Games",
+"id": "Winter Games (USA)",
+"status": "ok",
+"versions": [
+"Winter Games (USA)",
+"Winter Games (Australia)"
+],
+"image": "winter-games-usa-0e13f1"
+},
+{
+"title": "Wizard",
+"id": "Wizard (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Wizard (USA) (Proto)"
+],
+"image": "wizard-usa-proto-954c17"
+},
+{
+"title": "Wizard of War",
+"id": "Wizard of War (Europe)",
+"status": "ok",
+"versions": [
+"Wizard of War (Europe)"
+],
+"image": "wizard-of-war-europe-07ad86"
+},
+{
+"title": "Wizard of Wor",
+"id": "Wizard of Wor (USA)",
+"status": "ok",
+"versions": [
+"Wizard of Wor (USA)"
+],
+"image": "wizard-of-wor-usa-8afba5"
+},
+{
+"title": "Word Zapper",
+"id": "Word Zapper (USA)",
+"status": "ok",
+"versions": [
+"Word Zapper (USA)"
+],
+"image": "word-zapper-usa-5577dc"
+},
+{
+"title": "Words-Attack",
+"id": "Words-Attack (Europe) (Proto)",
+"status": "ok",
+"versions": [
+"Words-Attack (Europe) (Proto)"
+],
+"image": "words-attack-europe-proto-dda444"
+},
+{
+"title": "World Championship Baseball",
+"id": "World Championship Baseball (Europe)",
+"status": "ok",
+"versions": [
+"World Championship Baseball (Europe)"
+],
+"image": "world-championship-baseball-europe-4af2e3"
+},
+{
+"title": "World End",
+"id": "World End (USA)",
+"status": "ok",
+"versions": [
+"World End (USA)",
+"World End (Europe)"
+],
+"image": "world-end-usa-433323"
+},
+{
+"title": "Worm War I",
+"id": "Worm War I (USA)",
+"status": "ok",
+"versions": [
+"Worm War I (USA)"
+],
+"image": "worm-war-i-usa-cb5513"
+},
+{
+"title": "Wustenschlacht",
+"id": "Wustenschlacht (Germany)",
+"status": "ok",
+"versions": [
+"Wustenschlacht (Germany)"
+],
+"image": "wustenschlacht-germany-7c0c95"
+},
+{
+"title": "X-Man",
+"id": "X-Man (USA)",
+"status": "ok",
+"versions": [
+"X-Man (USA)"
+],
+"image": "x-man-usa-fae38b"
+},
+{
+"title": "Xenophobe",
+"id": "Xenophobe (USA)",
+"status": "ok",
+"versions": [
+"Xenophobe (USA)"
+],
+"image": "xenophobe-usa-6d8b58"
+},
+{
+"title": "Xevious",
+"id": "Xevious (USA) (Proto) (1983-08-02)",
+"status": "ok",
+"versions": [
+"Xevious (USA) (Proto) (1983-08-02)",
+"Xevious (USA) (Proto) (1984-01-18)"
+],
+"image": "xevious-usa-proto-1983-08-02-f520c5"
+},
+{
+"title": "Yars' Revenge",
+"id": "Yars' Revenge (USA)",
+"status": "ok",
+"versions": [
+"Yars' Revenge (USA)",
+"Yars' Revenge (Europe)"
+],
+"image": "yars-revenge-usa-c32630"
+},
+{
+"title": "Z-Tack",
+"id": "Z-Tack (USA)",
+"status": "ok",
+"versions": [
+"Z-Tack (USA)"
+],
+"image": "z-tack-usa-279211"
+},
+{
+"title": "Zaxxon",
+"id": "Zaxxon (USA)",
+"status": "ok",
+"versions": [
+"Zaxxon (USA)"
+],
+"image": "zaxxon-usa-c7b0ee"
+},
+{
+"title": "Zoo Fun",
+"id": "Zoo Fun (USA)",
+"status": "ok",
+"versions": [
+"Zoo Fun (USA)"
+],
+"image": "zoo-fun-usa-252d4b"
+},
+{
+"title": "Zoo Keeper Sounds",
+"id": "Zoo Keeper Sounds (USA) (Proto)",
+"status": "partial",
+"versions": [
+"Zoo Keeper Sounds (USA) (Proto)"
+],
+"image": null
+}
+]
+}

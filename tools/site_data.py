@@ -1,6 +1,6 @@
 """The site's game data, from boot runs (local only: it needs the games).
 
-python tools/site_data.py SYSTEM FOLDER [--frames N] [--images DIR] [--upload]
+python tools/site_data.py SYSTEM FOLDER... [--frames N] [--images DIR] [--upload]
 
 Runs every game of FOLDER in SYSTEM's headless program, sorts it into boots /
 partial / not yet, writes site/data/SYSTEM.json (committed) and a 256-wide
@@ -37,7 +37,8 @@ def colours(ppm):
 
 
 def classify(returncode, stdout, ppm):
-    if returncode != 0 or ppm is None or STOPPED.search(stdout):
+    ran = returncode == 0 or "result: timeout" in stdout  # gb_headless exits 1 when no test-ROM result came: a game ran
+    if not ran or ppm is None or STOPPED.search(stdout):
         return "no"
     return "partial" if colours(ppm) <= 2 else "ok"
 
@@ -91,6 +92,7 @@ def thumbnail(ppm_path, out_path):
 
 def run_one(system, path, frames, tmp):
     prog, _, _, play = SYSTEMS[system]
+    play_args = ["--play", "1"] if system == "nes" else ["--play"]  # the NES one takes a seed
     work = tempfile.mkdtemp(dir=tmp)
     rom = path
     if system != "cps1" and path.lower().endswith((".7z", ".zip")):
@@ -103,7 +105,7 @@ def run_one(system, path, frames, tmp):
     for n in (frames, frames * 5):  # one retry, five times as long, when the screen is blank (long intros)
         if os.path.exists(ppm):
             os.remove(ppm)
-        cmd = [os.path.join(BUILD, prog + EXE), rom, "--frames", str(n), "--ppm", ppm] + (["--play"] if play else [])
+        cmd = [os.path.join(BUILD, prog + EXE), rom, "--frames", str(n), "--ppm", ppm] + (play_args if play else [])
         try:
             r = subprocess.run(cmd, capture_output=True, text=True, timeout=600, errors="replace")
             code, out = r.returncode, r.stdout
@@ -123,19 +125,21 @@ def collect(system, folder):
     """{id: path} of the games in folder."""
     exts = SYSTEMS[system][1]
     out = {}
-    for f in sorted(os.listdir(folder)):
-        stem, ext = os.path.splitext(f)
-        if system == "cps1":
-            if ext.lower() == ".zip":
-                out[stem] = os.path.join(folder, f)
-        elif ext.lower() in exts + (".7z", ".zip"):
-            out[stem] = os.path.join(folder, f)
+    if system == "cps1":  # MAME sets: the folder itself
+        return {f[:-4]: os.path.join(folder, f) for f in sorted(os.listdir(folder)) if f.lower().endswith(".zip")}
+    for root, _, files in os.walk(folder):  # consoles: subfolders too (0-9/, A/, ...)
+        for f in sorted(files):
+            stem, ext = os.path.splitext(f)
+            if ext.lower() in exts + (".7z", ".zip"):
+                out[stem] = os.path.join(root, f)
     return out
 
 
-def make(system, folder, frames=None, images=None):
+def make(system, folders, frames=None, images=None):
     frames = frames or SYSTEMS[system][2]
-    games = collect(system, folder)
+    games = {}
+    for folder in folders:
+        games.update(collect(system, folder))
     if system == "cps1":
         groups = {t: [v for v in vs if v in games] for t, vs in cps1_groups().items()}
         groups = {t: vs for t, vs in groups.items() if vs}
@@ -188,12 +192,12 @@ def upload(images):
 def main(argv):
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("system", choices=sorted(SYSTEMS))
-    ap.add_argument("folder")
+    ap.add_argument("folders", nargs="+")
     ap.add_argument("--frames", type=int)
     ap.add_argument("--images", default=os.path.join(ROOT, "site-images"))
     ap.add_argument("--upload", action="store_true")
     a = ap.parse_args(argv)
-    make(a.system, a.folder, a.frames, a.images)
+    make(a.system, a.folders, a.frames, a.images)
     if a.upload:
         upload(a.images)
     return 0
