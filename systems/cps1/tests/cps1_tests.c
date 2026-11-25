@@ -14,8 +14,11 @@
 
 #include "cps1.h"
 #include "detect.h"
+#include "eeprom93c46.h"
 #include "input_log.h"
+#include "kabuki.h"
 #include "oki6295.h"
+#include "qsound.h"
 #include "ym2151.h"
 
 extern const SystemDetector cps1_detector;
@@ -70,16 +73,16 @@ static size_t zip_build(void) {  /* local headers and data, the directory, the e
 
 static uint8_t even[4] = {1, 2, 5, 6}, odd[4] = {3, 4, 7, 8}, swapped[4] = {0x22, 0x11, 0x44, 0x33};
 static uint8_t gfx[2][4] = {{0xA0, 0xA1, 0xA2, 0xA3}, {0xB0, 0xB1, 0xB2, 0xB3}}, plain[3] = {9, 8, 7};
-static Cps1Game test_game = {"test", "Test", CPS1_PLAIN, {16, 16, 3, 0}, {0}, 6, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0};
+static Cps1Game test_game = {"test", "Test", CPS1_PLAIN, {16, 16, 3, 0}, {0}, 6, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0};
 
 static void make_test_game(void) {
     Cps1File f[6] = {
-        {zip_crc32(even, 4), 4, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0, 0},
-        {zip_crc32(odd, 4), 4, CPS1_R_MAIN, CPS1_LOAD_ODD, 1, 0},
-        {zip_crc32(swapped, 4), 4, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 8, 0},
-        {zip_crc32(gfx[0], 4), 4, CPS1_R_GFX, CPS1_LOAD_GFX4, 0, 0},
-        {zip_crc32(gfx[1], 4), 4, CPS1_R_GFX, CPS1_LOAD_GFX4, 6, 0},
-        {zip_crc32(plain, 3), 3, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0, 0},
+        {zip_crc32(even, 4), 4, CPS1_R_MAIN, CPS1_LOAD_EVEN, 0, 0, 0, 0},
+        {zip_crc32(odd, 4), 4, CPS1_R_MAIN, CPS1_LOAD_ODD, 1, 0, 0, 0},
+        {zip_crc32(swapped, 4), 4, CPS1_R_MAIN, CPS1_LOAD_SWAP16, 8, 0, 0, 0},
+        {zip_crc32(gfx[0], 4), 4, CPS1_R_GFX, CPS1_LOAD_GFX4, 0, 0, 0, 0},
+        {zip_crc32(gfx[1], 4), 4, CPS1_R_GFX, CPS1_LOAD_GFX4, 6, 0, 0, 0},
+        {zip_crc32(plain, 3), 3, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0, 0, 0, 0},
     };
     memcpy(test_game.files, f, sizeof f);
 }
@@ -142,7 +145,7 @@ static void test_detector(void) {
 static Cps1 m;
 static uint8_t prog[1 << 20];
 static Cps1Game prog_game = {"prog", "Program", CPS1_PLAIN, {1 << 20, 0, 0, 0},
-                             {0x20, 0x0004, 0x00, 0x02, 0x04, 0x06, 0x2E, {0x26, 0x28, 0x2A, 0x2C}, 0x30, {0}}, 0, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0};
+                             {0x20, 0x0004, 0x00, 0x02, 0x04, 0x06, 0x2E, {0x26, 0x28, 0x2A, 0x2C}, 0x30, {0}}, 0, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0};
 static Cps1Rom prog_rom;
 
 static void w16(uint32_t a, uint16_t v) { prog[a] = (uint8_t)(v >> 8), prog[a + 1] = (uint8_t)v; }
@@ -245,6 +248,9 @@ static void test_cpsb_high(void) {  /* Street Fighter II revision E: the CPS-B a
 static void test_unmapped(void) {
     boot_program();
     assert(m68k_read(&m.cpu, 0x600000, 5, 3) == 0xFFFF);
+    prog_rom.size[CPS1_R_MAIN] = 0x1000;          /* the ROM space past the chips: 0, as MAME's zero-filled region (sf2accp2) */
+    assert(m68k_read(&m.cpu, 0x180CA6, 5, 3) == 0);
+    prog_rom.size[CPS1_R_MAIN] = sizeof prog;
     m68k_write(&m.cpu, 0x900010, 0xABCD, 5, 3);  /* graphics RAM is RAM */
     assert(m68k_read(&m.cpu, 0x900010, 5, 3) == 0xABCD);
 }
@@ -359,6 +365,13 @@ static void test_priority(void) {
     assert(m.frame[50 * CPS1_WIDTH + 131] == 0x400 + 0 * 16 + 7);
 }
 
+static void test_priority_none(void) {  /* a board without the mask's port (qad, CPS_B_21_BT7): no pen goes over */
+    prog_game.b.prio[1] = CPS1_NONE;
+    sprite_scene(1 << 7);
+    assert(m.frame[50 * CPS1_WIDTH + 131] == 0x13);
+    prog_game.b.prio[1] = 0x28;
+}
+
 static void test_gfx_mapper(void) {  /* S224B: a tile outside its layer's range is not drawn */
     static const Cps1Mapper s224b = {{0x8000}, 4, {{CPS1_GFX_SPRITES, 0x0000, 0x43FF, 0}, {CPS1_GFX_SCROLL1, 0x4400, 0x4BFF, 0},
                                                    {CPS1_GFX_SCROLL3, 0x4C00, 0x5FFF, 0}, {CPS1_GFX_SCROLL2, 0x6000, 0x7FFF, 0}}};
@@ -386,9 +399,9 @@ static void test_gfx_mapper(void) {  /* S224B: a tile outside its layer's range 
 
 static void test_layout_gfx8(void) {  /* 8-bit graphics chips: one byte into every 8, at the offset's slot */
     static uint8_t a[2] = {0xA0, 0xA1}, b[2] = {0xB0, 0xB1};
-    static Cps1Game g8 = {"g8", "G8", CPS1_PLAIN, {0, 16, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0};
-    g8.files[0] = (Cps1File){zip_crc32(a, 2), 2, CPS1_R_GFX, CPS1_LOAD_GFX8, 1, 0};
-    g8.files[1] = (Cps1File){zip_crc32(b, 2), 2, CPS1_R_GFX, CPS1_LOAD_GFX8, 6, 0};
+    static Cps1Game g8 = {"g8", "G8", CPS1_PLAIN, {0, 16, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0};
+    g8.files[0] = (Cps1File){zip_crc32(a, 2), 2, CPS1_R_GFX, CPS1_LOAD_GFX8, 1, 0, 0, 0};
+    g8.files[1] = (Cps1File){zip_crc32(b, 2), 2, CPS1_R_GFX, CPS1_LOAD_GFX8, 6, 0, 0, 0};
     zcount = 0;
     zip_add("a", a, 2), zip_add("b", b, 2);
     zip_build();
@@ -398,6 +411,47 @@ static void test_layout_gfx8(void) {  /* 8-bit graphics chips: one byte into eve
     assert(zip_open(&z, zbuf, zlen) == 0 && cps1_load(&g8, &z, &r, err, sizeof err) == 0);
     static const uint8_t want[16] = {0, 0xA0, 0, 0, 0, 0, 0xB0, 0, 0, 0xA1, 0, 0, 0, 0, 0xB1, 0};
     assert(memcmp(r.region[CPS1_R_GFX], want, 16) == 0);
+    cps1_unload(&r);
+    zip_close(&z);
+}
+
+/* Chips loaded in parts (MAME's ROM_CONTINUE, ROM_RELOAD, ROM_IGNORE): rows
+ * with skip and len; and an 8-bit chip one byte in every 4 (ROM_LOAD32_BYTE). */
+static void test_continue(void) {
+    static uint8_t w[8] = {0xA0, 0xA1, 0xA2, 0xA3, 0xB0, 0xB1, 0xB2, 0xB3}, q[4] = {1, 2, 3, 4};
+    static Cps1Game gp = {"gp", "GP", CPS1_PLAIN, {0, 16, 4, 0}, {0}, 4, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0};
+    gp.files[0] = (Cps1File){zip_crc32(w, 8), 8, CPS1_R_GFX, CPS1_LOAD_GFX4, 0, 0, 4, 0};  /* the first half at slot 0 */
+    gp.files[1] = (Cps1File){zip_crc32(w, 8), 8, CPS1_R_GFX, CPS1_LOAD_GFX4, 4, 4, 4, 0};  /* ROM_CONTINUE: the second at slot 4 */
+    gp.files[2] = (Cps1File){zip_crc32(q, 4), 4, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 0, 0, 2, 0};  /* ROM_IGNORE: 2 bytes used */
+    gp.files[3] = (Cps1File){zip_crc32(q, 4), 4, CPS1_R_SOUND, CPS1_LOAD_PLAIN, 2, 0, 2, 0};  /* ROM_RELOAD: again at 2 */
+    zcount = 0, zip_add("w", w, 8), zip_add("q", q, 4), zip_build();
+    Zip z;
+    Cps1Rom r;
+    char err[128];
+    assert(zip_open(&z, zbuf, zlen) == 0 && cps1_load(&gp, &z, &r, err, sizeof err) == 0);
+    static const uint8_t gfx_[16] = {0xA0, 0xA1, 0, 0, 0xB0, 0xB1, 0, 0, 0xA2, 0xA3, 0, 0, 0xB2, 0xB3, 0, 0};
+    static const uint8_t snd[4] = {1, 2, 1, 2};
+    assert(!memcmp(r.region[CPS1_R_GFX], gfx_, 16) && !memcmp(r.region[CPS1_R_SOUND], snd, 4));
+    cps1_unload(&r);
+    zip_close(&z);
+}
+
+static void test_load32(void) {  /* four byte chips interleaved by 4 */
+    static uint8_t c[4][2] = {{0x10, 0x11}, {0x20, 0x21}, {0x30, 0x31}, {0x40, 0x41}};
+    static Cps1Game g4 = {"g4", "G4", CPS1_PLAIN, {0, 8, 0, 0}, {0}, 4, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0};
+    static const char *names[4] = {"c0", "c1", "c2", "c3"};
+    zcount = 0;
+    for (int i = 0; i < 4; i++) {
+        g4.files[i] = (Cps1File){zip_crc32(c[i], 2), 2, CPS1_R_GFX, CPS1_LOAD_BYTE4, (uint32_t)i, 0, 0, 0};
+        zip_add(names[i], c[i], 2);
+    }
+    zip_build();
+    Zip z;
+    Cps1Rom r;
+    char err[128];
+    assert(zip_open(&z, zbuf, zlen) == 0 && cps1_load(&g4, &z, &r, err, sizeof err) == 0);
+    static const uint8_t want[8] = {0x10, 0x20, 0x30, 0x40, 0x11, 0x21, 0x31, 0x41};
+    assert(!memcmp(r.region[CPS1_R_GFX], want, 8));
     cps1_unload(&r);
     zip_close(&z);
 }
@@ -630,7 +684,7 @@ static void test_oki_bad_phrase(void) {
 
 /* ---- the Z80 side ---- */
 
-static uint8_t zrom[0x10000];
+static uint8_t zrom[0x20000];  /* 128 KB: the Q-Sound tests' banks too */
 
 static void boot_sound(const uint8_t *code, size_t n) {
     memset(zrom, 0, sizeof zrom);
@@ -755,9 +809,9 @@ static void write_zip(const char *path) {
 
 static void test_clone_parent(void) {
     static uint8_t own[4] = {1, 2, 3, 4}, shared[4] = {5, 6, 7, 8};
-    static Cps1Game clone = {"clone", "Clone", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "cps1_par", 0, -1, CPS1_EXTRA_NONE, 0, 0};
-    clone.files[0] = (Cps1File){zip_crc32(own, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0};
-    clone.files[1] = (Cps1File){zip_crc32(shared, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 4, 1};
+    static Cps1Game clone = {"clone", "Clone", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, "cps1_par", 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0};
+    clone.files[0] = (Cps1File){zip_crc32(own, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0, 0, 0};
+    clone.files[1] = (Cps1File){zip_crc32(shared, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 4, 0, 0, 1};
     zcount = 0, zip_add("own", own, 4), zip_build(), write_zip("cps1_clone.zip");
     static uint8_t clone_zip[256];
     size_t clone_len = zlen;
@@ -779,12 +833,28 @@ static void test_clone_parent(void) {
     remove("cps1_clone.zip"), remove("cps1_par.zip");
 }
 
+static void test_name_partial(void) {  /* wof.zip holding wofr1: a set whole in the zip beats the one named like it, partly there */
+    static uint8_t a[4] = {1, 1, 1, 1}, b[4] = {2, 2, 2, 2}, c[4] = {3, 3, 3, 3};
+    static Cps1Game two[2] = {
+        {"cps1_nm", "Named", CPS1_PLAIN, {12, 0, 0, 0}, {0}, 3, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0},
+        {"cps1_r1", "R1", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0}};
+    two[0].files[0] = (Cps1File){zip_crc32(a, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0, 0, 0};
+    two[0].files[1] = (Cps1File){zip_crc32(b, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 4, 0, 0, 0};
+    two[0].files[2] = (Cps1File){zip_crc32(c, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 8, 0, 0, 0};
+    two[1].files[0] = two[0].files[0], two[1].files[1] = two[0].files[1];
+    zcount = 0, zip_add("a", a, 4), zip_add("b", b, 4), zip_build();
+    Cps1Rom r;
+    char err[256] = "";
+    assert(cps1_open_in("cps1_nm.zip", zbuf, zlen, two, 2, &r, err, sizeof err) == 0 && r.game == &two[1]);
+    cps1_unload(&r);
+}
+
 static void test_chip_elsewhere(void) {  /* an own chip the zip lacks, found by CRC in another zip of the folder */
     static uint8_t a[4] = {1, 2, 3, 4}, b[4] = {5, 6, 7, 8}, c[4] = {9, 10, 11, 12};
-    static Cps1Game g = {"cps1_lack", "Lack", CPS1_PLAIN, {12, 0, 0, 0}, {0}, 3, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0};
-    g.files[0] = (Cps1File){zip_crc32(a, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0};
-    g.files[1] = (Cps1File){zip_crc32(b, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 4, 0};
-    g.files[2] = (Cps1File){zip_crc32(c, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 8, 0};
+    static Cps1Game g = {"cps1_lack", "Lack", CPS1_PLAIN, {12, 0, 0, 0}, {0}, 3, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0};
+    g.files[0] = (Cps1File){zip_crc32(a, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0, 0, 0};
+    g.files[1] = (Cps1File){zip_crc32(b, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 4, 0, 0, 0};
+    g.files[2] = (Cps1File){zip_crc32(c, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 8, 0, 0, 0};
     zcount = 0, zip_add("a", a, 4), zip_add("b", b, 4), zip_build();
     static uint8_t mine[256];
     size_t len = zlen;
@@ -807,16 +877,307 @@ static void test_chip_elsewhere(void) {  /* an own chip the zip lacks, found by 
 static void test_match_order(void) {  /* a zip two games match: the one with more of its own files */
     static uint8_t a[4] = {9, 9, 9, 1}, b[4] = {9, 9, 9, 2};
     static Cps1Game two[2] = {
-        {"small", "Small", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 1, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0},
-        {"big", "Big", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0}};
-    two[0].files[0] = (Cps1File){zip_crc32(a, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0};
+        {"small", "Small", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 1, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0},
+        {"big", "Big", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0}};
+    two[0].files[0] = (Cps1File){zip_crc32(a, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0, 0, 0};
     two[1].files[0] = two[0].files[0];
-    two[1].files[1] = (Cps1File){zip_crc32(b, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 4, 0};
+    two[1].files[1] = (Cps1File){zip_crc32(b, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 4, 0, 0, 0};
     zcount = 0, zip_add("a", a, 4), zip_add("b", b, 4), zip_build();
     Zip z;
     assert(zip_open(&z, zbuf, zlen) == 0);
     assert(cps1_match_in(&z, two, 2) == &two[1]);
     zip_close(&z);
+}
+
+/* ---- the Q-Sound board ---- */
+
+static void test_kabuki(void) {  /* bytes 0..31 decoded with each key: MAME 0.289 kabuki.cpp's output */
+    static const uint8_t want[4][2][32] = {
+        {{0x46,0x66,0x56,0x6E,0xC6,0xE6,0xD6,0x2E,0x56,0x6E,0x5E,0x7E,0xD6,0xEE,0xDE,0x3E,0x44,0x64,0x54,0x6C,0xC4,0xE4,0xD4,0x2F,0x57,0x6F,0x5F,0x7F,0xD7,0xEF,0xDF,0x3C},
+         {0x86,0x82,0x8E,0x8A,0x8E,0x8A,0x9E,0x9A,0x06,0x02,0xCE,0xCA,0xCE,0xCA,0x1E,0x1A,0x84,0x80,0x8C,0x88,0x8C,0x88,0x9F,0x9B,0x07,0x03,0xCF,0xCB,0xCF,0xCB,0x1C,0x18}},
+        {{0x07,0x03,0x03,0x23,0x47,0x13,0x13,0x63,0x17,0x43,0x43,0x33,0x57,0x53,0x53,0x73,0x87,0x0B,0x0B,0x2B,0x4F,0x93,0x93,0xE3,0x97,0x4B,0x4B,0x3B,0x5F,0xD3,0xD3,0xF3},
+         {0x07,0x17,0x17,0x13,0x47,0x57,0x37,0x33,0x27,0x37,0x57,0x53,0x67,0x77,0x77,0x73,0x0F,0x1F,0x1F,0x1B,0xC7,0xD7,0xB7,0xB3,0x2F,0x3F,0x5F,0x5B,0xE7,0xF7,0xF7,0xF3}},
+        {{0x88,0x80,0xA8,0xA0,0x98,0xC0,0x90,0xE0,0xC8,0xB8,0xC0,0xB0,0xD8,0xF8,0x38,0x30,0x89,0x81,0xE8,0xE0,0x99,0x01,0xD0,0x60,0x09,0xB9,0x40,0xF0,0x19,0x39,0x78,0x7C},
+         {0x90,0x92,0xB0,0xB2,0xD0,0xB8,0xD2,0xBA,0x98,0xF0,0x9A,0xF2,0xD8,0x1A,0x38,0x3A,0x94,0xD2,0xF0,0xB6,0x14,0xF8,0x52,0xBE,0x9C,0x70,0xDA,0x36,0x1C,0x60,0x78,0xF2}},
+        {{0x58,0x50,0x18,0x10,0x78,0x70,0x38,0x30,0xD8,0xD0,0x98,0x90,0xF8,0xF0,0xB8,0x2C,0x59,0xF8,0x5D,0xFC,0x1A,0xB8,0x1E,0x2C,0xD9,0xE8,0xDD,0xEC,0x9A,0xA8,0x9E,0xAC},
+         {0xA8,0x88,0xA0,0x80,0x28,0x08,0xE0,0xC0,0xB8,0x98,0xB0,0x90,0xF8,0xD8,0x18,0x1C,0xE8,0xAD,0xF8,0xBE,0x68,0x2E,0x18,0x3D,0xC8,0xED,0xD8,0xFE,0x48,0x6E,0x58,0x1D}}};
+    static uint8_t rom[0x8000], op[0x8000], data[0x8000];
+    for (int i = 0; i < 0x8000; i++) rom[i] = (uint8_t)i;
+    for (int k = 0; k < 4; k++) {
+        cps1_kabuki(CPS1_INIT_WOF + k, rom, op, data);
+        assert(!memcmp(op, want[k][0], 32) && !memcmp(data, want[k][1], 32));
+    }
+}
+
+/* MAME 0.289 qsoundhle.cpp's output (copied into a C++20 harness in the scratchpad)
+ * for one voice keyed on with a pan and an echo, on a made-up chip ROM and
+ * samples: the 512 stereo samples after the 4 of the boot, as an FNV-1a hash
+ * of their 16-bit values, and the first 8 pairs. */
+static void test_qsound_as_mame(void) {
+    static uint16_t dsp[4096];
+    static uint8_t samples[0x10000];
+    static QSound q;
+    for (int i = 0; i < 4096; i++) dsp[i] = (uint16_t)((i * 7919) % 8191 - 4095);
+    for (int i = 0; i < 0x10000; i++) samples[i] = (uint8_t)((i * 73) ^ (i >> 5));
+    qsound_init(&q, dsp, samples, sizeof samples);
+    int16_t o[2];
+    for (int i = 0; i < 4; i++) qsound_sample(&q, o);  /* the boot: init, then the filters */
+    static const uint16_t writes[][2] = {
+        {0x78, 0x8000},                                                 /* voice 0's bank (voice 15's slot) */
+        {0x01, 0x0100}, {0x02, 0x1800}, {0x04, 0x0400}, {0x05, 0x0F00},  /* start, rate 1.5, loop, end */
+        {0x80, 0x0118},                                                 /* its pan */
+        {0xBA, 0x2000}, {0x93, 0x1800}, {0xD9, 0x0554 + 200},           /* its echo, the feedback, the length */
+        {0x06, 0x3000}};                                                /* key on: the volume */
+    for (unsigned i = 0; i < sizeof writes / sizeof writes[0]; i++)
+        qsound_write(&q, 0, (uint8_t)(writes[i][1] >> 8)), qsound_write(&q, 1, (uint8_t)writes[i][1]),
+            qsound_write(&q, 2, (uint8_t)writes[i][0]);
+    static const int16_t first[16] = {-156, 201, 7, -303, -4, -62, -1, -229, -15, 101, -16, 143, -28, 576, -24, 696};
+    uint32_t h = 2166136261u;
+    for (int i = 0; i < 512; i++) {
+        qsound_sample(&q, o);
+        if (i < 8) assert(o[0] == first[i * 2] && o[1] == first[i * 2 + 1]);
+        for (int c = 0; c < 2; c++) h = (h ^ (uint16_t)o[c]) * 16777619u;
+    }
+    assert(h == 0x53BEE610u);
+    assert(qsound_ready(&q) == 0x80);
+}
+
+/* The hand-made program's board as a Q-Sound one, its Z80 code plain (no Kabuki key). */
+static void boot_qsound(const uint8_t *code, size_t n) {
+    memset(zrom, 0, sizeof zrom);
+    memcpy(zrom, code, n);
+    boot_program();
+    prog_game.group = CPS1_QSOUND, prog_game.clock_mhz = 12;
+    prog_rom.region[CPS1_R_SOUND] = zrom, prog_rom.size[CPS1_R_SOUND] = sizeof zrom;
+    prog_rom.z80_op = zrom;
+    cps1_init(&m, &prog_rom);
+}
+
+static void end_qsound(void) {
+    prog_game.group = CPS1_PLAIN, prog_game.clock_mhz = 10;
+    prog_rom.region[CPS1_R_SOUND] = NULL, prog_rom.size[CPS1_R_SOUND] = 0, prog_rom.z80_op = NULL;
+}
+
+static void test_qsound_sharedram(void) {  /* the 68000's low bytes are the Z80's RAM; high bytes read $FF */
+    static const uint8_t code[] = {0x3A, 0x00, 0xC0, 0x32, 0x01, 0xC0, 0x18, 0xF8};  /* ld a,($C000); ld ($C001),a; jr */
+    boot_qsound(code, sizeof code);
+    m68k_write(&m.cpu, 0xF18000, 0x005A, 5, 1);  /* $F18001 */
+    cps1_frame(&m);
+    assert(m.qram[0][1] == 0x5A);
+    assert(m68k_read(&m.cpu, 0xF18000, 5, 3) == 0xFF5A && m68k_read(&m.cpu, 0xF18002, 5, 3) == 0xFF5A);
+    m68k_write(&m.cpu, 0xF1E010, 0x1234, 5, 2);  /* the high byte alone: nothing */
+    assert(m.qram[1][8] == 0);
+    end_qsound();
+}
+
+static void test_qsound_irq(void) {  /* 250 interrupts a second: 60 frames, 1.006 s */
+    static const uint8_t code[] = {0x31, 0x00, 0x00, 0xED, 0x56, 0xFB, 0x18, 0xFE};  /* ld sp,0; im 1; ei; jr $ */
+    static const uint8_t irq[] = {0x2A, 0x00, 0xC0, 0x23, 0x22, 0x00, 0xC0, 0xFB, 0xC9};  /* (hl)++ at $C000; ei; ret */
+    boot_qsound(code, sizeof code);
+    memcpy(zrom + 0x38, irq, sizeof irq);
+    for (int i = 0; i < 60; i++) cps1_frame(&m);
+    int n = m.qram[0][0] | m.qram[0][1] << 8;
+    assert(n >= 250 && n <= 252);  /* 60 x 134,144 T-states / 32,000 = 251.5 */
+    end_qsound();
+}
+
+static void test_qsound_bank(void) {  /* $D003 = 2: $8000 shows ROM $10000 (MAME's $18000) */
+    static const uint8_t code[] = {0x3E, 0x02, 0x32, 0x03, 0xD0, 0x3A, 0x00, 0x80, 0x32, 0x00, 0xC0, 0x18, 0xFE};
+    boot_qsound(code, sizeof code);
+    zrom[0x10000] = 0x5A;
+    cps1_frame(&m);
+    assert(m.qbank == 2 && m.qram[0][0] == 0x5A);
+    end_qsound();
+}
+
+static void test_qsound_needs_zip(void) {  /* no qsound.zip beside the game: refused, the file named */
+    static uint8_t chip[4] = {1, 2, 3, 4};
+    static Cps1Game qs = {"qs", "Q", CPS1_QSOUND, {4, 0, 0, 0}, {0}, 1, {{0}}, {{0}, 0, {{0}}}, 12, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0};
+    qs.files[0] = (Cps1File){zip_crc32(chip, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0, 0, 0};
+    zcount = 0, zip_add("chip", chip, 4), zip_build();
+    Cps1Rom r;
+    char err[256] = "";
+    remove("qsound.zip");
+    assert(cps1_open_in("cps1_qs.zip", zbuf, zlen, &qs, 1, &r, err, sizeof err) == -1);
+    assert(strstr(err, "qsound.zip") && strstr(err, "qs"));
+}
+
+static void ee_port_bits(unsigned bits, int n) {  /* n bits on DI (bit 0) of $F1C006, clocked by bit 6, CS (bit 7) high */
+    for (int i = n - 1; i >= 0; i--) {
+        uint16_t di = (uint16_t)(bits >> i & 1);
+        m68k_write(&m.cpu, 0xF1C006, 0x80 | di, 5, 1), m68k_write(&m.cpu, 0xF1C006, 0xC0 | di, 5, 1);
+    }
+}
+
+static void ee_port(unsigned bits, int n) {  /* a command: CS down and up, then its bits */
+    m68k_write(&m.cpu, 0xF1C006, 0x00, 5, 1), m68k_write(&m.cpu, 0xF1C006, 0x80, 5, 1);
+    ee_port_bits(bits, n);
+}
+
+static void test_qsound_eeprom_state(void) {  /* a byte written through the port survives a save state */
+    static const uint8_t code[] = {0x18, 0xFE};
+    boot_qsound(code, sizeof code);
+    ee_port(0x260, 10);                            /* EWEN */
+    ee_port(0x283, 10), ee_port_bits(0xA5, 8);          /* WRITE 3 = $A5: 1 01 0000011 */
+    m68k_write(&m.cpu, 0xF1C006, 0x00, 5, 1);
+    assert(m.eeprom.data[3] == 0xA5);
+    assert(cps1_state_save(&m, "cps1_qs.state") == 0);
+    static Cps1 other;
+    cps1_init(&other, &prog_rom);
+    assert(other.eeprom.data[3] == 0xFF);
+    char err[128];
+    assert(cps1_state_load(&other, "cps1_qs.state", err, sizeof err) == 0 && other.eeprom.data[3] == 0xA5);
+    assert(other.qs.dsp == prog_rom.dsp);          /* the ROM's pointers, not the file's */
+    remove("cps1_qs.state");
+    end_qsound();
+}
+
+/* ---- Pang! 3 ---- */
+
+static void test_pang3_decrypt(void) {  /* MAME's init_pang3: the low byte of each word from $80000, by bit rules */
+    static uint8_t rom[0x100000];
+    rom[0x7FFFE] = 0x12, rom[0x7FFFF] = 0xAB;
+    rom[0x80000] = 0x12, rom[0x80001] = 0xAB;
+    cps1_pang3_decrypt(rom, sizeof rom);
+    assert(rom[0x7FFFE] == 0x12 && rom[0x7FFFF] == 0xAB);  /* the first half plain */
+    assert(rom[0x80000] == 0x12 && rom[0x80001] == 0x23);  /* $AB: bits 0, 1, 5 flip $04, $21, $06; bits 3, 7 only when clear */
+    assert(rom[0x80003] == (0x50 ^ 0x88));                  /* $00: the two rules for clear bits */
+}
+
+static void test_pang3_eeprom(void) {  /* the 16-bit EEPROM on the CPS-B's port $80017A: DI bit 0, CLK 6, CS 7; DO bit 0 */
+    boot_program();
+    prog_game.init = CPS1_INIT_PANG3;
+    cps1_init(&m, &prog_rom);
+    m.eeprom.data[2 * 2] = 0x34, m.eeprom.data[2 * 2 + 1] = 0x12;  /* cell 2 = $1234 */
+    unsigned bits = 0x182, v = 0;                                  /* READ 2: 1 10 000010 */
+    m68k_write(&m.cpu, 0x80017A, 0x00, 5, 1), m68k_write(&m.cpu, 0x80017A, 0x80, 5, 1);
+    for (int i = 8; i >= 0; i--)
+        m68k_write(&m.cpu, 0x80017A, (uint16_t)(0x80 | (bits >> i & 1)), 5, 1), m68k_write(&m.cpu, 0x80017A, (uint16_t)(0xC0 | (bits >> i & 1)), 5, 1);
+    for (int i = 0; i < 17; i++) {  /* the dummy 0, then 16 bits */
+        v = v << 1 | (m68k_read(&m.cpu, 0x80017A, 5, 3) & 1);
+        m68k_write(&m.cpu, 0x80017A, 0x80, 5, 1), m68k_write(&m.cpu, 0x80017A, 0xC0, 5, 1);
+    }
+    assert(v == 0x1234);
+    assert(m.cpsb[0x3A >> 1] == 0);  /* the port is the EEPROM's, not a CPS-B register */
+    prog_game.init = CPS1_INIT_NONE;
+}
+
+/* ---- the bootlegs' inits (MAME's init functions) ---- */
+
+static void with_init(uint8_t init) {
+    boot_program();
+    prog_game.init = init;
+    cps1_init(&m, &prog_rom);
+}
+
+static void test_init_sf2hack_dsw(void) {  /* the DIP switches on both bytes */
+    with_init(CPS1_INIT_SF2HACK);
+    m.dip[1] = 0xF4;
+    assert(m68k_read(&m.cpu, 0x80001C, 5, 3) == 0xF4F4);
+    cps1_set_input(&m, 0, PAD_START);
+    assert(m68k_read(&m.cpu, 0x800018, 5, 3) == (uint16_t)(0xEF << 8 | 0xEF));
+    prog_game.init = CPS1_INIT_NONE;
+    cps1_init(&m, &prog_rom);
+    m.dip[1] = 0xF4;
+    assert(m68k_read(&m.cpu, 0x80001C, 5, 3) == 0xF4FF);  /* the boards: the high byte */
+}
+
+static void test_init_sf2thndr_mirror(void) {  /* the CPS-B also at $8001C0 */
+    with_init(CPS1_INIT_SF2THNDR);
+    m68k_write(&m.cpu, 0x8001C0 + 0x2E, 0x1234, 5, 3);
+    assert(m.cpsb[0x2E >> 1] == 0x1234 && m68k_read(&m.cpu, 0x800140 + 0x20, 5, 3) == 0x0004 &&
+           m68k_read(&m.cpu, 0x8001C0 + 0x20, 5, 3) == 0x0004);
+    prog_game.init = CPS1_INIT_NONE;
+}
+
+static void test_init_prot_reads(void) {  /* MAME's values at MAME's addresses; elsewhere in the range 0 */
+    with_init(CPS1_INIT_SF2RB);
+    assert(m68k_read(&m.cpu, 0x201200, 5, 3) == 0x0002 && m68k_read(&m.cpu, 0x281200, 5, 3) == 0x0040 &&
+           m68k_read(&m.cpu, 0x201202, 5, 3) == 0);
+    with_init(CPS1_INIT_SF2RB2);
+    assert(m68k_read(&m.cpu, 0x201200, 5, 3) == 0x0000 && m68k_read(&m.cpu, 0x281200, 5, 3) == 0x0040);
+    with_init(CPS1_INIT_SF2DONGB);
+    assert(m68k_read(&m.cpu, 0x180000, 5, 3) == 0x0210 && m68k_read(&m.cpu, 0x1F7040, 5, 3) == 0x0210 &&
+           m68k_read(&m.cpu, 0x180002, 5, 3) == 0);
+    with_init(CPS1_INIT_SF2CEBLP);  /* a latch written at $5762B0, answered at $57A2B0 */
+    m68k_write(&m.cpu, 0x5762B0, 0x0004, 5, 3);
+    assert(m68k_read(&m.cpu, 0x57A2B0, 5, 3) == 0x0408);
+    m68k_write(&m.cpu, 0x5762B0, 0x0000, 5, 3);
+    assert(m68k_read(&m.cpu, 0x57A2B0, 5, 3) == 0x1992);
+    with_init(CPS1_INIT_PANG3B4);
+    m68k_write(&m.cpu, 0x5762B0, 0x0005, 5, 3);
+    assert(m68k_read(&m.cpu, 0x57A2B0, 5, 3) == 0x0025);
+    m68k_write(&m.cpu, 0x5762B0, 0x0017, 5, 3);
+    assert(m68k_read(&m.cpu, 0x57A2B0, 5, 3) == 0x7321);
+    with_init(CPS1_INIT_DINOHUNT);
+    cps1_set_input(&m, 2, PAD_UP);
+    assert(m68k_read(&m.cpu, 0xF18000, 5, 3) == 0x00FF && m68k_read(&m.cpu, 0xFC0000, 5, 3) == (uint8_t)~0x08);
+    prog_game.init = CPS1_INIT_NONE;
+}
+
+static void test_init_gfx_bitswap(void) {  /* sf2rk: graphics bits 0 and 7 swapped, but $400000-$47FFFF */
+    static uint8_t gfx_rom[0x600000];
+    gfx_rom[0x000010] = 0x81 ^ 0x01, gfx_rom[0x400010] = 0x01, gfx_rom[0x480010] = 0x80;
+    cps1_sf2rk_descramble(gfx_rom, sizeof gfx_rom);
+    assert(gfx_rom[0x000010] == 0x01 && gfx_rom[0x400010] == 0x01 && gfx_rom[0x480010] == 0x01);
+}
+
+/* ---- the 93C46 serial EEPROM ---- */
+
+static uint64_t ee_now;  /* microseconds */
+static void ee_bit(Eeprom93c46 *e, int di) {  /* one bit clocked in */
+    eeprom_write_lines(e, 1, 0, di, ee_now), eeprom_write_lines(e, 1, 1, di, ee_now), ee_now += 2;
+}
+static void ee_command(Eeprom93c46 *e, unsigned bits, int n) {  /* CS up, then n bits, high first */
+    eeprom_write_lines(e, 0, 0, 0, ee_now), eeprom_write_lines(e, 1, 0, 0, ee_now), ee_now += 2;
+    for (int i = n - 1; i >= 0; i--) ee_bit(e, bits >> i & 1);
+}
+static unsigned ee_read(Eeprom93c46 *e, unsigned cmd, int n, int bits) {  /* a READ: the dummy 0, then the cell */
+    ee_command(e, cmd, n);
+    unsigned v = 0;
+    for (int i = 0; i <= bits; i++) v = v << 1 | (unsigned)eeprom_do(e, ee_now), ee_bit(e, 0);
+    assert(v >> bits == 0);  /* the dummy 0 */
+    eeprom_write_lines(e, 0, 0, 0, ee_now);
+    return v;
+}
+
+static void test_eeprom_write_read(void) {  /* 16 bits: start, opcode 2 bits, address 6 bits */
+    static Eeprom93c46 e;
+    eeprom_init(&e, 0);
+    ee_command(&e, 0x130, 9);                          /* EWEN: 1 00 11xxxx */
+    ee_command(&e, 0x145, 9);                          /* WRITE 5: 1 01 000101 */
+    for (int i = 15; i >= 0; i--) ee_bit(&e, 0x1234 >> i & 1);
+    eeprom_write_lines(&e, 0, 0, 0, ee_now), eeprom_write_lines(&e, 1, 0, 0, ee_now);
+    assert(eeprom_do(&e, ee_now) == 0);                /* busy: 1.75 ms */
+    ee_now += 1750;
+    assert(eeprom_do(&e, ee_now) == 1);                /* ready */
+    assert(ee_read(&e, 0x185, 9, 16) == 0x1234);       /* READ 5: 1 10 000101; the dummy 0 leads */
+    assert(e.data[10] == 0x34 && e.data[11] == 0x12);  /* MAME's layout: cells little-endian */
+}
+
+static void test_eeprom_protected(void) {  /* WRITE before EWEN changes nothing */
+    static Eeprom93c46 e;
+    eeprom_init(&e, 0);
+    ee_command(&e, 0x145, 9);
+    for (int i = 15; i >= 0; i--) ee_bit(&e, 0x1234 >> i & 1);
+    eeprom_write_lines(&e, 0, 0, 0, ee_now);
+    ee_now += 2000;
+    assert(ee_read(&e, 0x185, 9, 16) == 0xFFFF);
+}
+
+static void test_eeprom_org8(void) {  /* 8 bits: address 7 bits, byte cells */
+    static Eeprom93c46 e;
+    eeprom_init(&e, 1);
+    ee_command(&e, 0x260, 10);                         /* EWEN: 1 00 11xxxxx */
+    ee_command(&e, 0x2FF, 10);                         /* WRITE 127: 1 01 1111111 */
+    for (int i = 7; i >= 0; i--) ee_bit(&e, 0xA5 >> i & 1);
+    eeprom_write_lines(&e, 0, 0, 0, ee_now);
+    ee_now += 2000;
+    assert(ee_read(&e, 0x37F, 10, 8) == 0xA5 && e.data[127] == 0xA5);
+    ee_command(&e, 0x3FF, 10);                         /* ERASE 127: 1 11 1111111 */
+    eeprom_write_lines(&e, 0, 0, 0, ee_now);
+    ee_now += 2000;
+    assert(ee_read(&e, 0x37F, 10, 8) == 0xFF);
 }
 
 /* ---- save states ---- */
@@ -897,9 +1258,12 @@ int main(void) {
     test_scroll3_tile();
     test_sprite_flip();
     test_priority();
+    test_priority_none();
     test_gfx_mapper();
     test_layout_gfx8();
     test_mapper_bounds();
+    test_continue();
+    test_load32();
     test_flip();
     test_stars();
     test_rotate();
@@ -929,8 +1293,25 @@ int main(void) {
     test_clone_parent();
     test_match_order();
     test_chip_elsewhere();
+    test_name_partial();
     test_state_roundtrip();
     test_state_refused();
+    test_kabuki();
+    test_eeprom_write_read();
+    test_eeprom_protected();
+    test_eeprom_org8();
+    test_qsound_as_mame();
+    test_qsound_sharedram();
+    test_qsound_irq();
+    test_qsound_bank();
+    test_qsound_needs_zip();
+    test_qsound_eeprom_state();
+    test_pang3_decrypt();
+    test_pang3_eeprom();
+    test_init_sf2hack_dsw();
+    test_init_sf2thndr_mirror();
+    test_init_prot_reads();
+    test_init_gfx_bitswap();
     puts("cps1_tests: ok");
     return 0;
 }

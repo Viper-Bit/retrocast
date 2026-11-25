@@ -99,10 +99,19 @@ static const Layer layers[4] = {
 
 /* The layer's pen at a screen pixel: 15 when transparent; *index and *group
  * filled otherwise. */
+/* A bootleg's scroll X offsets for layers 1-3 (MAME's bootleg_kludge). */
+static unsigned kludge_x(const Cps1 *s, int n) {
+    static const int16_t offs[16][3] = {[1] = {-0x0C, -0x0E, -0x10}, [2] = {-0x10, -0x10, -0x10}, [3] = {-0x08, -0x0B, -0x0C},
+                                        [0xE] = {-0x46, -0x40, -0x46}, [0xF] = {-0x40, -0x40, -0x40}};
+    static const int16_t wonders[3] = {4, 6, 0xA};  /* 3wondersb */
+    uint8_t k = s->rom->game->kludge;
+    return (unsigned)(k == 0x88 ? wonders[n - 1] : offs[k & 15][n - 1]);
+}
+
 static unsigned layer_pixel(const Cps1 *s, int n, unsigned x, unsigned y, uint16_t *index, unsigned *group) {
     const Layer *l = &layers[n];
     const uint8_t *map = base(s, l->map, 0x4000);
-    unsigned size = l->tile * 64, mx = x + RAW_X + areg(s, l->sx), my = (y + RAW_Y + areg(s, l->sy)) & (size - 1);
+    unsigned size = l->tile * 64, mx = x + RAW_X + areg(s, l->sx) + kludge_x(s, n), my = (y + RAW_Y + areg(s, l->sy)) & (size - 1);
     if (n == 2 && areg(s, A_VIDEO) & 1) {  /* row scroll: an X offset per map row */
         const uint8_t *other = base(s, A_OTHER, 0x800);
         mx += word(other + ((my + areg(s, A_ROWSCROLL)) & 0x3FF) * 2);
@@ -130,8 +139,13 @@ static unsigned layer_pixel(const Cps1 *s, int n, unsigned x, unsigned y, uint16
 static void draw_sprites(Cps1 *s, const uint8_t *high) {
     const uint8_t *obj = base(s, A_OBJ, 0x800);
     int last = 0;
-    while (last < 256 && (word(obj + last * 8 + 6) & 0xFF00) != 0xFF00) last++;
-    for (int k = last - 1; k >= 0; k--) {  /* the first entry ends on top */
+    uint8_t kludge = s->rom->game->kludge;
+    if ((kludge & 15) == 3)  /* captcommb: CPS-2's end marker, Y of $8000 or more */
+        while (last < 256 && word(obj + last * 8 + 2) < 0x8000) last++;
+    else
+        while (last < 256 && (word(obj + last * 8 + 6) & 0xFF00) != 0xFF00) last++;
+    for (int i = 0; i < last; i++) {  /* the first entry ends on top; some bootlegs' the last */
+        int k = kludge & 0x40 ? i : last - 1 - i;
         const uint8_t *e = obj + k * 8;
         unsigned x = word(e), y = word(e + 2), code = word(e + 4), attr = word(e + 6);
         unsigned nx = (attr >> 8 & 0xF) + 1, ny = (attr >> 12 & 0xF) + 1, fx = attr >> 5 & 1, fy = attr >> 6 & 1;
@@ -180,6 +194,13 @@ static void draw_stars(Cps1 *s, uint16_t ctrl) {
 void cps1_render(Cps1 *s) {
     static uint8_t high[CPS1_WIDTH * CPS1_HEIGHT];
     const Cps1B *b = &s->rom->game->b;
+    uint8_t kludge = s->rom->game->kludge;  /* bootlegs' wiring, set each frame as MAME does */
+    if ((kludge & 15) == 1 || (kludge & 15) == 2) s->cpsa[A_OBJ >> 1] = 0x9100;
+    if (kludge == 0x88) {  /* 3wondersb: registers wired, not written */
+        s->cpsb[0x30 >> 1] = 0x3F;
+        s->cpsa[A_VIDEO >> 1] = 0x3E, s->cpsa[A_SCROLL2 >> 1] = 0x90C0, s->cpsa[A_SCROLL3 >> 1] = 0x9100, s->cpsa[A_PALETTE >> 1] = 0x9140;
+    }
+    if (kludge & 0x80) cps1_palette_upload(s);  /* the palette taken every frame */
     uint16_t ctrl = s->cpsb[b->layer_ctrl >> 1];
     int order[4] = {ctrl >> 6 & 3, ctrl >> 8 & 3, ctrl >> 10 & 3, ctrl >> 12 & 3};
     for (int i = 0; i < CPS1_WIDTH * CPS1_HEIGHT; i++) s->frame[i] = BACKGROUND;
@@ -199,7 +220,8 @@ void cps1_render(Cps1 *s) {
                 unsigned group, p = layer_pixel(s, n, x, y, &index, &group);
                 if (p == 15) continue;
                 s->frame[y * CPS1_WIDTH + x] = index;
-                if (below_sprites && s->cpsb[b->prio[group] >> 1] >> p & 1) high[y * CPS1_WIDTH + x] = 1;
+                if (below_sprites && b->prio[group] != CPS1_NONE && s->cpsb[b->prio[group] >> 1] >> p & 1)  /* no port (qad): none */
+                    high[y * CPS1_WIDTH + x] = 1;
             }
     }
     if (areg(s, A_VIDEO) & 0x8000)  /* flip screen: the picture turned 180 degrees */

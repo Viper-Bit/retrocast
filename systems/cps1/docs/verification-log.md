@@ -5,6 +5,69 @@ reproducible check is not "verified".
 
 Checks of shared parts: [docs/verification-log.md](../../../docs/verification-log.md).
 
+## 2026-11-25 · P8 · the odd ones
+- **Table**: 210 sets, regenerated from MAME 0.289 by the scratchpad
+  generator (the existing rows unchanged but for two new columns: a
+  chip's part, MAME's bootleg kludge); 19 left out, each with its reason
+  ([compatibility](compatibility.md)). `sf2m3` and `sf2ceupl` moved out:
+  MAME runs them on their own memory maps; on ours they booted but read
+  no inputs.
+- **Self-checks** (`cps1_tests`): Pang! 3's decryption (the first half
+  plain, $12AB to $1223 and $0000 to $00D8 by MAME's rules, worked by
+  hand); its EEPROM read through $80017A; a chip in two halves and
+  re-loaded and cut (ROM_CONTINUE, ROM_RELOAD, ROM_IGNORE); four byte
+  chips by 4; no priority port (qad); sf2hack's DIP bytes, sf2thndr's
+  mirror, each protection's values and 0 elsewhere, sf2rk's bit swap;
+  the ROM space past the chips reading 0.
+- **Boot** (3,000 frames of `--play`, a picture, by eye): megamana,
+  pnickj, qad, qadjr; pang3b (the folder's `pang3.zip`); captcommb,
+  3wondersb (now as 3wonders draws); sf2rb, sf2rb2, sf2m2, sf2m4, sf2m5,
+  sf2m7, sf2yyc, sf2koryu; sf2accp2 (black before: it reads $180CA6,
+  past its ROM, and needs 0 there, as MAME's zero-filled region gives)
+  and sf2rb3 (black before the regenerated table) in play.
+- **Not checked**: pictures against MAME's (no MAME here); black
+  background tiles in sf2yyc, sf2accp2 and sf2rb3; Pang! 3's decrypted
+  sets, rockmanj and qtono2j (their zips each lack a chip).
+
+## 2026-11-24 · P7 · the Q-Sound games
+- **References**: MAME 0.289's sources (tag `mame0289`): `kabuki.cpp` and
+  `qsoundhle.cpp` copied into small harnesses built in the scratchpad (C, and
+  C++20 for MAME's shift semantics), not committed. No MAME program was run.
+- **The table, regenerated** from `cps1.cpp` / `cps1_v.cpp` by a rebuilt
+  generator (scratchpad): byte for byte the old table but for the old
+  generator's mistakes, now fixed: DIP defaults MAME sets through macros
+  (`CPS1_DIFFICULTY_1` and others: 84 sets' defaults changed, such as
+  difficulty "Normal" where the table had the easiest), five
+  128 KB sound chips listed as 64 KB (`daimakair`, `dynwarjr`, `area88r`,
+  `cawingjr`, `wofhfh`: those zips could not open before), four sets on
+  MAME's 12 MHz machines run at 10 (`sf2m3`, `sf2ceupl`, `wofhfh`,
+  `punisherbz`); `wonder3` and `sf2redp2` added. Then the 18 Q-Sound sets.
+- **Kabuki**: the four keys' first 32 bytes against MAME's (`test_kabuki`);
+  the first 32 KB of wof, dino, punisher and slammast's Z80 ROMs decoded
+  by both: opcodes and data identical.
+- **Q-Sound chip**: one voice with pan and echo on a made-up chip ROM, 512
+  samples against MAME's code (`test_qsound_as_mame`; UBSan clean). Then
+  Warriors of Fate, 3,000 frames of `--play`: its 114,222 chip writes
+  logged by a temporary build, replayed through MAME's code with the real
+  `dl-1425.bin` and the game's samples: 1,209,230 stereo samples, all
+  identical to what our machine played.
+- **The board** (`cps1_tests`): shared RAM on the 68000's low bytes, $FF
+  above; 251 Z80 interrupts in 60 frames (250 Hz); bank 2 at $8000; a game
+  refused without `qsound.zip`, the file named; an EEPROM byte written
+  through $F1C006 kept by a save state. The 93C46: write and read back,
+  write refused before EWEN, the 8-bit mode, erase.
+- **Boot**: every Q-Sound zip of the folder whole by CRC, 3,000 frames of
+  `--play`: wof (wofr1), wofa, wofj, wofu, dino, dinoj, punisher,
+  punisheru, punisherj, slammast, slammastu, mbombrd: a picture, none
+  halted; wof, dino, punisher, slammast and mbombrd in play by eye (four
+  wrestlers in mbombrd). `dinou.zip`, `mbomberj.zip` and `mbombrdj.zip`
+  each lack a chip.
+- **Recompiled** (`-DROMS` with wof.zip and dino.zip): `--diff --coverage`,
+  3,000 frames of `--play`: no difference; 97.26% and 97.67% of 68000
+  clocks recompiled.
+- **Not checked**: pictures against MAME's (no MAME program here); the
+  window played by hand; the EEPROM file by hand.
+
 ## 2026-11-24 · P6 · the recompiler
 - **Shared core**: `mdtest_random.c` generated before and after moving the
   recompiler to `cpu/m68k/m68k_recomp.c`: byte-identical; the Genesis

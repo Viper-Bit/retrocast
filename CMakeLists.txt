@@ -24,7 +24,7 @@ include(cmake/detect_system.cmake)  # detect_system(): which system a ROM is for
 set(NES_DIR ${CMAKE_SOURCE_DIR}/systems/nes)
 
 # Shared by every system: input recordings and the pad bits (core/).
-add_library(core STATIC core/input_log.c core/detect.c core/zip.c core/audio/fm.c)
+add_library(core STATIC core/input_log.c core/detect.c core/zip.c core/eeprom93c46.c core/audio/fm.c core/audio/qsound.c)
 target_include_directories(core PUBLIC core core/audio)
 # Instruction templates for the recompilers (build-time tools).
 add_library(recomp_template STATIC core/recomp/template.c)
