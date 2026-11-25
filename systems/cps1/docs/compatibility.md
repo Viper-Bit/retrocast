@@ -153,12 +153,14 @@ Run the same command on your own folder to see what yours lacks.
 | sf2cebltw | Street Fighter II': Champion Edition ('Taiwan' bootleg with PAL) | sf2ce | no zip |
 | sf2rb | Street Fighter II': Champion Edition (Rainbow, bootleg, set 1) | sf2ce | boot-tested |
 | sf2rb2 | Street Fighter II': Champion Edition (Rainbow, bootleg, set 2) | sf2ce | boot-tested |
+| sf2rb3 | Street Fighter II': Champion Edition (Rainbow, bootleg, set 3) | sf2ce | boot-tested |
 | sf2red | Street Fighter II': Champion Edition (Red Wave, bootleg, set 1) | sf2ce | boot-tested |
 | sf2reda | Street Fighter II': Champion Edition (Red Wave, bootleg, set 2) | sf2ce | no zip |
 | sf2redp2 | Street Fighter II': Champion Edition (Red Wave PtII, bootleg) | sf2ce | no zip |
 | sf2v004 | Street Fighter II': Champion Edition (V004, bootleg) | sf2ce | boot-tested |
 | sf2acc | Street Fighter II': Champion Edition (Accelerator!, bootleg, set 1) | sf2ce | boot-tested |
 | sf2acca | Street Fighter II': Champion Edition (Accelerator!, bootleg, set 2) | sf2ce | boot-tested |
+| sf2accp2 | Street Fighter II': Champion Edition (Accelerator Pt.II, bootleg) | sf2ce | boot-tested |
 | sf2amf2 | Street Fighter II': Champion Edition (L735 Test Rom, bootleg, set 1) | sf2ce | no zip |
 | sf2amf3 | Street Fighter II': Champion Edition (L735 Test Rom, bootleg, set 2) | sf2ce | no zip |
 | sf2dkot2 | Street Fighter II': Champion Edition (Double K.O. Turbo II, bootleg) | sf2ce | no zip |
@@ -232,7 +234,6 @@ Run the same command on your own folder to see what yours lacks.
 | ganbare | Ganbare! Marine Kun (Japan 2K0411) | its own init (init_ganbare) |
 | gulunpa | Gulun.Pa! (Japan 931220 L) (prototype) | a ROM layout the loader cannot express |
 | pmonster | Gamushara Battle! Puchi Monster (Japan 990519) | its own init (init_ganbare) |
-| sf2accp2 | Street Fighter II': Champion Edition (Accelerator Pt.II, bootleg) | a black screen |
 | sf2amf | Street Fighter II': Champion Edition (Alpha Magic-F, bootleg) | a chip MAME lists as not dumped |
 | sf2ceds6 | Street Fighter II': Champion Edition (Dstreet-6, bootleg) | its own memory map (MAME's sf2cems6 machine) |
 | sf2cems6a | Street Fighter II': Champion Edition (Mstreet-6, bootleg, set 1) | its own memory map (MAME's sf2cems6 machine) |
@@ -243,7 +244,6 @@ Run the same command on your own folder to see what yours lacks.
 | sf2m10 | Street Fighter II': Champion Edition (M10, bootleg) | its own memory map (MAME's sf2m10 machine) |
 | sf2m3 | Street Fighter II': Champion Edition (M3, bootleg) | its own memory map (MAME's sf2m3 machine) |
 | sf2m8 | Street Fighter II': Champion Edition (M8, bootleg) | its own init (init_sf2m8) |
-| sf2rb3 | Street Fighter II': Champion Edition (Rainbow, bootleg, set 3) | a black screen |
 | sf2re | Street Fighter II': Champion Edition (RE, bootleg) | its own memory map (MAME's sf2m3 machine) |
 | sf2stt | Street Fighter II: The World Warrior (TAB Austria, bootleg, set 2) | a chip MAME lists as not dumped |
 | varthb2 | Varth: Operation Thunderstorm (bootleg, set 2) | its own memory map (MAME's varthb2 machine) |

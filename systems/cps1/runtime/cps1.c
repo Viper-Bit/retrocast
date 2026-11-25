@@ -6,8 +6,9 @@
  *   $800100-$80013F  CPS-A registers;  $800140-$80017F  CPS-B registers
  *   $800180 / $800188  sound command / fade (for the Z80)
  *   $900000-$92FFFF  graphics RAM;  $FF0000-$FFFFFF  work RAM
- * Anything else reads $FFFF. VBlank is interrupt level 2 (autovector) from
- * line 240, held until acknowledged.
+ * The ROM space past the chips reads 0 (MAME's region); anything else
+ * $FFFF. VBlank is interrupt level 2 (autovector) from line 240, held until
+ * acknowledged.
  * The sound Z80: $0000-$7FFF ROM, $8000-$BFFF a 16 KB bank (ROM $8000 +
  * bank x $4000; $F004 bit 0), $D000-$D7FF RAM, $F000/$F001 the YM2151,
  * $F002 the OKI ($F006 its pin 7), $F008 / $F00A the 68000's command and fade; the YM2151's
@@ -171,7 +172,7 @@ static uint16_t rd(Cps1 *s, uint32_t a, unsigned strobe) {
     const Cps1Rom *r = s->rom;
     int32_t own = r->game->init >= CPS1_INIT_SF2HACK ? init_rd(s, a) : -1;
     if (own >= 0) return (uint16_t)own;
-    if (a < 0x400000) return a + 1 < r->size[CPS1_R_MAIN] ? be16(r->region[CPS1_R_MAIN] + a) : 0xFFFF;
+    if (a < 0x400000) return a + 1 < r->size[CPS1_R_MAIN] ? be16(r->region[CPS1_R_MAIN] + a) : 0;  /* MAME's 4 MB region: zeros past the chips */
     if (a >= 0xFF0000) return be16(s->ram + (a & 0xFFFF));
     if (a >= 0x900000 && a < 0x930000) return be16(s->gfxram + (a - 0x900000));
     if (a >= 0xF00000 && s->rom->game->group == CPS1_QSOUND) return qsound_rd(s, a);

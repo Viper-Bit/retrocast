@@ -248,6 +248,9 @@ static void test_cpsb_high(void) {  /* Street Fighter II revision E: the CPS-B a
 static void test_unmapped(void) {
     boot_program();
     assert(m68k_read(&m.cpu, 0x600000, 5, 3) == 0xFFFF);
+    prog_rom.size[CPS1_R_MAIN] = 0x1000;          /* the ROM space past the chips: 0, as MAME's zero-filled region (sf2accp2) */
+    assert(m68k_read(&m.cpu, 0x180CA6, 5, 3) == 0);
+    prog_rom.size[CPS1_R_MAIN] = sizeof prog;
     m68k_write(&m.cpu, 0x900010, 0xABCD, 5, 3);  /* graphics RAM is RAM */
     assert(m68k_read(&m.cpu, 0x900010, 5, 3) == 0xABCD);
 }
