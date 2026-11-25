@@ -70,15 +70,20 @@ int main(int argc, char **argv) {
         else if (argv[i][0] != '-') path = argv[i];
         else return fprintf(stderr, "unknown option %s\n", argv[i]), 2;
     }
-    if (!path) return fprintf(stderr, "usage: cps1_headless GAME.zip [--frames N] [--play] [--ppm FILE] [--wav FILE]"
+    const int embedded = !path && cps1_recomp_program && cps1_recomp_program->region[CPS1_R_MAIN];
+    if (!path && !embedded) return fprintf(stderr, "usage: cps1_headless GAME.zip [--frames N] [--play] [--ppm FILE] [--wav FILE]"
                                  " [--state-at N FILE] [--load-state FILE] [--misses FILE] [--diff] [--coverage]\n"), 2;
-    size_t size;
-    uint8_t *data = file_read(path, &size);
-    if (!data) return fprintf(stderr, "%s: cannot read\n", path), 1;
     Cps1Rom rom;
     char err[512];
-    if (cps1_open(path, data, size, &rom, err, sizeof err)) return fprintf(stderr, "%s\n", err), 1;
-    free(data);
+    if (embedded) {  /* the game built in (cps1recomp) */
+        if (cps1_open_embedded(cps1_recomp_program, &rom, err, sizeof err)) return fprintf(stderr, "%s\n", err), 1;
+    } else {
+        size_t size;
+        uint8_t *data = file_read(path, &size);
+        if (!data) return fprintf(stderr, "%s: cannot read\n", path), 1;
+        if (cps1_open(path, data, size, &rom, err, sizeof err)) return fprintf(stderr, "%s\n", err), 1;
+        free(data);
+    }
     const Cps1Game *g = rom.game;
 
     cps1_init(&machine, &rom);

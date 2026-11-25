@@ -86,9 +86,9 @@ things recompile more of it:
 
 DO NOT SHARE RECOMPILED PROGRAMS: they contain the game.
 
-CPS-1: give the game's .zip to -DROMS. The program does not contain the zip
-(the graphics are megabytes): start it with the zip, e.g.
-build/ffight "/path/to/ffight.zip".
+CPS-1: give the game's .zip to -DROMS (a Q-Sound game: qsound.zip in the
+same folder). The program holds what the game needs, decrypted, and starts
+without the zip (build/ffight); given a zip, it plays that one instead.
 
 
 CPS-1 (CAPCOM PLAY SYSTEM I)

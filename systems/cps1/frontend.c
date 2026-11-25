@@ -24,16 +24,24 @@ static int sys_setting(const char *key, const char *value) { (void)key, (void)va
 
 static int sys_open(const char *path, const Settings *settings, SysInfo *info, char *err, size_t errlen) {
     (void)settings;
-    if (!path && cps1_recomp_program)  /* a recompiled game: its zip is not built in (the graphics are megabytes) */
-        return snprintf(err, errlen, "%s is recompiled; open its zip: drop %s.zip on the program, or give it as an argument",
-                        cps1_recomp_program->game_id, cps1_recomp_program->game_id), 2;
-    if (!path) return snprintf(err, errlen, "usage: retrocast game.zip"), 2;
-    size_t size = 0;
-    uint8_t *data = SDL_LoadFile(path, &size);
-    if (!data) return snprintf(err, errlen, "%s: %s", path, SDL_GetError()), 1;
-    int bad = cps1_open(path, data, size, &rom, err, errlen);
-    SDL_free(data);
-    if (bad) return 1;
+    const Cps1RecompProgram *p = cps1_recomp_program;
+    static char beside[1024];  /* a built-in game: its saves next to the program, named for it */
+    if (!path && p && p->region[CPS1_R_MAIN]) {
+        if (cps1_open_embedded(p, &rom, err, errlen)) return 1;
+        SDL_snprintf(beside, sizeof beside, "%s%s.zip", SDL_GetBasePath(), p->game_id);
+        path = beside;
+    } else {
+        if (!path && p)  /* built with --no-rom */
+            return snprintf(err, errlen, "%s is recompiled; open its zip: drop %s.zip on the program, or give it as an argument",
+                            p->game_id, p->game_id), 2;
+        if (!path) return snprintf(err, errlen, "usage: retrocast game.zip"), 2;
+        size_t size = 0;
+        uint8_t *data = SDL_LoadFile(path, &size);
+        if (!data) return snprintf(err, errlen, "%s: %s", path, SDL_GetError()), 1;
+        int bad = cps1_open(path, data, size, &rom, err, errlen);
+        SDL_free(data);
+        if (bad) return 1;
+    }
     const Cps1Game *g = rom.game;
     loaded = 1;
     cps1_init(&machine, &rom);

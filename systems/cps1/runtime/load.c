@@ -256,6 +256,28 @@ int cps1_open_in(const char *path, const uint8_t *data, size_t size, const Cps1G
     return bad ? -1 : 0;
 }
 
+static uint8_t *copy(const uint8_t *src, size_t n) {
+    uint8_t *d = src ? malloc(n ? n : 1) : NULL;
+    if (d) memcpy(d, src, n);
+    return d;
+}
+
+int cps1_open_embedded(const Cps1RecompProgram *p, Cps1Rom *r, char *err, size_t errlen) {
+    memset(r, 0, sizeof *r);
+    for (int i = 0; i < cps1_game_count; i++)
+        if (!strcmp(cps1_games[i].id, p->game_id)) r->game = &cps1_games[i];
+    if (!r->game) return snprintf(err, errlen, "%s: not in this program's game table", p->game_id), -1;
+    int bad = 0;
+    for (int k = 0; k < CPS1_REGIONS; k++) {
+        r->size[k] = p->region[k] ? p->size[k] : 0;
+        bad |= p->region[k] && !(r->region[k] = copy(p->region[k], p->size[k]));
+    }
+    bad |= (p->z80_op && !(r->z80_op = copy(p->z80_op, 0x8000))) || (p->z80_raw && !(r->z80_raw = copy(p->z80_raw, 0x8000)));
+    if (p->dsp) memcpy(r->dsp, p->dsp, sizeof r->dsp);
+    if (bad) return cps1_unload(r), snprintf(err, errlen, "out of memory"), -1;
+    return 0;
+}
+
 int cps1_open(const char *path, const uint8_t *data, size_t size, Cps1Rom *r, char *err, size_t errlen) {
     return cps1_open_in(path, data, size, cps1_games, cps1_game_count, r, err, errlen);
 }
