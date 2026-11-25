@@ -234,8 +234,11 @@ int cps1_open_in(const char *path, const uint8_t *data, size_t size, const Cps1G
     size_t base = strlen(path), end;
     while (base && path[base - 1] != '/' && path[base - 1] != '\\') base--;
     end = strlen(path) > base + 4 ? strlen(path) - 4 : base;
-    for (int i = 0; g && i < n; i++)  /* a merged zip matches its clones too: the set named like the zip */
-        if (strlen(games[i].id) == end - base && !strncmp(games[i].id, path + base, end - base) && own_files(&z, &games[i], NULL)) g = &games[i];
+    int whole = 0, all;
+    if (g) own_files(&z, g, &whole);
+    for (int i = 0; g && i < n; i++)  /* a merged zip matches its clones too: the set named like the zip, unless only */
+        if (strlen(games[i].id) == end - base && !strncmp(games[i].id, path + base, end - base) &&  /* partly there and another whole */
+            own_files(&z, &games[i], &all) && (all || !whole)) g = &games[i];
     if (!g) {
         if (z.entries) zip_close(&z);
         return snprintf(err, errlen, "%s: not a CPS-1 game this program knows", path), -1;
