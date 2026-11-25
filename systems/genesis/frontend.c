@@ -7,6 +7,7 @@
 #include <SDL3/SDL.h>
 #include <string.h>
 
+#include "m68k_misses.h"
 #include "md.h"
 #include "recomp_rt.h"
 #include "system.h"
@@ -107,30 +108,10 @@ static int sys_state_save(const char *path) { return md_state_save(&md, path); }
 static int sys_state_load(const char *path, char *err, size_t errlen) { return md_state_load(&md, path, err, errlen); }
 static const char *sys_key(int key, char *buf, size_t len) { (void)key, (void)buf, (void)len; return NULL; }
 
-/* NAME.misses: the file's lines and this session's; rewritten only when the
- * session found new code, so the next build does not recompile for nothing. */
-static void save_misses(void) {
-    uint32_t n = md_code_end(&md) / 2, fresh = 0;
-    for (uint32_t i = 0; i < n; i++) fresh += md.misses[i];
-    FILE *f = fopen(misses_path, "r");
-    char line[64];
-    unsigned pc;
-    while (f && fgets(line, sizeof line, f)) {
-        if (sscanf(line, "MISS $%x", &pc) != 1 || pc / 2 >= n) continue;
-        if (md.misses[pc / 2] == 1) fresh--;  /* known already */
-        md.misses[pc / 2] = 2;
-    }
-    if (f) fclose(f);
-    if (!fresh) return;
-    if (!(f = fopen(misses_path, "w"))) { SDL_Log("%s: cannot write", misses_path); return; }
-    for (uint32_t i = 0; i < n; i++)
-        if (md.misses[i]) fprintf(f, "MISS $%06X\n", (unsigned)i * 2);
-    fclose(f);
-}
 
 static void sys_close(void) {
     save_sav();
-    if (md.misses) save_misses();
+    if (md.misses && m68k_misses_save(misses_path, md.misses, md_code_end(&md) / 2)) SDL_Log("%s: cannot write", misses_path);
     SDL_free(md.misses);
     md.misses = NULL;
     md_free(&md);

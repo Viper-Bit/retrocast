@@ -61,7 +61,7 @@ before the thing it checks. A milestone is done when its exit test passes.
 - [x] The game table rebuilt from MAME 0.289's `cps1.cpp` (DIP defaults
   MAME writes through macros, whole 128 KB sound chips, MAME's 12 MHz
   machines); Kabuki decryption (`runtime/kabuki.c`); the 93C46 serial
-  EEPROM (`core/eeprom93c46.c`); the Q-Sound board (shared RAM, the 8 MHz
+  EEPROM (`core/devices/eeprom93c46.c`); the Q-Sound board (shared RAM, the 8 MHz
   Z80 and its 250 Hz interrupt, the bank, players 3-4, Slam Masters'
   protection read, `GAME.eeprom`); the Q-Sound chip, MAME's high-level
   version (`core/audio/qsound.c`), stereo at 24,038 Hz, its tables from

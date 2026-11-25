@@ -25,7 +25,7 @@ def expected(path):
 
 def run(path):
     r = subprocess.run([CHECK, path], capture_output=True, text=True, timeout=120)
-    lines = [ln.split(" ") for ln in r.stdout.splitlines()]
+    lines = [ln.rsplit(" ", 2) for ln in r.stdout.splitlines()]  # a name may hold spaces (MAME's "01 rk098")
     return r.returncode, [(n, int(c, 16), int(s)) for n, c, s in lines] if r.returncode == 0 else r
 
 

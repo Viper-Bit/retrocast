@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "file.h"
 #include "cart.h"
 #include "recomp.h"
 
@@ -104,14 +105,9 @@ static int recompile(int argc, char **argv) {
         else if ((!strcmp(argv[i], "--misses") || !strcmp(argv[i], "--hints")) && i + 1 < argc) i++;  /* read below, once the ROM is in */
         else { fprintf(stderr, "gbrecomp: unknown option %s\n", argv[i]); return 2; }
     if (!out) { fprintf(stderr, "gbrecomp: -o OUT.c is needed\n"); return 2; }
-    FILE *f = fopen(rom_path, "rb");
-    if (!f) { perror(rom_path); return 2; }
-    fseek(f, 0, SEEK_END);
-    long size = ftell(f);
-    fseek(f, 0, SEEK_SET);
-    uint8_t *data = malloc((size_t)size);
-    if (!data || fread(data, 1, (size_t)size, f) != (size_t)size) { perror(rom_path); return 2; }
-    fclose(f);
+    size_t size;
+    uint8_t *data = file_read(rom_path, &size);
+    if (!data) { perror(rom_path); return 2; }
     static GbCart cart;  /* the ROM as the runtime loads it (padded to a power of two) */
     char err[128];
     if (gb_cart_load(&cart, data, (size_t)size, err, sizeof err) != 0) { fprintf(stderr, "%s: %s\n", rom_path, err); return 2; }

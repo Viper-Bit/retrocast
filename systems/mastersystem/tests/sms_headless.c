@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "capture.h"
 #include "input_log.h"
 #include "loader.h"
 #include "sms.h"
@@ -158,15 +159,10 @@ int main(int argc, char **argv) {
         }
     }
     if (ppm) {
-        FILE *o = fopen(ppm, "wb");
-        if (!o) { perror(ppm); return 2; }
-        fprintf(o, "P6\n%u %u\n255\n", w0, h0);
+        static uint32_t rgb[SMS_WIDTH * SMS_HEIGHT];
         for (unsigned y = 0; y < h0; y++)
-            for (unsigned x = 0; x < w0; x++) {
-                uint32_t c = sms_color(&s, s.vdp.frame[(y + y0) * SMS_WIDTH + x + x0]);
-                fputc((int)(c >> 16 & 255), o), fputc((int)(c >> 8 & 255), o), fputc((int)(c & 255), o);
-            }
-        if (fclose(o)) { perror(ppm); return 2; }
+            for (unsigned x = 0; x < w0; x++) rgb[y * w0 + x] = sms_color(&s, s.vdp.frame[(y + y0) * SMS_WIDTH + x + x0]);
+        if (capture_ppm(ppm, rgb, (int)w0, (int)h0, (int)w0)) { perror(ppm); return 2; }
     }
     free(trace);
     free(rom);

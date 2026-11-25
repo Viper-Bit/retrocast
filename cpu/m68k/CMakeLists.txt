@@ -8,6 +8,11 @@ add_library(m68k_templates STATIC m68k.c m68k_recomp.c)  # m68k_recomp.c: the re
 target_include_directories(m68k_templates PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(m68k_templates PUBLIC recomp_template)
 
+# NAME.misses of a recompiled game (the Genesis and CPS-1 frontends): once,
+# not in m68k_library's per-system copies.
+add_library(m68k_misses STATIC m68k_misses.c)
+target_include_directories(m68k_misses PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
 add_executable(m68k_gen m68k_gen.c)
 target_link_libraries(m68k_gen PRIVATE m68k_templates)
 

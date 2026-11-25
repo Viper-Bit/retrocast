@@ -10,6 +10,7 @@
 #include <string.h>
 
 #include "cps1.h"
+#include "m68k_misses.h"
 #include "system.h"
 
 static const char SETTINGS[] = "";
@@ -74,27 +75,6 @@ static void sys_reset(void) {
     if (*eeprom_path) memcpy(machine.eeprom.data, eeprom, sizeof eeprom);
 }
 
-/* NAME.misses: the file's lines and this session's; rewritten only when the
- * session found new code, so the next build does not recompile for nothing. */
-static void save_misses(void) {
-    uint32_t n = rom.size[CPS1_R_MAIN] / 2, fresh = 0;
-    for (uint32_t i = 0; i < n; i++) fresh += machine.misses[i];
-    FILE *f = fopen(misses_path, "r");
-    char line[64];
-    unsigned pc;
-    while (f && fgets(line, sizeof line, f)) {
-        if (sscanf(line, "MISS $%x", &pc) != 1 || pc / 2 >= n) continue;
-        if (machine.misses[pc / 2] == 1) fresh--;  /* known already */
-        machine.misses[pc / 2] = 2;
-    }
-    if (f) fclose(f);
-    if (!fresh) return;
-    if (!(f = fopen(misses_path, "w"))) { SDL_Log("%s: cannot write", misses_path); return; }
-    for (uint32_t i = 0; i < n; i++)
-        if (machine.misses[i]) fprintf(f, "MISS $%06X\n", (unsigned)i * 2);
-    fclose(f);
-}
-
 static int sys_frame(const InputFrame *in, uint32_t *rgb, float *samples, int max) {
     static int16_t snd[CPS1_SND_BUF];
     cps1_set_input(&machine, 0, in->pad[0]);
@@ -120,7 +100,8 @@ static const char *sys_key(int key, char *buf, size_t len) { (void)key, (void)bu
 static void sys_close(void) {
     if (loaded && *eeprom_path && !SDL_SaveFile(eeprom_path, machine.eeprom.data, sizeof machine.eeprom.data))
         SDL_Log("%s: %s", eeprom_path, SDL_GetError());
-    if (machine.misses && *misses_path) save_misses();
+    if (machine.misses && *misses_path && m68k_misses_save(misses_path, machine.misses, rom.size[CPS1_R_MAIN] / 2))
+        SDL_Log("%s: cannot write", misses_path);
     SDL_free(machine.misses);
     machine.misses = NULL;
     if (loaded) cps1_unload(&rom), loaded = 0;

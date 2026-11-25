@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "capture.h"
 #include "atari.h"
 #include "loader.h"
 #include "palette.h"
@@ -150,18 +151,12 @@ int main(int argc, char **argv) {
         if (fclose(f)) goto done;
     }
     if (ppm) {
-        FILE *f = fopen(ppm, "wb");
-        if (!f) goto done;
-        fprintf(f, "P6\n%d %d\n255\n", A26_WIDTH, A26_HEIGHT);
+        static uint32_t rgb[A26_WIDTH * A26_HEIGHT];
         for (unsigned i = 0; i < A26_WIDTH * A26_HEIGHT; i++) {
             uint8_t pixel = machine.tia.frame[i];
-            uint32_t color = (pixel & 1) ? 0 : a26_palette_color(pixel, pal);
-            fputc((color >> 16) & 255, f);
-            fputc((color >> 8) & 255, f);
-            fputc(color & 255, f);
+            rgb[i] = (pixel & 1) ? 0 : a26_palette_color(pixel, pal);
         }
-        int failed = ferror(f);
-        if (fclose(f) || failed) goto done;
+        if (capture_ppm(ppm, rgb, A26_WIDTH, A26_HEIGHT, A26_WIDTH)) goto done;
     }
     result = machine.bus.cpu.jammed || machine.diff_failed ? 1 : 0;
 done:

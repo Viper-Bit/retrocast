@@ -10,7 +10,7 @@ target_include_directories(cps1core PUBLIC runtime ${Z80_DIR})  # cps1.h holds a
 if(NOT MSVC)
     target_link_libraries(cps1core PUBLIC m)  # ym2151.c
 endif()
-target_link_libraries(cps1core PUBLIC cps1_m68k core PRIVATE cps1_z80)  # Z80_PREFIX stays inside: the Master System has its own
+target_link_libraries(cps1core PUBLIC cps1_m68k m68k_misses core PRIVATE cps1_z80)  # Z80_PREFIX stays inside: the Master System has its own
 
 # Programs without recompiled code link this (cps1_recomp_program = NULL).
 add_library(cps1_recomp_none STATIC runtime/recomp_none.c)

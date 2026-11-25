@@ -13,21 +13,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "file.h"
 #include "cps1.h"
 #include "m68k_recomp.h"
-
-static uint8_t *read_file(const char *path, size_t *size) {
-    FILE *f = fopen(path, "rb");
-    if (!f) return NULL;
-    fseek(f, 0, SEEK_END);
-    long n = ftell(f);
-    fseek(f, 0, SEEK_SET);
-    uint8_t *data = n > 0 ? malloc((size_t)n) : NULL;
-    if (data && fread(data, 1, (size_t)n, f) != (size_t)n) free(data), data = NULL;
-    fclose(f);
-    *size = (size_t)n;
-    return data;
-}
 
 int main(int argc, char **argv) {
     if (argc < 2) return fprintf(stderr, "usage: cps1recomp GAME.zip -o OUT.c [--misses TRACE]...\n"), 2;
@@ -38,7 +26,7 @@ int main(int argc, char **argv) {
         else return fprintf(stderr, "cps1recomp: unknown option %s\n", argv[i]), 2;
     if (!out) return fprintf(stderr, "cps1recomp: -o OUT.c is needed\n"), 2;
     size_t size;
-    uint8_t *data = read_file(zip, &size);
+    uint8_t *data = file_read(zip, &size);
     if (!data) return perror(zip), 2;
     Cps1Rom rom;
     char err[512];

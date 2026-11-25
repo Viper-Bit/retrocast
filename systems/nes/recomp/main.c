@@ -33,6 +33,7 @@
 
 #include <ctype.h>
 
+#include "file.h"
 #include "cart.h"
 #include "recomp.h"
 
@@ -84,16 +85,8 @@ static int disk_files(const uint8_t *d, size_t size, DiskFile *out) {
 }
 
 static uint8_t *read_file(const char *path, size_t *size) {
-    FILE *f = fopen(path, "rb");
-    if (!f) { perror(path); exit(2); }
-    fseek(f, 0, SEEK_END);
-    long n = ftell(f);
-    fseek(f, 0, SEEK_SET);
-    uint8_t *buf = malloc((size_t)n + 1);
-    if (fread(buf, 1, (size_t)n, f) != (size_t)n) { perror(path); exit(2); }
-    fclose(f);
-    buf[n] = 0;
-    *size = (size_t)n;
+    uint8_t *buf = file_read(path, size);  /* a zero byte past the end: hints files are text */
+    if (!buf) { perror(path); exit(2); }
     return buf;
 }
 

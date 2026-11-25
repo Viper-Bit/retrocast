@@ -6,7 +6,7 @@
 # templates (cpu/6502), which also make the interpreter's switch.
 add_executable(nesrecomp recomp/main.c recomp/analyze.c recomp/emit.c runtime/cart.c runtime/fds.c)
 target_include_directories(nesrecomp PRIVATE runtime)
-target_link_libraries(nesrecomp PRIVATE cpu6502_templates)
+target_link_libraries(nesrecomp PRIVATE cpu6502_templates core)
 
 # Programs without recompiled code link this instead (recomp_program = NULL).
 add_library(recomp_none STATIC runtime/recomp_none.c)

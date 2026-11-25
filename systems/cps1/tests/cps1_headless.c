@@ -13,7 +13,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "capture.h"
 #include "cps1.h"
+#include "file.h"
 #include "input_log.h"
 #include "recomp_rt.h"
 
@@ -47,28 +49,6 @@ static uint16_t scripted(long frame) {
     return pad;
 }
 
-static int write_wav(FILE *w, long n, int channels, uint32_t rate) {  /* the header, once the sizes are known; n values */
-    uint32_t data = (uint32_t)n * 2, riff = data + 36, bps = rate * 2 * (uint32_t)channels;
-    uint8_t h[44] = {'R', 'I', 'F', 'F', 0, 0, 0, 0, 'W', 'A', 'V', 'E', 'f', 'm', 't', ' ', 16, 0, 0, 0, 1, 0, 1, 0,
-                      0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 16, 0, 'd', 'a', 't', 'a'};
-    h[22] = (uint8_t)channels, h[32] = (uint8_t)(2 * channels);
-    memcpy(h + 4, &riff, 4), memcpy(h + 24, &rate, 4), memcpy(h + 28, &bps, 4), memcpy(h + 40, &data, 4);
-    return fseek(w, 0, SEEK_SET) || fwrite(h, 1, 44, w) != 44;
-}
-
-static uint8_t *read_file(const char *path, size_t *size) {
-    FILE *f = fopen(path, "rb");
-    if (!f) return NULL;
-    fseek(f, 0, SEEK_END);
-    long n = ftell(f);
-    fseek(f, 0, SEEK_SET);
-    uint8_t *data = n > 0 ? malloc((size_t)n) : NULL;
-    if (data && fread(data, 1, (size_t)n, f) != (size_t)n) free(data), data = NULL;
-    fclose(f);
-    *size = (size_t)n;
-    return data;
-}
-
 static Cps1 machine, ref, cx, cy;  /* ref: --diff's interpreter-only machine; cx, cy: compared copies */
 
 int main(int argc, char **argv) {
@@ -93,7 +73,7 @@ int main(int argc, char **argv) {
     if (!path) return fprintf(stderr, "usage: cps1_headless GAME.zip [--frames N] [--play] [--ppm FILE] [--wav FILE]"
                                  " [--state-at N FILE] [--load-state FILE] [--misses FILE] [--diff] [--coverage]\n"), 2;
     size_t size;
-    uint8_t *data = read_file(path, &size);
+    uint8_t *data = file_read(path, &size);
     if (!data) return fprintf(stderr, "%s: cannot read\n", path), 1;
     Cps1Rom rom;
     char err[512];
@@ -109,9 +89,8 @@ int main(int argc, char **argv) {
         if (!machine.recomp_on) printf("diff: no recompiled code for this game: both machines interpret\n");
     }
     if (misses && !(machine.misses = calloc(rom.size[CPS1_R_MAIN] / 2 + 1, 1))) return fprintf(stderr, "out of memory\n"), 2;
-    FILE *w = wav ? fopen(wav, "wb") : NULL;
-    if (wav && (!w || fseek(w, 44, SEEK_SET))) return perror(wav), 2;
-    long samples = 0;
+    FILE *w = wav ? capture_wav_open(wav) : NULL;
+    if (wav && !w) return perror(wav), 2;
     static int16_t buf[CPS1_SND_BUF];
     for (long f = 0; f < frames; f++) {
         uint16_t pad = play ? scripted((long)machine.frames) : 0;
@@ -134,11 +113,10 @@ int main(int argc, char **argv) {
             cps1_frame(&machine);
         }
         int n = cps1_take_sound(&machine, buf, CPS1_SND_BUF);
-        if (w && fwrite(buf, sizeof *buf, (size_t)n, w) != (size_t)n) return perror(wav), 2;
-        samples += n;
+        if (w) capture_wav_samples(w, buf, (size_t)n);
         if (state_out && (long)machine.frames == state_at && cps1_state_save(&machine, state_out)) return perror(state_out), 2;
     }
-    if (w && (write_wav(w, samples, cps1_channels(g), (uint32_t)cps1_sample_rate(g)) || fclose(w))) return perror(wav), 2;
+    if (w && capture_wav_close(w, (unsigned)cps1_sample_rate(g), (unsigned)cps1_channels(g))) return perror(wav), 2;
 
     static uint8_t seen[0xC00];
     int colours = 0;
@@ -147,18 +125,10 @@ int main(int argc, char **argv) {
         if (!seen[c]) seen[c] = 1, colours++;
     }
     if (ppm) {
-        FILE *f = fopen(ppm, "wb");
-        if (!f) return perror(ppm), 1;
         static uint32_t rgb[CPS1_WIDTH * CPS1_HEIGHT];
         int w, h;
         cps1_picture(&machine, rgb, &w, &h);  /* turned for a vertical monitor */
-        fprintf(f, "P6\n%d %d\n255\n", w, h);
-        for (int i = 0; i < CPS1_WIDTH * CPS1_HEIGHT; i++) {
-            uint32_t c = rgb[i];
-            uint8_t px[3] = {(uint8_t)(c >> 16), (uint8_t)(c >> 8), (uint8_t)c};
-            fwrite(px, 1, 3, f);
-        }
-        fclose(f);
+        if (capture_ppm(ppm, rgb, w, h, w)) return perror(ppm), 1;
     }
     if (diff) printf("diff: %ld frames, no difference\n", frames);
     if (coverage) {
