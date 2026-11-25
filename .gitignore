@@ -14,3 +14,6 @@ __pycache__/
 *.i64
 *.idb
 tests/roms/
+_site/
+site-images/
+site-images.zip

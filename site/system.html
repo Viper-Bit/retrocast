@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>$name games · retrocast</title>
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header>
+  <a class="logo" href="../"><i></i>retrocast</a>
+  <nav><a href="../">Home</a><a class="on" href="../#systems">Systems</a><a href="../#download">Download</a><a href="https://github.com/Viper-Bit/retrocast#readme">Docs</a><a href="https://github.com/Viper-Bit/retrocast">GitHub ↗</a></nav>
+  <span class="sp"></span>
+  <div class="dl" id="dl-top"></div>
+  <button class="theme" id="theme" title="Light / dark">☾</button>
+</header>
+
+<section style="padding-top:34px">
+  <div class="page-head">
+    <div><a class="vers" href="../#systems">← Systems</a><h1>$name</h1><div class="sub" style="margin:4px 0 0">$cpu$made</div></div>
+    <span class="sp"></span>
+    <div class="stats"><div class="stat"><b style="color:var(--ok)">$ok</b><small>boot</small></div><div class="stat"><b style="color:var(--warn)">$partial</b><small>partial</small></div><div class="stat"><b>$no</b><small>not yet</small></div></div>
+  </div>
+  $body
+</section>
+
+$footer
+<script>window.SITE=$site;</script>
+<script src="../app.js"></script>
+</body>
+</html>
