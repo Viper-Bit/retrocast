@@ -15,24 +15,22 @@ WHAT IS IN HERE
                   --system nes|gb|md|a26|sms|gg picks one when the file does not
                   say (Atari 2600 games have no header: name them .a26;
                   Sega 8-bit games without one: .sms or .gg).
-  nes_headless    The same without a window, for scripts and checks
-                  (--frames N, --record/--replay, --diff, --coverage, ...).
-  nesrecomp       The recompiler: turns a ROM into C source.
-  gb_headless     The same without a window, for test ROMs (--frames N,
-                  --wav FILE to record the sound).
-  gbrecomp        The Game Boy recompiler: turns a ROM into C source.
-  genesis_headless  The same without a window (--frames N, --ppm FILE,
-                  --wav FILE, --diff, --coverage).
-  mdrecomp        The Genesis recompiler (68000 code into C source).
-  atari2600_headless  Atari 2600 interpreter without a window.
-  atari2600recomp Atari 2600 recompiler.
-  sms_headless    Master System interpreter without a window (--frames N,
-                  --ppm FILE, --wav FILE, --diff, --coverage).
-  smsrecomp       The Master System recompiler (Z80 code into C source).
-  cps1_headless   CPS-1 interpreter without a window (--frames N, --ppm FILE,
-                  --wav FILE, --state-at N FILE, --load-state FILE, --diff,
-                  --coverage).
-  cps1recomp      The CPS-1 recompiler (68000 code into C source).
+
+  One headless program and one recompiler per system:
+
+    System                     Headless            Recompiler
+    NES, Famicom Disk System   nes_headless        nesrecomp
+    Game Boy, Game Boy Color   gb_headless         gbrecomp
+    Genesis / Mega Drive       genesis_headless    mdrecomp
+    Atari 2600                 atari2600_headless  atari2600recomp
+    Master System, Game Gear   sms_headless        smsrecomp
+    CPS-1                      cps1_headless       cps1recomp
+
+    *_headless      Plays a game without a window, for scripts and checks
+                    (frames to run, pictures, sound, recordings, ...).
+    *recomp         Turns a game into C source (the kit below runs it).
+    Run one without arguments for its options.
+
   kit/            Everything needed to build a recompiled game into a
                   native program (see below), with SDL3 prebuilt.
 
@@ -46,7 +44,8 @@ Keyboard: arrows, X = A, Z = B, (S = X, A = Y, Q = L, W = R for pads
 that have them), Enter = Start, Right Shift = Select,
 F5 = reset, F2 / F4 = save / load state, F6 = next disk side (FDS),
 F10 = TV frame, F11 or Alt+Enter = fullscreen, Esc = quit.
-Gamepads work too (first = player 1, second = player 2).
+Gamepads work too: players 1-4 in the order connected (3 and 4 in the
+CPS-1 games that have them).
 Genesis pad: A, B, C = keyboard A, Z, X (gamepad West, South, East);
 X, Y, Z = Q, S, W (left shoulder, North, right shoulder); Mode = Right Shift.
 Master System pad: button 1 = Z, button 2 = X, Pause = Enter.
@@ -89,7 +88,19 @@ DO NOT SHARE RECOMPILED PROGRAMS: they contain the game.
 
 CPS-1: give the game's .zip to -DROMS. The program does not contain the zip
 (the graphics are megabytes): start it with the zip, e.g.
-build/ffight "/path/to/ffight.zip" (a clone's zip needs its parent's beside it).
+build/ffight "/path/to/ffight.zip".
+
+
+CPS-1 (CAPCOM PLAY SYSTEM I)
+
+A game is its MAME / FBNeo zip, matched by its chips' CRCs whatever it is
+called; only the chips the board reads are needed. A chip the zip lacks is
+looked for in the parent's zip, then in every zip in the same folder. The
+Q-Sound games (Warriors of Fate, Cadillacs and Dinosaurs, The Punisher,
+Slam Masters, Muscle Bomber) also need qsound.zip in that folder; they
+keep their settings in game.eeprom next to the zip, as Pang! 3 does.
+Which sets are supported: systems/cps1/docs/compatibility.md on the
+project page.
 
 
 NES AND FAMICOM DISK SYSTEM
