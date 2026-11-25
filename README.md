@@ -10,6 +10,8 @@ by cycle against a reference interpreter (`--diff`); every game tested that
 way so far matches. Built for the challenge. No games included: bring your
 own.
 
+**Website:** [viper-bit.github.io/retrocast](https://viper-bit.github.io/retrocast/): the downloads, and every game tested per system with its title screen.
+
 | System | Status | Details |
 |---|---|---|
 | NES and Famicom Disk System | 74 mappers (99.7% of licensed releases load), FDS, expansion sound, NTSC/PAL/Dendy; recompiled | [systems/nes/README.md](systems/nes/README.md) |
@@ -180,6 +182,7 @@ kept in the Actions cache. The required check is `ci-ok`.
 ## Docs
 | File | Content |
 |------|---------|
+| [site/README.md](site/README.md) | The website: how it is built and how its game lists are refreshed |
 | [docs/architecture.md](docs/architecture.md) | Layout, the pipeline, templates, recompiled code, frontend: what every system shares |
 | [cpu/README.md](cpu/README.md) | The CPUs (6502, SM83), shared by the systems that use them |
 | [docs/roadmap.md](docs/roadmap.md) | The order rule, the systems, stretch goals |
