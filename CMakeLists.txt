@@ -162,6 +162,9 @@ option(TESTS "Build the test programs and test recompiles" OFF)
 # C source has a multiply then an add (gcc fuses by default when its target
 # CPU has FMA). Our code only, as for warnings below.
 add_compile_options($<$<NOT:$<C_COMPILER_ID:MSVC>>:-ffp-contract=off>)
+# A whole recompiled game is one file: tens of thousands of functions pass
+# MSVC's default object-file section limit (C1128); gcc and clang have none.
+add_compile_options($<$<C_COMPILER_ID:MSVC>:/bigobj>)
 
 option(WERROR "Treat compiler warnings as errors" OFF)
 if(WERROR)
