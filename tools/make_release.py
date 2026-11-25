@@ -26,6 +26,12 @@ EXE = ".exe" if WIN else ""
 KIT_FILES = ["CMakeLists.txt", "cmake", "core", "cpu", "systems"]
 
 
+# The programs in the archive; dist/README.txt and .github/release-notes.md
+# name each (tests/test_release_docs.py).
+PROGRAMS = ("retrocast", "nes_headless", "nesrecomp", "gb_headless", "gbrecomp",
+            "genesis_headless", "mdrecomp", "atari2600_headless", "atari2600recomp",
+            "sms_headless", "smsrecomp", "cps1_headless", "cps1recomp")
+
 def run(*cmd, cwd=None):
     print("+", " ".join(cmd), flush=True)
     subprocess.run(cmd, check=True, cwd=cwd)
@@ -154,9 +160,7 @@ def main():
     cmake_build(ROOT, build, "-DSDL3_PREFIX=" + os.path.join(kit, "sdl3"))
 
     # 3. stage
-    for prog in ("retrocast", "nes_headless", "nesrecomp", "gb_headless", "gbrecomp",
-                 "genesis_headless", "mdrecomp", "atari2600_headless", "atari2600recomp",
-                 "sms_headless", "smsrecomp", "cps1_headless", "cps1recomp"):  # no CPS-1 kit check: a game is a real zip, matched by CRC
+    for prog in PROGRAMS:  # no CPS-1 kit check: a game is a real zip, matched by CRC
         shutil.copy2(os.path.join(build, prog + EXE), stage)
     for item in KIT_FILES:
         src = os.path.join(ROOT, item)

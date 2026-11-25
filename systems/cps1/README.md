@@ -51,8 +51,8 @@ without a window.
 - **Recompiled**: `cmake -B build -DROMS="path/ffight.zip"` makes
   `ffight` (and `ffight_headless`): the game's 68000 code as C, on the
   68000 recompiler the Genesis uses (`cpu/m68k/m68k_recomp.c`). The zip is
-  not built in: give it to the program at start (a clone's: its parent's
-  zip beside it). Code the build's trace did not reach is interpreted and
+  not built in: give it to the program at start (the chips it lacks: in the
+  same folder, as [Loading a game](#loading-a-game) says). Code the build's trace did not reach is interpreted and
   written to `ffight.misses`; the next build recompiles it.
   `ffight_headless ZIP --diff` runs the interpreter in lockstep and stops at
   the first difference (checked on ffight, sf2, wof and dino). The Z80 is interpreted.

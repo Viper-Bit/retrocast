@@ -35,7 +35,7 @@ target_link_libraries(cps1recomp PRIVATE cps1core cps1_recomp_none m68k_template
 
 # cps1_recompile(NAME ZIP) generates ${GEN_DIR}/NAME.c with cps1recomp and
 # builds NAME_headless (and NAME with the frontend), which open the zip at
-# start (a clone's: its parent's zip beside it). AUTO_HINTS: the game is
+# start (chips it lacks: from the zips beside it). AUTO_HINTS: the game is
 # first traced in the interpreter with the scripted play of cps1_headless
 # --play (cps1_headless --misses), so the code that session reached is
 # recompiled; once per zip. NAME.misses next to the program: code your own
