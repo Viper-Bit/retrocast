@@ -180,7 +180,7 @@ static void test_vblank(void) {
 static int block_calls;
 static void test_block(M68k *c) { block_calls++, m68k_step(c); }
 static Cps1RecompFn test_lookup(uint32_t at) { (void)at; return test_block; }
-static Cps1RecompProgram test_program = {0, "prog", test_lookup};
+static Cps1RecompProgram test_program = {.game_id = "prog", .lookup = test_lookup};
 
 static void test_recomp_gate(void) {  /* the program runs only on the code it was made from */
     boot_program();
