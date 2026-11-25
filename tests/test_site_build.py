@@ -87,6 +87,22 @@ class SiteBuild(unittest.TestCase):
         self.assertIn("https://github.com/Viper-Bit/retrocast/releases", home)
         self.assertNotIn("releases/download/", home)
 
+    def test_data_from_images_asset(self):  # the lists ship inside site-images.zip, as data/<system>.json
+        os.makedirs(os.path.join(self.imgs, "data"))
+        with open(os.path.join(self.imgs, "data", "cps1.json"), "w", encoding="utf-8") as f:
+            json.dump({"system": "cps1", "made": "2026-11-26", "games": [game("Final Fight", "ffight")]}, f)
+        site_build.build(self.out, images_dir=self.imgs, release={"tag": "v0", "assets": []})
+        self.assertIn("1 of 1 play", self.read("index.html"))
+
+    def test_mac_labels(self):
+        b = site_build.builds({"tag": "v1", "assets": ["retrocast-v1-macos-arm64.tar.gz", "retrocast-v1-macos-x64.tar.gz"]})
+        self.assertEqual(sorted(x["arch"] for x in b), ["Apple Silicon", "Intel"])
+
+    def test_image_key_missing(self):
+        self.put("cps1", [{"title": "Strider", "id": "strider", "status": "ok", "versions": ["strider"]}])
+        self.build()
+        self.assertIsNone(json.loads(self.read("data", "cps1.json"))["games"][0]["image"])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -36,6 +36,18 @@ class Group(unittest.TestCase):
         self.assertIn("sf2j", sf2)
         self.assertTrue(all(t and " (" not in t for t in g))
 
+    def test_not_games_skipped(self):
+        for n in ["[BIOS] Sega Master System (USA) (v1.3)", "110-in-1 (Asia) (En) (Pirate)",
+                  "Controller Test Program (Japan) (En) (Test Program)"]:
+            self.assertTrue(site_data.skipped(n), n)
+        for n in ["Micro Machines (Europe) (Unl)", "Tetris (World)"]:
+            self.assertFalse(site_data.skipped(n), n)
+
+    def test_cps1_unsupported(self):
+        u = site_data.cps1_unsupported()
+        self.assertIn("ganbare", u)
+        self.assertTrue(u["sf2m3"].startswith("Street Fighter II'"))
+
 
 if __name__ == "__main__":
     unittest.main()
