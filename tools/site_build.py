@@ -2,7 +2,7 @@
 
 python tools/site_build.py OUT [--images DIR]
 
-Templates + site/data/<system>.json + thumbnails (from the release asset
+Templates + the game lists and thumbnails (DIR/data/<system>.json and DIR/<system>/, from the release asset
 site-images.zip, unpacked to DIR) + the latest release's file names.
 Standard library only: CI installs nothing.
 """
@@ -34,7 +34,7 @@ def builds(release):
         m = ASSET.match(name)
         if m:
             os_, arch = OS[m.group(1)], m.group(2)
-            out.append({"os": os_, "arch": "Apple Silicon" if os_ == "mac" else arch.upper(), "file": name,
+            out.append({"os": os_, "arch": "Apple Silicon" if os_ == "mac" and arch == "arm64" else "Intel" if os_ == "mac" else arch.upper(), "file": name,
                         "url": f"{RELEASES}/download/{release['tag']}/{name}"})
     order = ["win", "linux", "mac"]
     return sorted(out, key=lambda b: (order.index(b["os"]), b["arch"] != "X64"))
@@ -56,7 +56,8 @@ def write(path, text):
         f.write(text)
 
 
-def build(out_dir, data_dir=os.path.join(SITE, "data"), images_dir=None, release=None, fetch=True):
+def build(out_dir, data_dir=None, images_dir=None, release=None, fetch=True):
+    data_dir = data_dir or os.path.join(images_dir or "", "data")  # the lists ship in site-images.zip
     if release is None and fetch:
         release = latest_release()
     systems = load(os.path.join(SITE, "systems.json"))
@@ -75,6 +76,7 @@ def build(out_dir, data_dir=os.path.join(SITE, "data"), images_dir=None, release
         data = load(p) if os.path.exists(p) else None
         games = data["games"] if data else []
         for g in games:  # keep a picture only if the thumbnails have it
+            g.setdefault("image", None)
             if g.get("image") and not (images_dir and os.path.exists(os.path.join(images_dir, sid, g["image"] + ".webp"))):
                 g["image"] = None
             if g.get("image"):
@@ -84,7 +86,7 @@ def build(out_dir, data_dir=os.path.join(SITE, "data"), images_dir=None, release
             write(os.path.join(out_dir, "data", sid + ".json"), json.dumps(data, ensure_ascii=False))
         n = {k: sum(g["status"] == k for g in games) for k in ("ok", "partial", "no")}
         total += len(games)
-        pics = [f"img/{sid}/{g['image']}.webp" for g in games if g["image"] and g["status"] == "ok"]
+        pics = [f"img/{sid}/{g['image']}.webp" for g in games if g.get("image") and g["status"] == "ok"]
         wall += pics[:4]
         pic = f'<img src="{e(pics[0])}" alt="">' if pics else ""
         if games:

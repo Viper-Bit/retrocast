@@ -3,7 +3,7 @@
 python tools/site_data.py SYSTEM FOLDER... [--frames N] [--images DIR] [--upload]
 
 Runs every game of FOLDER in SYSTEM's headless program, sorts it into boots /
-partial / not yet, writes site/data/SYSTEM.json (committed) and a 256-wide
+partial / not yet, writes DIR/data/SYSTEM.json and a 256-wide
 WebP title screen per game into DIR/SYSTEM/ (never committed). --upload zips
 DIR and replaces site-images.zip on the release "site-images", which the Pages
 workflow downloads. Needs Pillow; 7-Zip for .7z archives.
@@ -25,6 +25,18 @@ SYSTEMS = {
 }
 STOPPED = re.compile(r"\bhalted\b|jammed=1|result: (halted|locked)")
 RANK = {"ok": 0, "partial": 1, "no": 2}
+NOT_GAMES = re.compile(r"\[BIOS\]|\(Pirate\)|\(Test Program\)|\(Program\)")  # BIOSes, pirate copies, test carts
+
+
+def skipped(name):
+    return bool(NOT_GAMES.search(name))
+
+
+def cps1_unsupported():
+    """{set: title} of the CPS-1 sets games.c doesn't hold, from compatibility.md's "Not supported yet"."""
+    with open(os.path.join(ROOT, "systems", "cps1", "docs", "compatibility.md"), encoding="utf-8") as f:
+        part = f.read().split("## Not supported yet", 1)[1].split("\n## ", 1)[0]
+    return {s: t for s, t in re.findall(r"^\| (\w+) \| (.+?) \| .+ \|$", part, re.M) if s != "Set"}
 
 
 def colours(ppm):
@@ -130,7 +142,7 @@ def collect(system, folder):
     for root, _, files in os.walk(folder):  # consoles: subfolders too (0-9/, A/, ...)
         for f in sorted(files):
             stem, ext = os.path.splitext(f)
-            if ext.lower() in exts + (".7z", ".zip"):
+            if ext.lower() in exts + (".7z", ".zip") and not skipped(stem):
                 out[stem] = os.path.join(root, f)
     return out
 
@@ -157,14 +169,19 @@ def make(system, folders, frames=None, images=None):
         for gid, st, img in ex.map(job, [g for vs in groups.values() for g in vs]):
             result[gid] = (st, img)
             print(f"{st:8} {gid}", flush=True)
+    if system == "cps1":  # the sets games.c can't run yet are listed too, as not yet
+        for s, t in cps1_unsupported().items():
+            groups.setdefault(title_of(t), []).append(s)
+            result[s] = ("no", None)
     entries = []
     for t, vs in groups.items():
         st = min((result[v][0] for v in vs), key=RANK.get)
         img = next((result[v][1] for v in vs if result[v][1]), None)
-        entries.append({"title": t, "id": vs[0], "status": st, "versions": vs, "image": img})
+        entries.append({"title": t, "id": vs[0], "status": st, "versions": vs, "image": img,
+                        "failing": [v for v in vs if result[v][0] != "ok"]})
     entries.sort(key=lambda e: e["title"].lower())
     data = {"system": system, "made": datetime.date.today().isoformat(), "games": entries}
-    path = os.path.join(ROOT, "site", "data", system + ".json")
+    path = os.path.join(images, "data", system + ".json")
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8", newline="\n") as f:
         json.dump(data, f, ensure_ascii=False, indent=0)
@@ -178,7 +195,7 @@ def upload(images):
     with zipfile.ZipFile(z, "w", zipfile.ZIP_STORED) as zf:  # WebP is already compressed
         for root, _, files in os.walk(images):
             for f in files:
-                if f.endswith(".webp"):
+                if f.endswith((".webp", ".json")):
                     p = os.path.join(root, f)
                     zf.write(p, os.path.relpath(p, images).replace(os.sep, "/"))
     if subprocess.run(["gh", "release", "view", "site-images"], capture_output=True).returncode:

@@ -11,6 +11,7 @@ const DL_ICON = '<svg viewBox="0 0 24 24"><path d="M11 3h2v10l3.5-3.5 1.4 1.4L12
 function myOS() {
   const u = ((navigator.userAgentData && navigator.userAgentData.platform) || navigator.userAgent).toLowerCase();
   if (/android|iphone|ipad|ipod|cros|bsd/.test(u)) return null;
+  if (u.includes("mac") && navigator.maxTouchPoints > 1) return null;  // an iPad asking for the desktop site
   return u.includes("win") ? "win" : u.includes("mac") ? "mac" : /linux|x11/.test(u) ? "linux" : null;
 }
 const OSNAME = {win: "Windows", linux: "Linux", mac: "macOS"};
@@ -86,7 +87,7 @@ function render() {
   const list = GAMES.filter(g => (F == "all" || g.status == F) &&
     (!q || g.title.toLowerCase().includes(q) || g.versions.some(v => v.toLowerCase().includes(q))));
   const by = {};
-  list.forEach(g => { const c = g.title[0] || "#", L = /[a-z]/i.test(c) ? c.toUpperCase() : "0-9"; (by[L] = by[L] || []).push(g); });
+  list.forEach(g => { const c = (g.title.normalize("NFD")[0] || "#"), L = /[a-z]/i.test(c) ? c.toUpperCase() : "0-9"; (by[L] = by[L] || []).push(g); });
   $("#az").innerHTML = ["0-9", ..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"].map(L => `<a class="${by[L] ? "" : "off"}" data-l="${L}">${L}</a>`).join("");
   let d = 0;
   $("#out").innerHTML = Object.keys(by).sort().map(L => `<div class="letter" id="L-${L}">${L}</div><div class="games ${V}">` + by[L].map(g => {
@@ -94,8 +95,8 @@ function render() {
     const more = g.versions.length > 1 ? `<span class="vers">+${g.versions.length - 1} versions</span>` : "";
     return `<div class="game" style="animation-delay:${Math.min(d++, 40) * 35}ms"><div class="pic">${pic}<span class="status ${CLS[g.status]}">${LABEL[g.status]}</span></div>` +
       `<div class="body"><div><h4>${esc(g.title)}</h4><div class="meta"><span>${esc(g.id)}</span></div>` +
-      `<div class="vlist">${g.versions.map(esc).join("<br>")}</div></div><div class="meta">${more}</div></div></div>`;
-  }).join("") + `</div>`).join("") || `<p class="sub">No game matches “${esc(q)}”.</p>`;
+      `<div class="vlist">${g.versions.map(v => esc(v) + ((g.failing || []).includes(v) ? ' <span class="arch">· not yet</span>' : "")).join("<br>")}</div></div><div class="meta">${more}</div></div></div>`;
+  }).join("") + `</div>`).join("") || (q ? `<p class="sub">No game matches “${esc(q)}”.</p>` : `<p class="sub">No games in this group.</p>`);
 }
 if (S.id && S.games) {
   fetch(`../data/${S.id}.json`).then(r => r.json()).then(d => { GAMES = d.games.sort((a, b) => a.title.localeCompare(b.title)); render(); })
