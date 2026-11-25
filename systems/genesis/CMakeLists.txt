@@ -4,7 +4,7 @@
 # The machine: memory maps, I/O, Z80 control, cartridge, timeline (D1); the VDP (D2); sound (D4).
 add_library(mdcore STATIC runtime/md.c runtime/vdp.c runtime/sound.c runtime/detect.c)
 target_include_directories(mdcore PUBLIC runtime)
-target_link_libraries(mdcore PUBLIC m68k z80 core)
+target_link_libraries(mdcore PUBLIC m68k m68k_misses z80 core)
 if(NOT MSVC)
     target_link_libraries(mdcore PUBLIC m)
 endif()

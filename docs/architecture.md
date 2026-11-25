@@ -164,14 +164,25 @@ that are its own. The frontend does the rest.
 - **Shared sound chips** (`core/audio/`): a chip lives in its system's
   folder while one system uses it, and moves here when a second needs it.
   Now: the FM operator of the Yamaha OPN / OPM chips (`fm.c`), under the
-  Genesis' YM2612 and the CPS-1's YM2151.
+  Genesis' YM2612 and the CPS-1's YM2151; the Q-Sound chip (`qsound.c`),
+  for the CPS-1 now and the CPS-2 next.
+- **Shared chips that are not sound** (`core/devices/`), by the same rule:
+  the 93C46 serial EEPROM (`eeprom93c46.c`; the CPS-1's Q-Sound board and
+  Pang! 3, the CPS-2 next).
+- **Shared plumbing** (`core/`): a whole file read (`file.c`), the
+  headless programs' pictures and sound (`capture.c`: PPM and WAV), zips
+  (`zip.c`), recordings (`input_log.c`), detection (`detect.c`). A
+  recompiled 68000 game's `NAME.misses` is written by
+  `cpu/m68k/m68k_misses.c`, for the Genesis and the CPS-1.
 - **Sound**: the system names its rate and channels (`SysInfo`: the NES
   mono, the Game Boy stereo) and returns sample frames, interleaved.
 - **Input**: one set of 16-bit buttons per player for every system (A, B,
   X, Y, L, R, Select, Start, the directions; 4 bits free), from the
-  keyboard and gamepads; each system reads the ones its pad has.
+  keyboard and up to four gamepads; each system reads the ones its pad has,
+  and says how many players its game has (`SysInfo.players`).
 - **Recordings** (`core/input_log.c`): version 2 names the system and keeps
-  16 bits per pad; version 1 (NES, a byte per pad) still loads.
+  16 bits per pad; version 3 the same for four pads (a game with more than
+  two players); version 1 (NES, a byte per pad) still loads.
 
 The emulator runs on its own
 thread, so window moves and device changes do not stall the sound.

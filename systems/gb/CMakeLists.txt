@@ -4,7 +4,7 @@
 # make the interpreter's switch.
 add_executable(gbrecomp recomp/main.c recomp/recomp.c runtime/cart.c)
 target_include_directories(gbrecomp PRIVATE runtime)
-target_link_libraries(gbrecomp PRIVATE sm83_templates)
+target_link_libraries(gbrecomp PRIVATE sm83_templates core)
 
 # The Game Boy system (bus, timer, interrupts, PPU, sound, cartridges).
 add_library(gbcore STATIC runtime/gb.c runtime/ppu.c runtime/apu.c runtime/cart.c runtime/cgb_compat.c runtime/detect.c)

@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "file.h"
 #include "detect.h"
 
 extern const SystemDetector *const detector_list[];  /* written by CMake */
@@ -17,14 +18,9 @@ int main(int argc, char **argv) {
         for (int i = 0; i < detector_count; i++) printf("%s\n", detector_list[i]->id);
         return 0;
     }
-    FILE *f = fopen(argv[1], "rb");
-    if (!f) return perror(argv[1]), 2;
-    fseek(f, 0, SEEK_END);
-    long size = ftell(f);
-    fseek(f, 0, SEEK_SET);
-    unsigned char *data = malloc(size > 0 ? (size_t)size : 1);
-    if (!data || fread(data, 1, (size_t)size, f) != (size_t)size) return fclose(f), fprintf(stderr, "%s: read error\n", argv[1]), 2;
-    fclose(f);
+    size_t size;
+    unsigned char *data = file_read(argv[1], &size);
+    if (!data) return perror(argv[1]), 2;
     char err[512];
     int k = detect_system(detector_list, detector_count, data, (size_t)size, argv[1], err, sizeof err);
     free(data);

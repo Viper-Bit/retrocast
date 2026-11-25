@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "file.h"
 #include "m68k_recomp.h"
 #include "md.h"
 
@@ -30,14 +31,9 @@ int main(int argc, char **argv) {
         else if (!strcmp(argv[i], "--misses") && i + 1 < argc) i++;  /* read below, once the ROM is in */
         else { fprintf(stderr, "mdrecomp: unknown option %s\n", argv[i]); return 2; }
     if (!out) { fprintf(stderr, "mdrecomp: -o OUT.c is needed\n"); return 2; }
-    FILE *f = fopen(rom_path, "rb");
-    if (!f) { perror(rom_path); return 2; }
-    fseek(f, 0, SEEK_END);
-    long size = ftell(f);
-    fseek(f, 0, SEEK_SET);
-    uint8_t *data = size > 0 ? malloc((size_t)size) : NULL;
-    if (!data || fread(data, 1, (size_t)size, f) != (size_t)size) { perror(rom_path); return 2; }
-    fclose(f);
+    size_t size;
+    uint8_t *data = file_read(rom_path, &size);
+    if (!data || !size) { perror(rom_path); return 2; }
     char err[128];
     if (md_load(&md, data, (size_t)size, err, sizeof err)) { fprintf(stderr, "%s: %s\n", rom_path, err); return 2; }
     free(data);

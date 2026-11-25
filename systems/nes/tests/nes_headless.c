@@ -48,6 +48,8 @@
 #include <windows.h>
 #endif
 
+#include "capture.h"
+#include "file.h"
 #include "input_log.h"
 #include "nes.h"
 
@@ -66,29 +68,19 @@ static double timer_seconds(void) {
 }
 
 static uint8_t *read_file(const char *path, long *size) {
-    FILE *f = fopen(path, "rb");
-    if (!f) { perror(path); exit(2); }
-    fseek(f, 0, SEEK_END);
-    *size = ftell(f);
-    fseek(f, 0, SEEK_SET);
-    uint8_t *buf = malloc(*size);
-    if (fread(buf, 1, *size, f) != (size_t)*size) { perror(path); exit(2); }
-    fclose(f);
+    size_t n;
+    uint8_t *buf = file_read(path, &n);
+    if (!buf) { perror(path); exit(2); }
+    *size = (long)n;
     return buf;
 }
 
 static void write_ppm(Nes *n, const char *path) {
     uint32_t pal[512];
     nes_palette_rgb(pal);
-    FILE *f = fopen(path, "wb");
-    if (!f) { perror(path); exit(2); }
-    fprintf(f, "P6 256 240 255\n");
-    for (int i = 0; i < 256 * 240; i++) {
-        uint32_t c = pal[n->ppu.fb[i] & 0x1FF];
-        uint8_t rgb[3] = {(uint8_t)(c >> 16), (uint8_t)(c >> 8), (uint8_t)c};
-        fwrite(rgb, 1, 3, f);
-    }
-    fclose(f);
+    static uint32_t rgb[256 * 240];
+    for (int i = 0; i < 256 * 240; i++) rgb[i] = pal[n->ppu.fb[i] & 0x1FF];
+    if (capture_ppm(path, rgb, 256, 240, 256)) { perror(path); exit(2); }
 }
 
 /* ---- lockstep comparison (--diff) ---- */
@@ -177,18 +169,11 @@ static void collect_audio(Nes *n) {
     }
 }
 
-static void put32(FILE *f, uint32_t v) { fwrite((uint8_t[4]){v, v >> 8, v >> 16, v >> 24}, 1, 4, f); }
-static void put16(FILE *f, uint16_t v) { fwrite((uint8_t[2]){v, v >> 8}, 1, 2, f); }
-
 static void write_wav(const char *path) {
-    FILE *f = fopen(path, "wb");
+    FILE *f = capture_wav_open(path);
     if (!f) { perror(path); exit(2); }
-    uint32_t bytes = (uint32_t)(pcm_len * 2);
-    fwrite("RIFF", 1, 4, f); put32(f, 36 + bytes); fwrite("WAVEfmt ", 1, 8, f);
-    put32(f, 16); put16(f, 1); put16(f, 1); put32(f, APU_SAMPLE_RATE); put32(f, APU_SAMPLE_RATE * 2);
-    put16(f, 2); put16(f, 16); fwrite("data", 1, 4, f); put32(f, bytes);
-    for (size_t i = 0; i < pcm_len; i++) put16(f, (uint16_t)pcm[i]);
-    fclose(f);
+    capture_wav_samples(f, pcm, pcm_len);
+    if (capture_wav_close(f, APU_SAMPLE_RATE, 1)) { perror(path); exit(2); }
 }
 
 /* --play: a deterministic session. Start at frames 300 and 700 (as for

@@ -21,6 +21,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "capture.h"
+#include "file.h"
 #include "md.h"
 #include "recomp_rt.h"
 
@@ -41,19 +43,6 @@ static int same_line(const Md *a, const Md *b) {
     p.bus = q.bus = NULL;
     return !memcmp(&x, &y, sizeof x) && !memcmp(&p, &q, sizeof p) && !memcmp(a->wram, b->wram, sizeof a->wram) &&
            !memcmp(a->zram, b->zram, sizeof a->zram);
-}
-
-static uint8_t *read_file(const char *path, size_t *size) {
-    FILE *f = fopen(path, "rb");
-    if (!f) return NULL;
-    fseek(f, 0, SEEK_END);
-    long n = ftell(f);
-    fseek(f, 0, SEEK_SET);
-    uint8_t *p = n > 0 ? malloc((size_t)n) : NULL;
-    if (p && fread(p, 1, (size_t)n, f) != (size_t)n) free(p), p = NULL;
-    fclose(f);
-    *size = (size_t)n;
-    return p;
 }
 
 int main(int argc, char **argv) {
@@ -78,7 +67,7 @@ int main(int argc, char **argv) {
         else { fprintf(stderr, "genesis_headless: bad argument %s\n", argv[i]); return 2; }
     }
     size_t size;
-    uint8_t *rom = read_file(argv[1], &size);
+    uint8_t *rom = file_read(argv[1], &size);
     if (!rom) {
         fprintf(stderr, "%s: cannot read\n", argv[1]);
         return 2;
@@ -97,11 +86,8 @@ int main(int argc, char **argv) {
     }
     free(rom);
     if (misses && !(m.misses = calloc(md_code_end(&m) / 2 + 1, 1))) { fprintf(stderr, "out of memory\n"); return 2; }
-    FILE *w = wav ? fopen(wav, "wb") : NULL;
+    FILE *w = wav ? capture_wav_open(wav) : NULL;
     if (wav && !w) { fprintf(stderr, "%s: cannot write\n", wav); return 2; }
-    uint8_t hdr[44] = {0};
-    if (w) fwrite(hdr, 1, 44, w);  /* filled in at the end */
-    uint32_t wav_frames = 0;
     static float buf[2 * SND_BUF];
     for (int f = 0; f < frames && !m.cpu.halted && !(boot && m.vdp_writes); f++) {
         m.pad[0] = 0;
@@ -128,34 +114,12 @@ int main(int argc, char **argv) {
         int n = snd_take(&m.snd, buf, SND_BUF);
         for (int k = 0; w && k < 2 * n; k++) {
             int16_t s = (int16_t)(buf[k] * 32767);
-            uint8_t b[2] = {(uint8_t)s, (uint8_t)(s >> 8)};
-            fwrite(b, 1, 2, w);
+            capture_wav_samples(w, &s, 1);
         }
-        if (w) wav_frames += (uint32_t)n;
     }
-    if (w) {  /* RIFF header: PCM, 2 channels, 16 bits */
-        uint32_t rate = (uint32_t)md_sample_rate(&m), data = wav_frames * 4;
-        uint32_t v[] = {36 + data, 16, 1 | 2 << 16, rate, rate * 4, 4 | 16 << 16, data};
-        memcpy(hdr, "RIFF", 4), memcpy(hdr + 8, "WAVEfmt ", 8), memcpy(hdr + 36, "data", 4);
-        for (int k = 0; k < 7; k++) {
-            int at = k == 0 ? 4 : k == 6 ? 40 : 12 + 4 * k;
-            for (int j = 0; j < 4; j++) hdr[at + j] = (uint8_t)(v[k] >> (8 * j));
-        }
-        fseek(w, 0, SEEK_SET);
-        fwrite(hdr, 1, 44, w);
-        fclose(w);
-    }
+    if (w && capture_wav_close(w, (unsigned)md_sample_rate(&m), 2)) { fprintf(stderr, "%s: cannot write\n", wav); return 2; }
     if (ppm) {
-        FILE *o = fopen(ppm, "wb");
-        if (!o) { fprintf(stderr, "%s: cannot write\n", ppm); return 2; }
-        fprintf(o, "P6\n%d %d\n255\n", m.vdp.frame_w, m.vdp.frame_h);
-        for (int y = 0; y < m.vdp.frame_h; y++)
-            for (int x = 0; x < m.vdp.frame_w; x++) {
-                uint32_t c = m.vdp.frame[y * 320 + x];
-                uint8_t px[3] = {(uint8_t)(c >> 16), (uint8_t)(c >> 8), (uint8_t)c};
-                fwrite(px, 1, 3, o);
-            }
-        fclose(o);
+        if (capture_ppm(ppm, m.vdp.frame, m.vdp.frame_w, m.vdp.frame_h, 320)) { fprintf(stderr, "%s: cannot write\n", ppm); return 2; }
     }
     if (diff) printf("diff: %d frames, no difference\n", frames);
     if (coverage) {

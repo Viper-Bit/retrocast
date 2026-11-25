@@ -24,6 +24,8 @@
 
 #include <stddef.h>
 
+#include "capture.h"
+#include "file.h"
 #include "gb.h"
 #include "input_log.h"  /* PAD_* */
 #include "recomp_rt.h"
@@ -140,14 +142,9 @@ int main(int argc, char **argv) {
         }
         else { fprintf(stderr, "gb_headless: unknown option %s\n", argv[i]); return 2; }
     }
-    FILE *f = fopen(argv[1], "rb");
-    if (!f) { perror(argv[1]); return 2; }
-    fseek(f, 0, SEEK_END);
-    long size = ftell(f);
-    fseek(f, 0, SEEK_SET);
-    uint8_t *rom = malloc((size_t)size);
-    if (!rom || fread(rom, 1, (size_t)size, f) != (size_t)size) { perror(argv[1]); return 2; }
-    fclose(f);
+    size_t size;
+    uint8_t *rom = file_read(argv[1], &size);
+    if (!rom) { perror(argv[1]); return 2; }
     static Gb g, ref;
     char err[128];
     if (gb_load_model(&g, rom, (size_t)size, model, err, sizeof err) != 0 ||
@@ -166,13 +163,8 @@ int main(int argc, char **argv) {
     }
     ref.recomp_on = 0;
     if (misses && !(g.misses = calloc(gb_miss_slots(&g), 1))) { perror("misses"); return 2; }
-    FILE *w = wav ? fopen(wav, "wb") : NULL;
+    FILE *w = wav ? capture_wav_open(wav) : NULL;
     if (wav && !w) { perror(wav); return 2; }
-    static const uint8_t WAV[44] = {'R', 'I', 'F', 'F', 0, 0, 0, 0, 'W', 'A', 'V', 'E', 'f', 'm', 't', ' ',
-                                    16, 0, 0, 0, 1, 0, 2, 0, 0x80, 0xBB, 0, 0, 0x00, 0xEE, 2, 0,  /* PCM, stereo, 48000 Hz, 192000 B/s */
-                                    4, 0, 16, 0, 'd', 'a', 't', 'a', 0, 0, 0, 0};
-    if (w) fwrite(WAV, 1, sizeof WAV, w);
-    long nsamples = 0;
     int r = 0;
     for (long i = 0; i < frames && !(r = result(&g)) && !g.cpu.jammed; i++) {
         if (i == state_at && gb_state_save(&g, state_out) != 0) { perror(state_out); return 2; }
@@ -190,15 +182,10 @@ int main(int argc, char **argv) {
         for (int k = 0; w && k < n; k++) {
             float x = buf[k] < -1 ? -1 : buf[k] > 1 ? 1 : buf[k];
             int16_t v = (int16_t)(x * 32767);
-            fwrite(&v, 2, 1, w), nsamples++;
+            capture_wav_samples(w, &v, 1);
         }
     }
-    if (w) {  /* the sizes in the header */
-        uint32_t data = (uint32_t)nsamples * 2, riff = data + 36;
-        fseek(w, 4, SEEK_SET), fwrite(&riff, 4, 1, w);
-        fseek(w, 40, SEEK_SET), fwrite(&data, 4, 1, w);
-        fclose(w);
-    }
+    if (w && capture_wav_close(w, 48000, 2)) { perror(wav); return 2; }  /* stereo, 48000 Hz */
     if (pgm) {  /* the last whole frame; shade 0 (light) = 255, as dmg-acid2's reference */
         FILE *o = fopen(pgm, "wb");
         if (!o) { perror(pgm); return 2; }
@@ -207,17 +194,16 @@ int main(int argc, char **argv) {
         fclose(o);
     }
     if (ppm) {
-        FILE *o = fopen(ppm, "wb");
-        if (!o) { perror(ppm); return 2; }
-        fprintf(o, "P6\n160 144\n255\n");
+        static uint32_t rgb[160 * 144];
         for (int i = 0; i < 160 * 144; i++) {
             uint16_t c = g.frame[i];
-            for (int k = 0; k < 3; k++) {
-                int v = g.cgb ? (c >> (5 * k) & 31) << 3 | (c >> (5 * k) & 31) >> 2 : (3 - (c & 3)) * 85;
-                fputc(v, o);
+            rgb[i] = 0;
+            for (int k = 0; k < 3; k++) {  /* red, green, blue */
+                unsigned v = g.cgb ? (c >> (5 * k) & 31u) << 3 | (c >> (5 * k) & 31u) >> 2 : (3u - (c & 3u)) * 85u;
+                rgb[i] |= v << (16 - 8 * k);
             }
         }
-        fclose(o);
+        if (capture_ppm(ppm, rgb, 160, 144, 160)) { perror(ppm); return 2; }
     }
     for (int i = 0; i < g.serial_n; i++) {
         unsigned char ch = (unsigned char)g.serial_out[i];

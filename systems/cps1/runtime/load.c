@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "cps1.h"
+#include "file.h"
 #include "kabuki.h"
 
 #ifdef _WIN32
@@ -148,18 +149,14 @@ int cps1_load(const Cps1Game *g, const Zip *z, Cps1Rom *r, char *err, size_t err
 
 /* take() from the zip at path; -1 when a chip there is damaged. */
 static int take_path(const char *path, const Cps1Game *g, Cps1Rom *r, char *done, char *err, size_t errlen) {
-    FILE *f = fopen(path, "rb");
-    long n = -1;
-    uint8_t *data = NULL;
+    size_t n;
+    uint8_t *data = file_read(path, &n);
     Zip z;
     int bad = 0;
-    if (f && !fseek(f, 0, SEEK_END)) n = ftell(f);
-    if (f && n > 0 && !fseek(f, 0, SEEK_SET) && (data = malloc((size_t)n)) && fread(data, 1, (size_t)n, f) == (size_t)n &&
-        !zip_open(&z, data, (size_t)n)) {
+    if (data && !zip_open(&z, data, n)) {
         bad = take(g, &z, r, done, err, errlen);
         zip_close(&z);
     }
-    if (f) fclose(f);
     free(data);
     return bad;
 }
@@ -199,16 +196,9 @@ static uint8_t *open_beside(const char *path, const char *name, Zip *z) {
     size_t dir = strlen(path);
     while (dir && path[dir - 1] != '/' && path[dir - 1] != '\\') dir--;
     snprintf(p, sizeof p, "%.*s%s.zip", (int)dir, path, name);
-    FILE *f = fopen(p, "rb");
-    long n = -1;
-    uint8_t *data = NULL;
-    if (f && !fseek(f, 0, SEEK_END)) n = ftell(f);
-    if (f && n > 0 && !fseek(f, 0, SEEK_SET) && (data = malloc((size_t)n)) && fread(data, 1, (size_t)n, f) == (size_t)n &&
-        !zip_open(z, data, (size_t)n)) {
-        fclose(f);
-        return data;
-    }
-    if (f) fclose(f);
+    size_t n;
+    uint8_t *data = file_read(p, &n);
+    if (data && !zip_open(z, data, n)) return data;
     free(data);
     return NULL;
 }

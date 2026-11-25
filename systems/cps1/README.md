@@ -33,7 +33,7 @@ without a window.
   (`core/audio/qsound.c`, MAME's high-level version) in stereo at 24,038 Hz,
   its tables from `qsound.zip` (MAME's name; `dl-1425.bin`) beside the game's
   zip, which must be there; players 3 and 4; the settings EEPROM (a 93C46,
-  `core/eeprom93c46.c`) kept in `GAME.eeprom` next to the zip, as MAME's
+  `core/devices/eeprom93c46.c`) kept in `GAME.eeprom` next to the zip, as MAME's
   nvram file (Pang! 3's too). Checked: the Kabuki decoding identical to MAME's on the four
   keys' games, the chip sample for sample on Warriors of Fate (verification log).
 - **Picture**: the palette (six pages, uploaded on a palette-base write),
