@@ -833,12 +833,28 @@ static void test_clone_parent(void) {
     remove("cps1_clone.zip"), remove("cps1_par.zip");
 }
 
+static void test_name_partial(void) {  /* wof.zip holding wofr1: a set whole in the zip beats the one named like it, partly there */
+    static uint8_t a[4] = {1, 1, 1, 1}, b[4] = {2, 2, 2, 2}, c[4] = {3, 3, 3, 3};
+    static Cps1Game two[2] = {
+        {"cps1_nm", "Named", CPS1_PLAIN, {12, 0, 0, 0}, {0}, 3, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0},
+        {"cps1_r1", "R1", CPS1_PLAIN, {8, 0, 0, 0}, {0}, 2, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0}};
+    two[0].files[0] = (Cps1File){zip_crc32(a, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0, 0, 0};
+    two[0].files[1] = (Cps1File){zip_crc32(b, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 4, 0, 0, 0};
+    two[0].files[2] = (Cps1File){zip_crc32(c, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 8, 0, 0, 0};
+    two[1].files[0] = two[0].files[0], two[1].files[1] = two[0].files[1];
+    zcount = 0, zip_add("a", a, 4), zip_add("b", b, 4), zip_build();
+    Cps1Rom r;
+    char err[256] = "";
+    assert(cps1_open_in("cps1_nm.zip", zbuf, zlen, two, 2, &r, err, sizeof err) == 0 && r.game == &two[1]);
+    cps1_unload(&r);
+}
+
 static void test_chip_elsewhere(void) {  /* an own chip the zip lacks, found by CRC in another zip of the folder */
     static uint8_t a[4] = {1, 2, 3, 4}, b[4] = {5, 6, 7, 8}, c[4] = {9, 10, 11, 12};
-    static Cps1Game g = {"cps1_lack", "Lack", CPS1_PLAIN, {12, 0, 0, 0}, {0}, 3, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0};
-    g.files[0] = (Cps1File){zip_crc32(a, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0};
-    g.files[1] = (Cps1File){zip_crc32(b, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 4, 0};
-    g.files[2] = (Cps1File){zip_crc32(c, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 8, 0};
+    static Cps1Game g = {"cps1_lack", "Lack", CPS1_PLAIN, {12, 0, 0, 0}, {0}, 3, {{0}}, {{0}, 0, {{0}}}, 10, {0xFF, 0xFF, 0xFF}, CPS1_NONE, CPS1_NONE, NULL, 0, -1, CPS1_EXTRA_NONE, 0, 0, CPS1_INIT_NONE, 0, 0};
+    g.files[0] = (Cps1File){zip_crc32(a, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 0, 0, 0, 0};
+    g.files[1] = (Cps1File){zip_crc32(b, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 4, 0, 0, 0};
+    g.files[2] = (Cps1File){zip_crc32(c, 4), 4, CPS1_R_MAIN, CPS1_LOAD_PLAIN, 8, 0, 0, 0};
     zcount = 0, zip_add("a", a, 4), zip_add("b", b, 4), zip_build();
     static uint8_t mine[256];
     size_t len = zlen;
@@ -1277,6 +1293,7 @@ int main(void) {
     test_clone_parent();
     test_match_order();
     test_chip_elsewhere();
+    test_name_partial();
     test_state_roundtrip();
     test_state_refused();
     test_kabuki();
