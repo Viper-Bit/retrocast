@@ -2,7 +2,9 @@
  * File, version 2: "RCIN", version byte 2, the system (4 bytes, zero
  * padded: "nes", "gb"), then 5 bytes per frame: pad 1 buttons, pad 2
  * buttons (16 bits each, little endian), flags (bit 0: reset before this
- * frame). Version 1 ("NESI", 1; NES only) had 1 byte per pad; it still loads.
+ * frame). Version 3 ("RCIN", 3; four-player games): the same with four
+ * pads, 9 bytes per frame. Version 1 ("NESI", 1; NES only) had 1 byte per
+ * pad; all three load.
  * Emulation is deterministic from power-on, so a recording replays exactly. */
 #ifndef CORE_INPUT_LOG_H
 #define CORE_INPUT_LOG_H
@@ -22,7 +24,7 @@ enum {
 };
 enum { INPUT_RESET = 0x01 };
 
-typedef struct { uint16_t pad[2]; uint8_t flags; } InputFrame;
+typedef struct { uint16_t pad[4]; uint8_t flags; } InputFrame;  /* players 1-4 */
 
 typedef struct {
     InputFrame *frames;
@@ -30,8 +32,9 @@ typedef struct {
     char system[5];  /* who recorded it ("nes" for version 1) */
 } InputLog;
 
-FILE *input_log_create(const char *path, const char *system);  /* writes the header; NULL on error */
-void input_log_write(FILE *f, InputFrame fr);
+/* pads: 2 (version 2) or 4 (version 3); input_log_write takes the same. */
+FILE *input_log_create(const char *path, const char *system, int pads);  /* writes the header; NULL on error */
+void input_log_write(FILE *f, InputFrame fr, int pads);
 int input_log_load(const char *path, InputLog *log);  /* 0 ok, -1 error */
 void input_log_free(InputLog *log);
 

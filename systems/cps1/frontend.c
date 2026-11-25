@@ -1,6 +1,6 @@
 /* The CPS-1 behind core/frontend/system.h: a game's zip matched to the game
- * table and loaded, both players' controls (buttons 1-3 = B, A, X; Start;
- * a coin on Select), the 384x224 picture on a 4:3 monitor, mono sound
+ * table and loaded, the players' controls (buttons 1-3 = B, A, X; Start;
+ * a coin on Select; players 3 and 4 on the boards that have them), the 384x224 picture on a 4:3 monitor, mono sound
  * (stereo on the Q-Sound board), save states, the EEPROM of the Q-Sound
  * board and Pang! 3 in GAME.eeprom next to the zip (MAME's nvram layout). No settings yet
  * (the DIP switches keep their defaults). */
@@ -61,6 +61,7 @@ static int sys_open(const char *path, const Settings *settings, SysInfo *info, c
                           : (4.0 / 3) / ((double)CPS1_WIDTH / CPS1_HEIGHT);
     info->sample_rate = cps1_sample_rate(g);
     info->channels = cps1_channels(g);
+    info->players = g->extra >= CPS1_EXTRA_P3 ? 4 : 2;  /* Captain Commando, Knights, Warriors of Fate: 3; Slam Masters: 4 */
     return 0;
 }
 
@@ -98,6 +99,8 @@ static int sys_frame(const InputFrame *in, uint32_t *rgb, float *samples, int ma
     static int16_t snd[CPS1_SND_BUF];
     cps1_set_input(&machine, 0, in->pad[0]);
     cps1_set_input(&machine, 1, in->pad[1]);
+    cps1_set_input(&machine, 2, in->pad[2]);
+    cps1_set_input(&machine, 3, in->pad[3]);
     cps1_frame(&machine);
     int w, h;
     cps1_picture(&machine, rgb, &w, &h);

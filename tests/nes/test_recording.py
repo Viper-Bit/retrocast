@@ -1,7 +1,7 @@
 """Input recordings (core/input_log.c) through nes_headless, with a made-up
 ROM that reads pad 1 into $00 every frame (no game needed): version 1
-("NESI", a byte per pad) and version 2 ("RCIN", the system, 16 bits per pad)
-give the same input; a recording of another system is refused."""
+("NESI", a byte per pad), version 2 ("RCIN", the system, 16 bits per pad)
+and version 3 (four pads, for four-player games) give the same input; a recording of another system is refused."""
 import os
 import struct
 import subprocess
@@ -25,6 +25,10 @@ def v1(frames, pad):
 
 def v2(frames, pad, system=b"nes\0"):
     return b"RCIN\x02" + system + struct.pack("<HHB", pad, 0, 0) * frames
+
+
+def v3(frames, pad, system=b"nes\0"):
+    return b"RCIN\x03" + system + struct.pack("<HHHHB", pad, 0, 0x0F, 0x0F, 0) * frames
 
 
 @built(RUNNER, "build the C runtime first (see tests/nes/test_cpu.py)")
@@ -57,6 +61,7 @@ class TestRecording(unittest.TestCase):
     def test_both_versions_give_the_same_pad(self):
         self.assertEqual(self.replay(v1(10, A | START)), 0x90)
         self.assertEqual(self.replay(v2(10, A | START | X)), 0x90)  # X: not on the NES pad
+        self.assertEqual(self.replay(v3(10, A | START)), 0x90)  # pads 3 and 4: not read by the NES
 
     def test_record_writes_version_2(self):
         path = os.path.join(self.tmp.name, "out.rec")

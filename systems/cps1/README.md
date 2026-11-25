@@ -96,10 +96,12 @@ Both players: buttons 1, 2, 3 on the pad's B, A and X (keyboard Z, X, S;
 gamepad South, East, North), a coin on Select (Right Shift, gamepad Back),
 Start. Street Fighter II's kicks (buttons 4-6) are on Y, L and R (keyboard
 A, Q, W). Forgotten Worlds' rotary dial turns with L and R, 20 steps a
-frame as MAME's keys turn it. A third and fourth player (Knights of the
-Round, The King of Dragons, Mercs, Warriors of Fate, Cadillacs and Dinosaurs,
-the Slam Masters games) are read in `cps1_headless` only: `retrocast` has
-two pads. `cps1.ini` next to `retrocast` has no CPS-1 settings yet (the
+frame as MAME's keys turn it. A third player (Mercs, The King of Dragons,
+Knights of the Round, Warriors of Fate, Cadillacs and Dinosaurs, Final
+Fight 30th Anniversary) and a fourth (Captain Commando, the Slam Masters
+games) play on the third and fourth gamepad, in the order they are
+connected. A recording of such a game keeps all four pads
+(`--record`, version 3). `cps1.ini` next to `retrocast` has no CPS-1 settings yet (the
 DIP switches keep each game's defaults).
 
 ## Running
