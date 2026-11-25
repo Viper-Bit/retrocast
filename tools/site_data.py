@@ -187,6 +187,8 @@ def upload(images):
                        check=True)
     subprocess.run(["gh", "release", "upload", "site-images", z, "--clobber"], check=True)
     print("uploaded", z)
+    # replacing an asset fires no release event: start the site build by hand
+    subprocess.run(["gh", "workflow", "run", "pages.yml"])
 
 
 def main(argv):
