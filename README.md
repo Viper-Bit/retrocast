@@ -117,7 +117,8 @@ names drop "(...)"/"[...]" tags from the file name.
 ## Controls and settings
 Keyboard (player 1): arrows, X = A, Z = B, S = X, A = Y, Q = L, W = R,
 Enter = Start, Right Shift = Select, F5 = reset, Esc = quit. Gamepads:
-first = player 1, second = player 2, hot-plug; D-pad or left stick, East =
+in the order connected, players 1-4 (3 and 4 where the game has them,
+CPS-1), hot-plug; D-pad or left stick, East =
 A, South = B, North = X, West = Y, shoulders = L and R, Back = Select,
 Start. Each system reads the buttons its pad has (the NES and Game Boy:
 A, B, Select, Start and the directions; the Genesis: A on Y, B on B, C on

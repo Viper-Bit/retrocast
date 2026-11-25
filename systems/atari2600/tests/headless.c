@@ -105,7 +105,7 @@ int main(int argc, char **argv) {
         goto done;
     }
     if (replay_path && !frame_limit) frames = (int)replay.count;
-    if (record_path && !(record = input_log_create(record_path, "a26"))) {
+    if (record_path && !(record = input_log_create(record_path, "a26", 2))) {
         fprintf(stderr, "cannot create recording: %s\n", record_path);
         goto done;
     }
@@ -113,7 +113,7 @@ int main(int argc, char **argv) {
         InputFrame input = {0};
         if (i < replay.count) input = replay.frames[i];
         else if (play) input = scripted_input(i);
-        if (record) input_log_write(record, input);
+        if (record) input_log_write(record, input, 2);
         if (input.flags & INPUT_RESET) {
             uint64_t compiled = machine.compiled_cycles, total = machine.total_cycles;
             if (a26_init(&machine, rom, size, mapper, pal) ||

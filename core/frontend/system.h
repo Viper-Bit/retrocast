@@ -22,6 +22,7 @@ typedef struct {
     double aspect;            /* shown pixel width / height (1 = square) */
     int sample_rate;          /* float samples a second, per channel */
     int channels;             /* 1 = mono, 2 = stereo (samples interleaved, left first) */
+    int players;              /* pads the game reads: 2 (0 is taken as 2) or 4 */
     char name[256];           /* the game, for the window title */
     char tag[16];             /* after it: "Game (NTSC)" */
     char state_path[1024];    /* F2 / F4 */

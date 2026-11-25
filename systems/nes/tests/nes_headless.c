@@ -351,7 +351,7 @@ int main(int argc, char **argv) {
         return 2;
     }
     FILE *rec = NULL;
-    if (record && !(rec = input_log_create(record, "nes"))) { perror(record); return 2; }
+    if (record && !(rec = input_log_create(record, "nes", 2))) { perror(record); return 2; }
     if (play_seed >= 0) {
         if (frames < 0) frames = 6000;
         play_script(&log, frames, (unsigned)play_seed);
@@ -367,7 +367,7 @@ int main(int argc, char **argv) {
         if (f < log.count) in = log.frames[f];
         for (int i = 0; i < npress; i++)
             if (f >= press_frame[i] && f < press_frame[i] + 6) in.pad[0] |= (uint8_t)press_mask[i];
-        if (rec) input_log_write(rec, in);
+        if (rec) input_log_write(rec, in, 2);
         for (int i = 0; i < ndisk; i++)
             if (f == disk_frame[i]) {
                 cart_fds_insert(&nes.cart, disk_side[i], nes.cpu.cycles + 900000);

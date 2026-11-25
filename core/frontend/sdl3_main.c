@@ -15,7 +15,8 @@
  * go to the system (NES: F6 = next disk side).
  * Settings: <program>.ini next to the program (settings.c); in retrocast
  * one per system (nes.ini, gb.ini, genesis.ini, atari2600.ini).
- * Gamepads: first connected = player 1, second = player 2; hot-plug works.
+ * Gamepads: in the order connected, players 1-4 (3 and 4 where the game
+ * has them: SysInfo.players); hot-plug works.
  * D-pad or left stick; East = A, South = B (NES layout: B left of A),
  * North = X, West = Y, shoulders = L and R, Back = Select, Start = Start. */
 #include <SDL3/SDL.h>
@@ -38,7 +39,7 @@ enum { MAX_W = 512, MAX_H = 480, MAX_FRAMES = 8192, STICK_DEADZONE = 16000 };  /
 static SysInfo info;
 static const System *sys;
 
-static SDL_Gamepad *gamepads[2];
+static SDL_Gamepad *gamepads[4];
 
 static uint16_t keyboard_buttons(void) {
     const bool *k = SDL_GetKeyboardState(NULL);
@@ -82,16 +83,16 @@ static uint16_t gamepad_buttons(SDL_Gamepad *g) {
 
 static void gamepad_event(const SDL_Event *e) {
     if (e->type == SDL_EVENT_GAMEPAD_ADDED) {
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 4; i++)
             if (gamepads[i] && SDL_GetGamepadID(gamepads[i]) == e->gdevice.which) return;
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 4; i++) {
             if (gamepads[i]) continue;
             gamepads[i] = SDL_OpenGamepad(e->gdevice.which);
             if (gamepads[i]) SDL_Log("player %d: %s", i + 1, SDL_GetGamepadName(gamepads[i]));
             return;
         }
     } else if (e->type == SDL_EVENT_GAMEPAD_REMOVED) {
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 4; i++) {
             if (gamepads[i] && SDL_GetGamepadID(gamepads[i]) == e->gdevice.which) {
                 SDL_Log("player %d: gamepad disconnected", i + 1);
                 SDL_CloseGamepad(gamepads[i]);
@@ -162,7 +163,7 @@ typedef struct {
     uint32_t fb[MAX_W * MAX_H];
     int fb_new;
     char halt[256];           /* why the game stopped (System.halted), or "" */
-    SDL_AtomicInt pads, reset, quit, done;  /* pads: player 1 | player 2 << 16 */
+    SDL_AtomicInt pads, pads34, reset, quit, done;  /* pads: player 1 | player 2 << 16; pads34: players 3 and 4 */
     SDL_AudioStream *audio;
     double fps;
     long max_frames;
@@ -182,10 +183,12 @@ static int emu_thread(void *arg) {
             in = u->replay->frames[frame];
         } else {
             int pads = SDL_GetAtomicInt(&u->pads);
+            int pads34 = SDL_GetAtomicInt(&u->pads34);
             in.pad[0] = (uint16_t)pads, in.pad[1] = (uint16_t)((unsigned)pads >> 16);
+            in.pad[2] = (uint16_t)pads34, in.pad[3] = (uint16_t)((unsigned)pads34 >> 16);
             in.flags = reset ? INPUT_RESET : 0;
         }
-        if (u->record) input_log_write(u->record, in);
+        if (u->record) input_log_write(u->record, in, info.players);
 
         SDL_LockMutex(u->lock);
         if (in.flags & INPUT_RESET) sys->reset();
@@ -288,7 +291,7 @@ int main(int argc, char **argv) {
         return 1;
     }
     FILE *record_file = NULL;
-    if (record && !(record_file = input_log_create(record, sys->detector->id))) {
+    if (record && !(record_file = input_log_create(record, sys->detector->id, info.players))) {
         SDL_Log("%s: cannot create", record);
         return 1;
     }
@@ -386,6 +389,8 @@ int main(int argc, char **argv) {
         }
         SDL_SetAtomicInt(&emu.pads, (int)(input_clean(keyboard_buttons() | gamepad_buttons(gamepads[0])) |
                                           (unsigned)input_clean(gamepad_buttons(gamepads[1])) << 16));
+        SDL_SetAtomicInt(&emu.pads34, (int)(input_clean(gamepad_buttons(gamepads[2])) |
+                                            (unsigned)input_clean(gamepad_buttons(gamepads[3])) << 16));
 
         SDL_LockMutex(emu.lock);
         const int fresh = emu.fb_new;
@@ -417,7 +422,7 @@ int main(int argc, char **argv) {
     SDL_DestroyMutex(emu.lock);
     if (record_file) fclose(record_file);
     input_log_free(&replay_log);
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < 4; i++)
         if (gamepads[i]) SDL_CloseGamepad(gamepads[i]);
     sys->close();
     if (audio) SDL_DestroyAudioStream(audio);
