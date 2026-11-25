@@ -12,7 +12,9 @@ without a window.
   clock. A zip is matched by CRC, whatever its name. Which sets, which are
   tested, which are not supported yet and why:
   [compatibility](docs/compatibility.md). What your folder lacks:
-  `python tools/cps1_audit.py FOLDER`.
+  `python tools/cps1_audit.py FOLDER`. The table (`runtime/games.c`) is
+  generated: `python tools/cps1_gen_games.py MAME_DIR runtime/games.c`,
+  MAME_DIR holding `cps1.cpp` and `cps1_v.cpp` of MAME's `src/mame/capcom/`.
 - **Zips**: read by `core/zip.c` (our own inflate); how a game is found
   and loaded: [Loading a game](#loading-a-game).
 - **CPUs**: the shared 68000 and Z80 (`cpu/m68k`, `cpu/z80`), their own

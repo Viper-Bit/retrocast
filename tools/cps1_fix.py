@@ -25,7 +25,7 @@ from cps1_audit import audit, crcs, table  # noqa: E402
 def best_set(have, games, name=None):
     """(set id, missing [(name, crc)]) for the zip's CRCs, or None when it matches nothing."""
     best = None
-    for gid, _, _, files in games:
+    for gid, _, _, files, _ in games:
         own = [(n, c) for c, n, fp in files if not fp]
         got = sum(c in have for _, c in own)
         if not own or got * 2 < len(own):
@@ -82,8 +82,8 @@ def main(argv):
     if to:
         os.makedirs(to, exist_ok=True)
     games = table()
-    parent = {g: p for g, _, p, _ in games}
-    shared = {g: [(n, c) for c, n, fp in f if fp] for g, _, _, f in games}  # the chips a clone takes from its parent
+    parent = {g: p for g, _, p, *_ in games}
+    shared = {g: [(n, c) for c, n, fp in f if fp] for g, _, _, f, _ in games}  # the chips a clone takes from its parent
     whole = "--whole" in argv  # the chips a clone takes from its parent
     found = plan(dirs, games)
     where = index(dirs)
