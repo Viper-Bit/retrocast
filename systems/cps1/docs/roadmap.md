@@ -12,7 +12,7 @@ before the thing it checks. A milestone is done when its exit test passes.
 | P5 | every plain-board game (their mappers); stars, flip screen, vertical monitors | done |
 | P6 | the recompiler (`cps1recomp`, `-DROMS`, `--diff`) | done |
 | P7 | the Q-Sound games: dino, punisher, wof, slammasu, mbombrd | done |
-| P8 | the rest: pang3, megaman, pnickj, qad, qtono2 | open |
+| P8 | the rest: pang3, megaman, pnickj, qad, qtono2, the bootlegs | done |
 
 ## P1 · Zips
 - [x] `core/zip.c`: the end record and central directory, stored and
@@ -28,6 +28,34 @@ before the thing it checks. A milestone is done when its exit test passes.
   sprites and priority; the game table (Final Fight).
 - [x] **Exit:** `cps1_tests`; Final Fight reaches its title in
   `cps1_headless --ppm`, checked by eye.
+
+## P8 · The odd ones
+- [x] The late 12 MHz games (Mega Man, Pnickies, Quiz & Dragons, Quiz
+  Tonosama 2); a CPS-B without priority-mask ports (qad). Pang! 3: its
+  68000 code decrypted from $80000, its 16-bit EEPROM on the CPS-B's
+  port $80017A. Chips loaded in parts (MAME's ROM_CONTINUE, ROM_RELOAD,
+  ROM_IGNORE) and ROM_LOAD32_BYTE; MAME's bootleg video quirks (the
+  sprite list at $9100, scroll offsets, CPS-2's end marker, sprites in
+  reverse, the palette every frame, 3wondersb's wired registers); the
+  bootlegs' inits (DIP switches on both bytes, the CPS-B mirror, fixed
+  and latched protection reads, sf2rk's graphics bit swap, dinohunt).
+  The ROM space past the chips reads 0, as MAME's region (sf2accp2's
+  black screen); sf2rb3's black screen went with the regenerated table.
+- [x] **Exit:** 210 sets in the table; `cps1_tests` (the decryption, the
+  EEPROM port, part loads, ROM_LOAD32_BYTE, each init's handler); every new
+  set whole in the folder boots, 3,000 frames of `--play`, in play or
+  attract by eye.
+- Not supported, with the reason ([compatibility](compatibility.md)):
+  sets on their own memory maps (MAME's sf2m3, sf2m10, sf2cems6, varthb2,
+  varthb3 machines: sf2m3, sf2ceupl, sf2re, sf2level, sf2m10, the
+  sf2cems6 sets, varthb2, varthb3); ganbare and pmonster (a clock chip
+  and raster interrupts); sf2m8 (graphics rebuilt from an extra region);
+  cps1mult; 3wondersbi and gulunpa (MAME's own loading unfinished or
+  patched); sf2amf and sf2stt (chips never dumped).
+- Open: pictures against MAME's (no MAME here); black background tiles
+  in some bootlegs (sf2yyc, sf2accp2, sf2rb3) unchecked; Pang! 3's
+  decrypted sets not whole in the folder (the decryption checked by its
+  test only).
 
 ## P7 · The Q-Sound games
 - [x] The game table rebuilt from MAME 0.289's `cps1.cpp` (DIP defaults

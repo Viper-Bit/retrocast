@@ -5,6 +5,30 @@ reproducible check is not "verified".
 
 Checks of shared parts: [docs/verification-log.md](../../../docs/verification-log.md).
 
+## 2026-11-25 · P8 · the odd ones
+- **Table**: 210 sets, regenerated from MAME 0.289 by the scratchpad
+  generator (the existing rows unchanged but for two new columns: a
+  chip's part, MAME's bootleg kludge); 19 left out, each with its reason
+  ([compatibility](compatibility.md)). `sf2m3` and `sf2ceupl` moved out:
+  MAME runs them on their own memory maps; on ours they booted but read
+  no inputs.
+- **Self-checks** (`cps1_tests`): Pang! 3's decryption (the first half
+  plain, $12AB to $1223 and $0000 to $00D8 by MAME's rules, worked by
+  hand); its EEPROM read through $80017A; a chip in two halves and
+  re-loaded and cut (ROM_CONTINUE, ROM_RELOAD, ROM_IGNORE); four byte
+  chips by 4; no priority port (qad); sf2hack's DIP bytes, sf2thndr's
+  mirror, each protection's values and 0 elsewhere, sf2rk's bit swap;
+  the ROM space past the chips reading 0.
+- **Boot** (3,000 frames of `--play`, a picture, by eye): megamana,
+  pnickj, qad, qadjr; pang3b (the folder's `pang3.zip`); captcommb,
+  3wondersb (now as 3wonders draws); sf2rb, sf2rb2, sf2m2, sf2m4, sf2m5,
+  sf2m7, sf2yyc, sf2koryu; sf2accp2 (black before: it reads $180CA6,
+  past its ROM, and needs 0 there, as MAME's zero-filled region gives)
+  and sf2rb3 (black before the regenerated table) in play.
+- **Not checked**: pictures against MAME's (no MAME here); black
+  background tiles in sf2yyc, sf2accp2 and sf2rb3; Pang! 3's decrypted
+  sets, rockmanj and qtono2j (their zips each lack a chip).
+
 ## 2026-11-24 · P7 · the Q-Sound games
 - **References**: MAME 0.289's sources (tag `mame0289`): `kabuki.cpp` and
   `qsoundhle.cpp` copied into small harnesses built in the scratchpad (C, and

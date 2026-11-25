@@ -6,8 +6,8 @@ A game is the zip of its chip dumps, as MAME and FBNeo sets have them
 without a window.
 
 ## Status
-- **Games** (167 sets: the plain boards and the Q-Sound games): every set MAME 0.289's
-  `cps1.cpp` lists on these boards, with MAME's chips and CRCs, the set's
+- **Games** (210 sets: the plain boards, the Q-Sound games, Pang! 3 and
+  most bootlegs): every set MAME 0.289's `cps1.cpp` lists, with MAME's chips and CRCs, the set's
   layout, CPS-B (and where it sits), graphics ROM mapper, DIP defaults and
   clock. A zip is matched by CRC, whatever its name. Which sets, which are
   tested, which are not supported yet and why:
@@ -32,7 +32,7 @@ without a window.
   its tables from `qsound.zip` (MAME's name; `dl-1425.bin`) beside the game's
   zip, which must be there; players 3 and 4; the settings EEPROM (a 93C46,
   `core/eeprom93c46.c`) kept in `GAME.eeprom` next to the zip, as MAME's
-  nvram file. Checked: the Kabuki decoding identical to MAME's on the four
+  nvram file (Pang! 3's too). Checked: the Kabuki decoding identical to MAME's on the four
   keys' games, the chip sample for sample on Warriors of Fate (verification log).
 - **Picture**: the palette (six pages, uploaded on a palette-base write),
   scroll1-3 with flips and scroll2's row scroll, sprites of up to 16x16
@@ -54,6 +54,10 @@ without a window.
   written to `ffight.misses`; the next build recompiles it.
   `ffight_headless ZIP --diff` runs the interpreter in lockstep and stops at
   the first difference (checked on ffight, sf2, wof and dino). The Z80 is interpreted.
+- **Bootlegs**: MAME's inits (protections, the DIP switches on the low
+  byte, a CPS-B mirror, a graphics bit swap) and video quirks; chips
+  loaded in parts. Sets on their own memory maps are not supported yet
+  ([compatibility](docs/compatibility.md)).
 - **Not yet**: DIP switch settings (their defaults).
 
 ## Loading a game
