@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>retrocast: retro games recompiled to native code</title>
+<meta name="description" content="retrocast turns NES, Game Boy, Genesis, Master System, Atari 2600 and CPS-1 games into native programs, checked against a built-in emulator.">
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <a class="logo" href="./"><i></i>retrocast</a>
+  <nav><a class="on" href="./">Home</a><a href="#systems">Systems</a><a href="#download">Download</a><a href="https://github.com/Viper-Bit/retrocast#readme">Docs</a><a href="https://github.com/Viper-Bit/retrocast">GitHub ↗</a></nav>
+  <span class="sp"></span>
+  <div class="dl" id="dl-top"></div>
+  <button class="theme" id="theme" title="Light / dark">☾</button>
+</header>
+
+<div class="hero">
+  <div class="wallclip"><div class="wall"><div class="row"></div><div class="row"></div><div class="row"></div></div></div>
+  <h1>Retro games, <span class="grad">recompiled</span> to native code</h1>
+  <p class="lead">retrocast turns a game's machine code into C and builds it into a native program for your PC: NES, Game Boy, Genesis, Master System, Atari 2600 and Capcom's CPS-1 arcade board. Every recompiled game is checked cycle by cycle against a built-in emulator, so it plays exactly like the original.</p>
+  <div class="cta">
+    <div class="dl" id="dl-hero"></div>
+    <a class="btn ghost" href="#systems">Browse supported games →</a>
+  </div>
+  <small>Other systems in the ▾ menu · Free and open source (GPL-3.0) · Bring your own games</small>
+  <div class="badges">$badges</div>
+</div>
+
+<section class="reveal">
+  <h2>How it works</h2><p class="sub">From a game you own to a program that runs it natively.</p>
+  <div class="steps">
+    <div class="step"><span class="n">1 · PLAY</span><b>Play in the built-in emulator</b><p>Drop any supported game on <code>retrocast</code>: the system is read from the file. Save states, gamepads, up to four players.</p></div>
+    <div class="step"><span class="n">2 · RECOMPILE</span><b>Turn it into C</b><p>The kit recompiles the game's code to C and builds a native program, with only CMake and a C compiler installed.</p></div>
+    <div class="step"><span class="n">3 · VERIFY</span><b>Checked, cycle by cycle</b><p>The recompiled game runs in lockstep with the emulator: any difference is caught, so it plays exactly like the original.</p></div>
+  </div>
+</section>
+
+<section class="reveal" id="systems">
+  <h2>Systems</h2><p class="sub">Each system has its own page: every game tested, with its title screen and status.</p>
+  <div class="systems">$cards
+    <a class="sys soon" href="https://github.com/Viper-Bit/retrocast/issues/76"><div class="pic">CPS-2 · Neo Geo · PC Engine · …</div><div class="body"><h3>Coming next</h3><div class="cpu">See the roadmap</div></div></a>
+  </div>
+</section>
+
+<section class="reveal" id="download">
+  <h2>Download</h2><p class="sub">$tagline</p>
+  <div class="steps" id="dl-cards"></div>
+</section>
+
+$footer
+<script>window.SITE=$site;</script>
+<script src="app.js"></script>
+</body>
+</html>
