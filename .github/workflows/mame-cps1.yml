@@ -1,0 +1,52 @@
+# Once a month: the CPS-1 game table (systems/cps1/runtime/games.c) against
+# MAME's latest release. tools/cps1_gen_games.py regenerates it from MAME's
+# cps1.cpp / cps1_v.cpp; tools/cps1_mame_diff.py lists what differs. A change
+# (or a generator that no longer reads MAME's source) opens one issue, or
+# updates it while open. Nothing in the repository is changed.
+name: MAME check (CPS-1)
+
+on:
+  schedule:
+    - cron: '0 6 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Regenerate from MAME's latest release
+        run: |
+          tag=$(gh api repos/mamedev/mame/releases/latest --jq .tag_name)
+          echo "TAG=$tag" >> "$GITHUB_ENV"
+          mkdir mame
+          for f in cps1.cpp cps1_v.cpp; do
+            curl -fsSL "https://raw.githubusercontent.com/mamedev/mame/$tag/src/mame/capcom/$f" -o "mame/$f"
+          done
+          if python3 tools/cps1_gen_games.py mame new_games.c > gen.log 2>&1; then
+            python3 tools/cps1_mame_diff.py systems/cps1/runtime/games.c new_games.c > changes.md
+          else
+            { echo "The generator failed on MAME's source:"; echo '```'; tail -20 gen.log; echo '```'; } > changes.md
+          fi
+          cat changes.md
+      - name: Open or update the issue
+        run: |
+          if grep -qx "no change" changes.md; then echo "games.c matches $TAG"; exit 0; fi
+          title="CPS-1: MAME's game table changed"
+          {
+            echo "MAME's latest release, **$TAG**, differs from \`systems/cps1/runtime/games.c\`:"
+            echo
+            cat changes.md
+            echo
+            echo "To take it: \`python tools/cps1_gen_games.py MAME_DIR systems/cps1/runtime/games.c --left left.md\` with MAME_DIR holding $TAG's \`src/mame/capcom/cps1.cpp\` and \`cps1_v.cpp\`; then the CPS-1 tests, the boot test on a full folder and \`tools/cps1_audit.py FOLDER --md\`."
+            echo
+            echo "_Written by the scheduled MAME check (.github/workflows/mame-cps1.yml)._"
+          } > body.md
+          num=$(gh issue list --state open --search "\"$title\" in:title" --json number,title --jq ".[] | select(.title == \"$title\") | .number" | head -1)
+          if [ -n "$num" ]; then gh issue edit "$num" --body-file body.md; else gh issue create --title "$title" --body-file body.md; fi

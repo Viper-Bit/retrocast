@@ -15,6 +15,9 @@ without a window.
   `python tools/cps1_audit.py FOLDER`. The table (`runtime/games.c`) is
   generated: `python tools/cps1_gen_games.py MAME_DIR runtime/games.c`,
   MAME_DIR holding `cps1.cpp` and `cps1_v.cpp` of MAME's `src/mame/capcom/`.
+  Once a month a GitHub Action regenerates it from MAME's latest release
+  and opens an issue when sets or chips changed (`.github/workflows/mame-cps1.yml`,
+  `tools/cps1_mame_diff.py`).
 - **Zips**: read by `core/zip.c` (our own inflate); how a game is found
   and loaded: [Loading a game](#loading-a-game).
 - **CPUs**: the shared 68000 and Z80 (`cpu/m68k`, `cpu/z80`), their own
