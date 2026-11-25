@@ -1,5 +1,5 @@
 /* cps1recomp: the CPS-1 68000 recompiler (build-time tool).
- *   cps1recomp GAME.zip -o OUT.c [--misses TRACE]...
+ *   cps1recomp GAME.zip -o OUT.c [--misses TRACE]... [--no-rom]
  *       TRACE: cps1_headless --misses output or a program's NAME.misses
  *       ("MISS $PC" lines: entries). A clone's zip needs its parent's beside it.
  *
@@ -8,7 +8,9 @@
  * trace's addresses. The analysis and the blocks: cpu/m68k/m68k_recomp.c.
  * Nothing runs after each instruction (the Z80 runs per line, recomp_rt.h);
  * the block returns where cps1_frame's loop would do something else
- * (CPS1_STOP). The zip is not embedded: the program opens it at start. */
+ * (CPS1_STOP). The game is built in as the loader leaves it (its regions,
+ * decrypted; the Q-Sound Z80's opcodes and the chip's tables), so the
+ * program needs no zip; --no-rom: not, the program opens the zip at start. */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -17,12 +19,23 @@
 #include "cps1.h"
 #include "m68k_recomp.h"
 
+/* "static const uint8_t NAME[k][n] = {...}": a part of the game, built in (nothing when data is NULL). */
+static void bytes(Buf *o, const char *name, int k, const uint8_t *data, uint32_t n) {
+    if (!data) return;
+    if (k < 0) bprintf(o, "static const uint8_t %s[%u] = {", name, n);
+    else bprintf(o, "static const uint8_t %s%d[%u] = {", name, k, n);
+    for (uint32_t i = 0; i < n; i++) bprintf(o, i % 16 ? "0x%02X," : "\n    0x%02X,", data[i]);
+    bprintf(o, "\n};\n\n");
+}
+
 int main(int argc, char **argv) {
-    if (argc < 2) return fprintf(stderr, "usage: cps1recomp GAME.zip -o OUT.c [--misses TRACE]...\n"), 2;
+    if (argc < 2) return fprintf(stderr, "usage: cps1recomp GAME.zip -o OUT.c [--misses TRACE]... [--no-rom]\n"), 2;
     const char *zip = argv[1], *out = NULL;
+    int embed = 1;
     for (int i = 2; i < argc; i++)
         if (!strcmp(argv[i], "-o") && i + 1 < argc) out = argv[++i];
         else if (!strcmp(argv[i], "--misses") && i + 1 < argc) i++;  /* read below, once the code is in */
+        else if (!strcmp(argv[i], "--no-rom")) embed = 0;
         else return fprintf(stderr, "cps1recomp: unknown option %s\n", argv[i]), 2;
     if (!out) return fprintf(stderr, "cps1recomp: -o OUT.c is needed\n"), 2;
     size_t size;
@@ -43,7 +56,7 @@ int main(int argc, char **argv) {
     }
     long misses = 0;
     for (int i = 2; i < argc; i++) {
-        if (strcmp(argv[i], "--misses")) continue;
+        if (strcmp(argv[i], "--misses")) continue;  /* -o and --no-rom checked above */
         FILE *m = fopen(argv[++i], "r");
         if (!m) return perror(argv[i]), 2;
         char line[128];
@@ -61,8 +74,26 @@ int main(int argc, char **argv) {
             rom.game->title, r.nblocks, r.ninstr);
     bprintf(&o, "#include \"m68k_ops.h\"\n#include \"recomp_rt.h\"\n\n");
     if (m68k_recomp_emit(&r, &o)) return 1;
-    bprintf(&o, "static const Cps1RecompProgram program = {\n    .rom_hash = 0x%08Xu,\n    .game_id = \"%s\",\n    .lookup = lookup,\n};\n",
+    if (embed) {
+        for (int k = 0; k < CPS1_REGIONS; k++) bytes(&o, "region", k, rom.region[k], rom.size[k]);
+        bytes(&o, "z80_op", -1, rom.z80_op, 0x8000), bytes(&o, "z80_raw", -1, rom.z80_raw, 0x8000);
+        if (rom.game->group == CPS1_QSOUND) {
+            bprintf(&o, "static const uint16_t dsp[4096] = {");
+            for (int i = 0; i < 4096; i++) bprintf(&o, i % 16 ? "0x%04X," : "\n    0x%04X,", rom.dsp[i]);
+            bprintf(&o, "\n};\n\n");
+        }
+    }
+    bprintf(&o, "static const Cps1RecompProgram program = {\n    .rom_hash = 0x%08Xu,\n    .game_id = \"%s\",\n    .lookup = lookup,\n",
             m68k_recomp_hash(code, end), id);  /* ids are [a-z0-9]: no escaping */
+    if (embed) {
+        bprintf(&o, "    .region = {");
+        for (int k = 0; k < CPS1_REGIONS; k++) bprintf(&o, rom.region[k] ? "region%d, " : "NULL, ", k);
+        bprintf(&o, "},\n    .size = {");
+        for (int k = 0; k < CPS1_REGIONS; k++) bprintf(&o, "%u, ", rom.region[k] ? rom.size[k] : 0);
+        bprintf(&o, "},\n    .z80_op = %s,\n    .z80_raw = %s,\n    .dsp = %s,\n", rom.z80_op ? "z80_op" : "NULL",
+                rom.z80_raw ? "z80_raw" : "NULL", rom.game->group == CPS1_QSOUND ? "dsp" : "NULL");
+    }
+    bprintf(&o, "};\n");
     bprintf(&o, "const Cps1RecompProgram *const cps1_recomp_program = &program;\n");
     buf_write_file(out, &o);
     printf("cps1recomp: %s, %ld blocks, %ld instructions (%ld trace entries) -> %s\n", id, r.nblocks, r.ninstr, misses, out);

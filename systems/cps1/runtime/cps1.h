@@ -154,7 +154,15 @@ typedef struct {
     uint32_t rom_hash;
     const char *game_id;
     Cps1RecompFn (*lookup)(uint32_t at);  /* the block holding the instruction at `at`; NULL: none */
+    /* The game as the loader left it (Cps1Rom), built in; region[CPS1_R_MAIN]
+     * NULL: not, the program opens the zip. */
+    const uint8_t *region[CPS1_REGIONS];
+    uint32_t size[CPS1_REGIONS];
+    const uint8_t *z80_op, *z80_raw;  /* Q-Sound (Cps1Rom), or NULL */
+    const uint16_t *dsp;              /* Q-Sound's chip tables, or NULL */
 } Cps1RecompProgram;
+/* The game built into p, copied into r. 0, or -1 with a message. */
+int cps1_open_embedded(const Cps1RecompProgram *p, Cps1Rom *r, char *err, size_t errlen);
 /* Defined by the generated code; NULL in programs without it (recomp_none.c). */
 extern const Cps1RecompProgram *const cps1_recomp_program;
 uint32_t cps1_code_hash(const Cps1Rom *r);  /* FNV-1a of the main-CPU region */

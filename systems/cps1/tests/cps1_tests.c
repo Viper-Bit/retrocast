@@ -180,7 +180,7 @@ static void test_vblank(void) {
 static int block_calls;
 static void test_block(M68k *c) { block_calls++, m68k_step(c); }
 static Cps1RecompFn test_lookup(uint32_t at) { (void)at; return test_block; }
-static Cps1RecompProgram test_program = {0, "prog", test_lookup};
+static Cps1RecompProgram test_program = {.game_id = "prog", .lookup = test_lookup};
 
 static void test_recomp_gate(void) {  /* the program runs only on the code it was made from */
     boot_program();
@@ -196,6 +196,21 @@ static void test_recomp_gate(void) {  /* the program runs only on the code it wa
     block_calls = 0;
     for (int i = 0; i < 3; i++) cps1_frame(&m);
     assert(block_calls == 0 && ram16(0xFF0000) == 3);
+}
+
+static void test_recomp_embedded(void) {  /* a program with the game built in: the same Cps1Rom as the zip gives */
+    static const uint8_t code[8] = {1, 2, 3, 4, 5, 6, 7, 8}, gfx[4] = {9, 10, 11, 12}, op[0x8000] = {0x3E};
+    static const uint16_t dsp[4096] = {0x1234};
+    Cps1RecompProgram p = {.game_id = "ffight", .region = {code, gfx}, .size = {8, 4}, .z80_op = op, .dsp = dsp};
+    Cps1Rom r;
+    char err[128];
+    assert(cps1_open_embedded(&p, &r, err, sizeof err) == 0);
+    assert(!strcmp(r.game->id, "ffight") && r.size[CPS1_R_MAIN] == 8 && r.size[CPS1_R_GFX] == 4);
+    assert(!memcmp(r.region[CPS1_R_MAIN], code, 8) && !memcmp(r.region[CPS1_R_GFX], gfx, 4) && r.region[CPS1_R_MAIN] != code);
+    assert(r.z80_op && r.z80_op[0] == 0x3E && !r.z80_raw && r.dsp[0] == 0x1234);
+    cps1_unload(&r);
+    p.game_id = "nosuchgame";
+    assert(cps1_open_embedded(&p, &r, err, sizeof err) == -1 && strstr(err, "nosuchgame"));
 }
 
 static void test_recomp_state(void) {  /* a state from the interpreter, loaded with recompiled code: still on */
@@ -1287,6 +1302,7 @@ int main(void) {
     test_clock_12mhz();
     test_recomp_gate();
     test_recomp_state();
+    test_recomp_embedded();
     test_in2_port();
     test_dip_defaults();
     test_dial();
