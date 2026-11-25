@@ -11,6 +11,7 @@ import re
 import subprocess
 import tempfile
 import array
+import concurrent.futures
 import hashlib
 import math
 import unittest
@@ -85,11 +86,11 @@ class TestHeadless(unittest.TestCase):
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             self.assertEqual(open(a, "rb").read(), open(b, "rb").read())
 
-    @unittest.skipUnless(all(os.path.exists(os.path.join(SET, z)) for z in ("wof.zip", "qsound.zip")), "no wof.zip and qsound.zip in " + SET)
+    @unittest.skipUnless(all(os.path.exists(os.path.join(SET, z)) for z in ("wofr1.zip", "qsound.zip")), "no wofr1.zip and qsound.zip in " + SET)
     def test_wof_sound(self):  # Q-Sound: 600 frames of --play are stereo, not silent, and the same samples as when checked
         with tempfile.TemporaryDirectory() as d:  # against MAME's qsoundhle (docs/verification-log.md)
             out = os.path.join(d, "out.wav")
-            r = subprocess.run([RUNNER, os.path.join(SET, "wof.zip"), "--frames", "600", "--play", "--wav", out],
+            r = subprocess.run([RUNNER, os.path.join(SET, "wofr1.zip"), "--frames", "600", "--play", "--wav", out],
                                capture_output=True, text=True, timeout=300)
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
             with wave.open(out) as w:
@@ -113,10 +114,12 @@ class TestHeadless(unittest.TestCase):
 @unittest.skipUnless(os.path.isdir(SET), "no CPS-1 set in " + SET)
 class TestBoot(unittest.TestCase):
     def test_games_show_a_picture(self):  # each zip in the set that is a whole game of the table, 3,000 frames of --play
-        for z in sorted(f for f in os.listdir(SET) if f.endswith(".zip")):
-            path = os.path.join(SET, z)
+        zips = sorted(f for f in os.listdir(SET) if f.endswith(".zip"))
+        run = lambda z: subprocess.run([RUNNER, os.path.join(SET, z), "--frames", "3000", "--play"], capture_output=True, text=True, timeout=300)
+        with concurrent.futures.ThreadPoolExecutor(os.cpu_count() or 4) as pool:  # one process a core: the games share nothing
+            runs = list(pool.map(run, zips))
+        for z, r in zip(zips, runs):
             with self.subTest(zip=z):
-                r = subprocess.run([RUNNER, path, "--frames", "3000", "--play"], capture_output=True, text=True, timeout=300)
                 if re.search(r"not a CPS-1 game|is missing|lacks the file|needs qsound.zip", r.stderr):
                     continue  # not one of the table's sets, or not whole: tools/cps1_audit.py lists it
                 self.assertEqual(r.returncode, 0, r.stdout + r.stderr)

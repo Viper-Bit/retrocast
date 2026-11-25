@@ -122,6 +122,18 @@ def main(argv):
                         out.writestr(n, z.read(member))
     if to:
         result = audit(to)
+        for gid, (_, _, status, notes) in result.items():
+            if status != "whole" or not notes:  # a set whole only inside another set's zip (nemoja in nemoj.zip): its own zip
+                continue
+            files = next(f for g, _, _, f, _ in games if g == gid)
+            src = index([to])
+            with zipfile.ZipFile(os.path.join(to, gid + ".zip"), "w", zipfile.ZIP_DEFLATED) as out:
+                for c, n, fp in files:
+                    if (whole or not fp) and c in src:
+                        with zipfile.ZipFile(src[c][0]) as z:
+                            out.writestr(n, z.read(src[c][1]))
+            print("  %-38s written from %s" % (gid + ".zip", notes[0][3:]))
+        result = audit(to)
         for status in ("whole", "lacking", "absent"):
             sets = [g for g, v in result.items() if v[2] == status]
             print("%s in %s: %d%s" % (status, to, len(sets), "" if status == "whole" else ": " + " ".join(sets)))
