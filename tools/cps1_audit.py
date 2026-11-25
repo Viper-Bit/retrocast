@@ -18,9 +18,9 @@ GAMES_C = os.path.join(ROOT, "systems", "cps1", "runtime", "games.c")
 MD = os.path.join(ROOT, "systems", "cps1", "docs", "compatibility.md")
 
 
-def table():
+def table(path=GAMES_C):
     """[(id, title, parent, [(crc, name, from_parent)], qsound)] in games.c's order."""
-    src = open(GAMES_C, encoding="utf-8").read()
+    src = open(path, encoding="utf-8").read()
     out = []
     for m in re.finditer(r'^    \{"(\w+)", "((?:[^"\\]|\\.)*)",(.*?)^    \}, ([^\n]*)', src, re.M | re.S):
         files = [(int(c, 16), n, fp == "1") for c, fp, n in
