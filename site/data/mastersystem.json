@@ -1,0 +1,4742 @@
+{
+"system": "mastersystem",
+"made": "2026-11-26",
+"games": [
+{
+"title": "11 Hap Gam-Boy",
+"id": "11 Hap Gam-Boy (Korea) (Unl)",
+"status": "partial",
+"versions": [
+"11 Hap Gam-Boy (Korea) (Unl)"
+],
+"image": null
+},
+{
+"title": "128 Hap",
+"id": "128 Hap (Korea) (Unl)",
+"status": "partial",
+"versions": [
+"128 Hap (Korea) (Unl)"
+],
+"image": null
+},
+{
+"title": "2 Hap in 1 - Moai-ui Bomul + David II",
+"id": "2 Hap in 1 - Moai-ui Bomul + David II (Korea) (Unl)",
+"status": "partial",
+"versions": [
+"2 Hap in 1 - Moai-ui Bomul + David II (Korea) (Unl)"
+],
+"image": null
+},
+{
+"title": "20 em 1",
+"id": "20 em 1 (Brazil)",
+"status": "ok",
+"versions": [
+"20 em 1 (Brazil)"
+],
+"image": "20-em-1-brazil-413dc7"
+},
+{
+"title": "3 in 1 - The Best Game Collection",
+"id": "3 in 1 - The Best Game Collection (A) (Korea) (En) (Unl)",
+"status": "ok",
+"versions": [
+"3 in 1 - The Best Game Collection (A) (Korea) (En) (Unl)",
+"3 in 1 - The Best Game Collection (B) (Korea) (En) (Unl)",
+"3 in 1 - The Best Game Collection (C) (Korea) (En) (Unl)",
+"3 in 1 - The Best Game Collection (D) (Korea) (En) (Unl)",
+"3 in 1 - The Best Game Collection (E) (Korea) (En) (Unl)",
+"3 in 1 - The Best Game Collection (F) (Korea) (En) (Unl)"
+],
+"image": "3-in-1-the-best-game-collection-a-korea--ecf0b7"
+},
+{
+"title": "3D Gunner",
+"id": "3D Gunner (USA) (Beta)",
+"status": "ok",
+"versions": [
+"3D Gunner (USA) (Beta)"
+],
+"image": "3d-gunner-usa-beta-9023d6"
+},
+{
+"title": "4 PAK All Action",
+"id": "4 PAK All Action (Australia) (Unl)",
+"status": "ok",
+"versions": [
+"4 PAK All Action (Australia) (Unl)"
+],
+"image": "4-pak-all-action-australia-unl-d83279"
+},
+{
+"title": "8 in 1 - The Best Game Collection",
+"id": "8 in 1 - The Best Game Collection (A) (Korea) (En) (Unl)",
+"status": "ok",
+"versions": [
+"8 in 1 - The Best Game Collection (A) (Korea) (En) (Unl)",
+"8 in 1 - The Best Game Collection (B) (Korea) (En) (Unl)",
+"8 in 1 - The Best Game Collection (C) (Korea) (En) (Unl)"
+],
+"image": "8-in-1-the-best-game-collection-a-korea--5f4784"
+},
+{
+"title": "94 Super World Cup Soccer",
+"id": "94 Super World Cup Soccer (Korea) (En) (Unl)",
+"status": "ok",
+"versions": [
+"94 Super World Cup Soccer (Korea) (En) (Unl)"
+],
+"image": "94-super-world-cup-soccer-korea-en-unl-5703f9"
+},
+{
+"title": "94-Nen Super Basketball",
+"id": "94-Nen Super Basketball (Taiwan) (En) (Unl)",
+"status": "ok",
+"versions": [
+"94-Nen Super Basketball (Taiwan) (En) (Unl)"
+],
+"image": "94-nen-super-basketball-taiwan-en-unl-1a1bdf"
+},
+{
+"title": "[BIOS] Alex Kidd in Miracle World",
+"id": "[BIOS] Alex Kidd in Miracle World (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"[BIOS] Alex Kidd in Miracle World (USA, Europe, Brazil) (En)",
+"[BIOS] Alex Kidd in Miracle World (World) (Sega Ages)",
+"[BIOS] Alex Kidd in Miracle World (Korea) (En) (Unl)"
+],
+"image": "bios-alex-kidd-in-miracle-world-usa-euro-e03464"
+},
+{
+"title": "[BIOS] Hang On",
+"id": "[BIOS] Hang On (USA, Europe) (v3.4)",
+"status": "ok",
+"versions": [
+"[BIOS] Hang On (USA, Europe) (v3.4)"
+],
+"image": "bios-hang-on-usa-europe-v3-4-e99fc5"
+},
+{
+"title": "[BIOS] Hang On & Safari Hunt",
+"id": "[BIOS] Hang On & Safari Hunt (USA, Europe, Brazil) (En) (v2.4)",
+"status": "partial",
+"versions": [
+"[BIOS] Hang On & Safari Hunt (USA, Europe, Brazil) (En) (v2.4)"
+],
+"image": null
+},
+{
+"title": "[BIOS] Missile Defense 3-D",
+"id": "[BIOS] Missile Defense 3-D (USA, Europe) (v4.4)",
+"status": "ok",
+"versions": [
+"[BIOS] Missile Defense 3-D (USA, Europe) (v4.4)"
+],
+"image": "bios-missile-defense-3-d-usa-europe-v4-4-40cc68"
+},
+{
+"title": "[BIOS] Sega Master System",
+"id": "[BIOS] Sega Master System (USA) (M404) (Proto)",
+"status": "ok",
+"versions": [
+"[BIOS] Sega Master System (USA) (M404) (Proto)",
+"[BIOS] Sega Master System (USA) (Proto)",
+"[BIOS] Sega Master System (USA) (Store Display Unit)",
+"[BIOS] Sega Master System (USA, Europe) (v1.3)",
+"[BIOS] Sega Master System (Europe) (v2.0)",
+"[BIOS] Sega Master System (Japan) (v2.1)"
+],
+"image": "bios-sega-master-system-usa-m404-proto-dfe369"
+},
+{
+"title": "[BIOS] Sonic The Hedgehog",
+"id": "[BIOS] Sonic The Hedgehog (Europe)",
+"status": "partial",
+"versions": [
+"[BIOS] Sonic The Hedgehog (Europe)"
+],
+"image": null
+},
+{
+"title": "[BIOS] TecToy Master System Evolution Menu",
+"id": "[BIOS] TecToy Master System Evolution Menu (Brazil)",
+"status": "ok",
+"versions": [
+"[BIOS] TecToy Master System Evolution Menu (Brazil)"
+],
+"image": "bios-tectoy-master-system-evolution-menu-dbbb1f"
+},
+{
+"title": "A-Team Music, The",
+"id": "A-Team Music, The (Europe) (Proto) (1992-11-09) (Sound Data)",
+"status": "partial",
+"versions": [
+"A-Team Music, The (Europe) (Proto) (1992-11-09) (Sound Data)"
+],
+"image": null
+},
+{
+"title": "Ace of Aces",
+"id": "Ace of Aces (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Ace of Aces (Europe, Brazil) (En)"
+],
+"image": "ace-of-aces-europe-brazil-en-7cbd0c"
+},
+{
+"title": "Acerte o Alvo",
+"id": "Acerte o Alvo (Brazil) (Mega Drive 4)",
+"status": "ok",
+"versions": [
+"Acerte o Alvo (Brazil) (Mega Drive 4)"
+],
+"image": "acerte-o-alvo-brazil-mega-drive-4-3df643"
+},
+{
+"title": "Action Boy",
+"id": "Action Boy (Taiwan) (En) (Unl)",
+"status": "ok",
+"versions": [
+"Action Boy (Taiwan) (En) (Unl)"
+],
+"image": "action-boy-taiwan-en-unl-f145da"
+},
+{
+"title": "Action Fighter",
+"id": "Action Fighter (USA, Europe, Brazil) (En) (Rev 1)",
+"status": "ok",
+"versions": [
+"Action Fighter (USA, Europe, Brazil) (En) (Rev 1)",
+"Action Fighter (Japan, Europe) (En)",
+"Action Fighter (Japan, Europe) (En) (Beta)",
+"Action Fighter (Taiwan) (En) (Unl)"
+],
+"image": "action-fighter-usa-europe-brazil-en-rev--b0f102"
+},
+{
+"title": "Addams Family, The",
+"id": "Addams Family, The (Europe)",
+"status": "partial",
+"versions": [
+"Addams Family, The (Europe)"
+],
+"image": null
+},
+{
+"title": "Aerial Assault",
+"id": "Aerial Assault (USA, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Aerial Assault (USA, Brazil) (En)",
+"Aerial Assault (Europe, Brazil) (En)",
+"Aerial Assault (Taiwan) (En) (Unl)"
+],
+"image": "aerial-assault-usa-brazil-en-aa9efb"
+},
+{
+"title": "After Burner",
+"id": "After Burner (World)",
+"status": "ok",
+"versions": [
+"After Burner (World)"
+],
+"image": "after-burner-world-452012"
+},
+{
+"title": "Agigongnyong Dooly",
+"id": "Agigongnyong Dooly (Korea) (Unl)",
+"status": "ok",
+"versions": [
+"Agigongnyong Dooly (Korea) (Unl)"
+],
+"image": "agigongnyong-dooly-korea-unl-f0db96"
+},
+{
+"title": "Air Rescue",
+"id": "Air Rescue (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Air Rescue (Europe, Brazil) (En)"
+],
+"image": "air-rescue-europe-brazil-en-6baf69"
+},
+{
+"title": "Aladdin",
+"id": "Aladdin (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Aladdin (Europe, Brazil) (En)"
+],
+"image": "aladdin-europe-brazil-en-3c8e3c"
+},
+{
+"title": "Aleste",
+"id": "Aleste (Japan) (En)",
+"status": "ok",
+"versions": [
+"Aleste (Japan) (En)"
+],
+"image": "aleste-japan-en-72f1b8"
+},
+{
+"title": "Alex Kidd - High-Tech World",
+"id": "Alex Kidd - High-Tech World (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Alex Kidd - High-Tech World (USA, Europe, Brazil) (En)",
+"Alex Kidd - High-Tech World (USA, Europe, Brazil) (En) (Beta)"
+],
+"image": "alex-kidd-high-tech-world-usa-europe-bra-6b6678"
+},
+{
+"title": "Alex Kidd - The Lost Stars",
+"id": "Alex Kidd - The Lost Stars (World)",
+"status": "ok",
+"versions": [
+"Alex Kidd - The Lost Stars (World)"
+],
+"image": "alex-kidd-the-lost-stars-world-594edc"
+},
+{
+"title": "Alex Kidd in Miracle World",
+"id": "Alex Kidd in Miracle World (USA, Europe)",
+"status": "ok",
+"versions": [
+"Alex Kidd in Miracle World (USA, Europe)",
+"Alex Kidd in Miracle World (USA, Europe, Brazil) (En) (Rev 1)",
+"Alex Kidd in Miracle World (World) (En) (Sega Ages)",
+"Alex Kidd in Miracle World (World) (Ja) (Sega Ages)"
+],
+"image": "alex-kidd-in-miracle-world-usa-europe-4177a7"
+},
+{
+"title": "Alex Kidd in Miracle World 2",
+"id": "Alex Kidd in Miracle World 2 (World) (Unl)",
+"status": "ok",
+"versions": [
+"Alex Kidd in Miracle World 2 (World) (Unl)"
+],
+"image": "alex-kidd-in-miracle-world-2-world-unl-ce6a81"
+},
+{
+"title": "Alex Kidd in Shinobi World",
+"id": "Alex Kidd in Shinobi World (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Alex Kidd in Shinobi World (USA, Europe, Brazil) (En)"
+],
+"image": "alex-kidd-in-shinobi-world-usa-europe-br-4b762b"
+},
+{
+"title": "Alex Kidd no Miracle World",
+"id": "Alex Kidd no Miracle World (Japan)",
+"status": "ok",
+"versions": [
+"Alex Kidd no Miracle World (Japan)"
+],
+"image": "alex-kidd-no-miracle-world-japan-81b735"
+},
+{
+"title": "Alex Kido",
+"id": "Alex Kido (Taiwan) (Ja) (Unl)",
+"status": "ok",
+"versions": [
+"Alex Kido (Taiwan) (Ja) (Unl)"
+],
+"image": "alex-kido-taiwan-ja-unl-4b0477"
+},
+{
+"title": "Alf",
+"id": "Alf (USA)",
+"status": "ok",
+"versions": [
+"Alf (USA)"
+],
+"image": "alf-usa-7667da"
+},
+{
+"title": "Alibaba and 40 Thieves",
+"id": "Alibaba and 40 Thieves (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Alibaba and 40 Thieves (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Alien 3",
+"id": "Alien 3 (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Alien 3 (Europe, Brazil) (En)"
+],
+"image": "alien-3-europe-brazil-en-8426ab"
+},
+{
+"title": "Alien Storm",
+"id": "Alien Storm (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Alien Storm (Europe, Brazil) (En)"
+],
+"image": "alien-storm-europe-brazil-en-56c165"
+},
+{
+"title": "Alien Syndrome",
+"id": "Alien Syndrome (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Alien Syndrome (USA, Europe, Brazil) (En)",
+"Alien Syndrome (USA, Europe, Brazil) (En) (Beta)",
+"Alien Syndrome (Japan) (En)"
+],
+"image": "alien-syndrome-usa-europe-brazil-en-aa17dc"
+},
+{
+"title": "Alocos",
+"id": "Alocos (Taiwan) (En) (Unl)",
+"status": "ok",
+"versions": [
+"Alocos (Taiwan) (En) (Unl)"
+],
+"image": "alocos-taiwan-en-unl-56bd95"
+},
+{
+"title": "Altered Beast",
+"id": "Altered Beast (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Altered Beast (USA, Europe, Brazil) (En)"
+],
+"image": "altered-beast-usa-europe-brazil-en-d34eae"
+},
+{
+"title": "American Baseball",
+"id": "American Baseball (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"American Baseball (Europe, Brazil) (En)"
+],
+"image": "american-baseball-europe-brazil-en-5ed9bb"
+},
+{
+"title": "American Pro Football",
+"id": "American Pro Football (Europe)",
+"status": "ok",
+"versions": [
+"American Pro Football (Europe)"
+],
+"image": "american-pro-football-europe-f40197"
+},
+{
+"title": "Andre Agassi Tennis",
+"id": "Andre Agassi Tennis (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Andre Agassi Tennis (Europe, Brazil) (En)"
+],
+"image": "andre-agassi-tennis-europe-brazil-en-fcc1ba"
+},
+{
+"title": "Anmitsu Hime",
+"id": "Anmitsu Hime (Japan)",
+"status": "ok",
+"versions": [
+"Anmitsu Hime (Japan)"
+],
+"image": "anmitsu-hime-japan-dda80d"
+},
+{
+"title": "Arcade Smash Hits",
+"id": "Arcade Smash Hits (Europe)",
+"status": "ok",
+"versions": [
+"Arcade Smash Hits (Europe)"
+],
+"image": "arcade-smash-hits-europe-5a5c7c"
+},
+{
+"title": "Argos no Juujiken",
+"id": "Argos no Juujiken (Japan) (En)",
+"status": "ok",
+"versions": [
+"Argos no Juujiken (Japan) (En)"
+],
+"image": "argos-no-juujiken-japan-en-dfef77"
+},
+{
+"title": "Ariel - The Little Mermaid",
+"id": "Ariel - The Little Mermaid (Brazil) (En)",
+"status": "ok",
+"versions": [
+"Ariel - The Little Mermaid (Brazil) (En)"
+],
+"image": "ariel-the-little-mermaid-brazil-en-694325"
+},
+{
+"title": "Ashura",
+"id": "Ashura (Japan) (En)",
+"status": "ok",
+"versions": [
+"Ashura (Japan) (En)"
+],
+"image": "ashura-japan-en-c8880f"
+},
+{
+"title": "Assault City",
+"id": "Assault City (Europe) (Joypad)",
+"status": "ok",
+"versions": [
+"Assault City (Europe) (Joypad)",
+"Assault City (Europe, Brazil) (En) (Light Phaser)"
+],
+"image": "assault-city-europe-joypad-24635d"
+},
+{
+"title": "Asterix",
+"id": "Asterix (Europe, Brazil) (En,Fr)",
+"status": "ok",
+"versions": [
+"Asterix (Europe, Brazil) (En,Fr)",
+"Asterix (Europe, Brazil) (En,Fr) (Rev 1)"
+],
+"image": "asterix-europe-brazil-en-fr-6ec3c3"
+},
+{
+"title": "Asterix and the Great Rescue",
+"id": "Asterix and the Great Rescue (Europe, Brazil) (En,Fr,De,Es,It)",
+"status": "ok",
+"versions": [
+"Asterix and the Great Rescue (Europe, Brazil) (En,Fr,De,Es,It)"
+],
+"image": "asterix-and-the-great-rescue-europe-braz-e851f5"
+},
+{
+"title": "Asterix and the Secret Mission",
+"id": "Asterix and the Secret Mission (Europe, Brazil) (En,Fr,De)",
+"status": "ok",
+"versions": [
+"Asterix and the Secret Mission (Europe, Brazil) (En,Fr,De)"
+],
+"image": "asterix-and-the-secret-mission-europe-br-2e897e"
+},
+{
+"title": "Astro Adventure",
+"id": "Astro Adventure (Taiwan) (En) (Unl)",
+"status": "ok",
+"versions": [
+"Astro Adventure (Taiwan) (En) (Unl)"
+],
+"image": "astro-adventure-taiwan-en-unl-77c140"
+},
+{
+"title": "Astro Flash",
+"id": "Astro Flash (Japan) (En)",
+"status": "ok",
+"versions": [
+"Astro Flash (Japan) (En)"
+],
+"image": "astro-flash-japan-en-f4d134"
+},
+{
+"title": "Astro Warrior",
+"id": "Astro Warrior (Japan, USA, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Astro Warrior (Japan, USA, Brazil) (En)"
+],
+"image": "astro-warrior-japan-usa-brazil-en-d24970"
+},
+{
+"title": "Astro Warrior & Pit Pot",
+"id": "Astro Warrior & Pit Pot (Brazil) (En) (Master System Evolution)",
+"status": "ok",
+"versions": [
+"Astro Warrior & Pit Pot (Brazil) (En) (Master System Evolution)",
+"Astro Warrior & Pit Pot (Europe)",
+"Astro Warrior & Pit Pot (Europe) (Sample)"
+],
+"image": "astro-warrior-pit-pot-brazil-en-master-s-bc4767"
+},
+{
+"title": "Aventuras da TV Colosso, As",
+"id": "Aventuras da TV Colosso, As (Brazil)",
+"status": "ok",
+"versions": [
+"Aventuras da TV Colosso, As (Brazil)"
+],
+"image": "aventuras-da-tv-colosso-as-brazil-4a87b0"
+},
+{
+"title": "Ayrton Senna's Super Monaco GP II",
+"id": "Ayrton Senna's Super Monaco GP II (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Ayrton Senna's Super Monaco GP II (Europe, Brazil) (En)"
+],
+"image": "ayrton-senna-s-super-monaco-gp-ii-europe-0556ec"
+},
+{
+"title": "Aztec Adventure",
+"id": "Aztec Adventure (World)",
+"status": "ok",
+"versions": [
+"Aztec Adventure (World)"
+],
+"image": "aztec-adventure-world-ca7344"
+},
+{
+"title": "Aztel Adventure",
+"id": "Aztel Adventure (Taiwan) (En) (Unl)",
+"status": "ok",
+"versions": [
+"Aztel Adventure (Taiwan) (En) (Unl)"
+],
+"image": "aztel-adventure-taiwan-en-unl-dd3a00"
+},
+{
+"title": "Back to the Future Part II",
+"id": "Back to the Future Part II (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Back to the Future Part II (Europe, Brazil) (En)"
+],
+"image": "back-to-the-future-part-ii-europe-brazil-77793c"
+},
+{
+"title": "Back to the Future Part III",
+"id": "Back to the Future Part III (Europe)",
+"status": "ok",
+"versions": [
+"Back to the Future Part III (Europe)"
+],
+"image": "back-to-the-future-part-iii-europe-e761ff"
+},
+{
+"title": "Baku Baku",
+"id": "Baku Baku (Brazil) (En)",
+"status": "ok",
+"versions": [
+"Baku Baku (Brazil) (En)"
+],
+"image": "baku-baku-brazil-en-f61ba1"
+},
+{
+"title": "Bank Panic",
+"id": "Bank Panic (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Bank Panic (Europe, Brazil) (En)"
+],
+"image": "bank-panic-europe-brazil-en-7c1b6a"
+},
+{
+"title": "Basketball Nightmare",
+"id": "Basketball Nightmare (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Basketball Nightmare (Europe, Brazil) (En)",
+"Basketball Nightmare (Europe, Brazil) (En) (Beta 1)",
+"Basketball Nightmare (Europe, Brazil) (En) (Beta 2)"
+],
+"image": "basketball-nightmare-europe-brazil-en-668135"
+},
+{
+"title": "Batman Returns",
+"id": "Batman Returns (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Batman Returns (Europe, Brazil) (En)"
+],
+"image": "batman-returns-europe-brazil-en-7ecd55"
+},
+{
+"title": "Battle Out Run",
+"id": "Battle Out Run (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Battle Out Run (Europe, Brazil) (En)"
+],
+"image": "battle-out-run-europe-brazil-en-9c3ed5"
+},
+{
+"title": "Battle Wings",
+"id": "Battle Wings (World) (Beta) (1988-09-07)",
+"status": "ok",
+"versions": [
+"Battle Wings (World) (Beta) (1988-09-07)"
+],
+"image": "battle-wings-world-beta-1988-09-07-699136"
+},
+{
+"title": "Battlemaniacs",
+"id": "Battlemaniacs (Brazil) (En)",
+"status": "ok",
+"versions": [
+"Battlemaniacs (Brazil) (En)"
+],
+"image": "battlemaniacs-brazil-en-704e26"
+},
+{
+"title": "Black Belt",
+"id": "Black Belt (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Black Belt (USA, Europe, Brazil) (En)",
+"Black Belt (Taiwan) (En) (Unl)"
+],
+"image": "black-belt-usa-europe-brazil-en-8cbb2e"
+},
+{
+"title": "Blade Eagle",
+"id": "Blade Eagle (World) (Beta 1)",
+"status": "ok",
+"versions": [
+"Blade Eagle (World) (Beta 1)",
+"Blade Eagle (World) (Beta 2)"
+],
+"image": "blade-eagle-world-beta-1-f7ff38"
+},
+{
+"title": "Blade Eagle 3-D",
+"id": "Blade Eagle 3-D (World)",
+"status": "ok",
+"versions": [
+"Blade Eagle 3-D (World)"
+],
+"image": "blade-eagle-3-d-world-bab980"
+},
+{
+"title": "Bloki",
+"id": "Bloki (World) (v1.00) (Unl)",
+"status": "ok",
+"versions": [
+"Bloki (World) (v1.00) (Unl)"
+],
+"image": "bloki-world-v1-00-unl-ca4afc"
+},
+{
+"title": "BMX Trial - Alex Kidd",
+"id": "BMX Trial - Alex Kidd (Japan) (En)",
+"status": "ok",
+"versions": [
+"BMX Trial - Alex Kidd (Japan) (En)"
+],
+"image": "bmx-trial-alex-kidd-japan-en-28b954"
+},
+{
+"title": "Bobble Bobble",
+"id": "Bobble Bobble (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Bobble Bobble (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Bolas e Cores",
+"id": "Bolas e Cores (Brazil) (Mega Drive 4)",
+"status": "ok",
+"versions": [
+"Bolas e Cores (Brazil) (Mega Drive 4)"
+],
+"image": "bolas-e-cores-brazil-mega-drive-4-185779"
+},
+{
+"title": "Bolhas",
+"id": "Bolhas (Brazil) (Mega Drive 4)",
+"status": "ok",
+"versions": [
+"Bolhas (Brazil) (Mega Drive 4)"
+],
+"image": "bolhas-brazil-mega-drive-4-8c491d"
+},
+{
+"title": "Bombeiros",
+"id": "Bombeiros (Brazil) (Mega Drive 4)",
+"status": "ok",
+"versions": [
+"Bombeiros (Brazil) (Mega Drive 4)"
+],
+"image": "bombeiros-brazil-mega-drive-4-900884"
+},
+{
+"title": "Bomber Raid",
+"id": "Bomber Raid (World)",
+"status": "ok",
+"versions": [
+"Bomber Raid (World)"
+],
+"image": "bomber-raid-world-6cc485"
+},
+{
+"title": "Bonanza Bros.",
+"id": "Bonanza Bros. (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Bonanza Bros. (Europe, Brazil) (En)"
+],
+"image": "bonanza-bros-europe-brazil-en-b765f0"
+},
+{
+"title": "Bonkers Wax Up!",
+"id": "Bonkers Wax Up! (Brazil) (En)",
+"status": "ok",
+"versions": [
+"Bonkers Wax Up! (Brazil) (En)"
+],
+"image": "bonkers-wax-up-brazil-en-669a51"
+},
+{
+"title": "Bram Stoker's Dracula",
+"id": "Bram Stoker's Dracula (Europe)",
+"status": "ok",
+"versions": [
+"Bram Stoker's Dracula (Europe)"
+],
+"image": "bram-stoker-s-dracula-europe-c5174a"
+},
+{
+"title": "Bubble Bobble",
+"id": "Bubble Bobble (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Bubble Bobble (Europe, Brazil) (En)",
+"Bubble Bobble (Taiwan) (En) (Unl)"
+],
+"image": "bubble-bobble-europe-brazil-en-e96c92"
+},
+{
+"title": "Buggy Run",
+"id": "Buggy Run (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Buggy Run (Europe, Brazil) (En)"
+],
+"image": "buggy-run-europe-brazil-en-82bd2a"
+},
+{
+"title": "C_So!",
+"id": "C_So! (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"C_So! (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "California Games",
+"id": "California Games (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"California Games (USA, Europe, Brazil) (En)"
+],
+"image": "california-games-usa-europe-brazil-en-b0338a"
+},
+{
+"title": "California Games II",
+"id": "California Games II (Europe)",
+"status": "ok",
+"versions": [
+"California Games II (Europe)"
+],
+"image": "california-games-ii-europe-570c3a"
+},
+{
+"title": "Captain Silver",
+"id": "Captain Silver (USA)",
+"status": "ok",
+"versions": [
+"Captain Silver (USA)",
+"Captain Silver (USA) (Beta)",
+"Captain Silver (Japan, Europe, Brazil) (En)"
+],
+"image": "captain-silver-usa-459973"
+},
+{
+"title": "Casino Games",
+"id": "Casino Games (USA, Europe)",
+"status": "ok",
+"versions": [
+"Casino Games (USA, Europe)"
+],
+"image": "casino-games-usa-europe-d94449"
+},
+{
+"title": "Castelo Ra-Tim-Bum",
+"id": "Castelo Ra-Tim-Bum (Brazil)",
+"status": "ok",
+"versions": [
+"Castelo Ra-Tim-Bum (Brazil)"
+],
+"image": "castelo-ra-tim-bum-brazil-860841"
+},
+{
+"title": "Castle of Illusion Starring Mickey Mouse",
+"id": "Castle of Illusion Starring Mickey Mouse (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Castle of Illusion Starring Mickey Mouse (USA, Europe, Brazil) (En)",
+"Castle of Illusion Starring Mickey Mouse (USA, Europe, Brazil) (En) (Demo)",
+"Castle of Illusion Starring Mickey Mouse (USA, Europe, Brazil) (En) (Rev 1)"
+],
+"image": "castle-of-illusion-starring-mickey-mouse-8c655b"
+},
+{
+"title": "Cava-Cava",
+"id": "Cava-Cava (Brazil) (Mega Drive 4)",
+"status": "ok",
+"versions": [
+"Cava-Cava (Brazil) (Mega Drive 4)"
+],
+"image": "cava-cava-brazil-mega-drive-4-bb7509"
+},
+{
+"title": "Champions of Europe",
+"id": "Champions of Europe (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Champions of Europe (Europe, Brazil) (En)"
+],
+"image": "champions-of-europe-europe-brazil-en-32e567"
+},
+{
+"title": "Championship Hockey",
+"id": "Championship Hockey (Europe)",
+"status": "ok",
+"versions": [
+"Championship Hockey (Europe)"
+],
+"image": "championship-hockey-europe-1eab80"
+},
+{
+"title": "Chapolim x Dracula - Um Duelo Assustador",
+"id": "Chapolim x Dracula - Um Duelo Assustador (Brazil)",
+"status": "ok",
+"versions": [
+"Chapolim x Dracula - Um Duelo Assustador (Brazil)"
+],
+"image": "chapolim-x-dracula-um-duelo-assustador-b-b8d3d5"
+},
+{
+"title": "Cheese Cat-astrophe Starring Speedy Gonzales",
+"id": "Cheese Cat-astrophe Starring Speedy Gonzales (Europe, Brazil) (En,Fr,De,Es)",
+"status": "ok",
+"versions": [
+"Cheese Cat-astrophe Starring Speedy Gonzales (Europe, Brazil) (En,Fr,De,Es)"
+],
+"image": "cheese-cat-astrophe-starring-speedy-gonz-567049"
+},
+{
+"title": "Choplifter",
+"id": "Choplifter (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Choplifter (USA, Europe, Brazil) (En)",
+"Choplifter (USA, Europe, Brazil) (En) (Beta)",
+"Choplifter (Japan) (En) (Proto)",
+"Choplifter (Taiwan) (En) (Unl)"
+],
+"image": "choplifter-usa-europe-brazil-en-9c2223"
+},
+{
+"title": "Chouon Senshi Borgman",
+"id": "Chouon Senshi Borgman (Japan)",
+"status": "ok",
+"versions": [
+"Chouon Senshi Borgman (Japan)",
+"Chouon Senshi Borgman (Japan) (Beta)"
+],
+"image": "chouon-senshi-borgman-japan-e29c61"
+},
+{
+"title": "Chuck Rock",
+"id": "Chuck Rock (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Chuck Rock (Europe, Brazil) (En)"
+],
+"image": "chuck-rock-europe-brazil-en-af01cf"
+},
+{
+"title": "Chuck Rock II - Son of Chuck",
+"id": "Chuck Rock II - Son of Chuck (Brazil) (En)",
+"status": "ok",
+"versions": [
+"Chuck Rock II - Son of Chuck (Brazil) (En)",
+"Chuck Rock II - Son of Chuck (Europe)"
+],
+"image": "chuck-rock-ii-son-of-chuck-brazil-en-ef13a2"
+},
+{
+"title": "Circuit, The",
+"id": "Circuit, The (Japan) (En)",
+"status": "ok",
+"versions": [
+"Circuit, The (Japan) (En)"
+],
+"image": "circuit-the-japan-en-ad329a"
+},
+{
+"title": "Cloud Master",
+"id": "Cloud Master (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Cloud Master (USA, Europe, Brazil) (En)"
+],
+"image": "cloud-master-usa-europe-brazil-en-e9462e"
+},
+{
+"title": "Color & Switch Test",
+"id": "Color & Switch Test (Brazil) (En) (Rev A)",
+"status": "ok",
+"versions": [
+"Color & Switch Test (Brazil) (En) (Rev A)",
+"Color & Switch Test (Japan) (En) (Proto)"
+],
+"image": "color-switch-test-brazil-en-rev-a-59275e"
+},
+{
+"title": "Columns",
+"id": "Columns (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Columns (USA, Europe, Brazil) (En)",
+"Columns (USA, Europe, Brazil) (En) (Beta)"
+],
+"image": "columns-usa-europe-brazil-en-dbe034"
+},
+{
+"title": "Comical Machine Gun Joe",
+"id": "Comical Machine Gun Joe (Japan) (En)",
+"status": "ok",
+"versions": [
+"Comical Machine Gun Joe (Japan) (En)",
+"Comical Machine Gun Joe (Korea) (En) (Unl)",
+"Comical Machine Gun Joe (Taiwan) (En) (Unl)"
+],
+"image": "comical-machine-gun-joe-japan-en-bcd227"
+},
+{
+"title": "Con-Dori",
+"id": "Con-Dori (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Con-Dori (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Cool Spot",
+"id": "Cool Spot (Europe)",
+"status": "ok",
+"versions": [
+"Cool Spot (Europe)"
+],
+"image": "cool-spot-europe-65c23e"
+},
+{
+"title": "Cosmic Spacehead",
+"id": "Cosmic Spacehead (Europe) (En,Fr,De,Es)",
+"status": "ok",
+"versions": [
+"Cosmic Spacehead (Europe) (En,Fr,De,Es)"
+],
+"image": "cosmic-spacehead-europe-en-fr-de-es-5f69aa"
+},
+{
+"title": "Creature Capture",
+"id": "Creature Capture (Brazil) (Mega Drive 4)",
+"status": "ok",
+"versions": [
+"Creature Capture (Brazil) (Mega Drive 4)"
+],
+"image": "creature-capture-brazil-mega-drive-4-76c183"
+},
+{
+"title": "Cyber Shinobi, The",
+"id": "Cyber Shinobi, The (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Cyber Shinobi, The (Europe, Brazil) (En)",
+"Cyber Shinobi, The (Europe, Brazil) (En) (Beta)",
+"Cyber Shinobi, The (Taiwan) (En) (Unl)"
+],
+"image": "cyber-shinobi-the-europe-brazil-en-9c65ff"
+},
+{
+"title": "Cyborg Hunter",
+"id": "Cyborg Hunter (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Cyborg Hunter (USA, Europe, Brazil) (En)",
+"Cyborg Hunter (USA, Europe, Brazil) (En) (Beta) (1988-09-12)"
+],
+"image": "cyborg-hunter-usa-europe-brazil-en-9a4e22"
+},
+{
+"title": "Cyborg Z",
+"id": "Cyborg Z (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Cyborg Z (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Daffy Duck in Hollywood",
+"id": "Daffy Duck in Hollywood (Europe, Brazil) (En,Fr,De,Es,It)",
+"status": "ok",
+"versions": [
+"Daffy Duck in Hollywood (Europe, Brazil) (En,Fr,De,Es,It)"
+],
+"image": "daffy-duck-in-hollywood-europe-brazil-en-22613d"
+},
+{
+"title": "Dallyeora Pigu-Wang",
+"id": "Dallyeora Pigu-Wang (Korea) (Unl)",
+"status": "partial",
+"versions": [
+"Dallyeora Pigu-Wang (Korea) (Unl)"
+],
+"image": null
+},
+{
+"title": "Danan - The Jungle Fighter",
+"id": "Danan - The Jungle Fighter (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Danan - The Jungle Fighter (Europe, Brazil) (En)"
+],
+"image": "danan-the-jungle-fighter-europe-brazil-e-8719c6"
+},
+{
+"title": "Dead Angle",
+"id": "Dead Angle (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Dead Angle (USA, Europe, Brazil) (En)",
+"Dead Angle (USA, Europe, Brazil) (En) (Beta)"
+],
+"image": "dead-angle-usa-europe-brazil-en-fc1d2e"
+},
+{
+"title": "Deep Duck Trouble Starring Donald Duck",
+"id": "Deep Duck Trouble Starring Donald Duck (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Deep Duck Trouble Starring Donald Duck (Europe, Brazil) (En)"
+],
+"image": "deep-duck-trouble-starring-donald-duck-e-e88c2c"
+},
+{
+"title": "Desert Speedtrap Starring Road Runner and Wile E. Coyote",
+"id": "Desert Speedtrap Starring Road Runner and Wile E. Coyote (Europe, Brazil) (En,Fr,De,Es,It)",
+"status": "ok",
+"versions": [
+"Desert Speedtrap Starring Road Runner and Wile E. Coyote (Europe, Brazil) (En,Fr,De,Es,It)"
+],
+"image": "desert-speedtrap-starring-road-runner-an-763327"
+},
+{
+"title": "Desert Strike",
+"id": "Desert Strike (Europe) (En,Fr,De,Es)",
+"status": "ok",
+"versions": [
+"Desert Strike (Europe) (En,Fr,De,Es)"
+],
+"image": "desert-strike-europe-en-fr-de-es-9c5427"
+},
+{
+"title": "Dick Tracy",
+"id": "Dick Tracy (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Dick Tracy (USA, Europe, Brazil) (En)"
+],
+"image": "dick-tracy-usa-europe-brazil-en-a9b320"
+},
+{
+"title": "Dinobasher Starring Bignose the Caveman",
+"id": "Dinobasher Starring Bignose the Caveman (Europe) (Proto)",
+"status": "ok",
+"versions": [
+"Dinobasher Starring Bignose the Caveman (Europe) (Proto)"
+],
+"image": "dinobasher-starring-bignose-the-caveman--139fee"
+},
+{
+"title": "Dinosaur Dooley, The",
+"id": "Dinosaur Dooley, The (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Dinosaur Dooley, The (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Doki Doki Penguin Land - Uchuu Daibouken",
+"id": "Doki Doki Penguin Land - Uchuu Daibouken (Japan) (En)",
+"status": "ok",
+"versions": [
+"Doki Doki Penguin Land - Uchuu Daibouken (Japan) (En)",
+"Doki Doki Penguin Land - Uchuu Daibouken (Japan) (En) (Beta)"
+],
+"image": "doki-doki-penguin-land-uchuu-daibouken-j-ac2c4d"
+},
+{
+"title": "Domino",
+"id": "Domino (Brazil) (Mega Drive 4)",
+"status": "ok",
+"versions": [
+"Domino (Brazil) (Mega Drive 4)"
+],
+"image": "domino-brazil-mega-drive-4-85e140"
+},
+{
+"title": "Double Dragon",
+"id": "Double Dragon (World)",
+"status": "ok",
+"versions": [
+"Double Dragon (World)",
+"Double Dragon (Taiwan) (En) (Unl)"
+],
+"image": "double-dragon-world-355ab5"
+},
+{
+"title": "Double Hawk",
+"id": "Double Hawk (Europe)",
+"status": "ok",
+"versions": [
+"Double Hawk (Europe)",
+"Double Hawk (Europe) (Beta)"
+],
+"image": "double-hawk-europe-da9b61"
+},
+{
+"title": "Double Target - Cynthia no Nemuri",
+"id": "Double Target - Cynthia no Nemuri (Japan) (En)",
+"status": "ok",
+"versions": [
+"Double Target - Cynthia no Nemuri (Japan) (En)"
+],
+"image": "double-target-cynthia-no-nemuri-japan-en-d0534d"
+},
+{
+"title": "Doze Trabalhos de Jongo, Os",
+"id": "Doze Trabalhos de Jongo, Os (Brazil) (Mega Drive 4)",
+"status": "ok",
+"versions": [
+"Doze Trabalhos de Jongo, Os (Brazil) (Mega Drive 4)"
+],
+"image": "doze-trabalhos-de-jongo-os-brazil-mega-d-679e36"
+},
+{
+"title": "Dr. HELLO",
+"id": "Dr. HELLO (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Dr. HELLO (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Dr. Robotnik's Mean Bean Machine",
+"id": "Dr. Robotnik's Mean Bean Machine (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Dr. Robotnik's Mean Bean Machine (Europe, Brazil) (En)"
+],
+"image": "dr-robotnik-s-mean-bean-machine-europe-b-ef0586"
+},
+{
+"title": "Dragon - The Bruce Lee Story",
+"id": "Dragon - The Bruce Lee Story (Europe)",
+"status": "ok",
+"versions": [
+"Dragon - The Bruce Lee Story (Europe)"
+],
+"image": "dragon-the-bruce-lee-story-europe-e2a6c7"
+},
+{
+"title": "Dragon Crystal",
+"id": "Dragon Crystal (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Dragon Crystal (Europe, Brazil) (En)"
+],
+"image": "dragon-crystal-europe-brazil-en-67abcd"
+},
+{
+"title": "Dynamite Duke",
+"id": "Dynamite Duke (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Dynamite Duke (Europe, Brazil) (En)"
+],
+"image": "dynamite-duke-europe-brazil-en-e9db96"
+},
+{
+"title": "Dynamite Dux",
+"id": "Dynamite Dux (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Dynamite Dux (Europe, Brazil) (En)",
+"Dynamite Dux (Europe, Brazil) (En) (Beta)"
+],
+"image": "dynamite-dux-europe-brazil-en-c6c052"
+},
+{
+"title": "Dynamite Headdy",
+"id": "Dynamite Headdy (Brazil) (En)",
+"status": "ok",
+"versions": [
+"Dynamite Headdy (Brazil) (En)"
+],
+"image": "dynamite-headdy-brazil-en-e5d96a"
+},
+{
+"title": "E-SWAT",
+"id": "E-SWAT (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"E-SWAT (USA, Europe, Brazil) (En)",
+"E-SWAT (USA, Europe, Brazil) (En) (Beta 1)",
+"E-SWAT (USA, Europe, Brazil) (En) (Beta 2)",
+"E-SWAT (USA, Europe, Brazil) (En) (Beta 3)",
+"E-SWAT (USA, Europe, Brazil) (En) (Rev A)"
+],
+"image": "e-swat-usa-europe-brazil-en-a8ef47"
+},
+{
+"title": "E.I. - Exa Innova",
+"id": "E.I. - Exa Innova (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"E.I. - Exa Innova (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Eagles 5",
+"id": "Eagles 5 (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Eagles 5 (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Earthworm Jim",
+"id": "Earthworm Jim (Brazil) (En)",
+"status": "ok",
+"versions": [
+"Earthworm Jim (Brazil) (En)"
+],
+"image": "earthworm-jim-brazil-en-e9a1b2"
+},
+{
+"title": "Ecco - The Tides of Time",
+"id": "Ecco - The Tides of Time (Brazil)",
+"status": "ok",
+"versions": [
+"Ecco - The Tides of Time (Brazil)"
+],
+"image": "ecco-the-tides-of-time-brazil-abdb0e"
+},
+{
+"title": "Ecco the Dolphin",
+"id": "Ecco the Dolphin (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Ecco the Dolphin (Europe, Brazil) (En)"
+],
+"image": "ecco-the-dolphin-europe-brazil-en-85f405"
+},
+{
+"title": "Enduro Racer",
+"id": "Enduro Racer (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Enduro Racer (USA, Europe, Brazil) (En)",
+"Enduro Racer (Japan) (En)"
+],
+"image": "enduro-racer-usa-europe-brazil-en-daf41f"
+},
+{
+"title": "Excellent Dizzy Collection, The",
+"id": "Excellent Dizzy Collection, The (Europe) (En,Fr,De,Es,It) (Proto)",
+"status": "partial",
+"versions": [
+"Excellent Dizzy Collection, The (Europe) (En,Fr,De,Es,It) (Proto)"
+],
+"image": null
+},
+{
+"title": "F-1 Spirit - The Way to Formula-1",
+"id": "F-1 Spirit - The Way to Formula-1 (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"F-1 Spirit - The Way to Formula-1 (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "F-16 Fighter",
+"id": "F-16 Fighter (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"F-16 Fighter (USA, Europe, Brazil) (En)"
+],
+"image": "f-16-fighter-usa-europe-brazil-en-bb2a4f"
+},
+{
+"title": "F-16 Fighting Falcon",
+"id": "F-16 Fighting Falcon (USA)",
+"status": "ok",
+"versions": [
+"F-16 Fighting Falcon (USA)",
+"F-16 Fighting Falcon (Japan) (En)",
+"F-16 Fighting Falcon (Taiwan) (En) (Unl)"
+],
+"image": "f-16-fighting-falcon-usa-cb5e19"
+},
+{
+"title": "F1",
+"id": "F1 (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"F1 (Europe, Brazil) (En)"
+],
+"image": "f1-europe-brazil-en-033019"
+},
+{
+"title": "FA Tetris",
+"id": "FA Tetris (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"FA Tetris (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Fabrica de Chocolate",
+"id": "Fabrica de Chocolate (Brazil) (Mega Drive 4)",
+"status": "ok",
+"versions": [
+"Fabrica de Chocolate (Brazil) (Mega Drive 4)"
+],
+"image": "fabrica-de-chocolate-brazil-mega-drive-4-ca1ad5"
+},
+{
+"title": "Family Games",
+"id": "Family Games (Japan) (En)",
+"status": "ok",
+"versions": [
+"Family Games (Japan) (En)"
+],
+"image": "family-games-japan-en-80d482"
+},
+{
+"title": "Fantastic Dizzy",
+"id": "Fantastic Dizzy (Europe) (En,Fr,De,Es,It)",
+"status": "ok",
+"versions": [
+"Fantastic Dizzy (Europe) (En,Fr,De,Es,It)"
+],
+"image": "fantastic-dizzy-europe-en-fr-de-es-it-72d73b"
+},
+{
+"title": "Fantasy Zone",
+"id": "Fantasy Zone (World) (Beta)",
+"status": "ok",
+"versions": [
+"Fantasy Zone (World) (Beta)",
+"Fantasy Zone (World) (Rev 1)",
+"Fantasy Zone (Japan) (En)",
+"Fantasy Zone (Taiwan) (En) (Unl)"
+],
+"image": "fantasy-zone-world-beta-b57056"
+},
+{
+"title": "Fantasy Zone - The Maze",
+"id": "Fantasy Zone - The Maze (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Fantasy Zone - The Maze (USA, Europe, Brazil) (En)",
+"Fantasy Zone - The Maze (USA, Europe, Brazil) (En) (Beta)"
+],
+"image": "fantasy-zone-the-maze-usa-europe-brazil--554221"
+},
+{
+"title": "Fantasy Zone II",
+"id": "Fantasy Zone II (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Fantasy Zone II (USA, Europe, Brazil) (En)"
+],
+"image": "fantasy-zone-ii-usa-europe-brazil-en-6e01c0"
+},
+{
+"title": "Fantasy Zone II - Opa-Opa no Namida",
+"id": "Fantasy Zone II - Opa-Opa no Namida (Japan) (En)",
+"status": "ok",
+"versions": [
+"Fantasy Zone II - Opa-Opa no Namida (Japan) (En)"
+],
+"image": "fantasy-zone-ii-opa-opa-no-namida-japan--f1c476"
+},
+{
+"title": "Feiche Zhengba Zhan",
+"id": "Feiche Zhengba Zhan (Taiwan) (En) (Unl)",
+"status": "ok",
+"versions": [
+"Feiche Zhengba Zhan (Taiwan) (En) (Unl)"
+],
+"image": "feiche-zhengba-zhan-taiwan-en-unl-f401fd"
+},
+{
+"title": "Ferias Frustradas do Pica Pau",
+"id": "Ferias Frustradas do Pica Pau (Brazil)",
+"status": "ok",
+"versions": [
+"Ferias Frustradas do Pica Pau (Brazil)"
+],
+"image": "ferias-frustradas-do-pica-pau-brazil-0c6f57"
+},
+{
+"title": "FIFA International Soccer",
+"id": "FIFA International Soccer (Brazil) (En,Es,Pt)",
+"status": "ok",
+"versions": [
+"FIFA International Soccer (Brazil) (En,Es,Pt)"
+],
+"image": "fifa-international-soccer-brazil-en-es-p-5d57a5"
+},
+{
+"title": "Final Bubble Bobble",
+"id": "Final Bubble Bobble (Japan)",
+"status": "ok",
+"versions": [
+"Final Bubble Bobble (Japan)"
+],
+"image": "final-bubble-bobble-japan-941795"
+},
+{
+"title": "Fire & Forget II",
+"id": "Fire & Forget II (Europe)",
+"status": "ok",
+"versions": [
+"Fire & Forget II (Europe)"
+],
+"image": "fire-forget-ii-europe-69b943"
+},
+{
+"title": "Fire & Ice",
+"id": "Fire & Ice (Brazil) (En)",
+"status": "ok",
+"versions": [
+"Fire & Ice (Brazil) (En)"
+],
+"image": "fire-ice-brazil-en-4e831e"
+},
+{
+"title": "Flash, The",
+"id": "Flash, The (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Flash, The (Europe, Brazil) (En)"
+],
+"image": "flash-the-europe-brazil-en-6f3cd2"
+},
+{
+"title": "Flashpoint",
+"id": "Flashpoint (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Flashpoint (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Flintstones, The",
+"id": "Flintstones, The (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Flintstones, The (Europe, Brazil) (En)"
+],
+"image": "flintstones-the-europe-brazil-en-e77171"
+},
+{
+"title": "Forgotten Worlds",
+"id": "Forgotten Worlds (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Forgotten Worlds (Europe, Brazil) (En)",
+"Forgotten Worlds (Taiwan) (En) (Unl)"
+],
+"image": "forgotten-worlds-europe-brazil-en-8a85c2"
+},
+{
+"title": "Fushigi no Oshiro Pit Pot",
+"id": "Fushigi no Oshiro Pit Pot (Japan) (En)",
+"status": "ok",
+"versions": [
+"Fushigi no Oshiro Pit Pot (Japan) (En)",
+"Fushigi no Oshiro Pit Pot (Japan) (En) (Beta)"
+],
+"image": "fushigi-no-oshiro-pit-pot-japan-en-d48bac"
+},
+{
+"title": "G-LOC - Air Battle",
+"id": "G-LOC - Air Battle (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"G-LOC - Air Battle (Europe, Brazil) (En)"
+],
+"image": "g-loc-air-battle-europe-brazil-en-e06d12"
+},
+{
+"title": "Gaegujangi Kkachi",
+"id": "Gaegujangi Kkachi (Korea) (Unl)",
+"status": "ok",
+"versions": [
+"Gaegujangi Kkachi (Korea) (Unl)"
+],
+"image": "gaegujangi-kkachi-korea-unl-9ab81b"
+},
+{
+"title": "Gain Ground",
+"id": "Gain Ground (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Gain Ground (Europe, Brazil) (En)",
+"Gain Ground (Europe, Brazil) (En) (Beta)"
+],
+"image": "gain-ground-europe-brazil-en-5bb040"
+},
+{
+"title": "Galactic Protector",
+"id": "Galactic Protector (Japan) (En)",
+"status": "ok",
+"versions": [
+"Galactic Protector (Japan) (En)"
+],
+"image": "galactic-protector-japan-en-107189"
+},
+{
+"title": "Galaxian",
+"id": "Galaxian (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Galaxian (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Galaxy Force",
+"id": "Galaxy Force (USA)",
+"status": "ok",
+"versions": [
+"Galaxy Force (USA)",
+"Galaxy Force (Europe, Brazil) (En)"
+],
+"image": "galaxy-force-usa-4f2a9e"
+},
+{
+"title": "Game Box Serie Esportes Radicais",
+"id": "Game Box Serie Esportes Radicais (Brazil) (En)",
+"status": "ok",
+"versions": [
+"Game Box Serie Esportes Radicais (Brazil) (En)"
+],
+"image": "game-box-serie-esportes-radicais-brazil--853535"
+},
+{
+"title": "Game Chongjiphap 200",
+"id": "Game Chongjiphap 200 (Korea) (Unl)",
+"status": "partial",
+"versions": [
+"Game Chongjiphap 200 (Korea) (Unl)"
+],
+"image": null
+},
+{
+"title": "Game de Check! Koutsuu Anzen",
+"id": "Game de Check! Koutsuu Anzen (Japan) (Proto)",
+"status": "ok",
+"versions": [
+"Game de Check! Koutsuu Anzen (Japan) (Proto)"
+],
+"image": "game-de-check-koutsuu-anzen-japan-proto-e8498b"
+},
+{
+"title": "Game Mo-eumjip 188 Hap",
+"id": "Game Mo-eumjip 188 Hap (Korea) (v1.0) (Unl)",
+"status": "ok",
+"versions": [
+"Game Mo-eumjip 188 Hap (Korea) (v1.0) (Unl)",
+"Game Mo-eumjip 188 Hap (Korea) (v1.1) (Unl)"
+],
+"image": "game-mo-eumjip-188-hap-korea-v1-0-unl-2edf12"
+},
+{
+"title": "Gangcheol RoboCop",
+"id": "Gangcheol RoboCop (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Gangcheol RoboCop (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Gangster Town",
+"id": "Gangster Town (USA, Europe, Brazil) (En)",
+"status": "partial",
+"versions": [
+"Gangster Town (USA, Europe, Brazil) (En)"
+],
+"image": null
+},
+{
+"title": "Gauntlet",
+"id": "Gauntlet (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Gauntlet (Europe, Brazil) (En)"
+],
+"image": "gauntlet-europe-brazil-en-55dde6"
+},
+{
+"title": "George Foreman's KO Boxing",
+"id": "George Foreman's KO Boxing (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"George Foreman's KO Boxing (Europe, Brazil) (En)"
+],
+"image": "george-foreman-s-ko-boxing-europe-brazil-2893cd"
+},
+{
+"title": "Geraldinho",
+"id": "Geraldinho (Brazil) (En)",
+"status": "ok",
+"versions": [
+"Geraldinho (Brazil) (En)"
+],
+"image": "geraldinho-brazil-en-294006"
+},
+{
+"title": "Ghost House",
+"id": "Ghost House (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Ghost House (USA, Europe, Brazil) (En)",
+"Ghost House (USA, Europe, Brazil) (En) (Beta)",
+"Ghost House (Japan) (En)"
+],
+"image": "ghost-house-usa-europe-brazil-en-0e7af1"
+},
+{
+"title": "Ghostbusters",
+"id": "Ghostbusters (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Ghostbusters (USA, Europe, Brazil) (En)"
+],
+"image": "ghostbusters-usa-europe-brazil-en-0002d8"
+},
+{
+"title": "Ghouls'n Ghosts",
+"id": "Ghouls'n Ghosts (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Ghouls'n Ghosts (USA, Europe, Brazil) (En)",
+"Ghouls'n Ghosts (USA, Europe, Brazil) (En) (Demo)"
+],
+"image": "ghouls-n-ghosts-usa-europe-brazil-en-57d53e"
+},
+{
+"title": "Global Defense",
+"id": "Global Defense (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Global Defense (USA, Europe, Brazil) (En)",
+"Global Defense (USA, Europe, Brazil) (En) (Beta)"
+],
+"image": "global-defense-usa-europe-brazil-en-07d156"
+},
+{
+"title": "Global Gladiators",
+"id": "Global Gladiators (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Global Gladiators (Europe, Brazil) (En)"
+],
+"image": "global-gladiators-europe-brazil-en-1e0839"
+},
+{
+"title": "Gokuaku Doumei Dump Matsumoto",
+"id": "Gokuaku Doumei Dump Matsumoto (Japan) (En)",
+"status": "ok",
+"versions": [
+"Gokuaku Doumei Dump Matsumoto (Japan) (En)"
+],
+"image": "gokuaku-doumei-dump-matsumoto-japan-en-32c547"
+},
+{
+"title": "Golden Axe",
+"id": "Golden Axe (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Golden Axe (USA, Europe, Brazil) (En)",
+"Golden Axe (USA, Europe, Brazil) (En) (Demo)"
+],
+"image": "golden-axe-usa-europe-brazil-en-ec5621"
+},
+{
+"title": "Golden Axe Warrior",
+"id": "Golden Axe Warrior (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Golden Axe Warrior (USA, Europe, Brazil) (En)"
+],
+"image": "golden-axe-warrior-usa-europe-brazil-en-daa827"
+},
+{
+"title": "Golfamania",
+"id": "Golfamania (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Golfamania (Europe, Brazil) (En)",
+"Golfamania (Europe, Brazil) (En) (Beta)"
+],
+"image": "golfamania-europe-brazil-en-ab4e15"
+},
+{
+"title": "Golvellius - Valley of Doom",
+"id": "Golvellius - Valley of Doom (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Golvellius - Valley of Doom (USA, Europe, Brazil) (En)"
+],
+"image": "golvellius-valley-of-doom-usa-europe-bra-1325b5"
+},
+{
+"title": "GP Rider",
+"id": "GP Rider (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"GP Rider (Europe, Brazil) (En)"
+],
+"image": "gp-rider-europe-brazil-en-5a2c48"
+},
+{
+"title": "Great Baseball",
+"id": "Great Baseball (USA, Europe)",
+"status": "ok",
+"versions": [
+"Great Baseball (USA, Europe)",
+"Great Baseball (Japan) (En)"
+],
+"image": "great-baseball-usa-europe-3fd037"
+},
+{
+"title": "Great Basketball",
+"id": "Great Basketball (World)",
+"status": "ok",
+"versions": [
+"Great Basketball (World)"
+],
+"image": "great-basketball-world-4b4a38"
+},
+{
+"title": "Great Football",
+"id": "Great Football (World)",
+"status": "ok",
+"versions": [
+"Great Football (World)"
+],
+"image": "great-football-world-de9953"
+},
+{
+"title": "Great Golf",
+"id": "Great Golf (World)",
+"status": "ok",
+"versions": [
+"Great Golf (World)",
+"Great Golf (World) (Beta)",
+"Great Golf (Japan) (En)",
+"Great Golf (Korea) (En) (Unl)"
+],
+"image": "great-golf-world-ccde53"
+},
+{
+"title": "Great Ice Hockey",
+"id": "Great Ice Hockey (Japan, USA) (En)",
+"status": "ok",
+"versions": [
+"Great Ice Hockey (Japan, USA) (En)"
+],
+"image": "great-ice-hockey-japan-usa-en-3750d1"
+},
+{
+"title": "Great Soccer",
+"id": "Great Soccer (Europe)",
+"status": "ok",
+"versions": [
+"Great Soccer (Europe)",
+"Great Soccer (Japan) (En)",
+"Great Soccer (Taiwan) (En) (Unl)"
+],
+"image": "great-soccer-europe-2d7779"
+},
+{
+"title": "Great Tennis",
+"id": "Great Tennis (Japan) (En)",
+"status": "ok",
+"versions": [
+"Great Tennis (Japan) (En)"
+],
+"image": "great-tennis-japan-en-9aa87e"
+},
+{
+"title": "Great Volleyball",
+"id": "Great Volleyball (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Great Volleyball (USA, Europe, Brazil) (En)",
+"Great Volleyball (Japan) (En)"
+],
+"image": "great-volleyball-usa-europe-brazil-en-d8481d"
+},
+{
+"title": "Gun.Smoke",
+"id": "Gun.Smoke (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Gun.Smoke (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Haja no Fuuin",
+"id": "Haja no Fuuin (Japan)",
+"status": "ok",
+"versions": [
+"Haja no Fuuin (Japan)"
+],
+"image": "haja-no-fuuin-japan-56d234"
+},
+{
+"title": "Hang On",
+"id": "Hang On (Europe)",
+"status": "ok",
+"versions": [
+"Hang On (Europe)",
+"Hang On (Europe) (Beta)",
+"Hang On (Japan) (En)"
+],
+"image": "hang-on-europe-e85c34"
+},
+{
+"title": "Hang On & Astro Warrior",
+"id": "Hang On & Astro Warrior (USA)",
+"status": "ok",
+"versions": [
+"Hang On & Astro Warrior (USA)"
+],
+"image": "hang-on-astro-warrior-usa-6db505"
+},
+{
+"title": "Hang On & Safari Hunt",
+"id": "Hang On & Safari Hunt (USA)",
+"status": "ok",
+"versions": [
+"Hang On & Safari Hunt (USA)",
+"Hang On & Safari Hunt (USA) (Beta)"
+],
+"image": "hang-on-safari-hunt-usa-afb01b"
+},
+{
+"title": "Heavyweight Champ",
+"id": "Heavyweight Champ (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Heavyweight Champ (Europe, Brazil) (En)"
+],
+"image": "heavyweight-champ-europe-brazil-en-eed570"
+},
+{
+"title": "Heroes of the Lance",
+"id": "Heroes of the Lance (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Heroes of the Lance (Europe, Brazil) (En)",
+"Heroes of the Lance (Europe, Brazil) (En) (Beta)"
+],
+"image": "heroes-of-the-lance-europe-brazil-en-4f5725"
+},
+{
+"title": "High School! Kimengumi",
+"id": "High School! Kimengumi (Japan)",
+"status": "ok",
+"versions": [
+"High School! Kimengumi (Japan)"
+],
+"image": "high-school-kimengumi-japan-f17f35"
+},
+{
+"title": "Hokuto no Ken",
+"id": "Hokuto no Ken (Japan)",
+"status": "ok",
+"versions": [
+"Hokuto no Ken (Japan)",
+"Hokuto no Ken (Taiwan) (Ja) (Unl)"
+],
+"image": "hokuto-no-ken-japan-3e7da3"
+},
+{
+"title": "Home Alone",
+"id": "Home Alone (Europe)",
+"status": "ok",
+"versions": [
+"Home Alone (Europe)"
+],
+"image": "home-alone-europe-7cb407"
+},
+{
+"title": "Hong Kil Dong",
+"id": "Hong Kil Dong (Korea) (Unl)",
+"status": "partial",
+"versions": [
+"Hong Kil Dong (Korea) (Unl)"
+],
+"image": null
+},
+{
+"title": "Hook",
+"id": "Hook (Europe) (Proto)",
+"status": "ok",
+"versions": [
+"Hook (Europe) (Proto)"
+],
+"image": "hook-europe-proto-5ae780"
+},
+{
+"title": "Hoshi wo Sagashite...",
+"id": "Hoshi wo Sagashite... (Japan)",
+"status": "ok",
+"versions": [
+"Hoshi wo Sagashite... (Japan)"
+],
+"image": "hoshi-wo-sagashite-japan-08c7e9"
+},
+{
+"title": "Hwarang-ui Geom",
+"id": "Hwarang-ui Geom (Korea) (Unl)",
+"status": "ok",
+"versions": [
+"Hwarang-ui Geom (Korea) (Unl)"
+],
+"image": "hwarang-ui-geom-korea-unl-f0b86f"
+},
+{
+"title": "Impossible Mission",
+"id": "Impossible Mission (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Impossible Mission (Europe, Brazil) (En)",
+"Impossible Mission (Europe, Brazil) (En) (Beta)"
+],
+"image": "impossible-mission-europe-brazil-en-7407b6"
+},
+{
+"title": "Incredible Crash Dummies, The",
+"id": "Incredible Crash Dummies, The (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Incredible Crash Dummies, The (Europe, Brazil) (En)"
+],
+"image": "incredible-crash-dummies-the-europe-braz-3e0c17"
+},
+{
+"title": "Incredible Hulk, The",
+"id": "Incredible Hulk, The (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Incredible Hulk, The (Europe, Brazil) (En)"
+],
+"image": "incredible-hulk-the-europe-brazil-en-363053"
+},
+{
+"title": "Indiana Jones and the Last Crusade",
+"id": "Indiana Jones and the Last Crusade (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Indiana Jones and the Last Crusade (USA) (Proto)",
+"Indiana Jones and the Last Crusade (Europe, Brazil) (En)"
+],
+"image": "indiana-jones-and-the-last-crusade-usa-p-1d1ac9"
+},
+{
+"title": "James 'Buster' Douglas Knockout Boxing",
+"id": "James 'Buster' Douglas Knockout Boxing (USA)",
+"status": "ok",
+"versions": [
+"James 'Buster' Douglas Knockout Boxing (USA)",
+"James 'Buster' Douglas Knockout Boxing (USA) (Sample)"
+],
+"image": "james-buster-douglas-knockout-boxing-usa-196fcb"
+},
+{
+"title": "James Bond 007 - The Duel",
+"id": "James Bond 007 - The Duel (Brazil) (En)",
+"status": "ok",
+"versions": [
+"James Bond 007 - The Duel (Brazil) (En)",
+"James Bond 007 - The Duel (Europe)"
+],
+"image": "james-bond-007-the-duel-brazil-en-617521"
+},
+{
+"title": "James Pond 2 - Codename RoboCod",
+"id": "James Pond 2 - Codename RoboCod (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"James Pond 2 - Codename RoboCod (Europe, Brazil) (En)"
+],
+"image": "james-pond-2-codename-robocod-europe-bra-a65184"
+},
+{
+"title": "Jang Pung 3",
+"id": "Jang Pung 3 (Korea) (En) (Unl)",
+"status": "ok",
+"versions": [
+"Jang Pung 3 (Korea) (En) (Unl)"
+],
+"image": "jang-pung-3-korea-en-unl-111529"
+},
+{
+"title": "Jang Pung II",
+"id": "Jang Pung II (Korea) (En) (Unl)",
+"status": "ok",
+"versions": [
+"Jang Pung II (Korea) (En) (Unl)"
+],
+"image": "jang-pung-ii-korea-en-unl-95b46a"
+},
+{
+"title": "Janggun-ui Adeul",
+"id": "Janggun-ui Adeul (Korea) (Unl)",
+"status": "ok",
+"versions": [
+"Janggun-ui Adeul (Korea) (Unl)"
+],
+"image": "janggun-ui-adeul-korea-unl-aff77e"
+},
+{
+"title": "Joe Montana Football",
+"id": "Joe Montana Football (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Joe Montana Football (USA, Europe, Brazil) (En)"
+],
+"image": "joe-montana-football-usa-europe-brazil-e-1036c5"
+},
+{
+"title": "Jogos de Verao II",
+"id": "Jogos de Verao II (Brazil) (En)",
+"status": "partial",
+"versions": [
+"Jogos de Verao II (Brazil) (En)"
+],
+"image": null
+},
+{
+"title": "Jungle Book, The",
+"id": "Jungle Book, The (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Jungle Book, The (Europe, Brazil) (En)"
+],
+"image": "jungle-book-the-europe-brazil-en-e078ac"
+},
+{
+"title": "Jurassic Park",
+"id": "Jurassic Park (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Jurassic Park (Europe, Brazil) (En)"
+],
+"image": "jurassic-park-europe-brazil-en-a3e4e0"
+},
+{
+"title": "Kenseiden",
+"id": "Kenseiden (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Kenseiden (USA, Europe, Brazil) (En)",
+"Kenseiden (Japan)"
+],
+"image": "kenseiden-usa-europe-brazil-en-d0ca9d"
+},
+{
+"title": "King & Balloon",
+"id": "King & Balloon (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"King & Balloon (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "King's Quest - Quest for the Crown",
+"id": "King's Quest - Quest for the Crown (USA)",
+"status": "ok",
+"versions": [
+"King's Quest - Quest for the Crown (USA)",
+"King's Quest - Quest for the Crown (USA) (Beta 1)",
+"King's Quest - Quest for the Crown (USA) (Beta 2)"
+],
+"image": "king-s-quest-quest-for-the-crown-usa-a14384"
+},
+{
+"title": "KLAX",
+"id": "KLAX (Europe)",
+"status": "ok",
+"versions": [
+"KLAX (Europe)"
+],
+"image": "klax-europe-0c1555"
+},
+{
+"title": "Knightmare II",
+"id": "Knightmare II (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Knightmare II (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Krusty's Fun House",
+"id": "Krusty's Fun House (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Krusty's Fun House (Europe, Brazil) (En)"
+],
+"image": "krusty-s-fun-house-europe-brazil-en-62cfb6"
+},
+{
+"title": "Kujaku Ou",
+"id": "Kujaku Ou (Japan)",
+"status": "ok",
+"versions": [
+"Kujaku Ou (Japan)"
+],
+"image": "kujaku-ou-japan-a76f60"
+},
+{
+"title": "Kung Fu Kid",
+"id": "Kung Fu Kid (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Kung Fu Kid (USA, Europe, Brazil) (En)",
+"Kung Fu Kid (Taiwan) (En) (Unl)"
+],
+"image": "kung-fu-kid-usa-europe-brazil-en-f29412"
+},
+{
+"title": "Land of Illusion Starring Mickey Mouse",
+"id": "Land of Illusion Starring Mickey Mouse (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Land of Illusion Starring Mickey Mouse (Europe, Brazil) (En)"
+],
+"image": "land-of-illusion-starring-mickey-mouse-e-ca2157"
+},
+{
+"title": "Laser Ghost",
+"id": "Laser Ghost (Europe)",
+"status": "ok",
+"versions": [
+"Laser Ghost (Europe)"
+],
+"image": "laser-ghost-europe-94d475"
+},
+{
+"title": "Legend of Illusion Starring Mickey Mouse",
+"id": "Legend of Illusion Starring Mickey Mouse (Brazil) (En)",
+"status": "ok",
+"versions": [
+"Legend of Illusion Starring Mickey Mouse (Brazil) (En)"
+],
+"image": "legend-of-illusion-starring-mickey-mouse-b6ac58"
+},
+{
+"title": "Lemmings",
+"id": "Lemmings (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Lemmings (Europe, Brazil) (En)",
+"Lemmings (Europe, Brazil) (En) (Beta)"
+],
+"image": "lemmings-europe-brazil-en-a27b8f"
+},
+{
+"title": "Lemmings 2 - The Tribes",
+"id": "Lemmings 2 - The Tribes (Europe) (Proto) (1995-09-04)",
+"status": "ok",
+"versions": [
+"Lemmings 2 - The Tribes (Europe) (Proto) (1995-09-04)"
+],
+"image": "lemmings-2-the-tribes-europe-proto-1995--40cd7c"
+},
+{
+"title": "Lethal Weapon 3 Music",
+"id": "Lethal Weapon 3 Music (Europe) (Proto) (1992-11-30) (Sound Data)",
+"status": "ok",
+"versions": [
+"Lethal Weapon 3 Music (Europe) (Proto) (1992-11-30) (Sound Data)"
+],
+"image": "lethal-weapon-3-music-europe-proto-1992--1aa664"
+},
+{
+"title": "Line of Fire",
+"id": "Line of Fire (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Line of Fire (Europe, Brazil) (En)"
+],
+"image": "line-of-fire-europe-brazil-en-d2e919"
+},
+{
+"title": "Lion King, The",
+"id": "Lion King, The (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Lion King, The (Europe, Brazil) (En)"
+],
+"image": "lion-king-the-europe-brazil-en-581116"
+},
+{
+"title": "Lord of Sword",
+"id": "Lord of Sword (Japan)",
+"status": "ok",
+"versions": [
+"Lord of Sword (Japan)",
+"Lord of Sword (Taiwan) (Ja) (Unl)"
+],
+"image": "lord-of-sword-japan-6ef5c2"
+},
+{
+"title": "Lord of the Sword",
+"id": "Lord of the Sword (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Lord of the Sword (USA, Europe, Brazil) (En)"
+],
+"image": "lord-of-the-sword-usa-europe-brazil-en-ef589f"
+},
+{
+"title": "Loretta no Shouzou - Sherlock Holmes",
+"id": "Loretta no Shouzou - Sherlock Holmes (Japan)",
+"status": "partial",
+"versions": [
+"Loretta no Shouzou - Sherlock Holmes (Japan)"
+],
+"image": null
+},
+{
+"title": "Lucky Dime Caper Starring Donald Duck, The",
+"id": "Lucky Dime Caper Starring Donald Duck, The (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Lucky Dime Caper Starring Donald Duck, The (Europe, Brazil) (En)",
+"Lucky Dime Caper Starring Donald Duck, The (Europe, Brazil) (En) (Beta)"
+],
+"image": "lucky-dime-caper-starring-donald-duck-th-640b8c"
+},
+{
+"title": "Mahjong Sengoku Jidai",
+"id": "Mahjong Sengoku Jidai (Japan)",
+"status": "ok",
+"versions": [
+"Mahjong Sengoku Jidai (Japan)",
+"Mahjong Sengoku Jidai (Japan) (Beta)"
+],
+"image": "mahjong-sengoku-jidai-japan-c1afb7"
+},
+{
+"title": "Makai Retsuden",
+"id": "Makai Retsuden (Japan)",
+"status": "ok",
+"versions": [
+"Makai Retsuden (Japan)"
+],
+"image": "makai-retsuden-japan-e10142"
+},
+{
+"title": "Maou Golvellius",
+"id": "Maou Golvellius (Japan)",
+"status": "ok",
+"versions": [
+"Maou Golvellius (Japan)",
+"Maou Golvellius (Japan) (Beta)"
+],
+"image": "maou-golvellius-japan-10ff46"
+},
+{
+"title": "Marble Madness",
+"id": "Marble Madness (Europe)",
+"status": "ok",
+"versions": [
+"Marble Madness (Europe)"
+],
+"image": "marble-madness-europe-c812a7"
+},
+{
+"title": "Marksman Shooting & Trap Shooting",
+"id": "Marksman Shooting & Trap Shooting (USA, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Marksman Shooting & Trap Shooting (USA, Brazil) (En)"
+],
+"image": "marksman-shooting-trap-shooting-usa-braz-18ff3f"
+},
+{
+"title": "Marksman Shooting & Trap Shooting & Safari Hunt",
+"id": "Marksman Shooting & Trap Shooting & Safari Hunt (Europe)",
+"status": "ok",
+"versions": [
+"Marksman Shooting & Trap Shooting & Safari Hunt (Europe)"
+],
+"image": "marksman-shooting-trap-shooting-safari-h-311827"
+},
+{
+"title": "Master of Darkness",
+"id": "Master of Darkness (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Master of Darkness (Europe, Brazil) (En)"
+],
+"image": "master-of-darkness-europe-brazil-en-b68107"
+},
+{
+"title": "Masters of Combat",
+"id": "Masters of Combat (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Masters of Combat (Europe, Brazil) (En)"
+],
+"image": "masters-of-combat-europe-brazil-en-2ff92f"
+},
+{
+"title": "Maze Hunter 3-D",
+"id": "Maze Hunter 3-D (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Maze Hunter 3-D (USA, Europe, Brazil) (En)"
+],
+"image": "maze-hunter-3-d-usa-europe-brazil-en-e290f8"
+},
+{
+"title": "Maze Walker",
+"id": "Maze Walker (Japan) (En)",
+"status": "ok",
+"versions": [
+"Maze Walker (Japan) (En)",
+"Maze Walker (Japan) (En) (Sega 3D Classics)"
+],
+"image": "maze-walker-japan-en-20a7ef"
+},
+{
+"title": "Megumi Rescue",
+"id": "Megumi Rescue (Japan) (En)",
+"status": "ok",
+"versions": [
+"Megumi Rescue (Japan) (En)"
+],
+"image": "megumi-rescue-japan-en-b86a9f"
+},
+{
+"title": "Memoria Master",
+"id": "Memoria Master (Brazil) (Mega Drive 4)",
+"status": "partial",
+"versions": [
+"Memoria Master (Brazil) (Mega Drive 4)"
+],
+"image": null
+},
+{
+"title": "Mercs",
+"id": "Mercs (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Mercs (Europe, Brazil) (En)"
+],
+"image": "mercs-europe-brazil-en-9d130d"
+},
+{
+"title": "Michael Jackson's Moonwalker",
+"id": "Michael Jackson's Moonwalker (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Michael Jackson's Moonwalker (USA, Europe, Brazil) (En)",
+"Michael Jackson's Moonwalker (USA, Europe, Brazil) (En) (Beta)"
+],
+"image": "michael-jackson-s-moonwalker-usa-europe--a9a93a"
+},
+{
+"title": "Mickey's Ultimate Challenge",
+"id": "Mickey's Ultimate Challenge (Brazil) (En)",
+"status": "ok",
+"versions": [
+"Mickey's Ultimate Challenge (Brazil) (En)"
+],
+"image": "mickey-s-ultimate-challenge-brazil-en-25669c"
+},
+{
+"title": "Micro Machines",
+"id": "Micro Machines (Europe)",
+"status": "ok",
+"versions": [
+"Micro Machines (Europe)"
+],
+"image": "micro-machines-europe-05cc6d"
+},
+{
+"title": "Micro Xevious, The",
+"id": "Micro Xevious, The (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Micro Xevious, The (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Mina Terrestre",
+"id": "Mina Terrestre (Brazil) (Mega Drive 4)",
+"status": "ok",
+"versions": [
+"Mina Terrestre (Brazil) (Mega Drive 4)"
+],
+"image": "mina-terrestre-brazil-mega-drive-4-609bba"
+},
+{
+"title": "Minerador",
+"id": "Minerador (Brazil) (Mega Drive 4)",
+"status": "ok",
+"versions": [
+"Minerador (Brazil) (Mega Drive 4)"
+],
+"image": "minerador-brazil-mega-drive-4-ee7a02"
+},
+{
+"title": "Miracle Warriors - Seal of The Dark Lord",
+"id": "Miracle Warriors - Seal of The Dark Lord (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Miracle Warriors - Seal of The Dark Lord (USA, Europe, Brazil) (En)",
+"Miracle Warriors - Seal of The Dark Lord (USA, Europe, Brazil) (En) (Beta) (1988-02-25)"
+],
+"image": "miracle-warriors-seal-of-the-dark-lord-u-70cf46"
+},
+{
+"title": "Missile Defense 3-D",
+"id": "Missile Defense 3-D (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Missile Defense 3-D (USA, Europe, Brazil) (En)",
+"Missile Defense 3-D (USA, Europe, Brazil) (En) (Sample)"
+],
+"image": "missile-defense-3-d-usa-europe-brazil-en-959e42"
+},
+{
+"title": "Monica no Castelo do Dragao",
+"id": "Monica no Castelo do Dragao (Brazil)",
+"status": "ok",
+"versions": [
+"Monica no Castelo do Dragao (Brazil)"
+],
+"image": "monica-no-castelo-do-dragao-brazil-da6b22"
+},
+{
+"title": "Monopoly",
+"id": "Monopoly (USA, Europe)",
+"status": "ok",
+"versions": [
+"Monopoly (USA, Europe)",
+"Monopoly (USA, Europe) (Beta 1)",
+"Monopoly (USA, Europe) (Beta 2)",
+"Monopoly (USA, Europe) (Rev A)"
+],
+"image": "monopoly-usa-europe-125633"
+},
+{
+"title": "Montezuma's Revenge Featuring Panama Joe",
+"id": "Montezuma's Revenge Featuring Panama Joe (USA)",
+"status": "ok",
+"versions": [
+"Montezuma's Revenge Featuring Panama Joe (USA)",
+"Montezuma's Revenge Featuring Panama Joe (USA) (Beta)"
+],
+"image": "montezuma-s-revenge-featuring-panama-joe-714176"
+},
+{
+"title": "Mopiranger",
+"id": "Mopiranger (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Mopiranger (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Mortal Kombat",
+"id": "Mortal Kombat (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Mortal Kombat (Europe, Brazil) (En)"
+],
+"image": "mortal-kombat-europe-brazil-en-1f75e6"
+},
+{
+"title": "Mortal Kombat 3",
+"id": "Mortal Kombat 3 (Brazil) (En)",
+"status": "ok",
+"versions": [
+"Mortal Kombat 3 (Brazil) (En)"
+],
+"image": "mortal-kombat-3-brazil-en-29deb4"
+},
+{
+"title": "Mortal Kombat II",
+"id": "Mortal Kombat II (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Mortal Kombat II (Europe, Brazil) (En)"
+],
+"image": "mortal-kombat-ii-europe-brazil-en-81d516"
+},
+{
+"title": "Ms. Pac-Man",
+"id": "Ms. Pac-Man (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Ms. Pac-Man (Europe, Brazil) (En)"
+],
+"image": "ms-pac-man-europe-brazil-en-18edeb"
+},
+{
+"title": "MSX Soccer",
+"id": "MSX Soccer (Korea) (Unl)",
+"status": "partial",
+"versions": [
+"MSX Soccer (Korea) (Unl)"
+],
+"image": null
+},
+{
+"title": "My Hero",
+"id": "My Hero (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"My Hero (USA, Europe, Brazil) (En)"
+],
+"image": "my-hero-usa-europe-brazil-en-37c2ca"
+},
+{
+"title": "NBA Jam",
+"id": "NBA Jam (Europe) (Proto)",
+"status": "ok",
+"versions": [
+"NBA Jam (Europe) (Proto)"
+],
+"image": "nba-jam-europe-proto-8b7527"
+},
+{
+"title": "Nekkyuu Koushien",
+"id": "Nekkyuu Koushien (Japan)",
+"status": "partial",
+"versions": [
+"Nekkyuu Koushien (Japan)"
+],
+"image": null
+},
+{
+"title": "Nemesis",
+"id": "Nemesis (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Nemesis (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Nemesis 2",
+"id": "Nemesis 2 (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Nemesis 2 (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "New Boggle Boggle 2",
+"id": "New Boggle Boggle 2 (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"New Boggle Boggle 2 (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "NewZealand Story, The",
+"id": "NewZealand Story, The (Europe)",
+"status": "ok",
+"versions": [
+"NewZealand Story, The (Europe)"
+],
+"image": "newzealand-story-the-europe-9df7b8"
+},
+{
+"title": "Ninja",
+"id": "Ninja (Japan)",
+"status": "ok",
+"versions": [
+"Ninja (Japan)"
+],
+"image": "ninja-japan-f0361c"
+},
+{
+"title": "Ninja Gaiden",
+"id": "Ninja Gaiden (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Ninja Gaiden (Europe, Brazil) (En)",
+"Ninja Gaiden (Europe, Brazil) (En) (Beta)"
+],
+"image": "ninja-gaiden-europe-brazil-en-b69680"
+},
+{
+"title": "Ninja, The",
+"id": "Ninja, The (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Ninja, The (USA, Europe, Brazil) (En)",
+"Ninja, The (Taiwan) (Ja) (Unl)"
+],
+"image": "ninja-the-usa-europe-brazil-en-a99f6b"
+},
+{
+"title": "Northen Ken",
+"id": "Northen Ken (Taiwan) (Ja) (Unl)",
+"status": "ok",
+"versions": [
+"Northen Ken (Taiwan) (Ja) (Unl)"
+],
+"image": "northen-ken-taiwan-ja-unl-bc7771"
+},
+{
+"title": "Olympic Gold",
+"id": "Olympic Gold (Brazil) (En,Fr,De,Es,It,Nl,Pt,Sv)",
+"status": "ok",
+"versions": [
+"Olympic Gold (Brazil) (En,Fr,De,Es,It,Nl,Pt,Sv)",
+"Olympic Gold (Europe) (En,Fr,De,Es,It,Nl,Pt,Sv)"
+],
+"image": "olympic-gold-brazil-en-fr-de-es-it-nl-pt-a42e06"
+},
+{
+"title": "Opa Opa",
+"id": "Opa Opa (Japan) (En)",
+"status": "ok",
+"versions": [
+"Opa Opa (Japan) (En)"
+],
+"image": "opa-opa-japan-en-a42e71"
+},
+{
+"title": "Operation Wolf",
+"id": "Operation Wolf (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Operation Wolf (Europe, Brazil) (En)"
+],
+"image": "operation-wolf-europe-brazil-en-7f9011"
+},
+{
+"title": "Ottifants, The",
+"id": "Ottifants, The (Europe, Brazil) (En,Fr,De,Es,It)",
+"status": "ok",
+"versions": [
+"Ottifants, The (Europe, Brazil) (En,Fr,De,Es,It)"
+],
+"image": "ottifants-the-europe-brazil-en-fr-de-es--1156f1"
+},
+{
+"title": "OutRun",
+"id": "OutRun (World)",
+"status": "ok",
+"versions": [
+"OutRun (World)"
+],
+"image": "outrun-world-4a81a2"
+},
+{
+"title": "OutRun 3-D",
+"id": "OutRun 3-D (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"OutRun 3-D (Europe, Brazil) (En)",
+"OutRun 3-D (Europe, Brazil) (En) (Beta)",
+"OutRun 3-D (Japan) (En) (Sega 3D Fukkoku Akaibusu)"
+],
+"image": "outrun-3-d-europe-brazil-en-28efac"
+},
+{
+"title": "OutRun Europa",
+"id": "OutRun Europa (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"OutRun Europa (Europe, Brazil) (En)"
+],
+"image": "outrun-europa-europe-brazil-en-dd5784"
+},
+{
+"title": "Pac-Mania",
+"id": "Pac-Mania (Europe)",
+"status": "ok",
+"versions": [
+"Pac-Mania (Europe)"
+],
+"image": "pac-mania-europe-338728"
+},
+{
+"title": "Palhacos",
+"id": "Palhacos (Brazil) (Mega Drive 4)",
+"status": "ok",
+"versions": [
+"Palhacos (Brazil) (Mega Drive 4)"
+],
+"image": "palhacos-brazil-mega-drive-4-ac246e"
+},
+{
+"title": "Paper Boy",
+"id": "Paper Boy (Taiwan) (En) (Unl)",
+"status": "ok",
+"versions": [
+"Paper Boy (Taiwan) (En) (Unl)"
+],
+"image": "paper-boy-taiwan-en-unl-9d8f23"
+},
+{
+"title": "Paperboy",
+"id": "Paperboy (USA, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Paperboy (USA, Brazil) (En)",
+"Paperboy (Europe)"
+],
+"image": "paperboy-usa-brazil-en-8e7693"
+},
+{
+"title": "Parlour Games",
+"id": "Parlour Games (USA, Europe)",
+"status": "ok",
+"versions": [
+"Parlour Games (USA, Europe)"
+],
+"image": "parlour-games-usa-europe-348955"
+},
+{
+"title": "Pat Riley Basketball",
+"id": "Pat Riley Basketball (USA) (Proto)",
+"status": "ok",
+"versions": [
+"Pat Riley Basketball (USA) (Proto)"
+],
+"image": "pat-riley-basketball-usa-proto-4de030"
+},
+{
+"title": "Penguin Adventure",
+"id": "Penguin Adventure (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Penguin Adventure (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Penguin Land",
+"id": "Penguin Land (USA, Europe)",
+"status": "ok",
+"versions": [
+"Penguin Land (USA, Europe)"
+],
+"image": "penguin-land-usa-europe-d9fccd"
+},
+{
+"title": "PGA Tour Golf",
+"id": "PGA Tour Golf (Europe)",
+"status": "ok",
+"versions": [
+"PGA Tour Golf (Europe)"
+],
+"image": "pga-tour-golf-europe-a641e6"
+},
+{
+"title": "Phantasy Star",
+"id": "Phantasy Star (USA, Europe)",
+"status": "ok",
+"versions": [
+"Phantasy Star (USA, Europe)",
+"Phantasy Star (USA, Europe) (Rev A)",
+"Phantasy Star (World) (En) (Sega Ages)",
+"Phantasy Star (World) (Ja) (Sega Ages)",
+"Phantasy Star (Brazil)",
+"Phantasy Star (Japan)",
+"Phantasy Star (Japan) (Rev 1)",
+"Phantasy Star (Korea) (Unl)"
+],
+"image": "phantasy-star-usa-europe-ab70a9"
+},
+{
+"title": "Pigu-Wang 7 Hap - Jaemiiss-neun Game Mo-eumjip",
+"id": "Pigu-Wang 7 Hap - Jaemiiss-neun Game Mo-eumjip (Korea) (Unl)",
+"status": "ok",
+"versions": [
+"Pigu-Wang 7 Hap - Jaemiiss-neun Game Mo-eumjip (Korea) (Unl)"
+],
+"image": "pigu-wang-7-hap-jaemiiss-neun-game-mo-eu-0d6ec9"
+},
+{
+"title": "Pili Zhan Jing",
+"id": "Pili Zhan Jing (Taiwan) (En) (Unl)",
+"status": "ok",
+"versions": [
+"Pili Zhan Jing (Taiwan) (En) (Unl)"
+],
+"image": "pili-zhan-jing-taiwan-en-unl-0d919d"
+},
+{
+"title": "Pit-Fighter",
+"id": "Pit-Fighter (Brazil) (En)",
+"status": "ok",
+"versions": [
+"Pit-Fighter (Brazil) (En)",
+"Pit-Fighter (Europe)"
+],
+"image": "pit-fighter-brazil-en-68f2b6"
+},
+{
+"title": "Pooyan",
+"id": "Pooyan (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Pooyan (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Populous",
+"id": "Populous (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Populous (Europe, Brazil) (En)"
+],
+"image": "populous-europe-brazil-en-dfd782"
+},
+{
+"title": "Poseidon Wars 3-D",
+"id": "Poseidon Wars 3-D (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Poseidon Wars 3-D (USA, Europe, Brazil) (En)"
+],
+"image": "poseidon-wars-3-d-usa-europe-brazil-en-5345a7"
+},
+{
+"title": "Power Boggle Boggle",
+"id": "Power Boggle Boggle (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Power Boggle Boggle (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Power Strike",
+"id": "Power Strike (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Power Strike (USA, Europe, Brazil) (En)"
+],
+"image": "power-strike-usa-europe-brazil-en-12abca"
+},
+{
+"title": "Power Strike II",
+"id": "Power Strike II (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Power Strike II (Europe, Brazil) (En)"
+],
+"image": "power-strike-ii-europe-brazil-en-c40822"
+},
+{
+"title": "Ppang Gongjang",
+"id": "Ppang Gongjang (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Ppang Gongjang (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Predator 2",
+"id": "Predator 2 (Brazil) (En)",
+"status": "ok",
+"versions": [
+"Predator 2 (Brazil) (En)",
+"Predator 2 (Europe)"
+],
+"image": "predator-2-brazil-en-4ec6ae"
+},
+{
+"title": "Prince of Persia",
+"id": "Prince of Persia (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Prince of Persia (Europe, Brazil) (En)",
+"Prince of Persia (Taiwan) (En) (Unl)"
+],
+"image": "prince-of-persia-europe-brazil-en-a00184"
+},
+{
+"title": "Pro Wrestling",
+"id": "Pro Wrestling (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Pro Wrestling (USA, Europe, Brazil) (En)"
+],
+"image": "pro-wrestling-usa-europe-brazil-en-6ac128"
+},
+{
+"title": "Pro Yakyuu, The - Pennant Race",
+"id": "Pro Yakyuu, The - Pennant Race (Japan)",
+"status": "ok",
+"versions": [
+"Pro Yakyuu, The - Pennant Race (Japan)"
+],
+"image": "pro-yakyuu-the-pennant-race-japan-bdf9da"
+},
+{
+"title": "Promocao Especial M. System III Compact",
+"id": "Promocao Especial M. System III Compact (Brazil) (Demo)",
+"status": "ok",
+"versions": [
+"Promocao Especial M. System III Compact (Brazil) (Demo)"
+],
+"image": "promocao-especial-m-system-iii-compact-b-e8ed3c"
+},
+{
+"title": "Psychic World",
+"id": "Psychic World (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Psychic World (Europe, Brazil) (En)"
+],
+"image": "psychic-world-europe-brazil-en-652b95"
+},
+{
+"title": "Psycho Fox",
+"id": "Psycho Fox (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Psycho Fox (USA, Europe, Brazil) (En)",
+"Psycho Fox (USA, Europe, Brazil) (En) (Beta)"
+],
+"image": "psycho-fox-usa-europe-brazil-en-9647f0"
+},
+{
+"title": "Putt & Putter",
+"id": "Putt & Putter (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Putt & Putter (Europe, Brazil) (En)",
+"Putt & Putter (Europe, Brazil) (En) (Beta)"
+],
+"image": "putt-putter-europe-brazil-en-a7fdda"
+},
+{
+"title": "Puzzle Game",
+"id": "Puzzle Game (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Puzzle Game (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Quartet",
+"id": "Quartet (USA, Europe)",
+"status": "ok",
+"versions": [
+"Quartet (USA, Europe)",
+"Quartet (Taiwan) (En) (Unl)"
+],
+"image": "quartet-usa-europe-99a32f"
+},
+{
+"title": "Quest for the Shaven Yak Starring Ren Hoek & Stimpy",
+"id": "Quest for the Shaven Yak Starring Ren Hoek & Stimpy (Brazil) (En)",
+"status": "partial",
+"versions": [
+"Quest for the Shaven Yak Starring Ren Hoek & Stimpy (Brazil) (En)"
+],
+"image": null
+},
+{
+"title": "R-Type",
+"id": "R-Type (World)",
+"status": "ok",
+"versions": [
+"R-Type (World)",
+"R-Type (World) (Beta)",
+"R-Type (Taiwan) (En) (Unl)"
+],
+"image": "r-type-world-c46b3d"
+},
+{
+"title": "R.C. Grand Prix",
+"id": "R.C. Grand Prix (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"R.C. Grand Prix (USA, Europe, Brazil) (En)",
+"R.C. Grand Prix (USA, Europe, Brazil) (En) (Beta)"
+],
+"image": "r-c-grand-prix-usa-europe-brazil-en-b645d4"
+},
+{
+"title": "Rainbow Islands",
+"id": "Rainbow Islands (Brazil) (En)",
+"status": "ok",
+"versions": [
+"Rainbow Islands (Brazil) (En)",
+"Rainbow Islands (Europe)"
+],
+"image": "rainbow-islands-brazil-en-e3ba76"
+},
+{
+"title": "Rambo - First Blood Part II",
+"id": "Rambo - First Blood Part II (USA)",
+"status": "ok",
+"versions": [
+"Rambo - First Blood Part II (USA)"
+],
+"image": "rambo-first-blood-part-ii-usa-36b9ea"
+},
+{
+"title": "Rambo III",
+"id": "Rambo III (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Rambo III (USA, Europe, Brazil) (En)"
+],
+"image": "rambo-iii-usa-europe-brazil-en-364790"
+},
+{
+"title": "Rampage",
+"id": "Rampage (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Rampage (USA, Europe, Brazil) (En)",
+"Rampage (USA, Europe, Brazil) (En) (Beta)"
+],
+"image": "rampage-usa-europe-brazil-en-1ca4d9"
+},
+{
+"title": "Rampart",
+"id": "Rampart (Europe)",
+"status": "ok",
+"versions": [
+"Rampart (Europe)"
+],
+"image": "rampart-europe-01c4df"
+},
+{
+"title": "Rastan",
+"id": "Rastan (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Rastan (USA, Europe, Brazil) (En)",
+"Rastan (USA, Europe, Brazil) (En) (Beta)"
+],
+"image": "rastan-usa-europe-brazil-en-086478"
+},
+{
+"title": "Reggie Jackson Baseball",
+"id": "Reggie Jackson Baseball (USA)",
+"status": "ok",
+"versions": [
+"Reggie Jackson Baseball (USA)"
+],
+"image": "reggie-jackson-baseball-usa-cb9539"
+},
+{
+"title": "Renegade",
+"id": "Renegade (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Renegade (Europe, Brazil) (En)"
+],
+"image": "renegade-europe-brazil-en-b7106d"
+},
+{
+"title": "Rental Car",
+"id": "Rental Car (World) (v0.06) (Proto) (Unl)",
+"status": "ok",
+"versions": [
+"Rental Car (World) (v0.06) (Proto) (Unl)"
+],
+"image": "rental-car-world-v0-06-proto-unl-aa596f"
+},
+{
+"title": "Rescue Mission",
+"id": "Rescue Mission (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Rescue Mission (USA, Europe, Brazil) (En)"
+],
+"image": "rescue-mission-usa-europe-brazil-en-2cef2b"
+},
+{
+"title": "Road Fighter",
+"id": "Road Fighter (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Road Fighter (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Road Rash",
+"id": "Road Rash (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Road Rash (Europe, Brazil) (En)"
+],
+"image": "road-rash-europe-brazil-en-b4acc5"
+},
+{
+"title": "RoboCop 3",
+"id": "RoboCop 3 (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"RoboCop 3 (Europe, Brazil) (En)"
+],
+"image": "robocop-3-europe-brazil-en-778f20"
+},
+{
+"title": "RoboCop Versus The Terminator",
+"id": "RoboCop Versus The Terminator (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"RoboCop Versus The Terminator (Europe, Brazil) (En)"
+],
+"image": "robocop-versus-the-terminator-europe-bra-c68e21"
+},
+{
+"title": "Rocky",
+"id": "Rocky (World)",
+"status": "ok",
+"versions": [
+"Rocky (World)"
+],
+"image": "rocky-world-2e7524"
+},
+{
+"title": "Running Battle",
+"id": "Running Battle (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Running Battle (Europe, Brazil) (En)"
+],
+"image": "running-battle-europe-brazil-en-30070a"
+},
+{
+"title": "Sagaia",
+"id": "Sagaia (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Sagaia (Europe, Brazil) (En)"
+],
+"image": "sagaia-europe-brazil-en-4865e9"
+},
+{
+"title": "Sagak-ui Bimil",
+"id": "Sagak-ui Bimil (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Sagak-ui Bimil (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Samgukji III - Cheonha Jaengpae",
+"id": "Samgukji III - Cheonha Jaengpae (Korea) (Unl)",
+"status": "ok",
+"versions": [
+"Samgukji III - Cheonha Jaengpae (Korea) (Unl)"
+],
+"image": "samgukji-iii-cheonha-jaengpae-korea-unl-adb443"
+},
+{
+"title": "Sapo Xule - O Mestre do Kung Fu",
+"id": "Sapo Xule - O Mestre do Kung Fu (Brazil)",
+"status": "ok",
+"versions": [
+"Sapo Xule - O Mestre do Kung Fu (Brazil)"
+],
+"image": "sapo-xule-o-mestre-do-kung-fu-brazil-5ebce1"
+},
+{
+"title": "Sapo Xule - S.O.S. Lagoa Poluida",
+"id": "Sapo Xule - S.O.S. Lagoa Poluida (Brazil, Portugal) (En)",
+"status": "ok",
+"versions": [
+"Sapo Xule - S.O.S. Lagoa Poluida (Brazil, Portugal) (En)"
+],
+"image": "sapo-xule-s-o-s-lagoa-poluida-brazil-por-be1fae"
+},
+{
+"title": "Sapo Xule vs. Os Invasores do Brejo",
+"id": "Sapo Xule vs. Os Invasores do Brejo (Brazil)",
+"status": "ok",
+"versions": [
+"Sapo Xule vs. Os Invasores do Brejo (Brazil)"
+],
+"image": "sapo-xule-vs-os-invasores-do-brejo-brazi-4c7bb9"
+},
+{
+"title": "Satellite 7",
+"id": "Satellite 7 (Japan) (En)",
+"status": "ok",
+"versions": [
+"Satellite 7 (Japan) (En)"
+],
+"image": "satellite-7-japan-en-a6cf2c"
+},
+{
+"title": "Schtroumpfs Autour du Monde, Les",
+"id": "Schtroumpfs Autour du Monde, Les (Europe) (En,Fr,De,Es)",
+"status": "ok",
+"versions": [
+"Schtroumpfs Autour du Monde, Les (Europe) (En,Fr,De,Es)",
+"Schtroumpfs Autour du Monde, Les (Europe) (En,Fr,De,Es) (Beta) (1996-08-12)"
+],
+"image": "schtroumpfs-autour-du-monde-les-europe-e-91db5b"
+},
+{
+"title": "Scramble Spirits",
+"id": "Scramble Spirits (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Scramble Spirits (Europe, Brazil) (En)",
+"Scramble Spirits (Europe, Brazil) (En) (Beta)",
+"Scramble Spirits (Taiwan) (En) (Unl)"
+],
+"image": "scramble-spirits-europe-brazil-en-3bd859"
+},
+{
+"title": "SDI",
+"id": "SDI (Japan) (En)",
+"status": "ok",
+"versions": [
+"SDI (Japan) (En)"
+],
+"image": "sdi-japan-en-09d9b3"
+},
+{
+"title": "Secret Command",
+"id": "Secret Command (Europe)",
+"status": "ok",
+"versions": [
+"Secret Command (Europe)",
+"Secret Command (Taiwan) (En) (Unl)"
+],
+"image": "secret-command-europe-efa0a3"
+},
+{
+"title": "Sega Chess",
+"id": "Sega Chess (Europe, Brazil) (En)",
+"status": "partial",
+"versions": [
+"Sega Chess (Europe, Brazil) (En)"
+],
+"image": null
+},
+{
+"title": "Sega Graphic Board",
+"id": "Sega Graphic Board (USA) (v2.0) (Proto)",
+"status": "ok",
+"versions": [
+"Sega Graphic Board (USA) (v2.0) (Proto)"
+],
+"image": "sega-graphic-board-usa-v2-0-proto-be324a"
+},
+{
+"title": "Sega World Tournament Golf",
+"id": "Sega World Tournament Golf (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Sega World Tournament Golf (Europe, Brazil) (En)"
+],
+"image": "sega-world-tournament-golf-europe-brazil-1b3b0e"
+},
+{
+"title": "Seishun Scandal",
+"id": "Seishun Scandal (Japan) (En)",
+"status": "ok",
+"versions": [
+"Seishun Scandal (Japan) (En)"
+],
+"image": "seishun-scandal-japan-en-1e4083"
+},
+{
+"title": "Senha",
+"id": "Senha (Brazil) (Mega Drive 4)",
+"status": "ok",
+"versions": [
+"Senha (Brazil) (Mega Drive 4)"
+],
+"image": "senha-brazil-mega-drive-4-fb5b99"
+},
+{
+"title": "Sensible Soccer",
+"id": "Sensible Soccer (Europe)",
+"status": "ok",
+"versions": [
+"Sensible Soccer (Europe)"
+],
+"image": "sensible-soccer-europe-afe89c"
+},
+{
+"title": "Shadow Dancer",
+"id": "Shadow Dancer (Taiwan) (En) (Unl)",
+"status": "ok",
+"versions": [
+"Shadow Dancer (Taiwan) (En) (Unl)"
+],
+"image": "shadow-dancer-taiwan-en-unl-aa2809"
+},
+{
+"title": "Shadow Dancer - The Secret of Shinobi",
+"id": "Shadow Dancer - The Secret of Shinobi (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Shadow Dancer - The Secret of Shinobi (Europe, Brazil) (En)"
+],
+"image": "shadow-dancer-the-secret-of-shinobi-euro-5de98c"
+},
+{
+"title": "Shadow of the Beast",
+"id": "Shadow of the Beast (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Shadow of the Beast (Europe, Brazil) (En)",
+"Shadow of the Beast (Taiwan) (En) (Unl)"
+],
+"image": "shadow-of-the-beast-europe-brazil-en-eab96d"
+},
+{
+"title": "Shanghai",
+"id": "Shanghai (USA, Europe)",
+"status": "ok",
+"versions": [
+"Shanghai (USA, Europe)",
+"Shanghai (USA, Europe) (Beta)"
+],
+"image": "shanghai-usa-europe-d56847"
+},
+{
+"title": "Shinobi",
+"id": "Shinobi (USA, Europe, Brazil) (En) (Rev 1)",
+"status": "ok",
+"versions": [
+"Shinobi (USA, Europe, Brazil) (En) (Rev 1)",
+"Shinobi (Japan, Brazil) (En)"
+],
+"image": "shinobi-usa-europe-brazil-en-rev-1-760a39"
+},
+{
+"title": "Shooting Gallery",
+"id": "Shooting Gallery (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Shooting Gallery (USA, Europe, Brazil) (En)"
+],
+"image": "shooting-gallery-usa-europe-brazil-en-0fca71"
+},
+{
+"title": "Simpsons, The - Bart vs. The Space Mutants",
+"id": "Simpsons, The - Bart vs. The Space Mutants (Europe, Brazil) (En)",
+"status": "partial",
+"versions": [
+"Simpsons, The - Bart vs. The Space Mutants (Europe, Brazil) (En)"
+],
+"image": null
+},
+{
+"title": "Simpsons, The - Bart vs. The World",
+"id": "Simpsons, The - Bart vs. The World (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Simpsons, The - Bart vs. The World (Europe, Brazil) (En)"
+],
+"image": "simpsons-the-bart-vs-the-world-europe-br-748b11"
+},
+{
+"title": "Sitio do Picapau Amarelo",
+"id": "Sitio do Picapau Amarelo (Brazil)",
+"status": "ok",
+"versions": [
+"Sitio do Picapau Amarelo (Brazil)"
+],
+"image": "sitio-do-picapau-amarelo-brazil-752185"
+},
+{
+"title": "Sky Fighter",
+"id": "Sky Fighter (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Sky Fighter (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Sky Jaguar",
+"id": "Sky Jaguar (Korea) (En) (HiCom) (Unl)",
+"status": "partial",
+"versions": [
+"Sky Jaguar (Korea) (En) (HiCom) (Unl)",
+"Sky Jaguar (Korea) (En) (Samsung) (Unl)"
+],
+"image": null
+},
+{
+"title": "Slap Shoot",
+"id": "Slap Shoot (USA) (Beta)",
+"status": "ok",
+"versions": [
+"Slap Shoot (USA) (Beta)"
+],
+"image": "slap-shoot-usa-beta-7a86f1"
+},
+{
+"title": "Slap Shot",
+"id": "Slap Shot (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Slap Shot (USA, Europe, Brazil) (En)",
+"Slap Shot (Europe)",
+"Slap Shot (Europe) (Sample)"
+],
+"image": "slap-shot-usa-europe-brazil-en-d22943"
+},
+{
+"title": "Smurfs, The",
+"id": "Smurfs, The (Europe, Brazil) (En,Fr,De,Es)",
+"status": "ok",
+"versions": [
+"Smurfs, The (Europe, Brazil) (En,Fr,De,Es)"
+],
+"image": "smurfs-the-europe-brazil-en-fr-de-es-87b77a"
+},
+{
+"title": "Solomon no Kagi - Oujo Rihita no Namida",
+"id": "Solomon no Kagi - Oujo Rihita no Namida (Japan)",
+"status": "ok",
+"versions": [
+"Solomon no Kagi - Oujo Rihita no Namida (Japan)",
+"Solomon no Kagi - Oujo Rihita no Namida (Japan) (Beta)"
+],
+"image": "solomon-no-kagi-oujo-rihita-no-namida-ja-a8aed3"
+},
+{
+"title": "Sonic Blast",
+"id": "Sonic Blast (Brazil) (En)",
+"status": "ok",
+"versions": [
+"Sonic Blast (Brazil) (En)"
+],
+"image": "sonic-blast-brazil-en-4505d2"
+},
+{
+"title": "Sonic Chaos",
+"id": "Sonic Chaos (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Sonic Chaos (Europe, Brazil) (En)",
+"Sonic Chaos (Europe, Brazil) (En) (Beta) (1993-06-30)",
+"Sonic Chaos (Europe, Brazil) (En) (Beta) (1993-07-13)"
+],
+"image": "sonic-chaos-europe-brazil-en-d51867"
+},
+{
+"title": "Sonic Spinball",
+"id": "Sonic Spinball (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Sonic Spinball (Europe, Brazil) (En)"
+],
+"image": "sonic-spinball-europe-brazil-en-825737"
+},
+{
+"title": "Sonic The Hedgehog",
+"id": "Sonic The Hedgehog (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Sonic The Hedgehog (USA, Europe, Brazil) (En)"
+],
+"image": "sonic-the-hedgehog-usa-europe-brazil-en-768355"
+},
+{
+"title": "Sonic The Hedgehog 2",
+"id": "Sonic The Hedgehog 2 (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Sonic The Hedgehog 2 (Europe, Brazil) (En)",
+"Sonic The Hedgehog 2 (Europe, Brazil) (En) (Rev 1)"
+],
+"image": "sonic-the-hedgehog-2-europe-brazil-en-e27935"
+},
+{
+"title": "Sonic's Edusoft",
+"id": "Sonic's Edusoft (Europe) (Proto)",
+"status": "partial",
+"versions": [
+"Sonic's Edusoft (Europe) (Proto)"
+],
+"image": null
+},
+{
+"title": "Space Gun",
+"id": "Space Gun (Europe)",
+"status": "ok",
+"versions": [
+"Space Gun (Europe)"
+],
+"image": "space-gun-europe-81b99b"
+},
+{
+"title": "Space Harrier",
+"id": "Space Harrier (Europe)",
+"status": "ok",
+"versions": [
+"Space Harrier (Europe)",
+"Space Harrier (Japan, USA) (En)"
+],
+"image": "space-harrier-europe-ee7691"
+},
+{
+"title": "Space Harrier 3-D",
+"id": "Space Harrier 3-D (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Space Harrier 3-D (USA, Europe, Brazil) (En)"
+],
+"image": "space-harrier-3-d-usa-europe-brazil-en-cd139f"
+},
+{
+"title": "Space Harrier 3D",
+"id": "Space Harrier 3D (Japan) (En)",
+"status": "ok",
+"versions": [
+"Space Harrier 3D (Japan) (En)"
+],
+"image": "space-harrier-3d-japan-en-6134d4"
+},
+{
+"title": "Special Criminal Investigation",
+"id": "Special Criminal Investigation (Europe)",
+"status": "ok",
+"versions": [
+"Special Criminal Investigation (Europe)",
+"Special Criminal Investigation (Europe) (Beta)"
+],
+"image": "special-criminal-investigation-europe-561bed"
+},
+{
+"title": "Speedball",
+"id": "Speedball (World) (Evercade)",
+"status": "ok",
+"versions": [
+"Speedball (World) (Evercade)",
+"Speedball (Europe)",
+"Speedball (Europe) (Rev 1)"
+],
+"image": "speedball-world-evercade-f137f3"
+},
+{
+"title": "Speedball 2",
+"id": "Speedball 2 (Europe)",
+"status": "ok",
+"versions": [
+"Speedball 2 (Europe)"
+],
+"image": "speedball-2-europe-d7db28"
+},
+{
+"title": "SpellCaster",
+"id": "SpellCaster (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"SpellCaster (USA, Europe, Brazil) (En)"
+],
+"image": "spellcaster-usa-europe-brazil-en-d1da38"
+},
+{
+"title": "Spider-Man",
+"id": "Spider-Man (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Spider-Man (USA, Europe, Brazil) (En)"
+],
+"image": "spider-man-usa-europe-brazil-en-fcc109"
+},
+{
+"title": "Spider-Man - Return of the Sinister Six",
+"id": "Spider-Man - Return of the Sinister Six (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Spider-Man - Return of the Sinister Six (Europe, Brazil) (En)"
+],
+"image": "spider-man-return-of-the-sinister-six-eu-5bb2ab"
+},
+{
+"title": "Sports Pad Football",
+"id": "Sports Pad Football (USA)",
+"status": "ok",
+"versions": [
+"Sports Pad Football (USA)"
+],
+"image": "sports-pad-football-usa-428cbb"
+},
+{
+"title": "Sports Pad Soccer",
+"id": "Sports Pad Soccer (Japan) (En)",
+"status": "ok",
+"versions": [
+"Sports Pad Soccer (Japan) (En)"
+],
+"image": "sports-pad-soccer-japan-en-7b3fd6"
+},
+{
+"title": "Spy vs Spy",
+"id": "Spy vs Spy (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Spy vs Spy (USA, Europe, Brazil) (En)",
+"Spy vs Spy (Japan) (En)",
+"Spy vs Spy (Taiwan) (En) (Unl)"
+],
+"image": "spy-vs-spy-usa-europe-brazil-en-116a6d"
+},
+{
+"title": "Star Wars",
+"id": "Star Wars (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Star Wars (Europe, Brazil) (En)"
+],
+"image": "star-wars-europe-brazil-en-49fed5"
+},
+{
+"title": "Street Fighter II'",
+"id": "Street Fighter II' (Brazil) (En)",
+"status": "ok",
+"versions": [
+"Street Fighter II' (Brazil) (En)"
+],
+"image": "street-fighter-ii-brazil-en-9cdea4"
+},
+{
+"title": "Street Master",
+"id": "Street Master (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Street Master (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Streets of Rage",
+"id": "Streets of Rage (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Streets of Rage (Europe, Brazil) (En)"
+],
+"image": "streets-of-rage-europe-brazil-en-f0788e"
+},
+{
+"title": "Streets of Rage II",
+"id": "Streets of Rage II (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Streets of Rage II (Europe, Brazil) (En)"
+],
+"image": "streets-of-rage-ii-europe-brazil-en-c965c9"
+},
+{
+"title": "Strider",
+"id": "Strider (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Strider (USA, Europe, Brazil) (En)",
+"Strider (USA, Europe, Brazil) (En) (Demo)"
+],
+"image": "strider-usa-europe-brazil-en-e90c59"
+},
+{
+"title": "Strider II",
+"id": "Strider II (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Strider II (Europe, Brazil) (En)"
+],
+"image": "strider-ii-europe-brazil-en-699d19"
+},
+{
+"title": "Strider, The",
+"id": "Strider, The (Taiwan) (En) (Unl)",
+"status": "ok",
+"versions": [
+"Strider, The (Taiwan) (En) (Unl)"
+],
+"image": "strider-the-taiwan-en-unl-3e38f4"
+},
+{
+"title": "Submarine Attack",
+"id": "Submarine Attack (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Submarine Attack (Europe, Brazil) (En)",
+"Submarine Attack (Taiwan) (En) (Unl)"
+],
+"image": "submarine-attack-europe-brazil-en-02bf5a"
+},
+{
+"title": "Sudoku",
+"id": "Sudoku (Brazil) (Mega Drive 4)",
+"status": "ok",
+"versions": [
+"Sudoku (Brazil) (Mega Drive 4)"
+],
+"image": "sudoku-brazil-mega-drive-4-b799b8"
+},
+{
+"title": "Suho Jeonsa",
+"id": "Suho Jeonsa (Korea) (Unl)",
+"status": "ok",
+"versions": [
+"Suho Jeonsa (Korea) (Unl)"
+],
+"image": "suho-jeonsa-korea-unl-ac19d4"
+},
+{
+"title": "Sukeban Deka II - Shoujo Tekkamen Densetsu",
+"id": "Sukeban Deka II - Shoujo Tekkamen Densetsu (Japan)",
+"status": "ok",
+"versions": [
+"Sukeban Deka II - Shoujo Tekkamen Densetsu (Japan)"
+],
+"image": "sukeban-deka-ii-shoujo-tekkamen-densetsu-3aeb5e"
+},
+{
+"title": "Summer Games",
+"id": "Summer Games (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Summer Games (Europe, Brazil) (En)",
+"Summer Games (Europe, Brazil) (En) (Beta 1)",
+"Summer Games (Europe, Brazil) (En) (Beta 2)"
+],
+"image": "summer-games-europe-brazil-en-f19f73"
+},
+{
+"title": "Super Arkanoid",
+"id": "Super Arkanoid (Korea) (En) (Unl)",
+"status": "ok",
+"versions": [
+"Super Arkanoid (Korea) (En) (Unl)"
+],
+"image": "super-arkanoid-korea-en-unl-58b3c6"
+},
+{
+"title": "Super Basketball",
+"id": "Super Basketball (USA) (Demo)",
+"status": "ok",
+"versions": [
+"Super Basketball (USA) (Demo)"
+],
+"image": "super-basketball-usa-demo-b61977"
+},
+{
+"title": "Super Bioman I",
+"id": "Super Bioman I (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Super Bioman I (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Super Boy 4",
+"id": "Super Boy 4 (Korea) (En) (Unl)",
+"status": "ok",
+"versions": [
+"Super Boy 4 (Korea) (En) (Unl)"
+],
+"image": "super-boy-4-korea-en-unl-e5e9c2"
+},
+{
+"title": "Super Boy I",
+"id": "Super Boy I (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Super Boy I (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Super Boy II",
+"id": "Super Boy II (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Super Boy II (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Super Boy III",
+"id": "Super Boy III (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Super Boy III (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Super Bubble Bobble",
+"id": "Super Bubble Bobble (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Super Bubble Bobble (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Super Columns & Tetris",
+"id": "Super Columns & Tetris (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Super Columns & Tetris (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Super Futebol II",
+"id": "Super Futebol II (Brazil)",
+"status": "ok",
+"versions": [
+"Super Futebol II (Brazil)"
+],
+"image": "super-futebol-ii-brazil-5d4c3d"
+},
+{
+"title": "Super Game 150",
+"id": "Super Game 150 (Korea) (Unl)",
+"status": "ok",
+"versions": [
+"Super Game 150 (Korea) (Unl)"
+],
+"image": "super-game-150-korea-unl-2b86d3"
+},
+{
+"title": "Super Game 180",
+"id": "Super Game 180 (Korea) (Unl)",
+"status": "partial",
+"versions": [
+"Super Game 180 (Korea) (Unl)"
+],
+"image": null
+},
+{
+"title": "Super Game 45",
+"id": "Super Game 45 (Korea) (Unl)",
+"status": "ok",
+"versions": [
+"Super Game 45 (Korea) (Unl)"
+],
+"image": "super-game-45-korea-unl-e6af67"
+},
+{
+"title": "Super Game 52 Hap",
+"id": "Super Game 52 Hap (Korea) (Unl)",
+"status": "ok",
+"versions": [
+"Super Game 52 Hap (Korea) (Unl)"
+],
+"image": "super-game-52-hap-korea-unl-f0fdc3"
+},
+{
+"title": "Super Game World 30 Hap",
+"id": "Super Game World 30 Hap (Korea) (v1.0) (Unl)",
+"status": "partial",
+"versions": [
+"Super Game World 30 Hap (Korea) (v1.0) (Unl)",
+"Super Game World 30 Hap (Korea) (v1.1) (Unl)"
+],
+"image": null
+},
+{
+"title": "Super Game World 75 Hap",
+"id": "Super Game World 75 Hap (Korea) (Unl)",
+"status": "partial",
+"versions": [
+"Super Game World 75 Hap (Korea) (Unl)"
+],
+"image": null
+},
+{
+"title": "Super Golf",
+"id": "Super Golf (Europe) (Beta)",
+"status": "ok",
+"versions": [
+"Super Golf (Europe) (Beta)"
+],
+"image": "super-golf-europe-beta-c53853"
+},
+{
+"title": "Super Kick Off",
+"id": "Super Kick Off (Europe, Brazil) (En,Fr,De,Es,It,Nl,Pt,Sv)",
+"status": "ok",
+"versions": [
+"Super Kick Off (Europe, Brazil) (En,Fr,De,Es,It,Nl,Pt,Sv)"
+],
+"image": "super-kick-off-europe-brazil-en-fr-de-es-0b5193"
+},
+{
+"title": "Super Monaco GP",
+"id": "Super Monaco GP (USA)",
+"status": "ok",
+"versions": [
+"Super Monaco GP (USA)",
+"Super Monaco GP (USA) (Beta 1)",
+"Super Monaco GP (USA) (Beta 2)",
+"Super Monaco GP (Europe, Brazil) (En)",
+"Super Monaco GP (Europe, Brazil) (En) (Beta)"
+],
+"image": "super-monaco-gp-usa-f18699"
+},
+{
+"title": "Super Multi Game - Super 125 in 1",
+"id": "Super Multi Game - Super 125 in 1 (Korea) (Unl)",
+"status": "partial",
+"versions": [
+"Super Multi Game - Super 125 in 1 (Korea) (Unl)"
+],
+"image": null
+},
+{
+"title": "Super Multi Game - Super 75 in 1",
+"id": "Super Multi Game - Super 75 in 1 (Korea) (Unl)",
+"status": "partial",
+"versions": [
+"Super Multi Game - Super 75 in 1 (Korea) (Unl)"
+],
+"image": null
+},
+{
+"title": "Super Off Road",
+"id": "Super Off Road (Europe)",
+"status": "ok",
+"versions": [
+"Super Off Road (Europe)",
+"Super Off Road (Europe) (Beta)"
+],
+"image": "super-off-road-europe-6438c7"
+},
+{
+"title": "Super Penguin",
+"id": "Super Penguin (Korea) (Unl)",
+"status": "partial",
+"versions": [
+"Super Penguin (Korea) (Unl)"
+],
+"image": null
+},
+{
+"title": "Super Racing",
+"id": "Super Racing (Japan) (En)",
+"status": "ok",
+"versions": [
+"Super Racing (Japan) (En)"
+],
+"image": "super-racing-japan-en-430bca"
+},
+{
+"title": "Super Smash T.V.",
+"id": "Super Smash T.V. (Europe)",
+"status": "ok",
+"versions": [
+"Super Smash T.V. (Europe)"
+],
+"image": "super-smash-t-v-europe-cdeb3e"
+},
+{
+"title": "Super Space Invaders",
+"id": "Super Space Invaders (Europe)",
+"status": "ok",
+"versions": [
+"Super Space Invaders (Europe)"
+],
+"image": "super-space-invaders-europe-db1123"
+},
+{
+"title": "Super Tennis",
+"id": "Super Tennis (USA, Europe)",
+"status": "ok",
+"versions": [
+"Super Tennis (USA, Europe)"
+],
+"image": "super-tennis-usa-europe-435340"
+},
+{
+"title": "Super Tetris",
+"id": "Super Tetris (Taiwan) (En) (Unl)",
+"status": "ok",
+"versions": [
+"Super Tetris (Taiwan) (En) (Unl)"
+],
+"image": "super-tetris-taiwan-en-unl-ae082b"
+},
+{
+"title": "Super Wonder Boy - Monster World",
+"id": "Super Wonder Boy - Monster World (Japan)",
+"status": "ok",
+"versions": [
+"Super Wonder Boy - Monster World (Japan)"
+],
+"image": "super-wonder-boy-monster-world-japan-21c100"
+},
+{
+"title": "Superman - The Man of Steel",
+"id": "Superman - The Man of Steel (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Superman - The Man of Steel (Europe, Brazil) (En)"
+],
+"image": "superman-the-man-of-steel-europe-brazil--44c662"
+},
+{
+"title": "T2 - The Arcade Game",
+"id": "T2 - The Arcade Game (Europe)",
+"status": "ok",
+"versions": [
+"T2 - The Arcade Game (Europe)"
+],
+"image": "t2-the-arcade-game-europe-50138a"
+},
+{
+"title": "Taito Chase H.Q.",
+"id": "Taito Chase H.Q. (Europe)",
+"status": "ok",
+"versions": [
+"Taito Chase H.Q. (Europe)",
+"Taito Chase H.Q. (Europe) (Beta)"
+],
+"image": "taito-chase-h-q-europe-86189b"
+},
+{
+"title": "Tangram",
+"id": "Tangram (Brazil) (Mega Drive 4)",
+"status": "ok",
+"versions": [
+"Tangram (Brazil) (Mega Drive 4)"
+],
+"image": "tangram-brazil-mega-drive-4-3a4d27"
+},
+{
+"title": "Tank Battalion",
+"id": "Tank Battalion (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Tank Battalion (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Taz in Escape from Mars",
+"id": "Taz in Escape from Mars (Brazil) (En)",
+"status": "ok",
+"versions": [
+"Taz in Escape from Mars (Brazil) (En)"
+],
+"image": "taz-in-escape-from-mars-brazil-en-2057b0"
+},
+{
+"title": "Taz-Mania",
+"id": "Taz-Mania (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Taz-Mania (Europe, Brazil) (En)",
+"Taz-Mania (Europe, Brazil) (En) (Beta)"
+],
+"image": "taz-mania-europe-brazil-en-b3a16d"
+},
+{
+"title": "Tecmo World Cup '92",
+"id": "Tecmo World Cup '92 (Europe) (Beta)",
+"status": "ok",
+"versions": [
+"Tecmo World Cup '92 (Europe) (Beta)"
+],
+"image": "tecmo-world-cup-92-europe-beta-51bf79"
+},
+{
+"title": "Tecmo World Cup '93",
+"id": "Tecmo World Cup '93 (Europe)",
+"status": "ok",
+"versions": [
+"Tecmo World Cup '93 (Europe)"
+],
+"image": "tecmo-world-cup-93-europe-b07e73"
+},
+{
+"title": "Teddy Boy",
+"id": "Teddy Boy (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Teddy Boy (USA, Europe, Brazil) (En)"
+],
+"image": "teddy-boy-usa-europe-brazil-en-28bdf4"
+},
+{
+"title": "Teddy Boy Blues",
+"id": "Teddy Boy Blues (Japan) (En)",
+"status": "ok",
+"versions": [
+"Teddy Boy Blues (Japan) (En)",
+"Teddy Boy Blues (Japan) (En) (Proto) (Ep-MyCard)"
+],
+"image": "teddy-boy-blues-japan-en-d8ad13"
+},
+{
+"title": "Tennis Ace",
+"id": "Tennis Ace (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Tennis Ace (Europe, Brazil) (En)"
+],
+"image": "tennis-ace-europe-brazil-en-76b0a6"
+},
+{
+"title": "Tensai Bakabon",
+"id": "Tensai Bakabon (Japan)",
+"status": "ok",
+"versions": [
+"Tensai Bakabon (Japan)"
+],
+"image": "tensai-bakabon-japan-dd74ce"
+},
+{
+"title": "Terminator 2 - Judgment Day",
+"id": "Terminator 2 - Judgment Day (Europe)",
+"status": "ok",
+"versions": [
+"Terminator 2 - Judgment Day (Europe)"
+],
+"image": "terminator-2-judgment-day-europe-762fde"
+},
+{
+"title": "Terminator, The",
+"id": "Terminator, The (Brazil) (En)",
+"status": "ok",
+"versions": [
+"Terminator, The (Brazil) (En)",
+"Terminator, The (Europe)"
+],
+"image": "terminator-the-brazil-en-f921f4"
+},
+{
+"title": "Three Dragon Story, The",
+"id": "Three Dragon Story, The (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Three Dragon Story, The (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Thunder Blade",
+"id": "Thunder Blade (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Thunder Blade (USA, Europe, Brazil) (En)",
+"Thunder Blade (USA, Europe, Brazil) (En) (Beta)",
+"Thunder Blade (Japan) (En)",
+"Thunder Blade (Taiwan) (En) (Unl)"
+],
+"image": "thunder-blade-usa-europe-brazil-en-c7ce51"
+},
+{
+"title": "Time Soldiers",
+"id": "Time Soldiers (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Time Soldiers (USA, Europe, Brazil) (En)"
+],
+"image": "time-soldiers-usa-europe-brazil-en-6cd732"
+},
+{
+"title": "Tom & Jerry",
+"id": "Tom & Jerry (Europe, Brazil) (En) (Beta)",
+"status": "ok",
+"versions": [
+"Tom & Jerry (Europe, Brazil) (En) (Beta)"
+],
+"image": "tom-jerry-europe-brazil-en-beta-86eb55"
+},
+{
+"title": "Tom and Jerry - The Movie",
+"id": "Tom and Jerry - The Movie (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Tom and Jerry - The Movie (Europe, Brazil) (En)"
+],
+"image": "tom-and-jerry-the-movie-europe-brazil-en-169625"
+},
+{
+"title": "Toto World 3",
+"id": "Toto World 3 (Korea) (En) (Unl)",
+"status": "ok",
+"versions": [
+"Toto World 3 (Korea) (En) (Unl)"
+],
+"image": "toto-world-3-korea-en-unl-04588d"
+},
+{
+"title": "TransBot",
+"id": "TransBot (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"TransBot (USA, Europe, Brazil) (En)",
+"TransBot (USA, Europe, Brazil) (En) (Beta)"
+],
+"image": "transbot-usa-europe-brazil-en-f1c87a"
+},
+{
+"title": "Trivial Pursuit - Genus Edition",
+"id": "Trivial Pursuit - Genus Edition (Europe) (En,Fr,De,Es)",
+"status": "ok",
+"versions": [
+"Trivial Pursuit - Genus Edition (Europe) (En,Fr,De,Es)"
+],
+"image": "trivial-pursuit-genus-edition-europe-en--1245e9"
+},
+{
+"title": "Ttoriui Moheom",
+"id": "Ttoriui Moheom (Korea) (En) (Unl)",
+"status": "ok",
+"versions": [
+"Ttoriui Moheom (Korea) (En) (Unl)"
+],
+"image": "ttoriui-moheom-korea-en-unl-60a994"
+},
+{
+"title": "Turma da Monica em - O Resgate",
+"id": "Turma da Monica em - O Resgate (Brazil)",
+"status": "ok",
+"versions": [
+"Turma da Monica em - O Resgate (Brazil)"
+],
+"image": "turma-da-monica-em-o-resgate-brazil-108f1a"
+},
+{
+"title": "Ultima IV - Quest of the Avatar",
+"id": "Ultima IV - Quest of the Avatar (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Ultima IV - Quest of the Avatar (Europe, Brazil) (En)",
+"Ultima IV - Quest of the Avatar (Europe, Brazil) (En) (Beta)"
+],
+"image": "ultima-iv-quest-of-the-avatar-europe-bra-e25e60"
+},
+{
+"title": "Ultimate Soccer",
+"id": "Ultimate Soccer (Europe, Brazil) (En,Fr,De,Es,It)",
+"status": "ok",
+"versions": [
+"Ultimate Soccer (Europe, Brazil) (En,Fr,De,Es,It)"
+],
+"image": "ultimate-soccer-europe-brazil-en-fr-de-e-c2d891"
+},
+{
+"title": "Vampire",
+"id": "Vampire (Europe, Brazil) (En) (Beta)",
+"status": "ok",
+"versions": [
+"Vampire (Europe, Brazil) (En) (Beta)"
+],
+"image": "vampire-europe-brazil-en-beta-7f31af"
+},
+{
+"title": "Vigilante",
+"id": "Vigilante (USA, Europe, Brazil) (En)",
+"status": "partial",
+"versions": [
+"Vigilante (USA, Europe, Brazil) (En)"
+],
+"image": null
+},
+{
+"title": "Virtua Fighter Animation",
+"id": "Virtua Fighter Animation (Brazil) (En)",
+"status": "ok",
+"versions": [
+"Virtua Fighter Animation (Brazil) (En)"
+],
+"image": "virtua-fighter-animation-brazil-en-b00de6"
+},
+{
+"title": "Walter Payton Football",
+"id": "Walter Payton Football (USA)",
+"status": "ok",
+"versions": [
+"Walter Payton Football (USA)"
+],
+"image": "walter-payton-football-usa-2658ff"
+},
+{
+"title": "Wanted",
+"id": "Wanted (USA, Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Wanted (USA, Europe, Brazil) (En)"
+],
+"image": "wanted-usa-europe-brazil-en-efaf41"
+},
+{
+"title": "Where in the World is Carmen Sandiego",
+"id": "Where in the World is Carmen Sandiego (USA)",
+"status": "ok",
+"versions": [
+"Where in the World is Carmen Sandiego (USA)",
+"Where in the World is Carmen Sandiego (Brazil)"
+],
+"image": "where-in-the-world-is-carmen-sandiego-us-95b5f7"
+},
+{
+"title": "Wimbledon",
+"id": "Wimbledon (Brazil) (En)",
+"status": "ok",
+"versions": [
+"Wimbledon (Brazil) (En)",
+"Wimbledon (Europe)"
+],
+"image": "wimbledon-brazil-en-5efcd9"
+},
+{
+"title": "Wimbledon II",
+"id": "Wimbledon II (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Wimbledon II (Europe, Brazil) (En)"
+],
+"image": "wimbledon-ii-europe-brazil-en-5e3e4d"
+},
+{
+"title": "Winter Olympics",
+"id": "Winter Olympics (Brazil) (En,Fr,De,Es,It,Pt,Sv,No)",
+"status": "ok",
+"versions": [
+"Winter Olympics (Brazil) (En,Fr,De,Es,It,Pt,Sv,No)",
+"Winter Olympics (Europe) (En,Fr,De,Es,It,Pt,Sv,No)"
+],
+"image": "winter-olympics-brazil-en-fr-de-es-it-pt-842520"
+},
+{
+"title": "Wolfchild",
+"id": "Wolfchild (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"Wolfchild (Europe, Brazil) (En)"
+],
+"image": "wolfchild-europe-brazil-en-c357d3"
+},
+{
+"title": "Wonder Boy",
+"id": "Wonder Boy (USA, Europe, Brazil) (En) (Rev 1)",
+"status": "ok",
+"versions": [
+"Wonder Boy (USA, Europe, Brazil) (En) (Rev 1)",
+"Wonder Boy (Japan, Europe) (En)"
+],
+"image": "wonder-boy-usa-europe-brazil-en-rev-1-06bcef"
+},
+{
+"title": "Wonder Boy III - The Dragon's Trap",
+"id": "Wonder Boy III - The Dragon's Trap (USA, Europe)",
+"status": "ok",
+"versions": [
+"Wonder Boy III - The Dragon's Trap (USA, Europe)",
+"Wonder Boy III - The Dragon's Trap (World) (Digital) (Unl)"
+],
+"image": "wonder-boy-iii-the-dragon-s-trap-usa-eur-2fb0b8"
+},
+{
+"title": "Wonder Boy in Monster Land",
+"id": "Wonder Boy in Monster Land (USA, Europe)",
+"status": "ok",
+"versions": [
+"Wonder Boy in Monster Land (USA, Europe)",
+"Wonder Boy in Monster Land (USA, Europe) (Beta)"
+],
+"image": "wonder-boy-in-monster-land-usa-europe-b90f15"
+},
+{
+"title": "Wonder Boy in Monster World",
+"id": "Wonder Boy in Monster World (Europe)",
+"status": "ok",
+"versions": [
+"Wonder Boy in Monster World (Europe)",
+"Wonder Boy in Monster World (Europe) (Beta)"
+],
+"image": "wonder-boy-in-monster-world-europe-4f6d80"
+},
+{
+"title": "Wonsiin",
+"id": "Wonsiin (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Wonsiin (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Woody Pop - Shinjinrui no Block Kuzushi",
+"id": "Woody Pop - Shinjinrui no Block Kuzushi (Japan) (En)",
+"status": "ok",
+"versions": [
+"Woody Pop - Shinjinrui no Block Kuzushi (Japan) (En)"
+],
+"image": "woody-pop-shinjinrui-no-block-kuzushi-ja-54bedb"
+},
+{
+"title": "World Class Leaderboard",
+"id": "World Class Leaderboard (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"World Class Leaderboard (Europe, Brazil) (En)"
+],
+"image": "world-class-leaderboard-europe-brazil-en-6fccb0"
+},
+{
+"title": "World Cup Italia '90",
+"id": "World Cup Italia '90 (USA) (Demo)",
+"status": "ok",
+"versions": [
+"World Cup Italia '90 (USA) (Demo)",
+"World Cup Italia '90 (Europe, Brazil) (En)"
+],
+"image": "world-cup-italia-90-usa-demo-25d391"
+},
+{
+"title": "World Cup USA 94",
+"id": "World Cup USA 94 (Europe, Brazil) (En,Fr,De,Es,It,Nl,Pt,Sv)",
+"status": "ok",
+"versions": [
+"World Cup USA 94 (Europe, Brazil) (En,Fr,De,Es,It,Nl,Pt,Sv)"
+],
+"image": "world-cup-usa-94-europe-brazil-en-fr-de--9fd390"
+},
+{
+"title": "World Games",
+"id": "World Games (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"World Games (Europe, Brazil) (En)",
+"World Games (Europe, Brazil) (En) (Beta)"
+],
+"image": "world-games-europe-brazil-en-06b1fc"
+},
+{
+"title": "World Grand Prix",
+"id": "World Grand Prix (USA, Brazil) (En)",
+"status": "ok",
+"versions": [
+"World Grand Prix (USA, Brazil) (En)",
+"World Grand Prix (USA, Brazil) (En) (Beta)",
+"World Grand Prix (Europe)"
+],
+"image": "world-grand-prix-usa-brazil-en-4a5772"
+},
+{
+"title": "World Soccer",
+"id": "World Soccer (World)",
+"status": "ok",
+"versions": [
+"World Soccer (World)"
+],
+"image": "world-soccer-world-714cb3"
+},
+{
+"title": "WWF Wrestlemania - Steel Cage Challenge",
+"id": "WWF Wrestlemania - Steel Cage Challenge (Europe, Brazil) (En)",
+"status": "ok",
+"versions": [
+"WWF Wrestlemania - Steel Cage Challenge (Europe, Brazil) (En)"
+],
+"image": "wwf-wrestlemania-steel-cage-challenge-eu-145c16"
+},
+{
+"title": "X-Men - Mojo World",
+"id": "X-Men - Mojo World (Brazil) (En)",
+"status": "ok",
+"versions": [
+"X-Men - Mojo World (Brazil) (En)"
+],
+"image": "x-men-mojo-world-brazil-en-cee611"
+},
+{
+"title": "Xenon 2 - Megablast",
+"id": "Xenon 2 - Megablast (Europe)",
+"status": "ok",
+"versions": [
+"Xenon 2 - Megablast (Europe)",
+"Xenon 2 - Megablast (Europe) (Rev 1)"
+],
+"image": "xenon-2-megablast-europe-434270"
+},
+{
+"title": "Xyzolog",
+"id": "Xyzolog (Korea) (En) (Unl)",
+"status": "partial",
+"versions": [
+"Xyzolog (Korea) (En) (Unl)"
+],
+"image": null
+},
+{
+"title": "Ys",
+"id": "Ys (Japan)",
+"status": "ok",
+"versions": [
+"Ys (Japan)"
+],
+"image": "ys-japan-b7a0cb"
+},
+{
+"title": "Ys - The Vanished Omens",
+"id": "Ys - The Vanished Omens (USA, Europe) (Ja) (Demo)",
+"status": "ok",
+"versions": [
+"Ys - The Vanished Omens (USA, Europe) (Ja) (Demo)",
+"Ys - The Vanished Omens (USA, Europe, Brazil) (En)"
+],
+"image": "ys-the-vanished-omens-usa-europe-ja-demo-ab4fc9"
+},
+{
+"title": "Yuyryeong-ui Jip",
+"id": "Yuyryeong-ui Jip (Korea) (En) (Unl)",
+"status": "ok",
+"versions": [
+"Yuyryeong-ui Jip (Korea) (En) (Unl)"
+],
+"image": "yuyryeong-ui-jip-korea-en-unl-2d18fc"
+},
+{
+"title": "Zaxxon 3-D",
+"id": "Zaxxon 3-D (World)",
+"status": "ok",
+"versions": [
+"Zaxxon 3-D (World)",
+"Zaxxon 3-D (World) (Beta)"
+],
+"image": "zaxxon-3-d-world-49b151"
+},
+{
+"title": "Zemina Best 25",
+"id": "Zemina Best 25 (Korea) (Unl)",
+"status": "partial",
+"versions": [
+"Zemina Best 25 (Korea) (Unl)"
+],
+"image": null
+},
+{
+"title": "Zemina Best 39",
+"id": "Zemina Best 39 (Korea) (Unl)",
+"status": "ok",
+"versions": [
+"Zemina Best 39 (Korea) (Unl)"
+],
+"image": "zemina-best-39-korea-unl-892622"
+},
+{
+"title": "Zemina Best 88",
+"id": "Zemina Best 88 (Korea) (Unl)",
+"status": "ok",
+"versions": [
+"Zemina Best 88 (Korea) (Unl)"
+],
+"image": "zemina-best-88-korea-unl-f3b224"
+},
+{
+"title": "Zemina Rompack - Q-Bert + Sports 3 + Gulkave + Pooyan",
+"id": "Zemina Rompack - Q-Bert + Sports 3 + Gulkave + Pooyan (Korea) (Unl)",
+"status": "partial",
+"versions": [
+"Zemina Rompack - Q-Bert + Sports 3 + Gulkave + Pooyan (Korea) (Unl)"
+],
+"image": null
+},
+{
+"title": "Zillion",
+"id": "Zillion (USA, Europe) (Rev 1)",
+"status": "ok",
+"versions": [
+"Zillion (USA, Europe) (Rev 1)",
+"Zillion (Europe, Brazil) (En) (Rev 2)",
+"Zillion (Japan, Europe) (En)"
+],
+"image": "zillion-usa-europe-rev-1-6564d8"
+},
+{
+"title": "Zillion II - The Tri Formation",
+"id": "Zillion II - The Tri Formation (World)",
+"status": "ok",
+"versions": [
+"Zillion II - The Tri Formation (World)",
+"Zillion II - The Tri Formation (World) (Beta)"
+],
+"image": "zillion-ii-the-tri-formation-world-18fb63"
+},
+{
+"title": "Zool - Ninja of the 'Nth' Dimension",
+"id": "Zool - Ninja of the 'Nth' Dimension (Europe)",
+"status": "ok",
+"versions": [
+"Zool - Ninja of the 'Nth' Dimension (Europe)"
+],
+"image": "zool-ninja-of-the-nth-dimension-europe-96b3c4"
+}
+]
+}
