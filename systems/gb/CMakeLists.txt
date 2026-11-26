@@ -80,6 +80,11 @@ endfunction()
 # blargg's cpu_instrs (public, tests/fetch_test_roms.py), recompiled with a
 # trace: tests/gb/test_recomp.py runs it and diffs it against the interpreter.
 set(GB_TEST_ROM ${CMAKE_SOURCE_DIR}/tests/roms/gb/blargg/cpu_instrs/cpu_instrs.gb)
+if(TESTS)
+    add_executable(gb_mbc7_tests tests/mbc7.c)
+    target_link_libraries(gb_mbc7_tests PRIVATE gbcore gb_recomp_none)
+endif()
+
 if(TESTS AND EXISTS ${GB_TEST_ROM})
     set(AUTO_HINTS ON)
     gb_recompile(gbtest_cpu_instrs ${GB_TEST_ROM})

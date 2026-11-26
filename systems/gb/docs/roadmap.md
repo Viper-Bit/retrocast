@@ -35,6 +35,7 @@ Exit tests and results: [verification-log.md](verification-log.md).
   flight, OAM $FF); LY/STAT timing only, until G3.
 - [x] MBC1, MBC2, MBC3 with the clock (counted in emulated time), MBC5
   (`systems/gb/runtime/cart.c`). Battery saves come with the window program (G3).
+- [x] MBC7 banking, serial EEPROM and digital tilt controls.
 - [x] **Exit:** blargg `cpu_instrs` (all 11 and combined), `instr_timing`,
   `mem_timing`, `mem_timing-2`, `halt_bug`; mooneye acceptance (timer,
   interrupts, OAM DMA, instruction timing, DMG boot state) and MBC1/2/5:

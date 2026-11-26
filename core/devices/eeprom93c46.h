@@ -26,6 +26,8 @@ void eeprom_init(Eeprom93c46 *e, int org8);  /* every cell $FF..., locked: MAME'
 /* The lines after a write of the port, at time now (microseconds); edges
  * are taken in DI, CLK, CS order, as MAME's port bits. */
 void eeprom_write_lines(Eeprom93c46 *e, int cs, int clk, int di, uint64_t now);
+/* 93LC56 in 16-bit mode, with separate battery storage. Initialize e with org8=0. */
+void eeprom93lc56_write(Eeprom93c46 *e, uint8_t data[256], uint8_t port, uint64_t now);
 int eeprom_do(const Eeprom93c46 *e, uint64_t now);
 
 #endif

@@ -342,6 +342,11 @@ void gb_run_frame(Gb *g) {
 void gb_set_pad(Gb *g, uint8_t pad) {
     if (pad & ~g->pad) g->ifl |= INT_JOYPAD, g->cpu.stopped = 0;  /* a new press */
     g->pad = pad;
+    if (g->cart.mbc == MBC_7) {
+        /* shortcut: one g from digital directions, use continuous input if a motion device is added. */
+        g->cart.tilt_dx = (int8_t)(!!(pad & PAD_LEFT) - !!(pad & PAD_RIGHT));
+        g->cart.tilt_dy = (int8_t)(!!(pad & PAD_UP) - !!(pad & PAD_DOWN));
+    }
 }
 
 int gb_load(Gb *g, const uint8_t *rom, size_t size, char *err, size_t errlen) {
@@ -402,7 +407,7 @@ void gb_free(Gb *g) { gb_cart_free(&g->cart); }
 /* ---- save states: a header, then the Gb struct as it is in memory (the
  * same build reads it back; a field-wise format when states must outlive
  * program updates) ---- */
-enum { GB_STATE_VERSION = 1 };
+enum { GB_STATE_VERSION = 2 };
 typedef struct { char magic[4]; uint32_t version, size, rom_hash; } GbStateHeader;
 
 uint32_t gb_rom_hash(const Gb *g) {  /* FNV-1a */
