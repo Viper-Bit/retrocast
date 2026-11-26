@@ -70,8 +70,13 @@ uint8_t sms_vdp_hcount(const Sms *s) {
     return (uint8_t)(t * 3 / 4);
 }
 
+/* The TMS9918 modes' fixed palette as the SMS VDP shows it, --BBGGRR (Genesis Plus GX). */
+static const uint8_t TMS[16] = {0x00, 0x00, 0x08, 0x0C, 0x10, 0x30, 0x01, 0x3C,
+                                0x02, 0x03, 0x05, 0x0F, 0x04, 0x33, 0x15, 0x3F};
+
 uint32_t sms_color(const Sms *s, unsigned index) {
-    unsigned c = s->vdp.cram[index & 31];
+    unsigned c = index >= 32 ? TMS[index & 15] : s->vdp.cram[index & 31];
+    if (index >= 32) return 0xFF000000u | (uint32_t)(c & 3) * 85 << 16 | (uint32_t)(c >> 2 & 3) * 85 << 8 | (uint32_t)(c >> 4 & 3) * 85;
     if (s->vdp.gg)  /* ----BBBBGGGGRRRR */
         return 0xFF000000u | (c & 15) * 17u << 16 | (c >> 4 & 15) * 17u << 8 | (c >> 8 & 15) * 17u;
     return 0xFF000000u | (uint32_t)(c & 3) * 85 << 16 | (uint32_t)(c >> 2 & 3) * 85 << 8 | (uint32_t)(c >> 4 & 3) * 85;
@@ -84,11 +89,57 @@ static unsigned pixel(const uint8_t *row, unsigned x) {
     return (row[0] >> b & 1) | (row[1] >> b & 1) << 1 | (row[2] >> b & 1) << 2 | (row[3] >> b & 1) << 3;
 }
 
+/* Graphics I and II (reg 0 bit 1), the TMS9918 modes: 32x24 names of 8x8
+ * patterns, two colours per pattern row (Graphics I: per 8 patterns),
+ * colour 0 the backdrop; 32 sprites of 4 bytes, 4 to a line. Frame colours
+ * 32-47 (sms_color). shortcut: no text or multicolour mode, no fifth-sprite
+ * number in the status; add them if a game needs them. */
+static void tms_line(SmsVdp *v, uint8_t *out, unsigned line) {
+    unsigned backdrop = v->reg[7] & 15, g2 = v->reg[0] & 2;
+    const uint8_t *names = &v->vram[(v->reg[2] & 0x0F) << 10 | (line >> 3) * 32];
+    for (unsigned x = 0; x < SMS_WIDTH; x++) {
+        unsigned n = names[x >> 3], pat, col;
+        if (g2) {
+            n |= (line >> 6) << 8;
+            pat = ((v->reg[4] & 4) << 11) | ((n & ((v->reg[4] & 3) << 8 | 0xFF)) << 3);
+            col = ((v->reg[3] & 0x80) << 6) | ((n & ((v->reg[3] & 0x7F) << 3 | 7)) << 3);
+            pat |= line & 7, col |= line & 7;
+        } else {
+            pat = (v->reg[4] & 7) << 11 | n << 3 | (line & 7);
+            col = v->reg[3] << 6 | n >> 3;
+        }
+        unsigned c = v->vram[col & 0x3FFF] >> (v->vram[pat & 0x3FFF] >> (7 - (x & 7)) & 1 ? 4 : 0) & 15;
+        out[x] = (uint8_t)(32 + (c ? c : backdrop));
+    }
+    const uint8_t *sat = &v->vram[(v->reg[5] & 0x7F) << 7];
+    unsigned size = v->reg[1] & 2 ? 16 : 8, zoom = v->reg[1] & 1 ? 2 : 1, found = 0;
+    uint8_t taken[SMS_WIDTH] = {0};
+    for (unsigned i = 0; i < 32; i++, sat += 4) {
+        if (sat[0] == 0xD0) break;
+        unsigned r = (line - (sat[0] + 1)) & 0xFF;
+        if (r >= size * zoom) continue;
+        if (++found > 4) { v->status |= 0x40; break; }
+        r /= zoom;
+        unsigned name = size == 16 ? sat[2] & 0xFC : sat[2], c = sat[3] & 15;
+        int x0 = sat[1] - (sat[3] & 0x80 ? 32 : 0);
+        for (unsigned px = 0; px < size * zoom; px++) {
+            int x = x0 + (int)px;
+            unsigned p = px / zoom;
+            uint8_t bits = v->vram[((v->reg[6] & 7) << 11 | (name + (p >> 3) * 2) << 3 | r) & 0x3FFF];
+            if (x < 0 || x >= SMS_WIDTH || !(bits >> (7 - (p & 7)) & 1)) continue;
+            if (taken[x]) { v->status |= 0x20; continue; }
+            taken[x] = 1;
+            if (c) out[x] = (uint8_t)(32 + c);
+        }
+    }
+}
+
 static void draw_line(Sms *s, unsigned line) {
     SmsVdp *v = &s->vdp;
     uint8_t *out = v->frame + line * SMS_WIDTH;
     uint8_t backdrop = (uint8_t)(16 | (v->reg[7] & 15));
     if (!(v->reg[1] & 0x40)) { memset(out, backdrop, SMS_WIDTH); return; }  /* display off */
+    if (!(v->reg[0] & 4)) { tms_line(v, out, line); return; }               /* not mode 4 */
 
     /* background: 32x28 tiles, scrolled; the top two rows (reg 0 bit 6) and
      * the right eight columns (bit 7) can be held still */

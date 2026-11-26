@@ -139,7 +139,8 @@ int main(int argc, char **argv) {
     unsigned colours = 0;
     for (unsigned y = 0; y < h0; y++)
         for (unsigned x = 0; x < w0; x++) {
-            unsigned c = s.vdp.cram[s.vdp.frame[(y + y0) * SMS_WIDTH + x + x0] & 31] & 0xFFF;
+            uint32_t rgb = sms_color(&s, s.vdp.frame[(y + y0) * SMS_WIDTH + x + x0]);
+            unsigned c = (rgb >> 20 & 15) << 8 | (rgb >> 12 & 15) << 4 | (rgb >> 4 & 15);
             colours += !seen[c], seen[c] = 1;
         }
     printf("frames=%u pc=%04X vdp_writes=%u colours=%u\n", s.frames, s.cpu.pc, s.writes, colours);

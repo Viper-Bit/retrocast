@@ -25,6 +25,8 @@ recompiler and its lockstep diff.
   written through to RAM. Ports decoded by A7, A6 and A0: memory and I/O
   control ($3E/$3F), V and H counters, VDP, PSG, both pads, Reset, the TH
   lines as the I/O control sets them (an export console).
+- [x] **VDP, TMS9918 modes**: Graphics I and II, the fixed palette, 4-byte
+  sprites four a line (the Korean MSX ports). Not text or multicolour.
 - [x] **VDP**: mode 4 at 192 lines. Ports with the read buffer, the frame
   and line interrupts and the status flags; 4-bitplane tiles, scrolling
   (with the top-row and right-column locks), flips, the second palette,
