@@ -10,7 +10,7 @@
 #include "sms.h"
 
 /* ---- memory ---- */
-static int cart_ram_on(const Sms *s, uint16_t a) { return a >= 0x8000 && a < 0xC000 && (s->cart.page[0] & 0x08); }
+static int cart_ram_on(const Sms *s, uint16_t a) { return a >= 0x8000 && a < 0xC000 && s->cart.mapper <= SMS_MAPPER_CODEMASTERS && (s->cart.page[0] & 0x08); }
 static uint8_t *cart_ram(Sms *s, uint16_t a) {
     return &s->cart.ram[(s->cart.page[0] & 0x04 ? 0x4000 : 0) + (a & 0x3FFF)];
 }
@@ -25,11 +25,15 @@ static uint8_t read_mem(Sms *s, uint16_t a) {
 static void write_mem(Sms *s, uint16_t a, uint8_t v) {
     if (a >= 0xC000) {
         s->ram[a & 0x1FFF] = v;  /* the mapper registers are written through to RAM too */
-        if (a >= 0xFFFC && !s->cart.codemasters) s->cart.page[a & 3] = v;
+        if (a >= 0xFFFC && s->cart.mapper == SMS_MAPPER_SEGA) s->cart.page[a & 3] = v;
     } else if (cart_ram_on(s, a)) {
         *cart_ram(s, a) = v;
         s->cart.ram_used = 1;
-    } else if (s->cart.codemasters && (a & 0x3FFF) == 0) {
+    } else if (sms_mapped_8k(&s->cart) && a < 4) {
+        s->cart.page[a] = v;
+    } else if (s->cart.mapper == SMS_MAPPER_KOREAN && a == 0xA000) {
+        s->cart.page[3] = v;
+    } else if (s->cart.mapper == SMS_MAPPER_CODEMASTERS && (a & 0x3FFF) == 0) {
         s->cart.page[1 + (a >> 14)] = v;
     }
 }
@@ -106,7 +110,7 @@ uint32_t sms_rom_hash(const uint8_t *rom, size_t size) {
 }
 
 unsigned sms_page_at(const SmsCart *c, uint16_t a) {
-    return a < 0x0400 && !c->codemasters ? 0 : c->page[1 + (a >> 14)];
+    return a < 0x0400 && c->mapper == SMS_MAPPER_SEGA ? 0 : c->page[1 + (a >> 14)];
 }
 
 void sms_step(Sms *s) {
@@ -118,7 +122,7 @@ void sms_step(Sms *s) {
         f(&s->cpu);
         s->cycles_native += s->cpu.tstates - before;
     } else {
-        if (s->misses && s->cpu.pc < SMS_CODE_SPAN) {
+        if (s->misses && !sms_mapped_8k(&s->cart) && s->cpu.pc < SMS_CODE_SPAN) {
             unsigned page = sms_page_at(&s->cart, s->cpu.pc);
             if (page < (s->cart.size + SMS_ROM_BANK - 1) / SMS_ROM_BANK) s->misses[sms_code_index(page, s->cpu.pc)] = 1;
         }
@@ -164,7 +168,9 @@ void sms_reset(Sms *s) {
     uint8_t gg = s->vdp.gg;
     memset(&s->vdp, 0, sizeof s->vdp);
     s->vdp.gg = gg;
-    s->cart.page[0] = 0, s->cart.page[1] = 0, s->cart.page[2] = 1, s->cart.page[3] = s->cart.codemasters ? 0 : 2;
+    s->cart.page[0] = 0, s->cart.page[1] = 0;
+    s->cart.page[2] = sms_mapped_8k(&s->cart) ? 0 : 1;
+    s->cart.page[3] = s->cart.mapper == SMS_MAPPER_SEGA || s->cart.mapper == SMS_MAPPER_KOREAN ? 2 : 0;
     s->mem_ctrl = 0xAB, s->io_ctrl = 0xFF;
     s->pause = 0;
     s->line = 0;
@@ -181,10 +187,11 @@ int sms_init(Sms *s, const uint8_t *rom, size_t size, int pal, int gg) {
     memset(s, 0, sizeof *s);
     s->cart.data = rom;
     s->cart.size = size;
-    s->cart.codemasters = (uint8_t)sms_is_codemasters(rom, size);
+    s->cart.mapper = (uint8_t)sms_mapper(rom, size);
     s->pal = pal && !gg;  /* every Game Gear is 60 Hz */
     s->vdp.gg = (uint8_t)(gg != 0);
-    s->recomp_on = sms_recomp_program && sms_recomp_program->rom_hash == sms_rom_hash(rom, size);
+    /* shortcut: MSX slots are 8 KB, use the interpreter until code generation supports that layout. */
+    s->recomp_on = !sms_mapped_8k(&s->cart) && sms_recomp_program && sms_recomp_program->rom_hash == sms_rom_hash(rom, size);
     sms_reset(s);
     return 0;
 }
@@ -241,7 +248,7 @@ int sms_load(Sms *s, const char *path, char *err, size_t errlen) {
     int bad = fread(magic, 1, 8, f) != 8 || memcmp(magic, MAGIC, 8) || fread(&size, 4, 1, f) != 1 ||
               size != sizeof loaded || fread(&loaded, 1, sizeof loaded, f) != sizeof loaded;
     fclose(f);
-    if (bad) { snprintf(err, errlen, "%s: not a state of this version", path); return 1; }
+    if (bad || loaded.cart.mapper != s->cart.mapper) { snprintf(err, errlen, "%s: incompatible save state", path); return 1; }
     const uint8_t *rom = s->cart.data;
     size_t rom_size = s->cart.size;
     uint8_t *misses = s->misses;

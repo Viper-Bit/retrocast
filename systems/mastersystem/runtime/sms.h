@@ -37,14 +37,20 @@
  * be mapped into any of the three slots, at different addresses. */
 static inline size_t sms_code_index(unsigned page, uint16_t pc) { return (size_t)page * SMS_CODE_SPAN + pc; }
 
+enum { SMS_MAPPER_SEGA, SMS_MAPPER_CODEMASTERS, SMS_MAPPER_KOREAN, SMS_MAPPER_MSX, SMS_MAPPER_NEMESIS };
+
 typedef struct {
     const uint8_t *data;
     size_t size;
     uint8_t page[4];                /* $FFFC (control) and $FFFD-$FFFF (slots 0-2) */
     uint8_t ram[0x8000];            /* cartridge RAM: two 16 KB banks at $8000 ($FFFC bits 3, 2) */
     uint8_t ram_used;               /* a game mapped it: it is saved next to the game */
-    uint8_t codemasters;            /* Codemasters' mapper: banks written at $0000, $4000, $8000 */
+    uint8_t mapper;
 } SmsCart;
+
+static inline int sms_mapped_8k(const SmsCart *cart) {
+    return cart->mapper == SMS_MAPPER_MSX || cart->mapper == SMS_MAPPER_NEMESIS;
+}
 
 typedef struct {
     uint8_t vram[0x4000];
@@ -124,6 +130,7 @@ size_t sms_misses_merge(Sms *s, const char *path);
 
 /* cart.c */
 long sms_header(const uint8_t *data, size_t size);  /* "TMR SEGA" offset, or -1 */
+unsigned sms_mapper(const uint8_t *rom, size_t size);
 int sms_is_codemasters(const uint8_t *data, size_t size);
 /* Game Gear mode: a header's region 5-7 says yes, 3-4 no (a Master System
  * cartridge, which the Game Gear runs as one); without, a .gg file name. */
