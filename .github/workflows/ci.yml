@@ -40,6 +40,8 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
+      - name: Test CPS-2 ROM inventory tooling
+        run: python -m unittest tests.test_cps2_tools
       # computed here once: Windows checkouts have CRLF line endings, so hashFiles differs there
       - id: key
         run: echo "key=test-data-${{ hashFiles('tests/fetch_test_roms.py') }}" >> "$GITHUB_OUTPUT"
