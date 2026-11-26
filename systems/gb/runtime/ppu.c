@@ -217,12 +217,12 @@ static void mode3_dot(Gb *g) {
     }
 }
 
-void ppu_tick(Gb *g) {
+void ppu_tick(Gb *g, int step) {
     if (!(g->lcdc & 0x80)) {
         g->mode_seen = 0;
         return;
     }
-    int step = g->double_speed ? 2 : 4, next = g->dot + step;  /* dots are real time: a double-speed cycle is 2 */
+    int next = g->dot + step;
     if (g->mode != 3 && next < 456 && (g->mode != 2 || next < 80) && !(g->mode == 0 && g->ly == 0 && g->dot < 82 && next >= 82)) {
         g->mode_seen = g->mode, g->ly_seen = g->ly, g->dot = next;  /* nothing happens inside this cycle */
         ppu_stat_update(g);

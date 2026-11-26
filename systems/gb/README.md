@@ -12,7 +12,8 @@ recompiles one (through `-DROMS`, see the [root README](../../README.md#recompil
   timer, interrupt, serial, DMA, PPU timing and MBC tests, MBC1 multicart,
   and its boot register, DIV and I/O tests for DMG0, MGB, SGB, SGB2, CGB
   and AGB); none is listed open in `tests/gb/test_roms.py`. The Color's
-  speed switch is checked by AGE's spsw-div and gambatte's start_stop ROMs.
+  speed switch passes all six standard AGE speed-switch ROMs and gambatte's
+  start_stop tests. Use `model = cgb-e` for the late CGB timer edge behavior.
 - **Picture**: dmg-acid2, cgb-acid2 and cgb-acid-hell match their
   reference screenshots pixel for pixel. The picture is drawn a dot at a
   time, so a register write in the middle of a line shows at its pixel.
@@ -95,10 +96,8 @@ report on the serial port or in cartridge RAM print `result: passed`.
   match.
 - The boot DIV of a Color game is unchecked (the test ROMs that check it
   are Game Boy games, so only compatibility mode has it); the DMG0's start
-  position in the frame is only known within its test's window; AGE's
-  other speed switch ROMs (tima, mode0, ch2 length, stop prefetch) still
-  fail: the TIMA, PPU and prefetch details after the switch are not
-  modelled.
+  position in the frame is only known within its test's window. The AGE
+  speed-switch interrupt edge cases remain open.
 
 ## Docs
 | File | Content |

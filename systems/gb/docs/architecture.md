@@ -50,8 +50,8 @@ OAM-order object priority in the PPU, HDMA, the CGB's own WRAM bus during
 OAM DMA, the sound chip's CGB details, and double speed: the CPU, timer,
 serial and OAM DMA run twice as fast, the PPU (2 dots per cycle), sound
 and the cartridge clock keep their pace. The speed switch (STOP with KEY1
-armed) runs 2050 cycles of the old speed in `gb_step`, then flips it and
-resets DIV; the same code for interpreted and recompiled programs. HDMA blocks move inside the CPU's
+armed) resets DIV and holds instruction execution for 32,768 M-cycles at
+the new speed. Both execution paths use the same timer, APU and PPU logic. HDMA blocks move inside the CPU's
 bus cycle, so recompiled code waits for them where the interpreter does.
 
 ## Recompiled code

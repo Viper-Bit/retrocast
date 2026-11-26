@@ -94,21 +94,20 @@ Exit tests and results: [verification-log.md](verification-log.md).
   flips, priority), OAM-order object priority, general and HBlank HDMA
   (in the bus cycle, so recompiled code waits where the interpreter
   does), the CGB's separate WRAM bus during OAM DMA, no STAT-write
-  interrupt, the APU's CGB details; the speed switch skips the byte after
-  STOP and takes 2050 M-cycles (DIV restarts at the end).
+  interrupt and the APU's CGB details. The speed switch resets DIV and
+  takes 32,768 M-cycles at the new speed. AGE's six standard switch tests pass.
 - [x] **Exit:** cgb-acid2 pixel for pixel, blargg cgb_sound (12 singles
   and the combined ROM); 36 sampled Color games reach title, menu or
   play screens; 18 recompiled in lockstep.
 - [x] Compatibility mode (`model = cgb`): a DMG game with the Color's
   palettes, picked from the header as the boot ROM does (palette table from
   SameBoy's boot ROM source), and the boot state of that mode (registers,
-  DIV, I/O). `model = auto|dmg|cgb` in `gb.ini`.
+  DIV, I/O). `model = auto|dmg|cgb|cgb-e` in `gb.ini`.
 - [x] Boot states of the other models (`gb_headless --model dmg0|mgb|sgb|
   sgb2|cgb0|agb`): the nine mooneye boot tests that were open and six of
   mooneye's `misc` boot tests now pass.
 - [x] Palette RAM is closed during mode 3 (reads $FF, writes lost); the
   picture is drawn a dot at a time: cgb-acid-hell pixel for pixel.
-- [ ] Open: a Color game's boot DIV is unchecked, AGE's spsw
-  tima/mode0/ch2/prefetch ROMs fail, compatibility mode lacks the boot ROM's button
-  palettes and the DMG logo tilemap.
+- [ ] Open: a Color game's boot DIV is unchecked. The speed-switch interrupt
+  edge cases, the boot ROM's button palettes, and the DMG logo tilemap remain open.
 

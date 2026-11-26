@@ -4,7 +4,7 @@
  *   --pgm         write the last whole frame as a grey image (shade 0 = white)
  *   --wav         write the sound (48 kHz stereo, 16-bit)
  *   --ppm         write the last whole frame in colour (CGB: 5-bit components as (c << 3) | (c >> 2))
- *   --model       run as this model: dmg, cgb (a DMG game: compatibility mode), cgb0, agb, dmg0, mgb, sgb, sgb2 (boot state only) (default: what the header asks for)
+ *   --model       run as this model: dmg, cgb (a DMG game: compatibility mode), cgb-e, cgb0, agb, dmg0, mgb, sgb, sgb2 (default: what the header asks for)
  *   --play        scripted input: Start and A taps, later walking right
  *   --state-at    save a state before frame F; --load-state: start from one
  *   --misses      write the ROM code the interpreter ran ("MISS $PC bank B",
@@ -67,7 +67,7 @@ static int same_cpu(const GbCpu *a, const GbCpu *b) {
 #define F(x) {#x, offsetof(Gb, x), sizeof(((Gb *)0)->x)}
 static const struct { const char *name; size_t off, len; } FIELDS[] = {
     F(vram), F(wram), F(oam), F(hram), F(io), F(apu), F(ie), F(ifl), F(div), F(tima), F(tma), F(tac),
-    F(tima_reload), F(sb), F(sc), F(serial_left), F(serial_out), F(serial_n), F(p1), F(pad), F(lcdc), F(stat),
+    F(tima_reload), F(sb), F(sc), F(speed_wait), F(serial_left), F(serial_out), F(serial_n), F(p1), F(pad), F(lcdc), F(stat),
     F(scy), F(scx), F(ly), F(lyc), F(wy), F(wx), F(stat_line), F(mode), F(wy_hit), F(win_line), F(dot),
     F(m3), F(fb), F(frame), F(frame_count), F(dma_reg), F(dma_start), F(dma_on), F(dma_pos), F(dma_src),
     F(dma_next), F(frame_end), F(cgb), F(compat), F(vbk), F(svbk), F(opri), F(key1), F(double_speed), F(half), F(bcps),
@@ -96,7 +96,7 @@ static int frame_diff(Gb *g, Gb *ref, long frame) {
     ref->frame_end = g->frame_end;
     while (g->cpu.cycles < g->frame_end) {
         GbCpu before = g->cpu;
-        int native = g->recomp_on && before.pc < 0x8000 && gb_recomp_program->lookup(before.pc, gb_cart_bank(&g->cart, before.pc));
+        int native = g->recomp_on && !g->speed_wait && before.pc < 0x8000 && gb_recomp_program->lookup(before.pc, gb_cart_bank(&g->cart, before.pc));
         gb_step(g);
         while (ref->cpu.cycles < g->cpu.cycles) gb_step(ref);
         const char *what = same_cpu(&g->cpu, &ref->cpu) ? NULL : "cpu";
@@ -134,11 +134,11 @@ int main(int argc, char **argv) {
         else if (!strcmp(argv[i], "--ppm") && i + 1 < argc) ppm = argv[++i];
         else if (!strcmp(argv[i], "--model") && i + 1 < argc) {
             const char *m = argv[++i];
-            static const char *const NAMES[] = {"dmg", "cgb", "dmg0", "mgb", "sgb", "sgb2", "agb", "cgb0"};  /* GB_MODEL_* order */
+            static const char *const NAMES[] = {"dmg", "cgb", "dmg0", "mgb", "sgb", "sgb2", "agb", "cgb0", "cgb-e"};  /* GB_MODEL_* order */
             model = -2;
-            for (int k = 0; k < 8; k++)
+            for (int k = 0; k < (int)(sizeof NAMES / sizeof *NAMES); k++)
                 if (!strcmp(m, NAMES[k])) model = k;
-            if (model == -2) { fprintf(stderr, "gb_headless: --model dmg, cgb, cgb0, agb, dmg0, mgb, sgb or sgb2\n"); return 2; }
+            if (model == -2) { fprintf(stderr, "gb_headless: --model dmg, cgb, cgb0, cgb-e, agb, dmg0, mgb, sgb or sgb2\n"); return 2; }
         }
         else { fprintf(stderr, "gb_headless: unknown option %s\n", argv[i]); return 2; }
     }

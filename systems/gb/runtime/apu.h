@@ -14,6 +14,7 @@ typedef struct GbApu {
     uint8_t fs_step;           /* the frame sequencer's next step (0-7) */
     uint8_t on[4];             /* channels playing (NR52 bits 0-3) */
     uint16_t len[4];           /* length counters (kept while powered off, DMG) */
+    uint8_t ds_delay, fs_pending;  /* CGB speed-switch delay and a frame sequencer edge due next cycle */
     int timer[4];              /* frequency timers: M-cycles left (wave: 2 MHz cycles) */
     uint8_t vol[4], env_timer[4];  /* envelopes (pulses, noise) */
     uint8_t duty_pos[2];

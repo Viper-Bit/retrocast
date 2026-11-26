@@ -71,21 +71,31 @@ class TestGbRoms(unittest.TestCase):
 
 @built(RUNNER, "build gb_headless first")
 class TestSpeedSwitch(unittest.TestCase):
-    """The CGB speed switch (about 2050 M-cycles, DIV restarts). These ROMs show their result
-    on the screen: AGE's spsw-div prints "TEST PASSED!"; gambatte's start_stop ROMs print the
+    """The CGB speed-switch ROMs show their result on the screen.
+    AGE prints "TEST PASSED!"; gambatte's start_stop ROMs print the
     two-digit value in their name (compared with each other: same out, same picture)."""
     PASSED_TITLE = "de78e0120f9452b597645d384b355feb"  # md5 of the first 14 rows of AGE's "TEST PASSED!"
 
-    def shot(self, rom, rows):
+    def shot(self, rom, rows, *args):
         with tempfile.TemporaryDirectory() as tmp:
             out = os.path.join(tmp, "f.ppm")
-            subprocess.run([RUNNER, rom, "--frames", "300", "--ppm", out], capture_output=True)
+            subprocess.run([RUNNER, rom, "--frames", "300", "--ppm", out, *args], capture_output=True)
             with open(out, "rb") as f:
                 return f.read().split(b"\n", 3)[3][:160 * 3 * rows]
 
-    def test_age_spsw_div(self):
-        rom = os.path.join(fetch_gb_test_roms(), "age-test-roms", "speed-switch", "spsw-div-cgbBCE.gb")
-        self.assertEqual(hashlib.md5(self.shot(rom, 14)).hexdigest(), self.PASSED_TITLE)
+    def test_age_speed_switch(self):
+        folder = os.path.join(fetch_gb_test_roms(), "age-test-roms", "speed-switch")
+        for name, model in (
+            ("div-cgbBCE", "cgb"),
+            ("tima-cgbBC", "cgb"),
+            ("tima-cgbE", "cgb-e"),
+            ("ch2-lc-delay-cgbBCE", "cgb"),
+            ("mode0-cgbBCE", "cgb"),
+            ("stop-prefetch-cgbBCE", "cgb"),
+        ):
+            with self.subTest(name=name):
+                rom = os.path.join(folder, f"spsw-{name}.gb")
+                self.assertEqual(hashlib.md5(self.shot(rom, 14, "--model", model)).hexdigest(), self.PASSED_TITLE)
 
     def test_gambatte_start_stop(self):
         d = os.path.join(fetch_gb_test_roms(), "gambatte", "div")

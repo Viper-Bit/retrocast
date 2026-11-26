@@ -124,6 +124,7 @@ void gb_apu_write(Gb *g, uint16_t a, uint8_t v) {
             memset(p->on, 0, sizeof p->on);
             if (g->cgb) memset(p->len, 0, sizeof p->len);
             p->power = 0;
+            p->ds_delay = p->fs_pending = 0;
         } else if ((v & 0x80) && !p->power) {
             p->power = 1;
             p->fs_step = 0;
