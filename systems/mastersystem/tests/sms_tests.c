@@ -154,6 +154,7 @@ static void test_gamegear(void) {
 /* A 16-colour tile and a sprite, drawn on line 0. */
 static void test_render(void) {
     sms_init(&s, rom, sizeof rom, 0, 0);
+    vdp_reg(0, 0x04);                                       /* mode 4 */
     vdp_reg(1, 0x40);                                       /* display on */
     vdp_reg(2, 0xFF);                                       /* names at $3800 */
     vdp_reg(5, 0xFF);                                       /* sprites at $3F00 */
@@ -175,18 +176,52 @@ static void test_render(void) {
     s.vdp.vram[0x3F80] = 40, s.vdp.vram[0x3F81] = 1;
     sms_vdp_line(&s, 0);
     assert(s.vdp.frame[40] == 16 + 15 && s.vdp.frame[41] == 16 + 5);
-    vdp_reg(0, 0x20);                                       /* left column hidden: backdrop */
+    vdp_reg(0, 0x24);                                       /* left column hidden: backdrop */
     vdp_reg(7, 0x04);
     sms_vdp_line(&s, 0);
     assert(s.vdp.frame[0] == 16 + 4 && s.vdp.frame[7] == 16 + 4);
     /* nine sprites on a line: the ninth is dropped and flagged */
-    vdp_reg(0, 0);
+    vdp_reg(0, 0x04);
     for (unsigned i = 0; i < 9; i++) s.vdp.vram[0x3F00 + i] = 0xFF, s.vdp.vram[0x3F80 + i * 2] = (uint8_t)(i * 16), s.vdp.vram[0x3F81 + i * 2] = 1;
     s.vdp.vram[0x3F09] = 0xD0;
     s.vdp.status = 0;
     sms_vdp_line(&s, 0);
     assert(s.vdp.status & 0x40);
     assert(s.vdp.frame[128] != 16 + 15);                    /* the ninth, at 128, not drawn */
+}
+
+/* The TMS9918 modes the Korean MSX ports use: Graphics I and II with the
+ * fixed palette (frame colours 32-47), and their 4-byte sprites. */
+static void test_tms_modes(void) {
+    sms_init(&s, rom, sizeof rom, 0, 0);
+    vdp_reg(1, 0x40);                                       /* display on, Graphics I */
+    vdp_reg(2, 0x0E);                                       /* names at $3800 */
+    vdp_reg(3, 0x80);                                       /* colours at $2000 */
+    vdp_reg(4, 0x00);                                       /* patterns at 0 */
+    vdp_reg(5, 0x7E);                                       /* sprites at $3F00 */
+    vdp_reg(6, 0x00);
+    vdp_reg(7, 0x04);                                       /* backdrop: dark blue */
+    s.vdp.vram[0x3F00] = 0xD0;
+    s.vdp.vram[0x3800] = 9;                                 /* name (0,0) = pattern 9 */
+    s.vdp.vram[9 * 8] = 0x80;                               /* row 0: pixel 0 set */
+    s.vdp.vram[0x2001] = 0xF0;                              /* patterns 8-15: white on transparent */
+    sms_vdp_line(&s, 0);
+    assert(s.vdp.frame[0] == 32 + 15 && s.vdp.frame[1] == 32 + 4);
+    vdp_reg(0, 0x02);                                       /* Graphics II: a colour per row */
+    vdp_reg(3, 0xFF), vdp_reg(4, 0x03);                     /* colours at $2000, patterns at 0, full masks */
+    s.vdp.vram[0x3800 + 32 * 8] = 2;                        /* row 8 of names (line 64): the second third */
+    s.vdp.vram[(256 + 2) * 8] = 0x40;
+    s.vdp.vram[0x2000 + (256 + 2) * 8] = 0x6C;
+    sms_vdp_line(&s, 64);
+    assert(s.vdp.frame[64 * SMS_WIDTH] == 32 + 12 && s.vdp.frame[64 * SMS_WIDTH + 1] == 32 + 6);
+    s.vdp.vram[0x3F00] = 63, s.vdp.vram[0x3F01] = 100;      /* sprite at line 64, x 100, pattern 1, red */
+    s.vdp.vram[0x3F02] = 1, s.vdp.vram[0x3F03] = 0x08;
+    s.vdp.vram[0x3F04] = 0xD0;
+    s.vdp.vram[8] = 0xC0;
+    sms_vdp_line(&s, 64);
+    assert(s.vdp.frame[64 * SMS_WIDTH + 100] == 32 + 8 && s.vdp.frame[64 * SMS_WIDTH + 101] == 32 + 8);
+    assert(s.vdp.frame[64 * SMS_WIDTH + 102] == 32 + 4);
+    assert(sms_color(&s, 32 + 15) == 0xFFFFFFFFu && sms_color(&s, 32 + 1) == 0xFF000000u);
 }
 
 /* IM 1, EI, then a loop: count the frame interrupts and the T-states. */
@@ -245,6 +280,7 @@ int main(void) {
     test_vdp_ports();
     test_gamegear();
     test_render();
+    test_tms_modes();
     test_timing();
     test_state();
     puts("Master System runtime tests passed");

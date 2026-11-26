@@ -19,8 +19,9 @@ recompiles one (through `-DROMS`, see the
   header. No BIOS needed. Not yet: Korean and other mappers.
 - **Picture**: the VDP's mode 4 at 192 lines: scrolling and its locks,
   flipped tiles, priority, 8x8, 8x16 and zoomed sprites, eight a line,
-  frame and line interrupts. Not yet: the older TMS9918 modes, the SMS2's
-  224- and 240-line modes, palette changes within a frame.
+  frame and line interrupts; the TMS9918's Graphics I and II with their
+  sprites (the Korean MSX ports). Not yet: text and multicolour modes, the
+  SMS2's 224- and 240-line modes, palette changes within a frame.
 - **Sound**: the PSG, 44,100 Hz mono. Not yet: the FM sound unit.
 - **Games**: of every 5th game in the No-Intro set, 124 of 137 reach a
   title screen or play ([verification log](docs/verification-log.md)).

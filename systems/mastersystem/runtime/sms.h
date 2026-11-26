@@ -58,7 +58,7 @@ typedef struct {
     uint8_t latch, code, buffer;    /* control port's second byte expected; access code; read buffer */
     uint16_t addr;
     uint8_t vscroll;                /* register 9, latched at the top of the frame */
-    uint8_t frame[SMS_WIDTH * SMS_HEIGHT];  /* CRAM indices, 0-31 */
+    uint8_t frame[SMS_WIDTH * SMS_HEIGHT];  /* CRAM indices 0-31; 32-47 the TMS9918 palette */
 } SmsVdp;
 
 typedef struct {
