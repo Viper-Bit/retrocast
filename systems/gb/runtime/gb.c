@@ -9,9 +9,11 @@
 #include "recomp_rt.h"
 
 /* ---- timer (Pan Docs "Timer obscure behaviour") ---- */
+static const uint16_t TIMER_BIT[4] = {1 << 9, 1 << 3, 1 << 5, 1 << 7};
+enum { SPEED_SWITCH_CYCLES = 32768 };
+
 static int timer_bit(uint16_t div, uint8_t tac) {
-    static const uint16_t BIT[4] = {1 << 9, 1 << 3, 1 << 5, 1 << 7};  /* 4096, 262144, 65536, 16384 Hz */
-    return (tac & 4) && (div & BIT[tac & 3]);
+    return (tac & 4) && (div & TIMER_BIT[tac & 3]);
 }
 static void timer_inc(Gb *g) {
     if (++g->tima == 0) g->tima_reload = 1;  /* TIMA reads 0 for a cycle, then TMA */
@@ -67,7 +69,11 @@ static void tick(Gb *g) {
     uint16_t old = g->div;
     g->div += 4;
     if (before && !timer_bit(g->div, g->tac)) timer_inc(g);
-    if (old & ~g->div & (g->double_speed ? 0x2000 : 0x1000)) apu_frame_step(g);  /* DIV bit 4 (5) fell: 512 Hz */
+    if (g->apu.fs_pending) g->apu.fs_pending = 0, apu_frame_step(g);
+    if (old & ~g->div & (g->double_speed ? 0x2000 : 0x1000)) {
+        if (g->double_speed && g->apu.ds_delay) g->apu.fs_pending = 1;
+        else apu_frame_step(g);
+    }
 
     if (g->serial_left && !--g->serial_left) g->sb = 0xFF, g->sc &= 0x7F, g->ifl |= INT_SERIAL;
 
@@ -77,7 +83,9 @@ static void tick(Gb *g) {
         else g->oam[g->dma_pos] = dma_peek(g, (uint16_t)(g->dma_src + g->dma_pos)), g->dma_pos++;
     }
 
-    ppu_tick(g);
+    int dots = g->double_speed ? 2 : 4;
+    if (g->double_speed && g->speed_wait == SPEED_SWITCH_CYCLES) dots--;  /* LCD phase slips one dot */
+    ppu_tick(g, dots);
     if (g->double_speed && (g->half ^= 1)) return;
     apu_tick(g);
     gb_cart_tick(&g->cart);
@@ -103,7 +111,9 @@ static uint8_t io_read(Gb *g, uint16_t a) {
     case 0xFF41: return (uint8_t)(0x80 | g->stat | ((g->lcdc & 0x80 ? g->ly_seen == g->ly && g->ly == g->lyc : g->coin_hold) ? 4 : 0) | ppu_vmode(g));
     case 0xFF42: return g->scy;
     case 0xFF43: return g->scx;
-    case 0xFF44: return g->ly;
+    case 0xFF44:
+        /* In double speed an odd-aligned read sees the next LY on the last dot. */
+        return (uint8_t)(g->double_speed && g->dot == 455 ? (g->ly + 1) % 154 : g->ly);
     case 0xFF45: return g->lyc;
     case 0xFF46: return g->dma_reg;
     case 0xFF47: case 0xFF48: case 0xFF49: return g->io[a & 0x7F];
@@ -141,7 +151,9 @@ static void io_write(Gb *g, uint16_t a, uint8_t v) {
         return;
     case 0xFF04: {  /* reset the counter; a falling edge on the way counts */
         int before = timer_bit(g->div, g->tac);
-        if (g->div & 0x1000) apu_frame_step(g);
+        unsigned apu_bit = g->double_speed ? 0x2000 : 0x1000;
+        if ((g->div & apu_bit) && !(g->double_speed && g->apu.ds_delay &&
+                                   (g->div & (apu_bit * 2 - 1)) == apu_bit)) apu_frame_step(g);
         g->div = 0;
         if (before) timer_inc(g);
         return;
@@ -289,6 +301,12 @@ uint16_t gb_irq_ack(GbCpu *c) {
 /* A step: interrupt entry, a halted cycle, or code: a recompiled block when
  * there is one for this PC and bank, else one instruction interpreted. */
 void gb_step(Gb *g) {
+    if (g->speed_wait) {
+        g->cpu.cycles++;
+        tick(g);
+        g->speed_wait--;
+        return;
+    }
     GbCpu *c = &g->cpu;
     uint8_t pending = g->ie & g->ifl & 0x1F;
     if (c->halted && !pending) {
@@ -324,13 +342,26 @@ void gb_step(Gb *g) {
     /* HALT with IME off and an interrupt already pending does not halt; the
      * next opcode byte is read twice (the "HALT bug") */
     if (c->halted && !c->ime && (g->ie & g->ifl & 0x1F)) c->halted = 0, c->halt_bug = 1;
-    /* CGB: STOP with KEY1 armed switches the speed and goes on past the byte
-     * after it (2 bytes then; a game puts $E3 there). The CPU waits about 2050
-     * M-cycles while the rest of the machine runs; DIV restarts. */
+    /* CGB: STOP resets DIV, then the CPU waits at the new speed. */
     if (c->stopped && g->cgb && g->key1) {
-        for (int i = 0; i < 2050; i++) c->cycles++, tick(g);  /* in the old speed; DIV restarts at the end (age spsw-div) */
+        idle(c);  /* STOP padding byte and divider-reset cycle */
+        idle(c);
+        unsigned select = g->tac & 3;
+        unsigned bit = TIMER_BIT[select];
+        /* Some CGB revisions miss the reset edge on the first high cycle. */
+        int late_edge = g->cgb == 2 ? select != 1 : select == 0;
+        if (timer_bit(g->div, g->tac) && (!late_edge || (g->div & (bit * 2 - 1)) != bit))
+            timer_inc(g);
+        unsigned apu_bit = g->double_speed ? 0x2000 : 0x1000;
+        if ((g->div & (apu_bit * 2 - 1)) > apu_bit) apu_frame_step(g);
+        if (g->frame_end > c->cycles) {
+            uint64_t left = g->frame_end - c->cycles;
+            g->frame_end = c->cycles + (g->double_speed ? (left + 1) / 2 : left * 2);
+        }
         g->double_speed ^= 1, g->half = 0, g->div = 0;
+        if (g->double_speed && g->apu.power) g->apu.ds_delay ^= 1;
         g->key1 = 0, c->stopped = 0, c->pc++;
+        g->speed_wait = SPEED_SWITCH_CYCLES;
     }
 }
 
@@ -358,9 +389,10 @@ int gb_load_model(Gb *g, const uint8_t *rom, size_t size, int model, char *err, 
     if (gb_cart_load(&g->cart, rom, size, err, errlen) != 0) return -1;
     GbCpu *c = &g->cpu;
     c->bus = g;
-    int color = model == GB_MODEL_CGB || model == GB_MODEL_CGB0 || model == GB_MODEL_AGB;
+    int color = model == GB_MODEL_CGB || model == GB_MODEL_CGB0 || model == GB_MODEL_AGB || model == GB_MODEL_CGB_E;
     g->cgb = (uint8_t)(color || (model == GB_MODEL_AUTO && (g->cart.rom[0x143] & 0x80)));
     g->compat = (uint8_t)(color && !(g->cart.rom[0x143] & 0x80));
+    if (model == GB_MODEL_CGB_E) g->cgb = 2;
     /* what the boot ROM of the model leaves (Pan Docs "Power Up Sequence"): the registers A F B C D E H L, and the
      * DIV counter (mooneye boot_div and boot_regs tests). DMG: F = $B0 with a correct header checksum, else H and C too.
      * div_compat: the counter when the Color boots a DMG game (mooneye's boot_div-A, -cgb0, -cgbABCDE are DMG games). A
@@ -375,7 +407,8 @@ int gb_load_model(Gb *g, const uint8_t *rom, size_t size, int model, char *err, 
         [GB_MODEL_CGB0] = {{0x11, 0x80, 0x00, 0x00, 0xFF, 0x56, 0x00, 0x0D}, 0x1EA0, 0x2880},
         [GB_MODEL_AGB]  = {{0x11, 0x00, 0x01, 0x00, 0xFF, 0x56, 0x00, 0x0D}, 0x1EA0, 0x2678},
     };
-    int m = model == GB_MODEL_AUTO ? (g->cgb ? GB_MODEL_CGB : GB_MODEL_DMG) : model;
+    int m = model == GB_MODEL_CGB_E ? GB_MODEL_CGB : model;
+    if (m == GB_MODEL_AUTO) m = g->cgb ? GB_MODEL_CGB : GB_MODEL_DMG;
     c->a = BOOT[m].r[0], c->f = BOOT[m].r[1], c->b = BOOT[m].r[2], c->c = BOOT[m].r[3];
     c->d = BOOT[m].r[4], c->e = BOOT[m].r[5], c->h = BOOT[m].r[6], c->l = BOOT[m].r[7];
     c->sp = 0xFFFE, c->pc = 0x0100;

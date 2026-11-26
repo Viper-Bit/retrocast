@@ -18,7 +18,7 @@
 static const char SETTINGS[] =
     "# palette: the four shades: green = the original screen's tint, gray = neutral grays\n"
     "palette = green\n"
-    "# model: dmg, cgb (a Game Boy game then runs in the Color's compatibility mode, with its colours) or auto\n"
+    "# model: dmg, cgb, cgb-e or auto (cgb and cgb-e colourise original Game Boy games)\n"
     "# (the game's header decides)\n"
     "model = auto\n";
 
@@ -29,6 +29,7 @@ static int sys_setting(const char *key, const char *val) {
         if (!strcmp(val, "auto")) return model = GB_MODEL_AUTO, 1;
         if (!strcmp(val, "dmg")) return model = GB_MODEL_DMG, 1;
         if (!strcmp(val, "cgb")) return model = GB_MODEL_CGB, 1;
+        if (!strcmp(val, "cgb-e")) return model = GB_MODEL_CGB_E, 1;
         return 0;
     }
     if (strcmp(key, "palette")) return 0;
