@@ -47,12 +47,14 @@ static void load_sav(void) {
     size_t size;
     uint8_t *d = SDL_LoadFile(sav_path, &size);
     GbCart *c = &gb.cart;
-    if (d && (size == c->ram_size || (c->has_rtc && size == c->ram_size + RTC_BYTES))) {
+    size_t huc3_bytes = c->mbc == MBC_HUC3 ? sizeof c->huc3.nvram : 0;
+    if (d && (size == c->ram_size || (c->has_rtc && size == c->ram_size + RTC_BYTES + huc3_bytes))) {
         memcpy(c->ram, d, c->ram_size);
         if (size > c->ram_size) {
             const uint8_t *r = d + c->ram_size;
             memcpy(c->rtc, r, 5);
             memcpy(c->rtc_latched, r + 5, 5);
+            if (huc3_bytes) memcpy(c->huc3.nvram, r + RTC_BYTES, huc3_bytes);
             uint64_t then = 0;
             for (int i = 7; i >= 0; i--) then = then << 8 | r[10 + i];
             uint64_t now = (uint64_t)time(NULL);
@@ -65,7 +67,7 @@ static void load_sav(void) {
 static void save_sav(void) {
     GbCart *c = &gb.cart;
     if (!c->battery || !c->ram_size) return;
-    uint8_t d[sizeof c->ram + RTC_BYTES];
+    uint8_t d[sizeof c->ram + RTC_BYTES + sizeof c->huc3.nvram];
     size_t n = c->ram_size;
     memcpy(d, c->ram, n);
     if (c->has_rtc) {
@@ -74,6 +76,10 @@ static void save_sav(void) {
         uint64_t now = (uint64_t)time(NULL);
         for (int i = 0; i < 8; i++) d[n + 10 + i] = (uint8_t)(now >> (8 * i));
         n += RTC_BYTES;
+        if (c->mbc == MBC_HUC3) {
+            memcpy(d + n, c->huc3.nvram, sizeof c->huc3.nvram);
+            n += sizeof c->huc3.nvram;
+        }
     }
     if (!SDL_SaveFile(sav_path, d, n)) SDL_Log("%s: %s", sav_path, SDL_GetError());
 }
@@ -127,6 +133,7 @@ static void sys_reset(void) {
     if (bad) return;
     memcpy(gb.cart.ram, keep.ram, sizeof keep.ram);
     memcpy(gb.cart.rtc, keep.rtc, sizeof keep.rtc);
+    if (gb.cart.mbc == MBC_HUC3) memcpy(gb.cart.huc3.nvram, keep.huc3.nvram, sizeof keep.huc3.nvram);
 }
 
 static int sys_frame(const InputFrame *in, uint32_t *rgb, float *samples, int max) {
