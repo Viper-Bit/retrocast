@@ -23,6 +23,8 @@
     <div class="stats"><div class="stat"><b style="color:var(--ok)">$ok</b><small>boot</small></div><div class="stat"><b style="color:var(--warn)">$partial</b><small>partial</small></div><div class="stat"><b>$no</b><small>not yet</small></div></div>
   </div>
   $body
+  <details class="how"><summary>How games are tested</summary>
+  <p>Each game runs on its own in the built-in emulator for a few hundred to a thousand frames, with Start pressed; its last frame is kept as the picture. <b>Boots</b>: it shows a picture and the CPU never stopped. <b>Partial</b>: it runs, but the screen stays blank (it may need a longer intro, a button, or hardware we lack). <b>Not yet</b>: it fails to load, or the CPU halts. This is an automatic start-up test, not a play-through, and it is not the recompiler's cycle-by-cycle check (that one is run on chosen games). A game's versions are its regions, revisions and clones; the failing ones are marked in its list.</p></details>
 </section>
 
 $footer

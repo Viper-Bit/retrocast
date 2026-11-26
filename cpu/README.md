@@ -9,8 +9,8 @@ calls, so every system with the same CPU uses the same code.
 | 6502 (the NES's 2A03) | NES and Famicom Disk System | SingleStepTests 2A03, nestest | [6502/](6502/) |
 | 6507 (a 6502: 13 address lines, no IRQ or NMI, decimal mode) | Atari 2600, its own copy of the 6502 | NMOS decimal vectors | [6502/](6502/) |
 | SM83 | Game Boy and Game Boy Color | SingleStepTests sm83 | [sm83/](sm83/) |
-| Z80 | Genesis / Mega Drive (sound CPU), Master System / Mark III and Game Gear (main CPU) | SingleStepTests z80 | [z80/](z80/) |
-| 68000 | Genesis / Mega Drive (main CPU) | SingleStepTests m68000 | [m68k/](m68k/) |
+| Z80 | Genesis / Mega Drive and CPS-1 (sound CPU), Master System / Mark III and Game Gear (main CPU) | SingleStepTests z80 | [z80/](z80/) |
+| 68000 | Genesis / Mega Drive and CPS-1 (main CPU) | SingleStepTests m68000 | [m68k/](m68k/) |
 
 ## What a CPU folder holds
 - The instruction templates, written once: the opcode table and C per

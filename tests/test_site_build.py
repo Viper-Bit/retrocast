@@ -94,6 +94,16 @@ class SiteBuild(unittest.TestCase):
         site_build.build(self.out, images_dir=self.imgs, release={"tag": "v0", "assets": []})
         self.assertIn("1 of 1 play", self.read("index.html"))
 
+    def test_wording_and_controls(self):  # what "boots" means is said; filters are buttons
+        self.put("cps1", [dict(game("Final Fight", "ffight"), versions=["ffight", "ffightj", "ffightb"], failing=["ffightb"])])
+        self.build()
+        self.assertIn("games start-tested", self.read("index.html"))
+        page = self.read("cps1", "index.html")
+        self.assertIn("How games are tested", page)
+        self.assertIn("3 versions, 1 not yet", page)
+        self.assertNotIn('<span class="chip', page)
+        self.assertIn('<button class="chip on" data-f="all"', page)
+
     def test_mac_labels(self):
         b = site_build.builds({"tag": "v1", "assets": ["retrocast-v1-macos-arm64.tar.gz", "retrocast-v1-macos-x64.tar.gz"]})
         self.assertEqual(sorted(x["arch"] for x in b), ["Apple Silicon", "Intel"])

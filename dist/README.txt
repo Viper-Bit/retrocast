@@ -99,8 +99,7 @@ looked for in the parent's zip, then in every zip in the same folder. The
 Q-Sound games (Warriors of Fate, Cadillacs and Dinosaurs, The Punisher,
 Slam Masters, Muscle Bomber) also need qsound.zip in that folder; they
 keep their settings in game.eeprom next to the zip, as Pang! 3 does.
-Which sets are supported: systems/cps1/docs/compatibility.md on the
-project page.
+Which sets run: https://viper-bit.github.io/retrocast/cps1/
 
 
 NES AND FAMICOM DISK SYSTEM

@@ -10,8 +10,8 @@ without a window.
   most bootlegs): every set MAME 0.289's `cps1.cpp` lists, with MAME's chips and CRCs, the set's
   layout, CPS-B (and where it sits), graphics ROM mapper, DIP defaults and
   clock. A zip is matched by CRC, whatever its name. Which sets, which are
-  tested, which are not supported yet and why:
-  [compatibility](docs/compatibility.md). What your folder lacks:
+  boot: the [website](https://viper-bit.github.io/retrocast/cps1/); which are
+  not supported yet and why: [unsupported](docs/unsupported.md). What your folder lacks:
   `python tools/cps1_audit.py FOLDER`. The table (`runtime/games.c`) is
   generated: `python tools/cps1_gen_games.py MAME_DIR runtime/games.c`,
   MAME_DIR holding `cps1.cpp` and `cps1_v.cpp` of MAME's `src/mame/capcom/`.
@@ -63,7 +63,7 @@ without a window.
 - **Bootlegs**: MAME's inits (protections, the DIP switches on the low
   byte, a CPS-B mirror, a graphics bit swap) and video quirks; chips
   loaded in parts. Sets on their own memory maps are not supported yet
-  ([compatibility](docs/compatibility.md)).
+  ([unsupported](docs/unsupported.md)).
 - **Not yet**: DIP switch settings (their defaults).
 
 ## Loading a game

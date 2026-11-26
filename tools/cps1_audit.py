@@ -5,8 +5,6 @@ folder (a split clone's parent's, or another version sharing them), as the loade
 a Q-Sound set also needs qsound.zip (the chip's ROM, dl-1425.bin) in the folder.
 
     python tools/cps1_audit.py [FOLDER]        the lists, on the console
-    python tools/cps1_audit.py FOLDER --md     also rewrites the supported-sets
-                                                table of systems/cps1/docs/compatibility.md
 """
 import os
 import re
@@ -15,7 +13,6 @@ import zipfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GAMES_C = os.path.join(ROOT, "systems", "cps1", "runtime", "games.c")
-MD = os.path.join(ROOT, "systems", "cps1", "docs", "compatibility.md")
 
 
 def table(path=GAMES_C):
@@ -71,17 +68,6 @@ def audit(folder):
     return out
 
 
-def write_md(result):
-    md = open(MD, encoding="utf-8").read()
-    start, end = md.index("<!-- sets -->\n") + len("<!-- sets -->\n"), md.index("<!-- /sets -->")
-    rows = ["| Set | Game | Parent | Here |", "|---|---|---|---|"]
-    mark = {"whole": "boot-tested", "lacking": "chips missing", "absent": "no zip"}
-    for gid, (title, parent, status, notes) in result.items():
-        here = mark[status] + (" (%s)" % notes[0] if status == "whole" and notes else "")
-        rows.append("| %s | %s | %s | %s |" % (gid, title.replace("|", "\\|"), parent or "", here))
-    open(MD, "w", encoding="utf-8", newline="\n").write(md[:start] + "\n".join(rows) + "\n" + md[end:])
-
-
 def main(argv):
     folder = next((a for a in argv if not a.startswith("--")), os.path.join(ROOT, "roms", "CAPCOM - Play System I"))
     result = audit(folder)
@@ -92,8 +78,6 @@ def main(argv):
             print("  %-10s %s%s" % (g, title, " (parent %s)" % parent if parent else ""))
             for note in notes:
                 print("     ", note)
-    if "--md" in argv:
-        write_md(result)
     return 0
 
 

@@ -33,9 +33,9 @@ def skipped(name):
 
 
 def cps1_unsupported():
-    """{set: title} of the CPS-1 sets games.c doesn't hold, from compatibility.md's "Not supported yet"."""
-    with open(os.path.join(ROOT, "systems", "cps1", "docs", "compatibility.md"), encoding="utf-8") as f:
-        part = f.read().split("## Not supported yet", 1)[1].split("\n## ", 1)[0]
+    """{set: title} of the CPS-1 sets games.c doesn't hold, from systems/cps1/docs/unsupported.md."""
+    with open(os.path.join(ROOT, "systems", "cps1", "docs", "unsupported.md"), encoding="utf-8") as f:
+        part = f.read()
     return {s: t for s, t in re.findall(r"^\| (\w+) \| (.+?) \| .+ \|$", part, re.M) if s != "Set"}
 
 

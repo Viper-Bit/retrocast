@@ -45,7 +45,7 @@ before the thing it checks. A milestone is done when its exit test passes.
   EEPROM port, part loads, ROM_LOAD32_BYTE, each init's handler); every new
   set whole in the folder boots, 3,000 frames of `--play`, in play or
   attract by eye.
-- Not supported, with the reason ([compatibility](compatibility.md)):
+- Not supported, with the reason ([unsupported](unsupported.md)):
   sets on their own memory maps (MAME's sf2m3, sf2m10, sf2cems6, varthb2,
   varthb3 machines: sf2m3, sf2ceupl, sf2re, sf2level, sf2m10, the
   sf2cems6 sets, varthb2, varthb3); ganbare and pmonster (a clock chip

@@ -184,7 +184,7 @@ kept in the Actions cache. The required check is `ci-ok`.
 |------|---------|
 | [site/README.md](site/README.md) | The website: how it is built and how its game lists are refreshed |
 | [docs/architecture.md](docs/architecture.md) | Layout, the pipeline, templates, recompiled code, frontend: what every system shares |
-| [cpu/README.md](cpu/README.md) | The CPUs (6502, SM83), shared by the systems that use them |
+| [cpu/README.md](cpu/README.md) | The CPUs (6502 and the 2600's 6507, SM83, Z80, 68000), shared by the systems that use them |
 | [docs/roadmap.md](docs/roadmap.md) | The order rule, the systems, stretch goals |
 | [docs/verification-log.md](docs/verification-log.md) | Checks of the shared parts |
 | [docs/prior-art.md](docs/prior-art.md) | Other recompilers and emulators, and what we take from them |

@@ -117,3 +117,6 @@ footer{border-top:1px solid var(--line);padding:30px 28px;color:var(--dim);text-
 footer p{margin:4px 0}
 @media (max-width:720px){.steps{grid-template-columns:1fr}.hero h1{font-size:36px}header nav{display:none}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.game,.reveal{opacity:1;transform:none}}
+button.chip,button.vers{font:inherit;font-size:13px}button.vers{background:none;border:0;padding:0;font-size:12px;font-weight:600}
+.chip:focus-visible,.vers:focus-visible,.view button:focus-visible,.az a:focus-visible{outline:2px solid var(--accent2);outline-offset:2px}
+.how{margin-top:28px;color:var(--dim);font-size:14px}.how summary{cursor:pointer;font-weight:700;color:var(--text)}.how p{max-width:820px}

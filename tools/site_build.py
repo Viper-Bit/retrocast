@@ -99,20 +99,24 @@ def build(out_dir, data_dir=None, images_dir=None, release=None, fetch=True):
 
         if games:
             body = (f'<div class="tools"><div class="search"><input id="q" placeholder="Search {len(games)} {e(s["name"])} games…" aria-label="Search"></div>'
-                    '<span class="chip on" data-f="all">All</span><span class="chip" data-f="ok">Boots</span>'
-                    '<span class="chip" data-f="partial">Partial</span><span class="chip" data-f="no">Not yet</span>'
+                    '<button class="chip on" data-f="all">All</button><button class="chip" data-f="ok">Boots</button>'
+                    '<button class="chip" data-f="partial">Partial</button><button class="chip" data-f="no">Not yet</button>'
                     '<div class="view"><button id="v-grid" class="on" aria-label="Grid">▦</button><button id="v-list" aria-label="List">☰</button></div></div>'
                     '<div class="az" id="az"></div><div id="out"></div>')
         else:
             body = '<p class="sub">No games tested yet on this system. The list fills in when the boot runs are made.</p>'
         made = f' · tested {e(data["made"])}' if data and data.get("made") else ""
+        nv = sum(len(g["versions"]) for g in games)
+        nf = sum(len(g.get("failing", [])) for g in games)
+        if games:
+            made += f" · {len(games)} games, {nv} versions, {nf} not yet"
         write(os.path.join(out_dir, sid, "index.html"), tpl["system.html"].substitute(
             name=e(s["name"]), cpu=e(s["cpu"]), made=made, body=body, footer=FOOTER, **n,
             site=js(dict(common, id=sid, games=len(games)))))
 
     tag = release["tag"] if release else ""
-    badges = f"<span>{len(systems)} systems</span>" + (f"<span>{total:,} games boot-tested</span>" if total else "") + \
-             "<span>cycle-checked against an interpreter</span>"
+    badges = f"<span>{len(systems)} systems</span>" + (f"<span>{total:,} games start-tested</span>" if total else "") + \
+             "<span>recompilers checked cycle by cycle against an interpreter</span>"
     tagline = (f"{html.escape(tag)} · " if tag else "") + "the emulator, a headless program and a recompiler per system, and the kit to recompile your own games."
     write(os.path.join(out_dir, "index.html"), tpl["index.html"].substitute(
         badges=badges, cards="".join(cards), tagline=tagline, footer=FOOTER, site=js(dict(common, wall=wall))))

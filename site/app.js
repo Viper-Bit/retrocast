@@ -92,7 +92,7 @@ function render() {
   let d = 0;
   $("#out").innerHTML = Object.keys(by).sort().map(L => `<div class="letter" id="L-${L}">${L}</div><div class="games ${V}">` + by[L].map(g => {
     const pic = g.image ? `<img src="../img/${esc(S.id)}/${esc(g.image)}.webp" loading="lazy" alt="">` : `<div class="nopic">no picture yet</div>`;
-    const more = g.versions.length > 1 ? `<span class="vers">+${g.versions.length - 1} versions</span>` : "";
+    const more = g.versions.length > 1 ? `<button class="vers" aria-expanded="false">+${g.versions.length - 1} versions</button>` : "";
     return `<div class="game" style="animation-delay:${Math.min(d++, 40) * 35}ms"><div class="pic">${pic}<span class="status ${CLS[g.status]}">${LABEL[g.status]}</span></div>` +
       `<div class="body"><div><h4>${esc(g.title)}</h4><div class="meta"><span>${esc(g.id)}</span></div>` +
       `<div class="vlist">${g.versions.map(v => esc(v) + ((g.failing || []).includes(v) ? ' <span class="arch">· not yet</span>' : "")).join("<br>")}</div></div><div class="meta">${more}</div></div></div>`;
@@ -107,5 +107,5 @@ if (S.id && S.games) {
   ["grid", "list"].forEach(v => $("#v-" + v).addEventListener("click", () => {
     V = v; $("#v-grid").classList.toggle("on", v == "grid"); $("#v-list").classList.toggle("on", v == "list"); render(); }));
   $("#az").addEventListener("click", e => { const l = e.target.dataset.l; if (l) document.getElementById("L-" + l).scrollIntoView({behavior: "smooth", block: "center"}); });
-  $("#out").addEventListener("click", e => { if (e.target.classList.contains("vers")) e.target.closest(".game").querySelector(".vlist").classList.toggle("on"); });
+  $("#out").addEventListener("click", e => { if (e.target.classList.contains("vers")) { const on = e.target.closest(".game").querySelector(".vlist").classList.toggle("on"); e.target.setAttribute("aria-expanded", on); } });
 }

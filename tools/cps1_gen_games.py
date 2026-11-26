@@ -4,7 +4,7 @@ cps1_v.cpp (tag mame0289: src/mame/capcom/), which are not in this repository.
     python3 tools/cps1_gen_games.py MAME_DIR OUT_GAMES_C [--left OUT_MD]
 
 --left writes the markdown rows of the sets left out, with the reason (the
-"Not supported yet" table of systems/cps1/docs/compatibility.md).
+table of systems/cps1/docs/unsupported.md).
 """
 import re
 import sys

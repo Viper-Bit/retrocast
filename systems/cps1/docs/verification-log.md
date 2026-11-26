@@ -9,7 +9,7 @@ Checks of shared parts: [docs/verification-log.md](../../../docs/verification-lo
 - **Table**: 210 sets, regenerated from MAME 0.289 by the scratchpad
   generator (the existing rows unchanged but for two new columns: a
   chip's part, MAME's bootleg kludge); 19 left out, each with its reason
-  ([compatibility](compatibility.md)). `sf2m3` and `sf2ceupl` moved out:
+  ([unsupported](unsupported.md)). `sf2m3` and `sf2ceupl` moved out:
   MAME runs them on their own memory maps; on ours they booted but read
   no inputs.
 - **Self-checks** (`cps1_tests`): Pang! 3's decryption (the first half
@@ -90,7 +90,7 @@ Checks of shared parts: [docs/verification-log.md](../../../docs/verification-lo
 - **The table**: every set of MAME 0.289's `cps1.cpp` on the plain boards
   (147), MAME's chips and CRCs, whatever the folder holds; 18 more are left
   out for a layout the loader cannot express (bootlegs' ROM_CONTINUE,
-  ROM_LOAD32), listed in [compatibility](compatibility.md) with the
+  ROM_LOAD32), listed in [unsupported](unsupported.md) with the
   Q-Sound, P8 and own-init sets.
 - **Audit** (`tools/cps1_audit.py` on the folder, after taking 37 zips from
   CPS-new): 112 sets whole (some in a zip named otherwise), 8 with chips
