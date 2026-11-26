@@ -36,6 +36,10 @@ test touches.
   (32K), the bank picked by a read or a write of the hotspot, power-on in
   the last bank. Other sizes are refused (`cart.c`; `atari2600_cart_tests`,
   `tests/atari2600/test_cart.py`).
+- [x] More schemes, for the emulator: Superchip RAM (F8SC, F6SC, F4SC), FA,
+  E0, E7 (8K, 12K, 16K) and 3F, detected as Stella does; their slices and
+  RAM are in the save state (`A26STAT3`; older states still load). The
+  recompiler refuses them. Open: Starpath Supercharger, DPC.
 - [x] Scheme and region from the size, the file name (`(Europe)`,
   `(PAL)`) or a setting (`mapper`, `region`).
 - [x] RIOT: 128 bytes of RAM and its mirrors, ports A and B with their

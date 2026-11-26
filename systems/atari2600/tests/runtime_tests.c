@@ -158,6 +158,21 @@ int main(int argc, char **argv) {
     assert(machine.bus.cpu.cycles == cycles && machine.tia.x == x && machine.tia.y == y);
     machine.rom_hash++;
     assert(a26_load(&machine, argv[1]) != 0);
+    {   /* a state keeps the cartridge's slices and RAM (E7 here) */
+        static uint8_t e7[16384];
+        static Atari2600 m;
+        assert(a26_init(&m, e7, sizeof e7, A26_CART_E7, 0) == 0);
+        m.bus.cart.slice[0] = 3;
+        m.bus.cart.slice[1] = 2;
+        m.bus.cart.ram[0x500] = 0x9C;
+        assert(a26_save(&m, argv[1]) == 0);
+        m.bus.cart.slice[0] = m.bus.cart.slice[1] = 0;
+        m.bus.cart.ram[0x500] = 0;
+        assert(a26_load(&m, argv[1]) == 0);
+        assert(m.bus.cart.slice[0] == 3 && m.bus.cart.slice[1] == 2 && m.bus.cart.ram[0x500] == 0x9C);
+        m.bus.cart.slice[1] = 9;  /* out of range: refused */
+        assert(a26_save(&m, argv[1]) == 0 && a26_load(&m, argv[1]) != 0);
+    }
     Atari2600 reference;
     assert(a26_init(&machine, rom, sizeof rom, A26_CART_AUTO, 0) == 0);
     assert(a26_init(&reference, rom, sizeof rom, A26_CART_AUTO, 0) == 0);

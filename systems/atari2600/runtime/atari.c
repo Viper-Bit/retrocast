@@ -55,7 +55,9 @@ static const char *compare_state(const Atari2600 *a, const Atari2600 *b, int fra
     Cpu ca = a->bus.cpu, cb = b->bus.cpu;
     ca.bus = cb.bus = NULL;
     if (memcmp(&ca, &cb, sizeof ca)) return "CPU";
-    if (a->bus.cart.bank != b->bus.cart.bank) return "cartridge bank";
+    if (a->bus.cart.bank != b->bus.cart.bank || memcmp(a->bus.cart.slice, b->bus.cart.slice, sizeof a->bus.cart.slice))
+        return "cartridge bank";
+    if (memcmp(a->bus.cart.ram, b->bus.cart.ram, sizeof a->bus.cart.ram)) return "cartridge RAM";
     if (memcmp(&a->bus.riot, &b->bus.riot, sizeof a->bus.riot)) return "RIOT";
     size_t start = offsetof(A26Tia, frame), after = start + sizeof a->tia.frame;
     size_t samples = offsetof(A26Tia, samples), end_samples = samples + sizeof a->tia.samples;
@@ -117,6 +119,7 @@ void a26_frame(Atari2600 *a, const InputFrame *input) {
     }
 }
 
+/* A26STAT2's layout; A26STAT3 adds the cartridge's slices and RAM after it. */
 typedef struct {
     char magic[8];
     uint32_t hash;
@@ -128,25 +131,33 @@ typedef struct {
     uint32_t audio_phase[2];
     uint16_t audio_lfsr[2];
     unsigned sample_phase;
+} A26StateV2;
+
+typedef struct {
+    A26StateV2 v2;
+    uint8_t slice[4];
+    uint8_t ram[2048];
 } A26State;
 
 int a26_save(Atari2600 *a, const char *path) {
     A26State state = {0};
-    memcpy(state.magic, "A26STAT2", 8);
-    state.hash = a->rom_hash;
-    state.pal = a->pal;
-    state.cpu = a->bus.cpu;
-    state.cpu.bus = NULL;
+    memcpy(state.v2.magic, "A26STAT3", 8);
+    state.v2.hash = a->rom_hash;
+    state.v2.pal = a->pal;
+    state.v2.cpu = a->bus.cpu;
+    state.v2.cpu.bus = NULL;
     for (unsigned i = 0; i < 32; i++) {
-        state.cpu.read_map[i] = NULL;
-        state.cpu.write_map[i] = NULL;
+        state.v2.cpu.read_map[i] = NULL;
+        state.v2.cpu.write_map[i] = NULL;
     }
-    state.riot = a->bus.riot;
-    state.tia = a->tia;
-    state.bank = a->bus.cart.bank;
-    memcpy(state.audio_phase, a->audio_phase, sizeof state.audio_phase);
-    memcpy(state.audio_lfsr, a->audio_lfsr, sizeof state.audio_lfsr);
-    state.sample_phase = a->sample_phase;
+    state.v2.riot = a->bus.riot;
+    state.v2.tia = a->tia;
+    state.v2.bank = a->bus.cart.bank;
+    memcpy(state.v2.audio_phase, a->audio_phase, sizeof state.v2.audio_phase);
+    memcpy(state.v2.audio_lfsr, a->audio_lfsr, sizeof state.v2.audio_lfsr);
+    state.v2.sample_phase = a->sample_phase;
+    memcpy(state.slice, a->bus.cart.slice, sizeof state.slice);
+    memcpy(state.ram, a->bus.cart.ram, sizeof state.ram);
     FILE *file = fopen(path, "wb");
     if (!file) return -1;
     int failed = fwrite(&state, sizeof state, 1, file) != 1;
@@ -158,45 +169,58 @@ int a26_load(Atari2600 *a, const char *path) {
     A26State state;
     FILE *file = fopen(path, "rb");
     if (!file) return -1;
-    int failed = fread(&state, sizeof state, 1, file) != 1;
+    size_t got = fread(&state, 1, sizeof state, file);
     fclose(file);
-    if (failed) return -1;
-    int legacy = !memcmp(state.magic, "A26STATE", 8);
-    if ((!legacy && memcmp(state.magic, "A26STAT2", 8)) || state.hash != a->rom_hash ||
-        state.pal != a->pal || state.bank >= a->bus.cart.banks || state.tia.x >= 228 ||
-        state.tia.y >= A26_HEIGHT || state.tia.sample_count > 2048 ||
-        state.tia.color_rate != (unsigned)(a->pal ? 3546895 : 3579545) ||
-        (state.riot.divider != 1 && state.riot.divider != 8 &&
-         state.riot.divider != 64 && state.riot.divider != 1024)) return -1;
-    if (legacy) {
-        state.tia.pf_pixel = state.tia.pf_reflect = state.tia.rsync_skip = state.tia.next_hmove = 0;
-        state.tia.motion_counter = state.tia.moving = 0;
-        state.tia.audio_clock = (uint8_t)state.tia.x;
-        memset(state.tia.reserved, 0, sizeof state.tia.reserved);
+    int legacy = !memcmp(state.v2.magic, "A26STATE", 8);
+    int v3 = !memcmp(state.v2.magic, "A26STAT3", 8);
+    if (got != (v3 ? sizeof state : sizeof state.v2)) return -1;
+    if (!v3) {  /* older states: no slices, no cartridge RAM */
+        memset(state.slice, 0, sizeof state.slice);
+        memset(state.ram, 0, sizeof state.ram);
     }
-    if (state.tia.pf_pixel > 1 || state.tia.pf_reflect > 1 ||
-        state.tia.rsync_skip > state.tia.x || state.tia.next_hmove > 6 ||
-        state.tia.motion_counter > 15 || state.tia.moving > 0x1F || state.tia.audio_clock >= 228 ||
-        (state.tia.next_hmove && state.tia.next_hmove <= state.tia.pending_delay[0x2A])) return -1;
+    A26CartType type = a->bus.cart.type;
+    unsigned limit = type == A26_CART_E0 ? 8 : type == A26_CART_E7 ? (unsigned)(a->bus.cart.size / 2048) : 256;
+    if (state.slice[0] >= limit || state.slice[1] >= (type == A26_CART_E7 ? 4u : limit) ||
+        state.slice[2] >= limit || state.slice[3]) return -1;
+    if ((!legacy && !v3 && memcmp(state.v2.magic, "A26STAT2", 8)) || state.v2.hash != a->rom_hash ||
+        state.v2.pal != a->pal || state.v2.bank >= a->bus.cart.banks || state.v2.tia.x >= 228 ||
+        state.v2.tia.y >= A26_HEIGHT || state.v2.tia.sample_count > 2048 ||
+        state.v2.tia.color_rate != (unsigned)(a->pal ? 3546895 : 3579545) ||
+        (state.v2.riot.divider != 1 && state.v2.riot.divider != 8 &&
+         state.v2.riot.divider != 64 && state.v2.riot.divider != 1024)) return -1;
+    if (legacy) {
+        state.v2.tia.pf_pixel = state.v2.tia.pf_reflect = state.v2.tia.rsync_skip = state.v2.tia.next_hmove = 0;
+        state.v2.tia.motion_counter = state.v2.tia.moving = 0;
+        state.v2.tia.audio_clock = (uint8_t)state.v2.tia.x;
+        memset(state.v2.tia.reserved, 0, sizeof state.v2.tia.reserved);
+    }
+    if (state.v2.tia.pf_pixel > 1 || state.v2.tia.pf_reflect > 1 ||
+        state.v2.tia.rsync_skip > state.v2.tia.x || state.v2.tia.next_hmove > 6 ||
+        state.v2.tia.motion_counter > 15 || state.v2.tia.moving > 0x1F || state.v2.tia.audio_clock >= 228 ||
+        (state.v2.tia.next_hmove && state.v2.tia.next_hmove <= state.v2.tia.pending_delay[0x2A])) return -1;
     for (unsigned i = 0; i < 5; i++)
-        if ((unsigned)state.tia.position[i] >= A26_WIDTH) return -1;
+        if ((unsigned)state.v2.tia.position[i] >= A26_WIDTH) return -1;
     unsigned pending = 0;
     for (unsigned i = 0; i < 64; i++) {
-        if (state.tia.pending_delay[i] > (i >= sizeof state.tia.reg ? 0 : i == 0x2A ? 6 : 2)) return -1;
-        if (state.tia.pending_delay[i]) pending++;
+        if (state.v2.tia.pending_delay[i] > (i >= sizeof state.v2.tia.reg ? 0 : i == 0x2A ? 6 : 2)) return -1;
+        if (state.v2.tia.pending_delay[i]) pending++;
     }
-    if (pending != state.tia.pending_count) return -1;
-    a->bus.cpu = state.cpu;
+    if (pending != state.v2.tia.pending_count) return -1;
+    a->bus.cpu = state.v2.cpu;
     for (unsigned i = 0; i < 32; i++) {
         a->bus.cpu.read_map[i] = NULL;
         a->bus.cpu.write_map[i] = NULL;
     }
-    a->bus.riot = state.riot;
-    a->tia = state.tia;
-    a->bus.cart.bank = state.bank;
-    memcpy(a->audio_phase, state.audio_phase, sizeof a->audio_phase);
-    memcpy(a->audio_lfsr, state.audio_lfsr, sizeof a->audio_lfsr);
-    a->sample_phase = state.sample_phase;
+    a->bus.riot = state.v2.riot;
+    a->tia = state.v2.tia;
+    a->bus.cart.bank = state.v2.bank;
+    if (v3) {
+        memcpy(a->bus.cart.slice, state.slice, sizeof state.slice);
+        memcpy(a->bus.cart.ram, state.ram, sizeof state.ram);
+    }
+    memcpy(a->audio_phase, state.v2.audio_phase, sizeof a->audio_phase);
+    memcpy(a->audio_lfsr, state.v2.audio_lfsr, sizeof a->audio_lfsr);
+    a->sample_phase = state.v2.sample_phase;
     connect_tia(a);
     return 0;
 }
