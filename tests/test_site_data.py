@@ -43,6 +43,26 @@ class Group(unittest.TestCase):
         for n in ["Micro Machines (Europe) (Unl)", "Tetris (World)"]:
             self.assertFalse(site_data.skipped(n), n)
 
+    def test_attempts(self):  # a blank screen is tried again later: intros and attract loops
+        self.assertEqual(site_data.attempts(1200), [1200, 1500, 2400, 6000])
+        self.assertEqual(site_data.attempts(300), [300, 375, 600, 1500, 6000])
+
+    def test_genesis_presses_start(self):  # untouched first (as before), then with Start: pressing can land on a black menu
+        plain, pressed = site_data.input_variants("genesis")
+        self.assertEqual(plain, [])
+        self.assertIn("--press", pressed)
+        self.assertTrue(all(a.endswith(":08") for a in pressed[1::2]))
+        self.assertEqual(site_data.input_variants("nes"), [["--play", "1"]])
+
+    def test_pick_rom(self):  # an archive with the game and a small extra (Sonic & Knuckles' lock-on patch)
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            for name, size in [("patch.bin", 256), ("game.bin", 2048), ("readme.txt", 9999)]:
+                with open(os.path.join(d, name), "wb") as f:
+                    f.write(b"x" * size)
+            self.assertEqual(os.path.basename(site_data.pick_rom(d, (".bin",))), "game.bin")
+            self.assertIsNone(site_data.pick_rom(d, (".nes",)))
+
     def test_cps1_unsupported(self):
         u = site_data.cps1_unsupported()
         self.assertIn("ganbare", u)

@@ -16,7 +16,8 @@
  *   --coverage  print the share of the 68000's clocks run by recompiled code
  * Runs N frames (default 300), or fewer on a TMSS lock or a halted 68000,
  * and reports which. Last line "result: booted|locked|halted|timeout"
- * (booted: the VDP was written); exit code 0 only for booted. */
+ * (booted: the VDP was written); exit code 0 only for booted, or for any
+ * run with --misses (the build's trace step: the file is the result). */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -140,5 +141,5 @@ int main(int argc, char **argv) {
     if (m.tmss_locked) printf("tmss: the VDP was used before \"SEGA\" was written to $A14000\n");
     printf("result: %s\n", r);
     md_free(&m);
-    return strcmp(r, "booted") != 0;
+    return misses ? 0 : strcmp(r, "booted") != 0;
 }
