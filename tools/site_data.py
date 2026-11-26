@@ -102,13 +102,14 @@ def thumbnail(ppm_path, out_path):
     im.save(out_path, "WEBP", quality=80, method=6)
 
 
-def play_args(system):
-    """What presses Start: --play, the NES's with a seed, the Genesis's as presses (as the build's traces)."""
+def input_variants(system):
+    """The inputs tried in turn while the screen stays blank. The Genesis is left alone first, then Start is
+    pressed (as the build's traces do): pressing can land some games on a black menu."""
     if system == "nes":
-        return ["--play", "1"]
+        return [["--play", "1"]]  # the NES's --play takes a seed
     if system == "genesis":
-        return [a for f in (300, 500, 700, 900, 1100, 1500, 2000, 2500, 3000) for a in ("--press", f"{f}:08")]
-    return ["--play"]
+        return [[], [a for f in (300, 500, 700, 900, 1100, 1500, 2000, 2500, 3000) for a in ("--press", f"{f}:08")]]
+    return [["--play"]]
 
 
 def attempts(frames):
@@ -132,10 +133,10 @@ def run_one(system, path, frames, tmp):
         if not rom:
             return "no", None, ""
     ppm = os.path.join(work, "f.ppm")
-    for n in attempts(frames):
+    for n, inputs in [(n, i) for i in (input_variants(system) if play else [[]]) for n in attempts(frames)]:
         if os.path.exists(ppm):
             os.remove(ppm)
-        cmd = [os.path.join(BUILD, prog + EXE), rom, "--frames", str(n), "--ppm", ppm] + (play_args(system) if play else [])
+        cmd = [os.path.join(BUILD, prog + EXE), rom, "--frames", str(n), "--ppm", ppm] + inputs
         try:
             r = subprocess.run(cmd, capture_output=True, text=True, timeout=600, errors="replace")
             code, out = r.returncode, r.stdout

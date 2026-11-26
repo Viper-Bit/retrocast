@@ -47,11 +47,12 @@ class Group(unittest.TestCase):
         self.assertEqual(site_data.attempts(1200), [1200, 1500, 2400, 6000])
         self.assertEqual(site_data.attempts(300), [300, 375, 600, 1500, 6000])
 
-    def test_genesis_presses_start(self):
-        args = site_data.play_args("genesis")
-        self.assertIn("--press", args)
-        self.assertTrue(all(a.endswith(":08") for a in args[1::2]))
-        self.assertEqual(site_data.play_args("nes"), ["--play", "1"])
+    def test_genesis_presses_start(self):  # untouched first (as before), then with Start: pressing can land on a black menu
+        plain, pressed = site_data.input_variants("genesis")
+        self.assertEqual(plain, [])
+        self.assertIn("--press", pressed)
+        self.assertTrue(all(a.endswith(":08") for a in pressed[1::2]))
+        self.assertEqual(site_data.input_variants("nes"), [["--play", "1"]])
 
     def test_pick_rom(self):  # an archive with the game and a small extra (Sonic & Knuckles' lock-on patch)
         import tempfile
