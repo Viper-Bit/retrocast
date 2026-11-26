@@ -2,7 +2,7 @@
 # are in cpu/m68k and cpu/z80, listed in the root CMakeLists.txt (CPU_genesis).
 
 # The machine: memory maps, I/O, Z80 control, cartridge, timeline (D1); the VDP (D2); sound (D4).
-add_library(mdcore STATIC runtime/md.c runtime/vdp.c runtime/sound.c runtime/detect.c)
+add_library(mdcore STATIC runtime/md.c runtime/eeprom.c runtime/vdp.c runtime/sound.c runtime/detect.c)
 target_include_directories(mdcore PUBLIC runtime)
 target_link_libraries(mdcore PUBLIC m68k m68k_misses z80 core)
 if(NOT MSVC)

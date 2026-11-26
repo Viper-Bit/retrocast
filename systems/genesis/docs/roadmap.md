@@ -104,8 +104,10 @@ corrects this list where they disagree.
   candidates (240p Test Suite's Z80 RAM and pad tests, flamewing's
   68k-bcd-verifier) show their results on screen; with D2 in, what is
   left is checking their licences and pinning them.
-- Left out: EEPROM saves, wait states of the Z80's window into the
-  68000's space, the open bus (the queued opcode word).
+- Added later: serial EEPROM saves (`runtime/eeprom.c`: 24C01 to 24C65 on
+  Sega's, EA's and Acclaim's wiring, by product code or the header's $E8
+  $40 flag; not Codemasters' J-Cart), the open bus as the prefetched word.
+- Left out: wait states of the Z80's window into the 68000's space.
 
 ## D2 · VDP
 - [x] Registers, the data and control ports, VRAM/CRAM/VSRAM, the three

@@ -140,6 +140,8 @@ uint8_t z80_irq_ack(Z80 *z) { (void)z; return 0xFF; }
 static uint16_t rd(Md *m, uint32_t a, unsigned strobe) {
     a &= 0xFFFFFE;
     if (a < 0x400000) {
+        if (m->eeprom.size && a == 0x200000)
+            return (uint16_t)(md_eeprom_read(&m->eeprom, a) << 8 | md_eeprom_read(&m->eeprom, a + 1));
         if (sram_on(m, a)) {
             uint32_t o = a - m->sram_start;
             return (uint16_t)(m->sram[o] << 8 | m->sram[o + 1]);
@@ -178,7 +180,10 @@ static void wr(Md *m, uint32_t a, uint16_t v, unsigned strobe) {
     a &= 0xFFFFFE;
     uint8_t byte = (uint8_t)(strobe == 1 ? v : v >> 8);  /* a word to a byte device: its upper byte */
     if (a < 0x400000) {
-        if (sram_on(m, a) && !(m->sram_ctl & 2)) {
+        if (m->eeprom.size && a == 0x200000) {
+            if (strobe & 2) md_eeprom_write(&m->eeprom, a, (uint8_t)(v >> 8));
+            if (strobe & 1) md_eeprom_write(&m->eeprom, a + 1, (uint8_t)v);
+        } else if (sram_on(m, a) && !(m->sram_ctl & 2)) {
             uint32_t o = a - m->sram_start;
             if (strobe & 2) m->sram[o] = (uint8_t)(v >> 8);
             if (strobe & 1) m->sram[o + 1] = (uint8_t)v;
@@ -308,8 +313,9 @@ int md_load(Md *m, const uint8_t *rom, size_t size, char *err, size_t errlen) {
     memcpy(m->rom, rom, size);
     for (int i = 0; i < 8; i++) m->ssf2[i] = (uint8_t)i;
     /* battery RAM: "RA", type, $20, start, end (odd bytes, even bytes or both; every byte kept) */
+    md_eeprom_setup(&m->eeprom, m->rom);  /* a serial EEPROM takes battery RAM's place */
     uint32_t start = be32(rom + 0x1B4) & ~1u, end = be32(rom + 0x1B8) | 1u;
-    if (rom[0x1B0] == 'R' && rom[0x1B1] == 'A' && start >= 0x200000 && start < 0x400000 && end > start &&
+    if (!m->eeprom.size && rom[0x1B0] == 'R' && rom[0x1B1] == 'A' && start >= 0x200000 && start < 0x400000 && end > start &&
         end - start < 0x20000) {
         m->sram_start = start;
         m->sram_size = end - start + 1;
@@ -342,7 +348,7 @@ uint32_t md_rom_hash(const Md *m) {
     return h;
 }
 
-enum { STATE_VERSION = 1 };
+enum { STATE_VERSION = 2 };  /* 2: the EEPROM */
 typedef struct { char magic[4]; uint32_t version, size, rom_hash; } StateHeader;
 
 int md_state_save(const Md *m, const char *path) {
@@ -386,4 +392,10 @@ void md_free(Md *m) {
     free(m->rom);
     free(m->sram);
     m->rom = m->sram = NULL;
+}
+
+uint8_t *md_battery(Md *m, uint32_t *size) {
+    if (m->eeprom.size) return *size = m->eeprom.size, m->eeprom.mem;
+    *size = m->sram ? m->sram_size : 0;
+    return m->sram;
 }

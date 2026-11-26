@@ -13,7 +13,8 @@ as in the [README](../../README.md#recompiling-a-game)).
   SingleStepTests m68000 on all 127 of its instruction families, every bus
   transaction with its clocks included (317,500 tests).
 - **The machine** (roadmap D1): memory maps, I/O and pads, Z80 control,
-  cartridge with battery RAM, TMSS, both CPUs on one clock; 1,556 of the
+  cartridge with battery RAM or a serial EEPROM (NBA Jam, NHLPA 93, Wily
+  Wars, College Slam...; not Codemasters' J-Cart ones), TMSS, both CPUs on one clock; 1,556 of the
   1,566 games of the licensed set reach their first VDP writes.
 - **The VDP** (roadmap D2): planes, window, sprites, priorities,
   shadow/highlight, DMA, interrupts, drawn a line at a time; samples of
