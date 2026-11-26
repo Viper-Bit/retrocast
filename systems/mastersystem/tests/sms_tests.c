@@ -75,6 +75,29 @@ static void test_codemasters(void) {
     assert(!sms_is_codemasters(rom, 0x40000));
 }
 
+static void test_korean_mappers(void) {
+    for (unsigned b = 0; b < 16; b++) memset(rom + b * 0x2000, (int)b, 0x2000);
+    sms_init(&s, rom, 0x20000, 0, 0);
+    s.cart.mapper = SMS_MAPPER_MSX;
+    sms_reset(&s);
+    assert(z80_read(&s.cpu, 0x2000) == 1 && z80_read(&s.cpu, 0x4000) == 0);
+    for (unsigned b = 0; b < 4; b++) z80_write(&s.cpu, (uint16_t)b, (uint8_t)(8 + b));
+    assert(z80_read(&s.cpu, 0x4000) == 10 && z80_read(&s.cpu, 0x6000) == 11);
+    assert(z80_read(&s.cpu, 0x8000) == 8 && z80_read(&s.cpu, 0xA000) == 9);
+    z80_write(&s.cpu, 0xFFFF, 3);
+    assert(z80_read(&s.cpu, 0xA000) == 9 && z80_read(&s.cpu, 0xDFFF) == 3);
+
+    s.cart.mapper = SMS_MAPPER_NEMESIS;
+    assert(z80_read(&s.cpu, 0x0000) == 15 && z80_read(&s.cpu, 0x2000) == 1);
+
+    s.cart.mapper = SMS_MAPPER_KOREAN;
+    sms_reset(&s);
+    assert(z80_read(&s.cpu, 0x8000) == 4);
+    z80_write(&s.cpu, 0xA000, 6);
+    z80_write(&s.cpu, 0xFFFF, 1);
+    assert(z80_read(&s.cpu, 0x8000) == 12 && z80_read(&s.cpu, 0x4000) == 2);
+}
+
 static void test_ports(void) {
     sms_init(&s, rom, sizeof rom, 0, 0);
     assert(z80_in(&s.cpu, 0xDC) == 0xFF && z80_in(&s.cpu, 0xDD) == 0xFF);  /* nothing pressed */
@@ -276,6 +299,7 @@ int main(void) {
     test_header();
     test_memory();
     test_codemasters();
+    test_korean_mappers();
     test_ports();
     test_vdp_ports();
     test_gamegear();
