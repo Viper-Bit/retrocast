@@ -9,6 +9,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include "eeprom.h"
 #include "m68k_cpu.h"
 #include "sound.h"
 #include "vdp.h"
@@ -25,6 +26,7 @@ typedef struct Md {
     uint8_t zram[0x2000];   /* Z80 RAM, $A00000 for the 68000 (mirrored at $2000) */
     uint8_t *sram;          /* battery RAM from the header ("RA"), NULL if none */
     uint32_t sram_start, sram_size;  /* 68000 addresses sram_start.. (even, every byte kept) */
+    MdEeprom eeprom;        /* a serial EEPROM in place of battery RAM (eeprom.h); size 0 if none */
     uint8_t sram_ctl;       /* $A130F1: bit 0 maps it over ROM, bit 1 write protects */
     uint8_t ssf2[8];        /* $A130F3-$A130FF: 512 KB bank per 512 KB slot (ROMs over 4 MB) */
     uint8_t pal;            /* 313 lines a frame, not 262 */
@@ -67,6 +69,8 @@ typedef struct Md {
 /* Load a ROM (copied): the header picks region and battery RAM; power-on. */
 int md_load(Md *m, const uint8_t *rom, size_t size, char *err, size_t errlen);
 void md_free(Md *m);
+/* What the game keeps on the cartridge (battery RAM or EEPROM), for a .sav file; NULL if nothing. */
+uint8_t *md_battery(Md *m, uint32_t *size);
 /* The console's reset button: the 68000 restarts, the Z80 is held in
  * reset; RAM, VRAM and the cartridge keep their contents. */
 void md_reset(Md *m);

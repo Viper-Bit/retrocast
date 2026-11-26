@@ -34,7 +34,9 @@ static Md md;
 static char sav_path[1024], misses_path[1024];
 
 static void save_sav(void) {
-    if (md.sram && !SDL_SaveFile(sav_path, md.sram, md.sram_size)) SDL_Log("%s: %s", sav_path, SDL_GetError());
+    uint32_t size;
+    uint8_t *battery = md_battery(&md, &size);
+    if (battery && !SDL_SaveFile(sav_path, battery, size)) SDL_Log("%s: %s", sav_path, SDL_GetError());
 }
 
 static int sys_open(const char *path, const Settings *settings, SysInfo *info, char *err, size_t errlen) {
@@ -61,8 +63,10 @@ static int sys_open(const char *path, const Settings *settings, SysInfo *info, c
     SDL_snprintf(misses_path, sizeof misses_path, "%s%s.misses", SDL_GetBasePath(), APP_NAME);
     if (md.recomp_on && settings->record_misses) md.misses = SDL_calloc(md_code_end(&md) / 2 + 1, 1);
     size_t n;
-    uint8_t *sav = md.sram ? SDL_LoadFile(sav_path, &n) : NULL;
-    if (sav && n == md.sram_size) memcpy(md.sram, sav, n);
+    uint32_t size;
+    uint8_t *battery = md_battery(&md, &size);
+    uint8_t *sav = battery ? SDL_LoadFile(sav_path, &n) : NULL;
+    if (sav && n == size) memcpy(battery, sav, n);
     SDL_free(sav);
     const char *name = path;
     for (const char *p = path; *p; p++)

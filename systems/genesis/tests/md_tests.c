@@ -145,6 +145,104 @@ static void sram(void) {
     CHECK(r8(0x200001) == 0x42, "battery RAM protected");
 }
 
+/* ---- serial EEPROM (I2C), driven bit by bit as the games do ---- */
+typedef struct { uint32_t sda_out, scl, sda_in; unsigned sda_out_bit, scl_bit, sda_in_bit; } Wiring;
+static Wiring wire;
+static uint8_t latch[2];  /* what the game last wrote to $200000 / $200001 */
+static void lines(int scl, int sda) {
+    latch[wire.scl & 1] = (uint8_t)((latch[wire.scl & 1] & ~(1u << wire.scl_bit)) | (unsigned)scl << wire.scl_bit);
+    latch[wire.sda_out & 1] = (uint8_t)((latch[wire.sda_out & 1] & ~(1u << wire.sda_out_bit)) | (unsigned)sda << wire.sda_out_bit);
+    w8(0x200000, latch[0]);
+    w8(0x200001, latch[1]);
+}
+static int sda_in(void) { return r8(wire.sda_in) >> wire.sda_in_bit & 1; }
+static void i2c_start(void) { lines(1, 1); lines(1, 0); lines(0, 0); }
+static void i2c_stop(void) { lines(0, 0); lines(1, 0); lines(1, 1); }
+static int i2c_send(unsigned byte) {  /* returns the chip's ack (1: acked) */
+    for (int i = 7; i >= 0; i--) { int b = byte >> i & 1; lines(0, b); lines(1, b); lines(0, b); }
+    lines(0, 1); lines(1, 1);
+    int ack = !sda_in();
+    lines(0, 1);
+    return ack;
+}
+static unsigned i2c_recv(int ack) {
+    unsigned v = 0;
+    lines(0, 1);
+    for (int i = 0; i < 8; i++) { lines(1, 1); v = v << 1 | (unsigned)sda_in(); lines(0, 1); }
+    lines(0, !ack); lines(1, !ack); lines(0, !ack);
+    return v;
+}
+static void load_eeprom(const char *code, int flag) {
+    char err[64];
+    md_free(&m);
+    make_rom("U", 0);
+    memcpy(rom + 0x180, code, 14);
+    if (flag) memcpy(rom + 0x1B0, "RA\xE8\x40\x00\x20\x00\x01\x00\x20\x00\x01", 12);
+    if (md_load(&m, rom, sizeof rom, err, sizeof err)) { printf("load: %s\n", err); failed++; }
+    latch[0] = latch[1] = 0xFF;
+}
+
+static void eeprom(void) {
+    /* Sega's wiring (Evander Holyfield's Boxing): $200001 bit 0 SDA, bit 1 SCL; a 24C01 in mode 1
+       (the first byte is the 7-bit address and the read bit, no device select) */
+    wire = (Wiring){0x200001, 0x200001, 0x200001, 0, 1, 0};
+    load_eeprom("GM MK-1215 -00", 1);
+    CHECK(!m.sram && m.eeprom.size == 128, "Evander: a 24C01, not battery RAM (size %u)", m.eeprom.size);
+    i2c_start();
+    CHECK(i2c_send(0x10 << 1), "mode 1: address acked");
+    CHECK(i2c_send(0x5A) && i2c_send(0xA5), "mode 1: data acked");
+    i2c_stop();
+    i2c_start(); i2c_send(0x10 << 1 | 1);
+    unsigned a = i2c_recv(1), b = i2c_recv(0);
+    i2c_stop();
+    CHECK(a == 0x5A && b == 0xA5, "mode 1 read back %02X %02X", a, b);
+    /* a page of 4 bytes: the fifth write wraps to the page's start */
+    i2c_start(); i2c_send(0x20 << 1);
+    for (unsigned i = 0; i < 5; i++) i2c_send(i + 1);
+    i2c_stop();
+    CHECK(m.eeprom.mem[0x20] == 5 && m.eeprom.mem[0x21] == 2 && m.eeprom.mem[0x24] != 5, "page wrap: %u %u",
+          m.eeprom.mem[0x20], m.eeprom.mem[0x21]);
+    /* an unknown game with the header's EEPROM flag: Sega's wiring */
+    load_eeprom("GM T-99999 -00", 1);
+    CHECK(m.eeprom.size == 128, "flagged, unknown: a 24C01 on Sega's wiring");
+
+    /* Acclaim's (NBA Jam TE): SCL $200000 bit 0, SDA $200001 bit 0; a 24C04, device select, then a random read */
+    wire = (Wiring){0x200001, 0x200000, 0x200001, 0, 0, 0};
+    load_eeprom("GM T-81406 -00", 0);
+    CHECK(m.eeprom.size == 512, "NBA Jam TE: a 24C04 (size %u)", m.eeprom.size);
+    i2c_start();
+    CHECK(i2c_send(0xA2) && i2c_send(0x33) && i2c_send(0x77), "24C04: block 1, address $33, data");
+    i2c_stop();
+    CHECK(m.eeprom.mem[0x133] == 0x77, "24C04 write at $133");
+    i2c_start(); i2c_send(0xA2); i2c_send(0x33);   /* the address, then a restart to read */
+    i2c_start(); i2c_send(0xA3);
+    a = i2c_recv(0);
+    i2c_stop();
+    CHECK(a == 0x77, "24C04 random read %02X", a);
+    i2c_start();
+    CHECK(!i2c_send(0x50), "not $Ax: no ack");
+    i2c_stop();
+
+    /* College Slam: the same wiring, a 24C65: two address bytes */
+    load_eeprom("GM T-81576 -00", 1);
+    CHECK(m.eeprom.size == 8192, "College Slam: a 24C65 (size %u)", m.eeprom.size);
+    i2c_start(); i2c_send(0xA0); i2c_send(0x12); i2c_send(0x34); i2c_send(0x99); i2c_stop();
+    CHECK(m.eeprom.mem[0x1234] == 0x99, "24C65 write at $1234");
+
+    /* EA's (NHLPA Hockey 93, no header flag): $200001 bit 7 SDA, bit 6 SCL */
+    wire = (Wiring){0x200001, 0x200001, 0x200001, 7, 6, 7};
+    load_eeprom("GM T-50396 -00", 0);
+    CHECK(m.eeprom.size == 128, "NHLPA 93: a 24C01");
+    i2c_start(); i2c_send(0xA0); i2c_send(0x05); i2c_send(0x66); i2c_stop();
+    i2c_start(); i2c_send(0xA0); i2c_send(0x05); i2c_start(); i2c_send(0xA1);
+    a = i2c_recv(0);
+    i2c_stop();
+    CHECK(a == 0x66, "EA wiring read back %02X", a);
+
+    load("U", 0);
+    CHECK(!m.eeprom.size, "no EEPROM without the flag or a listed game");
+}
+
 static void tmss(void) {
     load("U", 0);
     w16(0xC00004, 0x8104);
@@ -331,6 +429,7 @@ int main(int argc, char **argv) {
     z80();
     pads();
     sram();
+    eeprom();
     tmss();
     vdp();
     sound();
