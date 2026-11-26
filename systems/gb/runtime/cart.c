@@ -14,7 +14,7 @@ int gb_cart_load(GbCart *c, const uint8_t *d, size_t size, char *err, size_t err
         {0x0F, MBC_3, 1, 1}, {0x10, MBC_3, 1, 1}, {0x11, MBC_3, 0, 0}, {0x12, MBC_3, 0, 0}, {0x13, MBC_3, 1, 0},
         {0x19, MBC_5, 0, 0}, {0x1A, MBC_5, 0, 0}, {0x1B, MBC_5, 1, 0},
         {0x1C, MBC_5, 0, 0}, {0x1D, MBC_5, 0, 0}, {0x1E, MBC_5, 1, 0},  /* rumble: the motor is ignored */
-        {0x22, MBC_7, 1, 0},
+        {0x22, MBC_7, 1, 0}, {0xFE, MBC_HUC3, 1, 1}, {0xFF, MBC_HUC1, 1, 0},
     };
     uint8_t type = d[0x147];
     int k = -1;
@@ -42,6 +42,7 @@ int gb_cart_load(GbCart *c, const uint8_t *d, size_t size, char *err, size_t err
         eeprom_init(&c->eeprom, 0);
         c->tilt_x = c->tilt_y = 0x8000;
     }
+    if (c->mbc == MBC_HUC1 || c->mbc == MBC_HUC3) c->ram_on = 1;
     c->rom_bank = 1;
     /* MBC1 multicart: 8 Mbit, and bank $10 (at $40000) has a header with the logo too */
     c->multicart = c->mbc == MBC_1 && rom == 0x100000 && !memcmp(d + 0x104, d + 0x40104, 0x30);
@@ -67,7 +68,7 @@ static uint32_t rom_bank(const GbCart *c, int high) {
         break;
     }
     case MBC_2: case MBC_3: b = high ? (c->rom_bank ? c->rom_bank : 1) : 0; break;
-    case MBC_5: case MBC_7: b = high ? c->rom_bank : 0; break;
+    case MBC_5: case MBC_7: case MBC_HUC1: case MBC_HUC3: b = high ? c->rom_bank : 0; break;
     default: b = (uint32_t)high;
     }
     return b & (c->rom_size / 0x4000 - 1);
@@ -77,7 +78,7 @@ uint32_t gb_cart_bank(const GbCart *c, uint16_t a) { return rom_bank(c, a >= 0x4
 
 static int ram_offset(const GbCart *c, uint16_t a) {  /* -1: no RAM there */
     if (!c->ram_on || !c->ram_size) return -1;
-    uint32_t bank = c->mbc == MBC_1 ? (c->mode ? c->bank2 : 0) : c->mbc == MBC_3 || c->mbc == MBC_5 ? c->bank2 : 0;
+    uint32_t bank = c->mbc == MBC_1 ? (c->mode ? c->bank2 : 0) : c->bank2;
     return (int)((bank * 0x2000 + (a & 0x1FFF)) % c->ram_size);
 }
 
@@ -120,6 +121,46 @@ static void mbc7_write(GbCart *c, uint16_t a, uint8_t v) {
     }
 }
 
+static unsigned huc3_nibble(const GbCart *c, unsigned addr) {
+    return c->huc3.nvram[addr >> 1] >> ((addr & 1) * 4) & 15;
+}
+
+static void huc3_put(GbCart *c, unsigned addr, unsigned v) {
+    unsigned shift = (addr & 1) * 4;
+    uint8_t *byte = &c->huc3.nvram[addr >> 1];
+    *byte = (uint8_t)((*byte & ~(15u << shift)) | (v & 15) << shift);
+}
+
+static void huc3_exec(GbCart *c) {
+    unsigned cmd = c->huc3.command >> 4, arg = c->huc3.command & 15;
+    switch (cmd) {
+    case 1: c->huc3.command = (uint8_t)(0x10 | huc3_nibble(c, c->huc3.addr++)); break;
+    case 3: huc3_put(c, c->huc3.addr++, arg); break;
+    case 4: c->huc3.addr = (uint8_t)((c->huc3.addr & 0xF0) | arg); break;
+    case 5: c->huc3.addr = (uint8_t)((c->huc3.addr & 0x0F) | arg << 4); break;
+    case 6:
+        if (arg == 0) {
+            unsigned minutes = c->rtc[2] * 60u + c->rtc[1];
+            unsigned days = c->rtc[3] | (c->rtc[4] & 15) << 8;
+            for (unsigned i = 0; i < 3; i++) {
+                huc3_put(c, i, minutes >> (4 * i));
+                huc3_put(c, i + 3, days >> (4 * i));
+            }
+        } else if (arg == 1) {
+            unsigned minutes = (huc3_nibble(c, 0) | huc3_nibble(c, 1) << 4 | huc3_nibble(c, 2) << 8) % 1440;
+            c->rtc[0] = 0;
+            c->rtc[1] = (uint8_t)(minutes % 60);
+            c->rtc[2] = (uint8_t)(minutes / 60);
+            c->rtc[3] = (uint8_t)(huc3_nibble(c, 3) | huc3_nibble(c, 4) << 4);
+            c->rtc[4] = (uint8_t)huc3_nibble(c, 5);
+            c->rtc_cycles = 0;
+        } else if (arg == 2) {
+            c->huc3.command = 0x61;
+        }
+        break;
+    }
+}
+
 uint8_t gb_cart_read(const GbCart *c, uint16_t a) {
     if (a < 0x8000) return c->rom[rom_bank(c, a >= 0x4000) * 0x4000 + (a & 0x3FFF)];
     if (c->mbc == MBC_7) return mbc7_read(c, a);
@@ -127,6 +168,15 @@ uint8_t gb_cart_read(const GbCart *c, uint16_t a) {
     if (c->mbc == MBC_3 && c->bank2 >= 0x08) {  /* the clock, as latched */
         static const uint8_t MASK[5] = {0x3F, 0x3F, 0x1F, 0xFF, 0xC1};
         return c->ram_on && c->bank2 <= 0x0C ? (uint8_t)(c->rtc_latched[c->bank2 - 8] & MASK[c->bank2 - 8]) : 0xFF;
+    }
+    if (c->mbc == MBC_HUC1 && c->mode == 0x0E) return 0xC0;  /* no incoming IR */
+    if (c->mbc == MBC_HUC3 && !c->ram_on) {
+        switch (c->mode) {
+        case 0x0C: return 0x80 | c->huc3.command;
+        case 0x0D: return 0xFF;  /* MCU is ready */
+        case 0x0E: return 0xFE;  /* no incoming IR */
+        default: return 0xFF;
+        }
     }
     int o = ram_offset(c, a);
     return o < 0 ? 0xFF : c->ram[o];
@@ -143,7 +193,10 @@ void gb_cart_write(GbCart *c, uint16_t a, uint8_t v) {
                 c->rtc[c->bank2 - 8] = v;
                 if (c->bank2 == 0x08) c->rtc_cycles = 0;  /* writing the seconds restarts the second */
             }
-        } else {
+        } else if (c->mbc == MBC_HUC3 && c->mode != 0x0A) {
+            if (c->mode == 0x0B) c->huc3.command = v & 0x7F;
+            else if (c->mode == 0x0D && !(v & 1)) huc3_exec(c);
+        } else if (c->mbc != MBC_HUC1 || c->mode != 0x0E) {
             int o = ram_offset(c, a);
             if (o >= 0) c->ram[o] = v;
         }
@@ -171,6 +224,14 @@ void gb_cart_write(GbCart *c, uint16_t a, uint8_t v) {
             c->latch_prev = v;
         }
         break;
+    case MBC_HUC1:
+    case MBC_HUC3:
+        if (a < 0x2000) {
+            c->mode = v & 15;
+            if (c->mbc == MBC_HUC3) c->ram_on = c->mode == 0 || c->mode == 0x0A;
+        } else if (a < 0x4000) c->rom_bank = v & 0x7F;
+        else if (a < 0x6000) c->bank2 = v & 3;
+        break;
     case MBC_7:
         if (a < 0x2000) c->ram_on = (v & 0x0F) == 0x0A;
         else if (a < 0x4000) c->rom_bank = v & 0x7F;
@@ -192,6 +253,10 @@ static void rtc_second(GbCart *c) {
     c->rtc[1] = 0;
     if (++c->rtc[2] != 24) return;
     c->rtc[2] = 0;
+    if (c->mbc == MBC_HUC3) {
+        if (++c->rtc[3] == 0) c->rtc[4] = (c->rtc[4] + 1) & 15;
+        return;
+    }
     unsigned day = (c->rtc[3] | (c->rtc[4] & 1) << 8) + 1;
     if (day == 512) day = 0, c->rtc[4] |= 0x80;  /* day counter carry */
     c->rtc[3] = (uint8_t)day;
@@ -208,6 +273,18 @@ void gb_cart_tick(GbCart *c) {
 
 void gb_cart_rtc_advance(GbCart *c, uint64_t seconds) {
     if (!c->has_rtc || (c->rtc[4] & 0x40)) return;
+    if (c->mbc == MBC_HUC3) {
+        seconds %= 4096ull * 86400;
+        seconds += ((c->rtc[3] | (c->rtc[4] & 15) << 8) * 24ull + c->rtc[2]) * 3600 +
+                   c->rtc[1] * 60ull + c->rtc[0];
+        unsigned day = (unsigned)(seconds / 86400) & 4095;
+        c->rtc[0] = (uint8_t)(seconds % 60);
+        c->rtc[1] = (uint8_t)(seconds / 60 % 60);
+        c->rtc[2] = (uint8_t)(seconds / 3600 % 24);
+        c->rtc[3] = (uint8_t)day;
+        c->rtc[4] = (uint8_t)(day >> 8);
+        return;
+    }
     if (seconds > 512ull * 86400) seconds = 512ull * 86400 + 1;  /* past the day counter: it carried */
     while (seconds--) rtc_second(c);
 }
