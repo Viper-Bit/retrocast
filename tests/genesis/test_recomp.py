@@ -27,6 +27,16 @@ class TestRecompiledRandom(unittest.TestCase):
         share = float(re.search(r"coverage: ([\d.]+)%", r.stdout).group(1))
         self.assertGreater(share, 90, r.stdout)
 
+    def test_trace_run_succeeds_unbooted(self):  # the build's trace step: the file is the result, booted or not
+        import tempfile
+        headless = os.path.join(BUILD, "genesis_headless" + EXE)
+        with tempfile.TemporaryDirectory() as d:
+            out = os.path.join(d, "t.trace")
+            r = subprocess.run([headless, ROM, "--frames", "1", "--misses", out], capture_output=True, text=True)
+            self.assertIn("result: timeout", r.stdout)
+            self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+            self.assertTrue(os.path.exists(out))
+
 
 if __name__ == "__main__":
     unittest.main()

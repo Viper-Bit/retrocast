@@ -14,11 +14,11 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BUILD = os.path.join(ROOT, "build")
 EXE = ".exe" if os.name == "nt" else ""
 SEVENZIP = shutil.which("7z") or r"C:\Program Files\7-Zip\7z.exe"
-# program, the game files it takes, frames to the title screen, whether it has --play
+# program, the game files it takes, frames to the title screen, whether it is played (play_args)
 SYSTEMS = {
     "nes": ("nes_headless", (".nes",), 300, True),
     "gb": ("gb_headless", (".gb", ".gbc"), 900, True),
-    "genesis": ("genesis_headless", (".md", ".gen", ".bin", ".smd"), 1200, False),
+    "genesis": ("genesis_headless", (".md", ".gen", ".bin", ".smd"), 1200, True),
     "mastersystem": ("sms_headless", (".sms", ".gg"), 600, True),
     "atari2600": ("atari2600_headless", (".a26", ".bin"), 300, True),
     "cps1": ("cps1_headless", (".zip",), 1200, True),
@@ -102,22 +102,40 @@ def thumbnail(ppm_path, out_path):
     im.save(out_path, "WEBP", quality=80, method=6)
 
 
+def play_args(system):
+    """What presses Start: --play, the NES's with a seed, the Genesis's as presses (as the build's traces)."""
+    if system == "nes":
+        return ["--play", "1"]
+    if system == "genesis":
+        return [a for f in (300, 500, 700, 900, 1100, 1500, 2000, 2500, 3000) for a in ("--press", f"{f}:08")]
+    return ["--play"]
+
+
+def attempts(frames):
+    """Frame counts to try while the screen is blank: some intros are long, some attract loops blank a while."""
+    return list(dict.fromkeys((frames, frames * 5 // 4, frames * 2, frames * 5, max(frames * 5, 6000))))
+
+
+def pick_rom(folder, exts):
+    """The game in an unpacked archive: the largest file of the system's kinds (an archive may hold a patch too)."""
+    found = [os.path.join(folder, f) for f in os.listdir(folder) if f.lower().endswith(exts)]
+    return max(found, key=os.path.getsize) if found else None
+
+
 def run_one(system, path, frames, tmp):
     prog, _, _, play = SYSTEMS[system]
-    play_args = ["--play", "1"] if system == "nes" else ["--play"]  # the NES one takes a seed
     work = tempfile.mkdtemp(dir=tmp)
     rom = path
     if system != "cps1" and path.lower().endswith((".7z", ".zip")):
         subprocess.run([SEVENZIP, "e", "-y", "-o" + work, path], capture_output=True)
-        found = [f for f in os.listdir(work) if f.lower().endswith(SYSTEMS[system][1])]
-        if not found:
+        rom = pick_rom(work, SYSTEMS[system][1])
+        if not rom:
             return "no", None, ""
-        rom = os.path.join(work, found[0])
     ppm = os.path.join(work, "f.ppm")
-    for n in dict.fromkeys((frames, frames * 5, max(frames * 5, 6000))):  # retries, longer, while the screen is blank (long intros)
+    for n in attempts(frames):
         if os.path.exists(ppm):
             os.remove(ppm)
-        cmd = [os.path.join(BUILD, prog + EXE), rom, "--frames", str(n), "--ppm", ppm] + (play_args if play else [])
+        cmd = [os.path.join(BUILD, prog + EXE), rom, "--frames", str(n), "--ppm", ppm] + (play_args(system) if play else [])
         try:
             r = subprocess.run(cmd, capture_output=True, text=True, timeout=600, errors="replace")
             code, out = r.returncode, r.stdout

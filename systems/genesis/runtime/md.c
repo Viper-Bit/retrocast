@@ -13,7 +13,7 @@ enum { Z80_INT_CLOCKS = 2573 };  /* the Z80's INT pulse: BlastEm's measured 171.
 enum { TH_TIMEOUT = 80540 }; /* 6-button pad: ~1.5 ms of master clocks without a TH rise resets its count */
 
 /* shortcut: open bus reads give the queued opcode word, not the last word on the bus; exact once a game needs it */
-static uint16_t open_bus(const Md *m) { return m->cpu.ir; }
+static uint16_t open_bus(const Md *m) { return m->cpu.irc; }  /* the bus last held the prefetched word (Time Killers' $A11100 test) */
 
 static int z80_has_bus(const Md *m) { return m->z80_run && !m->z80_busreq; }
 
