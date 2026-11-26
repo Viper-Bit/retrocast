@@ -16,7 +16,8 @@ recompiles one (through `-DROMS`, see the
   interpreter, since drawing the picture costs far more than the Z80.
 - **Cartridges**: Sega's mapper with cartridge RAM (kept in `game.sms.sav`),
   Codemasters' mapper; raw `.sms`, with or without a 512-byte copier
-  header. No BIOS needed. Not yet: Korean and other mappers.
+  header. Known Korean releases select the $A000 or MSX mapper by ROM CRC.
+  MSX cartridges run in the interpreter. No BIOS needed.
 - **Picture**: the VDP's mode 4 at 192 lines: scrolling and its locks,
   flipped tiles, priority, 8x8, 8x16 and zoomed sprites, eight a line,
   frame and line interrupts; the TMS9918's Graphics I and II with their

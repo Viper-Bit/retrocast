@@ -42,7 +42,8 @@ palette table is from SameBoy's boot ROM source ([sources](../../docs/sources.md
 nothing else differs, there are no Super Game Boy features.
 Cartridges: ROM only, MBC1 (also the multicart wiring: an 8 Mbit ROM with the logo again at
 $40104), MBC2, MBC3 with its
-clock, MBC5 (rumble ignored), and MBC7. For MBC7, the arrow keys, D-pad or
+clock, MBC5 (rumble ignored), MBC7, HuC1 and HuC3. HuC3 has a battery clock;
+the infrared link and the HuC3 tone generator are unimplemented. For MBC7, the arrow keys, D-pad or
 left stick simulate tilt in four directions. Battery RAM and MBC7 EEPROM
 are kept in `ROM.sav` next to the ROM. The MBC3 clock is saved with RAM
 and advances while the program is closed.

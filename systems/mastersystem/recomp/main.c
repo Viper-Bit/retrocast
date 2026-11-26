@@ -45,7 +45,7 @@ typedef struct {
     unsigned n, cap;
     uint8_t *seen;                    /* by sms_code_index(page, pc): 1 = queued */
     unsigned banks;
-    int codemasters;
+    int fixed_vectors;
     const uint8_t *rom;
     size_t size;
 } Work;
@@ -67,7 +67,7 @@ static void usage(void) {
 
 static void add(Work *w, unsigned page, uint16_t pc) {
     if (pc >= SMS_CODE_SPAN || page >= w->banks) return;
-    if (pc < 0x0400 && page != 0 && !w->codemasters) return;  /* the fixed vector page */
+    if (pc < 0x0400 && page != 0 && w->fixed_vectors) return;  /* the fixed vector page */
     if (w->seen[sms_code_index(page, pc)]) return;
     if (w->npending == MAX_PENDING) return;
     w->pending[w->npending++] = (At){page, pc};
@@ -164,7 +164,7 @@ static int decode(const Work *w, unsigned page, uint16_t pc, Decoded *d, Lines *
 /* The page check after an instruction: the code at `next` is this page's
  * only while the page stays mapped in next's slot (the vectors always are). */
 static void page_check(Buf *o, const Work *w, unsigned page, uint16_t next) {
-    if (next < 0x0400 && !w->codemasters) return;
+    if (next < 0x0400 && w->fixed_vectors) return;
     bprintf(o, " || s->cart.page[%u] != %u", 1 + (next >> 14), page);
 }
 
@@ -334,7 +334,7 @@ int main(int argc, char **argv) {
     w->rom = rom;
     w->size = size;
     w->banks = (unsigned)((size + SMS_ROM_BANK - 1) / SMS_ROM_BANK);
-    w->codemasters = sms_is_codemasters(rom, size);
+    w->fixed_vectors = sms_mapper(rom, size) == SMS_MAPPER_SEGA;
     w->seen = calloc(sms_code_index(w->banks, 0), 1);
     if (!w->seen) return 1;
     for (unsigned v = 0; v <= 0x38; v += 8) add(w, 0, (uint16_t)v);  /* RST $00-$38 */

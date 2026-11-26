@@ -7,7 +7,7 @@
 #include <stdint.h>
 #include "eeprom93c46.h"
 
-enum { MBC_NONE, MBC_1, MBC_2, MBC_3, MBC_5, MBC_7 };
+enum { MBC_NONE, MBC_1, MBC_2, MBC_3, MBC_5, MBC_7, MBC_HUC1, MBC_HUC3 };
 
 typedef struct {
     uint8_t *rom;
@@ -25,7 +25,13 @@ typedef struct {
      * bit 8, bit 6 halt, bit 7 carry); counted in emulated time */
     uint8_t rtc[5], rtc_latched[5], latch_prev;
     uint32_t rtc_cycles;        /* M-cycles into the current second */
-    Eeprom93c46 eeprom;
+    union {
+        Eeprom93c46 eeprom;
+        struct {
+            uint8_t nvram[128];  /* 256 RTC MCU nibbles, low nibble first */
+            uint8_t addr, command;
+        } huc3;
+    };
     uint64_t mbc7_cycles;      /* normal-speed M-cycles */
     uint16_t tilt_x, tilt_y;  /* latched accelerometer values */
     int8_t tilt_dx, tilt_dy;  /* simulated gravity in whole g */

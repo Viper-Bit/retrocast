@@ -83,6 +83,8 @@ set(GB_TEST_ROM ${CMAKE_SOURCE_DIR}/tests/roms/gb/blargg/cpu_instrs/cpu_instrs.g
 if(TESTS)
     add_executable(gb_mbc7_tests tests/mbc7.c)
     target_link_libraries(gb_mbc7_tests PRIVATE gbcore gb_recomp_none)
+    add_executable(gb_hudson_tests tests/hudson.c)
+    target_link_libraries(gb_hudson_tests PRIVATE gbcore gb_recomp_none)
 endif()
 
 if(TESTS AND EXISTS ${GB_TEST_ROM})

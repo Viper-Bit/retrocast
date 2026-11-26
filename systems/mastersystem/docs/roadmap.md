@@ -96,6 +96,6 @@ recompiler and its lockstep diff.
 ## Later
 - Game Gear stereo (port $06).
 - Not modelled: the BIOS, the SMS2 VDP's 224- and 240-line modes, the
-  Korean and other mappers, the light phaser, paddles and other
+  other Korean mappers and multicart wiring, the light phaser, paddles and other
   controllers, the FM sound unit, raster effects on the palette within a
   frame (colours are taken at the frame's end), the exact H counter.
