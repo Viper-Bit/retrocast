@@ -95,6 +95,10 @@ int main(int argc, char **argv) {
     if (a26_cart_init(&cart, rom, size, (A26CartType)mapper)) {
         fprintf(stderr, "unsupported cartridge\n"); free(rom); return 1;
     }
+    if (!a26_cart_recompilable(cart.type)) {  /* sliced banks and cartridge RAM: the emulator runs these */
+        fprintf(stderr, "this cartridge's bankswitching is not recompiled yet: play it in the emulator\n");
+        free(rom); return 1;
+    }
     if (trace_path) {
         FILE *f = fopen(trace_path, "rb");
         if (!f || fread(trace, 1, sizeof trace, f) != sizeof trace) {

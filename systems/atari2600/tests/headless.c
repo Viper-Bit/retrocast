@@ -63,7 +63,7 @@ int main(int argc, char **argv) {
                 (strstr(name, "(Europe)") != NULL || strstr(name, "(PAL)") != NULL);
             else { fprintf(stderr, "invalid region: %s\n", value); return 2; }
         } else if (!strcmp(argv[i], "--mapper") && i + 1 < argc) {
-            static const char *const names[] = {"auto", "2k", "4k", "f8", "f6", "f4"};
+            static const char *const names[] = {"auto", "2k", "4k", "f8", "f6", "f4", "f8sc", "f6sc", "f4sc", "fa", "e0", "e7", "3f"};
             const char *value = argv[++i];
             unsigned j;
             for (j = 0; j < sizeof names / sizeof names[0]; j++) if (!strcmp(value, names[j])) break;

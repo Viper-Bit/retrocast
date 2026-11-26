@@ -12,7 +12,7 @@
 #define APP_NAME "atari2600"
 #endif
 
-static const char SETTINGS[] = "# region: auto, ntsc, or pal\nregion = auto\n# mapper: auto, 2k, 4k, f8, f6, or f4\nmapper = auto\n";
+static const char SETTINGS[] = "# region: auto, ntsc, or pal\nregion = auto\n# mapper: auto, 2k, 4k, f8, f6, f4, f8sc, f6sc, f4sc, fa, e0, e7, or 3f\nmapper = auto\n";
 static int region = -1;
 static A26CartType mapper = A26_CART_AUTO;
 static Atari2600 machine;
@@ -29,7 +29,7 @@ static int sys_setting(const char *key, const char *value) {
         return 1;
     }
     if (!strcmp(key, "mapper")) {
-        static const char *const names[] = {"auto", "2k", "4k", "f8", "f6", "f4"};
+        static const char *const names[] = {"auto", "2k", "4k", "f8", "f6", "f4", "f8sc", "f6sc", "f4sc", "fa", "e0", "e7", "3f"};
         for (unsigned i = 0; i < sizeof names / sizeof names[0]; i++) {
             if (!strcmp(value, names[i])) { mapper = (A26CartType)i; return 1; }
         }

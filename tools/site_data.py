@@ -114,7 +114,7 @@ def run_one(system, path, frames, tmp):
             return "no", None, ""
         rom = os.path.join(work, found[0])
     ppm = os.path.join(work, "f.ppm")
-    for n in (frames, frames * 5):  # one retry, five times as long, when the screen is blank (long intros)
+    for n in dict.fromkeys((frames, frames * 5, max(frames * 5, 6000))):  # retries, longer, while the screen is blank (long intros)
         if os.path.exists(ppm):
             os.remove(ppm)
         cmd = [os.path.join(BUILD, prog + EXE), rom, "--frames", str(n), "--ppm", ppm] + (play_args if play else [])

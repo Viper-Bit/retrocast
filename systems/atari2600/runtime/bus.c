@@ -40,5 +40,8 @@ void cpu_write(Cpu *cpu, uint16_t address, uint8_t value) {
     cpu->open_bus = value;
     if (address & 0x1000) a26_cart_write(&bus->cart, address, value);
     else if (address & 0x80) a26_riot_write(&bus->riot, address, value);
-    else if (bus->tia_write) bus->tia_write(bus->tia, address, value);
+    else {
+        a26_cart_tia_write(&bus->cart, address, value);  /* 3F's bank register sits at $00-$3F */
+        if (bus->tia_write) bus->tia_write(bus->tia, address, value);
+    }
 }

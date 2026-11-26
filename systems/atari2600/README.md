@@ -11,7 +11,11 @@ a window, `atari2600recomp` recompiles one (through `-DROMS`, see the
   ISC) and eight bus-cycle opcodes pass; the other opcodes are the NES's,
   checked there.
 - **Cartridges**: 2K, 4K, F8, F6 and F4 (8K to 32K, bank hotspots on read
-  and write); the unit tests pass. No other scheme, no cartridge RAM.
+  and write), the Superchip's RAM (F8SC, F6SC, F4SC), CBS RAM Plus (FA),
+  Parker Brothers (E0), M Network (E7) and Tigervision (3F), found by size
+  and by Stella's byte signatures; the unit tests pass. The recompiler takes
+  2K to F4; the rest play in the emulator. Not yet: Starpath Supercharger
+  tapes, Pitfall II's DPC chip.
 - **RIOT**: RAM, both ports, the timer with its four dividers and the
   edge flag; checked by unit tests.
 - **Picture**: playfield, both players, missiles and ball, all
@@ -43,7 +47,8 @@ Arrow keys and X are the first joystick and its button; Enter and Right
 Shift are console reset and select. F5 resets, F2 saves a state, F4 loads
 it. Two gamepads work.
 
-`atari2600.ini` has `mapper` (`auto`, `2k`, `4k`, `f8`, `f6`, `f4`) and
+`atari2600.ini` has `mapper` (`auto`, `2k`, `4k`, `f8`, `f6`, `f4`, `f8sc`,
+`f6sc`, `f4sc`, `fa`, `e0`, `e7`, `3f`) and
 `region` (`auto`, `ntsc`, `pal`). Auto region takes `(Europe)` and `(PAL)`
 in the file name. `atari2600_headless` takes `--mapper`, `--region`,
 `--frames N`, `--play` (scripted input), `--record FILE` and
