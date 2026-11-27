@@ -12,3 +12,23 @@ cc -std=c11 -O2 systems/cps2/runtime/decrypt_main.c systems/cps2/runtime/cps2cry
 
 The checker reads the key followed by big-endian program bytes on standard
 input and writes big-endian opcode bytes to standard output.
+
+## ROM table and loader
+
+Generate the compiled table from the pinned MAME source:
+
+```sh
+python tools/cps2_table.py path/to/cps2.cpp mame0289
+```
+
+The C loader uses the shared ZIP reader and places verified chips in bus byte
+order. The standalone checker looks for the requested set ZIP and its parent
+ZIPs, so a clone inside a merged parent archive works too.
+
+```sh
+cc -std=c11 -O2 -Icore -Isystems/cps2/runtime systems/cps2/tests/rom_check.c systems/cps2/runtime/load.c systems/cps2/runtime/games.c core/zip.c core/file.c -o cps2-rom-check
+./cps2-rom-check "/path/to/CAPCOM - Play System II" ssf2u
+```
+
+Each output row gives the region tag, size in bytes, and CRC-32. The checker
+reports missing, damaged, and undumped chips by set, region, and chip name.
