@@ -1,46 +1,14 @@
-# CPS-2 ROM inventory
+# CPS-2 opcode decryption
 
-The [CPS-2 plan](https://github.com/Viper-Bit/retrocast/issues/67) starts with ROM
-metadata. The checked-in [game table](games.json) comes from
-[MAME mame0289's CPS-2 driver](https://github.com/mamedev/mame/blob/mame0289/src/mame/capcom/cps2.cpp).
-It records parent sets, board variants, region sizes, load operations, CRCs,
-and SHA-1 hashes. The JSON feeds the Python inventory and loader checker.
-For the emulator runtime, generate a compiled C table as CPS-1 does.
+The C decryptor takes program words and a verified 20-byte key and writes
+a separate opcode buffer. The machine can continue to read the original
+program words for data accesses.
 
-## Audit a folder
+Build the standalone checker with a C compiler:
 
-```powershell
-python tools/cps2_audit.py 'D:/roms/CAPCOM - Play System II'
-python tools/cps2_audit.py 'D:/roms/CAPCOM - Play System II' --verify --set ssf2 --set ssf2u
+```sh
+cc -std=c11 -O2 systems/cps2/runtime/decrypt_main.c systems/cps2/runtime/cps2crypt.c -o cps2-decrypt
 ```
 
-The audit matches size and CRC in the set ZIP and its parent chain, so split,
-merged, and non-merged MAME layouts work. It lists each missing chip by region,
-name, byte count, and CRC. A copy in an unrelated ZIP is listed as a hint.
-`--verify` reads matching ZIP members and checks their CRC and SHA-1. The
-shared QSound DSP ZIP is reported separately from the game set counts.
-
-A complete set has all the catalogued chip dumps in its archive or parent
-chain. An incomplete set has an archive or a named folder inside its parent's
-ZIP and some requirement is missing. The audit flags entries that MAME marks
-undumped. These are file coverage results. Game execution and decryption will
-be checked separately.
-
-## Check ROM layout and opcode decryption
-
-```powershell
-gcc -std=c11 -O2 systems/cps2/runtime/decrypt_main.c systems/cps2/runtime/cps2crypt.c -o build/cps2-decrypt.exe
-python tools/cps2_load.py 'D:/roms/CAPCOM - Play System II' ssf2 --decrypt build/cps2-decrypt.exe
-```
-
-The checker prints SHA-1 hashes of the assembled regions and the separate
-opcode stream. The program region retains its original bytes for data reads.
-
-## Regenerate the table
-
-```powershell
-python tools/cps2_gen_games.py path/to/cps2.cpp mame0289
-python -m unittest tests.test_cps2_tools
-```
-
-Pass the release tag matching the source when updating the table.
+The checker reads the key followed by big-endian program bytes on standard
+input and writes big-endian opcode bytes to standard output.

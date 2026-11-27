@@ -40,10 +40,9 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
-      - name: Test CPS-2 ROM inventory tooling
+      - name: Build the CPS-2 opcode checker
         run: |
           gcc -std=c11 -Wall -Wextra -Werror systems/cps2/runtime/decrypt_main.c systems/cps2/runtime/cps2crypt.c -o "$RUNNER_TEMP/cps2-decrypt"
-          python -m unittest tests.test_cps2_tools
       # computed here once: Windows checkouts have CRLF line endings, so hashFiles differs there
       - id: key
         run: echo "key=test-data-${{ hashFiles('tests/fetch_test_roms.py') }}" >> "$GITHUB_OUTPUT"
