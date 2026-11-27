@@ -32,3 +32,14 @@ cc -std=c11 -O2 -Icore -Isystems/cps2/runtime systems/cps2/tests/rom_check.c sys
 
 Each output row gives the region tag, size in bytes, and CRC-32. The checker
 reports missing, damaged, and undumped chips by set, region, and chip name.
+
+## Audit a ROM folder
+
+```powershell
+python tools/cps2_rom_audit.py 'D:/roms/CAPCOM - Play System II' --verify
+```
+
+The audit reads the compiled table's C source, reports missing chips across
+split and merged sets, and checks for the shared QSound DSP. Use repeatable
+`--set` arguments to audit specific sets. By default it compares ZIP directory
+entries. With `--verify` it also decompresses matching entries and checks CRC-32.
