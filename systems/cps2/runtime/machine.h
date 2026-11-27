@@ -3,9 +3,20 @@
 #include "roms.h"
 #include "m68k_cpu.h"
 #include "eeprom93c46.h"
+#include "z80_cpu.h"
+#include "qsound.h"
 
 typedef struct {
     M68k cpu;
+    Z80 audio_cpu;
+    QSound sound;
+    uint16_t dsp[4096];
+    const uint8_t *audio_program;
+    size_t audio_size;
+    uint8_t audio_ram[0x1000], audio_bank, audio_irq;
+    uint64_t audio_irq_clock, sample_clock;
+    void (*audio_sample)(void *context, const int16_t sample[2]);
+    void *audio_context;
     Eeprom93c46 eeprom;
     const uint8_t *program;
     uint16_t *opcodes;
@@ -28,6 +39,9 @@ typedef struct {
 int cps2_machine_init(Cps2Machine *machine, const Cps2Rom *rom);
 void cps2_machine_destroy(Cps2Machine *machine);
 void cps2_machine_run(Cps2Machine *machine, uint64_t until);
+int cps2_sound_init(Cps2Machine *machine, const Cps2Rom *rom, const Zip *archive);
+void cps2_sound_run(Cps2Machine *machine);
+void cps2_sound_control(Cps2Machine *machine, uint8_t value);
 int cps2_video_init(Cps2Machine *machine, const Cps2Rom *rom);
 void cps2_palette_upload(Cps2Machine *machine);
 void cps2_video_render(Cps2Machine *machine, unsigned end);

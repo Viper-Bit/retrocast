@@ -44,8 +44,11 @@ uint16_t m68k_read(M68k *c, uint32_t a, unsigned fc, unsigned strobe)
     const uint8_t *ram = mapped_ram(s, a, 0);
     if (ram)
         return be16(ram);
-    if (a >= 0x618000 && a <= 0x619fff)
+    if (a >= 0x618000 && a <= 0x619fff) {
+        if (s->audio_program)
+            cps2_sound_run(s);
         return 0xff00 | s->shared[(a - 0x618000) / 2];
+    }
     switch (a) {
     case 0x804000: return s->inputs[0];
     case 0x804010: return s->inputs[1];
@@ -79,14 +82,12 @@ void m68k_write(M68k *c, uint32_t a, uint16_t v, unsigned fc, unsigned strobe)
     } else if (a == 0x8040e0 && (strobe & 1)) {
         s->object_bank = v & 1;
     } else if (a >= 0x618000 && a <= 0x619fff && (strobe & 1)) {
+        if (s->audio_program)
+            cps2_sound_run(s);
         s->shared[(a - 0x618000) / 2] = (uint8_t)v;
     }
-    /* shortcut: stand in for the QSound CPU's startup mailbox until P3. */
-    if (a == 0x804040 && (strobe & 1)) {
-        if (!(s->sound_control & 8) && (v & 8))
-            s->shared[0xfff] = 0x77;
-        s->sound_control = (uint8_t)v;
-    }
+    if (a == 0x804040 && (strobe & 1))
+        cps2_sound_control(s, (uint8_t)v);
 }
 
 void m68k_idle(M68k *c, unsigned clocks) { (void)c; (void)clocks; }
@@ -169,5 +170,7 @@ void cps2_machine_run(Cps2Machine *s, uint64_t until)
             s->raster_clock = UINT64_MAX;
         }
         m68k_step(&s->cpu);
+        if (s->audio_program)
+            cps2_sound_run(s);
     }
 }

@@ -58,4 +58,6 @@ The final argument is the 68000 clock budget. Set `CPS2_PLAY=fight` to send
 scripted coin, start, character select, and player inputs after that budget.
 `CPS2_PLAY=idle` runs the same sequence with the last player input omitted.
 The optional capture is a 384×224 PPM. The headless runner is opt-in.
-The QSound startup mailbox response is provisional until the sound CPU lands.
+Machine runs look for `qsound.zip` in the ROM folder. Set `CPS2_PCM` to
+capture signed 16-bit little-endian stereo at the native QSound rate
+(60 MHz / 2496, approximately 24,038 Hz).

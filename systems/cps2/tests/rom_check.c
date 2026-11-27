@@ -10,6 +10,36 @@
 #include <string.h>
 
 #ifdef CPS2_CHECK_MACHINE
+static int load_sound(Cps2Machine *machine, const Cps2Rom *rom, const char *folder)
+{
+    size_t capacity = strlen(folder) + sizeof("/qsound.zip");
+    char *path = malloc(capacity);
+    if (!path)
+        return -1;
+    snprintf(path, capacity, "%s/qsound.zip", folder);
+    size_t size;
+    uint8_t *bytes = file_read(path, &size);
+    free(path);
+    Zip archive;
+    int status = -1;
+    if (bytes && !zip_open(&archive, bytes, size)) {
+        status = cps2_sound_init(machine, rom, &archive);
+        zip_close(&archive);
+    }
+    free(bytes);
+    return status;
+}
+
+static void write_sample(void *context, const int16_t sample[2])
+{
+    FILE *file = context;
+    for (size_t i = 0; i < 2; ++i) {
+        uint16_t word = (uint16_t)sample[i];
+        fputc(word & 255, file);
+        fputc(word >> 8, file);
+    }
+}
+
 static int write_frame(const Cps2Machine *machine, const char *path)
 {
     FILE *file = fopen(path, "wb");
@@ -106,7 +136,20 @@ static int check(const Cps2Game *game, const char *folder, uint64_t cycles)
         if (!machine || cps2_machine_init(machine, &rom)) {
             fputs("Could not initialize CPS-2 machine\n", stderr);
             status = EXIT_FAILURE;
+        } else if (load_sound(machine, &rom, folder)) {
+            fputs("CPS-2 sound needs audiocpu, qsound, and qsound.zip (CRC d6cf5ef5)\n", stderr);
+            cps2_machine_destroy(machine);
+            status = EXIT_FAILURE;
         } else {
+            const char *audio_path = getenv("CPS2_PCM");
+            FILE *audio = audio_path ? fopen(audio_path, "wb") : NULL;
+            if (audio) {
+                machine->audio_sample = write_sample;
+                machine->audio_context = audio;
+            } else if (audio_path) {
+                perror(audio_path);
+                status = EXIT_FAILURE;
+            }
             printf("reset pc %06x sp %06x\n", (unsigned)(machine->cpu.pc - 4),
                    (unsigned)machine->cpu.a[7]);
             cps2_machine_run(machine, cycles);
@@ -118,6 +161,11 @@ static int check(const Cps2Game *game, const char *folder, uint64_t cycles)
                    (unsigned)zip_crc32((const uint8_t *)machine->frame, sizeof(machine->frame)));
             if (machine->cpu.halted)
                 status = EXIT_FAILURE;
+            if (audio) {
+                int failed = ferror(audio);
+                if (fclose(audio) || failed)
+                    status = EXIT_FAILURE;
+            }
             const char *capture = getenv("CPS2_FRAME");
             if (capture && write_frame(machine, capture)) {
                 perror(capture);
