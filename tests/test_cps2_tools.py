@@ -12,6 +12,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 from cps2_audit import audit
 from cps2_gen_games import TABLE, generate
+from cps2_load import load_regions
 
 
 def hashes(data):
@@ -68,6 +69,27 @@ class TestCps2Table(unittest.TestCase):
 
 
 class TestCps2Audit(unittest.TestCase):
+    def test_load_merged_and_reject_wrong_key(self):
+        source = SOURCE.replace('ROM_CONTINUE( 4, 1 )\n    ROM_IGNORE( 1 )',
+                                'ROM_CONTINUE( 4, 2 )')
+        source = source.replace('ROM_LOAD( "clone.bin", 8, 2,',
+                                'ROM_REGION( 2, "key", 0 )\n    ROM_LOAD( "clone.bin", 0, 2,')
+        games = generate(source, "mame-test")["games"]
+        with tempfile.TemporaryDirectory() as directory:
+            folder = Path(directory)
+            with zipfile.ZipFile(folder / "base.zip", "w") as archive:
+                archive.writestr("shared", SHARED)
+            with self.assertRaisesRegex(ValueError, "clone/key/clone.bin"):
+                load_regions(games, folder, "clone")
+            with zipfile.ZipFile(folder / "base.zip", "a") as archive:
+                archive.writestr("clone/key.bin", PROGRAM)
+            regions = load_regions(games, folder, "clone")
+            self.assertEqual(regions["maincpu"][:6], b"ba\0\0dc")
+            self.assertEqual(regions["key"], PROGRAM)
+            games["clone"]["regions"]["key"]["entries"][0]["sha1"] = "0" * 40
+            with self.assertRaisesRegex(ValueError, "clone/key/clone.bin"):
+                load_regions(games, folder, "clone")
+
     def test_split_and_merged_sets(self):
         games = generate(SOURCE, "mame-test")["games"]
         with tempfile.TemporaryDirectory() as directory:
