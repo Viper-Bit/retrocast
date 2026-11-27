@@ -9,6 +9,47 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifdef CPS2_CHECK_MACHINE
+static int write_frame(const Cps2Machine *machine, const char *path)
+{
+    FILE *file = fopen(path, "wb");
+    if (!file)
+        return -1;
+    fputs("P6\n384 224\n255\n", file);
+    for (size_t i = 0; i < 384 * 224; ++i) {
+        uint32_t pixel = machine->frame[i];
+        fputc((pixel >> 16) & 255, file);
+        fputc((pixel >> 8) & 255, file);
+        fputc(pixel & 255, file);
+    }
+    int failed = ferror(file);
+    return fclose(file) || failed ? -1 : 0;
+}
+
+static void play(Cps2Machine *machine, uint64_t at, int fight)
+{
+    /* Pulse coin, start, character select, and in-game input. */
+    const uint64_t frame = 262 * 1024;
+    machine->inputs[2] &= (uint16_t)~0x1000;
+    cps2_machine_run(machine, at + 2 * frame);
+    machine->inputs[2] |= 0x1000;
+    cps2_machine_run(machine, at + 90 * frame);
+    machine->inputs[2] &= (uint16_t)~0x0100;
+    cps2_machine_run(machine, at + 98 * frame);
+    machine->inputs[2] |= 0x0100;
+    cps2_machine_run(machine, at + 240 * frame);
+    machine->inputs[0] &= (uint16_t)~0x0011;
+    cps2_machine_run(machine, at + 248 * frame);
+    machine->inputs[0] |= 0x0011;
+    cps2_machine_run(machine, at + 1020 * frame);
+    if (fight)
+        machine->inputs[0] &= (uint16_t)~0x0011;
+    cps2_machine_run(machine, at + 1040 * frame);
+    machine->inputs[0] |= 0x0011;
+    cps2_machine_run(machine, at + 1050 * frame);
+}
+#endif
+
 static int check(const Cps2Game *game, const char *folder, uint64_t cycles)
 {
     size_t depth = 0;
@@ -69,10 +110,19 @@ static int check(const Cps2Game *game, const char *folder, uint64_t cycles)
             printf("reset pc %06x sp %06x\n", (unsigned)(machine->cpu.pc - 4),
                    (unsigned)machine->cpu.a[7]);
             cps2_machine_run(machine, cycles);
-            printf("pc %06x graphics %08x\n", (unsigned)(machine->cpu.pc - 4),
-                   (unsigned)zip_crc32(machine->graphics, sizeof(machine->graphics)));
+            const char *script = getenv("CPS2_PLAY");
+            if (script)
+                play(machine, cycles, strcmp(script, "idle") != 0);
+            printf("pc %06x graphics %08x frame %08x\n", (unsigned)(machine->cpu.pc - 4),
+                   (unsigned)zip_crc32(machine->graphics, sizeof(machine->graphics)),
+                   (unsigned)zip_crc32((const uint8_t *)machine->frame, sizeof(machine->frame)));
             if (machine->cpu.halted)
                 status = EXIT_FAILURE;
+            const char *capture = getenv("CPS2_FRAME");
+            if (capture && write_frame(machine, capture)) {
+                perror(capture);
+                status = EXIT_FAILURE;
+            }
             cps2_machine_destroy(machine);
         }
         free(machine);

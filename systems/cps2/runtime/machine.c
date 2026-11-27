@@ -39,6 +39,8 @@ uint16_t m68k_read(M68k *c, uint32_t a, unsigned fc, unsigned strobe)
             return s->opcodes[a / 2];
         return be16(s->program + a);
     }
+    if ((a & 0xffbffe) == 0x800150 || (a & 0xffbffe) == 0x800152)
+        return s->raster_counter[(a >> 1) & 1];
     const uint8_t *ram = mapped_ram(s, a, 0);
     if (ram)
         return be16(ram);
@@ -48,7 +50,7 @@ uint16_t m68k_read(M68k *c, uint32_t a, unsigned fc, unsigned strobe)
     case 0x804000: return s->inputs[0];
     case 0x804010: return s->inputs[1];
     case 0x804020: return (s->inputs[2] & 0xfffe) | eeprom_do(&s->eeprom, c->cycles / 16);
-    case 0x804030: return 0xffff;
+    case 0x804030: return 0xe021;
     default: return 0xffff;
     }
 }
@@ -62,6 +64,15 @@ void m68k_write(M68k *c, uint32_t a, uint16_t v, unsigned fc, unsigned strobe)
     if (ram) {
         if (strobe & 2) ram[0] = (uint8_t)(v >> 8);
         if (strobe & 1) ram[1] = (uint8_t)v;
+        if ((a & 0xffbffe) == 0x80010a)
+            cps2_palette_upload(s);
+        if ((a & 0xffbffe) == 0x800150 || (a & 0xffbffe) == 0x800152) {
+            unsigned counter = (a >> 1) & 1;
+            uint16_t value = be16(ram);
+            s->raster_reload[counter] = value & 0x1ff;
+            if (value & 0x8000)
+                s->raster_counter[counter] = s->raster_reload[counter];
+        }
     } else if (a == 0x804040 && (strobe & 2)) {
         eeprom_write_lines(&s->eeprom, (v >> 14) & 1, (v >> 13) & 1,
                           (v >> 12) & 1, c->cycles / 16);
@@ -69,6 +80,12 @@ void m68k_write(M68k *c, uint32_t a, uint16_t v, unsigned fc, unsigned strobe)
         s->object_bank = v & 1;
     } else if (a >= 0x618000 && a <= 0x619fff && (strobe & 1)) {
         s->shared[(a - 0x618000) / 2] = (uint8_t)v;
+    }
+    /* shortcut: stand in for the QSound CPU's startup mailbox until P3. */
+    if (a == 0x804040 && (strobe & 1)) {
+        if (!(s->sound_control & 8) && (v & 8))
+            s->shared[0xfff] = 0x77;
+        s->sound_control = (uint8_t)v;
     }
 }
 
@@ -101,7 +118,13 @@ int cps2_machine_init(Cps2Machine *s, const Cps2Rom *rom)
         cps2_decrypt(words, s->opcodes, (int)s->program_size, key);
         free(words);
     }
+    if (cps2_video_init(s, rom)) {
+        cps2_machine_destroy(s);
+        return -1;
+    }
     eeprom_init(&s->eeprom, 0);
+    s->raster_reload[0] = s->raster_reload[1] = 0x1ff;
+    s->raster_clock = UINT64_MAX;
     for (size_t i = 0; i < 3; ++i)
         s->inputs[i] = 0xffff;
     s->cpu.bus = s;
@@ -112,11 +135,39 @@ int cps2_machine_init(Cps2Machine *s, const Cps2Rom *rom)
 void cps2_machine_destroy(Cps2Machine *s)
 {
     free(s->opcodes);
+    free(s->tiles);
     s->opcodes = NULL;
+    s->tiles = NULL;
 }
 
 void cps2_machine_run(Cps2Machine *s, uint64_t until)
 {
-    while (s->cpu.cycles < until && !s->cpu.halted)
+    while (s->cpu.cycles < until && !s->cpu.halted) {
+        if (s->cpu.cycles >= s->line_clock) {
+            for (unsigned i = 0; i < 2; ++i) {
+                s->raster_counter[i] = s->scanline
+                    ? (s->raster_counter[i] - 1) & 0x1ff : s->raster_reload[i];
+                if (!s->raster_counter[i])
+                    s->raster_clock = s->line_clock + ((be16(s->cps_b + 0x0e) >> 1) & 0xff) * 4;
+            }
+            if (s->scanline == 16)
+                s->rendered = 0;
+            if (s->scanline == 240) {
+                cps2_video_render(s, 224);
+                memcpy(s->latched_objects, s->objects[s->object_bank],
+                       sizeof(s->latched_objects));
+                s->priority = be16(s->output + 4);
+                s->cpu.ipl |= 2;
+            }
+            s->scanline = (s->scanline + 1) % 262;
+            s->line_clock += 1024;
+        }
+        if (s->cpu.cycles >= s->raster_clock) {
+            if (s->scanline > 16 && s->scanline <= 240)
+                cps2_video_render(s, s->scanline - 16);
+            s->cpu.ipl |= 4;
+            s->raster_clock = UINT64_MAX;
+        }
         m68k_step(&s->cpu);
+    }
 }
