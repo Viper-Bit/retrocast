@@ -4,7 +4,8 @@ The [CPS-2 plan](https://github.com/Viper-Bit/retrocast/issues/67) starts with R
 metadata. The checked-in [game table](games.json) comes from
 [MAME mame0289's CPS-2 driver](https://github.com/mamedev/mame/blob/mame0289/src/mame/capcom/cps2.cpp).
 It records parent sets, board variants, region sizes, load operations, CRCs,
-and SHA-1 hashes. It contains metadata only.
+and SHA-1 hashes. The JSON feeds the Python inventory and loader checker.
+For the emulator runtime, generate a compiled C table as CPS-1 does.
 
 ## Audit a folder
 
@@ -23,7 +24,17 @@ A complete set has all the catalogued chip dumps in its archive or parent
 chain. An incomplete set has an archive or a named folder inside its parent's
 ZIP and some requirement is missing. The audit flags entries that MAME marks
 undumped. These are file coverage results. Game execution and decryption will
-be checked with the loader.
+be checked separately.
+
+## Check ROM layout and opcode decryption
+
+```powershell
+gcc -std=c11 -O2 systems/cps2/runtime/decrypt_main.c systems/cps2/runtime/cps2crypt.c -o build/cps2-decrypt.exe
+python tools/cps2_load.py 'D:/roms/CAPCOM - Play System II' ssf2 --decrypt build/cps2-decrypt.exe
+```
+
+The checker prints SHA-1 hashes of the assembled regions and the separate
+opcode stream. The program region retains its original bytes for data reads.
 
 ## Regenerate the table
 
