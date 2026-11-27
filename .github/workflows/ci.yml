@@ -50,6 +50,11 @@ jobs:
           mkdir "$RUNNER_TEMP/empty-roms"
           if "$RUNNER_TEMP/cps2-rom-check" "$RUNNER_TEMP/empty-roms" ssf2u 2>"$RUNNER_TEMP/cps2-error"; then exit 1; fi
           grep -Fx 'ssf2u maincpu ssfu.03a: missing or damaged chip' "$RUNNER_TEMP/cps2-error"
+      - name: Build the opt-in CPS-2 machine
+        run: |
+          cmake -S . -B "$RUNNER_TEMP/cps2-build" -DFRONTEND=OFF -DCPS2_HEADLESS=ON -DSYSTEMS= -DTESTS=ON -DWERROR=ON
+          cmake --build "$RUNNER_TEMP/cps2-build" --target cps2_headless cps2_machine_test --parallel 2
+          "$RUNNER_TEMP/cps2-build/cps2_machine_test"
       # computed here once: Windows checkouts have CRLF line endings, so hashFiles differs there
       - id: key
         run: echo "key=test-data-${{ hashFiles('tests/fetch_test_roms.py') }}" >> "$GITHUB_OUTPUT"
