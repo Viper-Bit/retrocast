@@ -49,7 +49,7 @@ jobs:
           gcc -std=c11 -Wall -Wextra -Werror -Icore -Isystems/cps2/runtime systems/cps2/tests/rom_check.c systems/cps2/runtime/{load,games}.c core/{zip,file}.c -o "$RUNNER_TEMP/cps2-rom-check"
           mkdir "$RUNNER_TEMP/empty-roms"
           if "$RUNNER_TEMP/cps2-rom-check" "$RUNNER_TEMP/empty-roms" ssf2u 2>"$RUNNER_TEMP/cps2-error"; then exit 1; fi
-          rg -F 'ssf2u maincpu ssfu.03a: missing or damaged chip' "$RUNNER_TEMP/cps2-error"
+          grep -Fx 'ssf2u maincpu ssfu.03a: missing or damaged chip' "$RUNNER_TEMP/cps2-error"
       # computed here once: Windows checkouts have CRLF line endings, so hashFiles differs there
       - id: key
         run: echo "key=test-data-${{ hashFiles('tests/fetch_test_roms.py') }}" >> "$GITHUB_OUTPUT"
