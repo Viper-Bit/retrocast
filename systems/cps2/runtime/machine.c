@@ -1,5 +1,6 @@
 #include "machine.h"
 #include "cps2crypt.h"
+#include "recomp_rt.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -7,6 +8,23 @@
 static uint16_t be16(const uint8_t *p)
 {
     return (uint16_t)(p[0] << 8 | p[1]);
+}
+
+uint16_t cps2_opcode(const Cps2Machine *s, uint32_t address)
+{
+    return s->opcodes ? s->opcodes[address / 2] : be16(s->program + address);
+}
+
+int cps2_machine_set_recomp(Cps2Machine *s, const Cps2Recomp *program)
+{
+    uint32_t hash = 2166136261u;
+    for (uint32_t a = 0; a < s->program_size; a += 2) {
+        uint16_t word = cps2_opcode(s, a);
+        hash = (hash ^ (word >> 8)) * 16777619u;
+        hash = (hash ^ (word & 255)) * 16777619u;
+    }
+    s->recomp = program && hash == program->opcode_hash ? program : NULL;
+    return s->recomp != NULL;
 }
 
 static uint8_t *mapped_ram(Cps2Machine *s, uint32_t a, int write)
@@ -35,8 +53,8 @@ uint16_t m68k_read(M68k *c, uint32_t a, unsigned fc, unsigned strobe)
     a &= 0xfffffe;
     if (a < s->program_size) {
         /* Reset vectors are data even though the core issues program cycles. */
-        if ((fc & 3) == 2 && s->opcodes)
-            return s->opcodes[a / 2];
+        if ((fc & 3) == 2)
+            return cps2_opcode(s, a);
         return be16(s->program + a);
     }
     if ((a & 0xffbffe) == 0x800150 || (a & 0xffbffe) == 0x800152)
@@ -141,8 +159,15 @@ void cps2_machine_destroy(Cps2Machine *s)
     s->tiles = NULL;
 }
 
+static void run_native(M68k *cpu, Cps2RecompFn block)
+{
+    if (!setjmp(cpu->abort))
+        block(cpu);
+}
+
 void cps2_machine_run(Cps2Machine *s, uint64_t until)
 {
+    s->deadline = until;
     while (s->cpu.cycles < until && !s->cpu.halted) {
         if (s->cpu.cycles >= s->line_clock) {
             for (unsigned i = 0; i < 2; ++i) {
@@ -169,7 +194,22 @@ void cps2_machine_run(Cps2Machine *s, uint64_t until)
             s->cpu.ipl |= 4;
             s->raster_clock = UINT64_MAX;
         }
-        m68k_step(&s->cpu);
+        M68k *cpu = &s->cpu;
+        uint32_t pc = (cpu->pc - 4) & 0xffffff;
+        Cps2RecompFn block = NULL;
+        if (s->executed && !(pc & 1) && pc < s->program_size &&
+            !cpu->stopped && !cpu->trace && !cpu->ipl && !cpu->ipl_seen)
+            s->executed[pc] = 1;
+        if (s->recomp && !CPS2_STOP(s, cpu) && !(pc & 1) && pc < s->program_size &&
+            cpu->ir == cps2_opcode(s, pc))
+            block = s->recomp->lookup(pc);
+        uint64_t before = cpu->cycles;
+        if (block) {
+            run_native(cpu, block);
+            s->native_clocks += cpu->cycles - before;
+        } else {
+            m68k_step(cpu);
+        }
         if (s->audio_program)
             cps2_sound_run(s);
     }

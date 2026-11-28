@@ -6,8 +6,17 @@
 #include "z80_cpu.h"
 #include "qsound.h"
 
+typedef void (*Cps2RecompFn)(M68k *);
+typedef struct {
+    uint32_t opcode_hash;
+    Cps2RecompFn (*lookup)(uint32_t pc);
+} Cps2Recomp;
+
 typedef struct {
     M68k cpu;
+    const Cps2Recomp *recomp;
+    uint8_t *executed;
+    uint64_t deadline, native_clocks;
     Z80 audio_cpu;
     QSound sound;
     uint16_t dsp[4096];
@@ -39,6 +48,8 @@ typedef struct {
 int cps2_machine_init(Cps2Machine *machine, const Cps2Rom *rom);
 void cps2_machine_destroy(Cps2Machine *machine);
 void cps2_machine_run(Cps2Machine *machine, uint64_t until);
+int cps2_machine_set_recomp(Cps2Machine *machine, const Cps2Recomp *program);
+uint16_t cps2_opcode(const Cps2Machine *machine, uint32_t address);
 int cps2_sound_init(Cps2Machine *machine, const Cps2Rom *rom, const Zip *archive);
 void cps2_sound_run(Cps2Machine *machine);
 void cps2_sound_control(Cps2Machine *machine, uint8_t value);
