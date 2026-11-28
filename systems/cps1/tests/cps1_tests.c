@@ -353,6 +353,21 @@ static void test_scroll3_tile(void) {
     assert(m.frame[10 * CPS1_WIDTH + 40] == 0x600 + 9);
 }
 
+static void test_row_scroll(void) {
+    boot_video();
+    cpsb(0x2E, ORDER);
+    cpsa(0x04, 0x9040);
+    cpsa(0x08, 0x9200);
+    cpsa(0x12, 32);
+    cpsa(0x20, 0x3f8);   /* raw line 16 samples entry 8 after wrapping */
+    cpsa(0x22, 5);
+    gram(0x20000 + 8 * 2, 16);
+    gram(0x4000 + (5 * 16 + 3) * 4, 5);
+    pixel(5 * 128, 8, 0, 0, 7);
+    cps1_render(&m);
+    assert(m.frame[0] == 0x407);
+}
+
 static void sprite_scene(uint16_t prio) {
     boot_video();
     cpsb(0x2E, ORDER);
@@ -1270,6 +1285,7 @@ int main(void) {
     test_palette();
     test_scroll1_tile();
     test_scroll2_tile();
+    test_row_scroll();
     test_scroll3_tile();
     test_sprite_flip();
     test_priority();
