@@ -78,6 +78,19 @@ int main(void)
     int ok = sound_ok && output_ok && multiplier_ok && machine->cpu.d[0] == 42 && !machine->cpu.halted &&
              machine->objects[0][0] == 0xab && machine->objects[0][1] == 0xcd &&
              machine->cpu.ipl == 6 && machine->rendered == 224;
+    m68k_write(&machine->cpu, 0x804166, 0x0084, 5, 3);
+    m68k_write(&machine->cpu, 0x804104, 0x9040, 5, 3);
+    m68k_write(&machine->cpu, 0x804108, 0x9200, 5, 3);
+    m68k_write(&machine->cpu, 0x804112, 32, 5, 3);
+    m68k_write(&machine->cpu, 0x804120, 0x3f8, 5, 3);
+    m68k_write(&machine->cpu, 0x804122, 5, 5, 3);
+    m68k_write(&machine->cpu, 0x920010, 16, 5, 3);
+    m68k_write(&machine->cpu, 0x90414c, 1, 5, 3);  /* column 5, row 3 */
+    machine->tiles[128] = 0x80;
+    machine->palette[0x401] = 0xff00;
+    machine->rendered = 0;
+    cps2_video_render(machine, 1);
+    ok = ok && machine->frame[0] == 0xff0000;
     cps2_machine_destroy(machine);
     free(machine);
     if (!ok)

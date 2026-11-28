@@ -72,7 +72,7 @@ static unsigned tile_pixel(const Cps2Machine *s, unsigned layer, unsigned x, uns
     unsigned mx = x + 64 + word(s->cps_a + 8 + layer * 4);
     unsigned my = (y + 16 + word(s->cps_a + 10 + layer * 4)) & (tile * 64 - 1);
     if (layer == 2 && (word(s->cps_a + 0x22) & 1)) {
-        unsigned row = (my + word(s->cps_a + 0x20)) & 1023;
+        unsigned row = (y + 16 + word(s->cps_a + 0x20)) & 1023;
         unsigned address = base(s, 8, 0x800) + row * 2;
         if (address + 1 < sizeof(s->graphics))
             mx += word(s->graphics + address);

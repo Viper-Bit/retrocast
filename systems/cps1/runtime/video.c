@@ -112,9 +112,9 @@ static unsigned layer_pixel(const Cps1 *s, int n, unsigned x, unsigned y, uint16
     const Layer *l = &layers[n];
     const uint8_t *map = base(s, l->map, 0x4000);
     unsigned size = l->tile * 64, mx = x + RAW_X + areg(s, l->sx) + kludge_x(s, n), my = (y + RAW_Y + areg(s, l->sy)) & (size - 1);
-    if (n == 2 && areg(s, A_VIDEO) & 1) {  /* row scroll: an X offset per map row */
+    if (n == 2 && areg(s, A_VIDEO) & 1) {  /* The offset table follows the raster, not the tilemap Y. */
         const uint8_t *other = base(s, A_OTHER, 0x800);
-        mx += word(other + ((my + areg(s, A_ROWSCROLL)) & 0x3FF) * 2);
+        mx += word(other + ((y + RAW_Y + areg(s, A_ROWSCROLL)) & 0x3FF) * 2);
     }
     mx &= size - 1;
     unsigned col = mx / l->tile, row = my / l->tile, b = l->block;
