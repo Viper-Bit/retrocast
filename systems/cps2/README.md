@@ -1,8 +1,8 @@
 # Capcom Play System II (CPS-2)
 
-The CPS-2 arcade board in [retrocast](../../README.md). Run a game from its
-MAME ZIPs with `cps2_headless ROM_FOLDER SET_ID CYCLES`. The release ships
-the headless runner and recompiler.
+The CPS-2 arcade board in [retrocast](../../README.md). Open a named MAME
+set ZIP in the window with `retrocast SET.zip`, or run the headless
+checker with `cps2_headless ROM_FOLDER SET_ID CYCLES`.
 
 ## Status
 
@@ -24,8 +24,9 @@ the headless runner and recompiler.
   image. An execution trace improves coverage. The interpreter runs code
   outside the generated blocks. Lockstep passed for `ssf2`, `ssf2u`, and
   the Phoenix set `ssf2ud`.
-- **Current scope**: headless execution and scripted input. The SDL
-  frontend, automatic ZIP detection, and saved states are open.
+- **Window**: CPS-2 ZIPs are detected by program chip CRC and size. Keep
+  the set ZIP under its MAME name so the window can distinguish revisions.
+  The window saves EEPROM beside the set. Save states remain open.
 
 ## Loading a game
 
@@ -45,13 +46,18 @@ and region changes against the latest release.
 
 ## Controls and settings
 
-Set `CPS2_PLAY=fight` to send coin, start, character selection, and
+In the window, use the direction keys, Z/X/S for buttons 1–3, and
+A/Q/W for buttons 4–6 on six-button sets. Right Shift inserts a coin
+and Enter presses Start. Gamepads use the same layout as CPS-1.
+
+In the headless runner, set `CPS2_PLAY=fight` to send coin, start, character selection, and
 in-round input after the initial clock budget. `CPS2_PLAY=idle` omits
 the last player input. The headless runner starts with a fresh EEPROM.
 
 ## Running
 
 ```powershell
+retrocast '<ROM-FOLDER>/ssf2.zip'
 cmake -S . -B build/cps2-headless -DFRONTEND=OFF -DSYSTEMS=cps2
 cmake --build build/cps2-headless --target cps2_headless cps2_recompile
 build/cps2-headless/cps2_headless.exe '<ROM-FOLDER>' ssf2 528000000

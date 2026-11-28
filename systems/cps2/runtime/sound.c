@@ -1,5 +1,10 @@
 /* CPS-2 QSound bus (MAME 0.289 cps2.cpp and cps1.cpp). */
 #include "machine.h"
+#include "file.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 int cps2_sound_init(Cps2Machine *s, const Cps2Rom *rom, const Zip *archive)
 {
@@ -103,3 +108,23 @@ uint8_t z80_in(Z80 *z, uint16_t port) { (void)z; (void)port; return 0xff; }
 void z80_out(Z80 *z, uint16_t port, uint8_t v) { (void)z; (void)port; (void)v; }
 void z80_idle(Z80 *z, uint16_t a, unsigned n) { (void)z; (void)a; (void)n; }
 uint8_t z80_irq_ack(Z80 *z) { (void)z; return 0xff; }
+
+int cps2_sound_open(Cps2Machine *machine, const Cps2Rom *rom, const char *folder)
+{
+    size_t capacity = strlen(folder) + sizeof("/qsound.zip");
+    char *path = malloc(capacity);
+    if (!path)
+        return -1;
+    snprintf(path, capacity, "%s/qsound.zip", folder);
+    size_t size;
+    uint8_t *bytes = file_read(path, &size);
+    free(path);
+    Zip archive;
+    int status = -1;
+    if (bytes && !zip_open(&archive, bytes, size)) {
+        status = cps2_sound_init(machine, rom, &archive);
+        zip_close(&archive);
+    }
+    free(bytes);
+    return status;
+}

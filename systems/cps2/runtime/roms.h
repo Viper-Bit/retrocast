@@ -37,6 +37,8 @@ extern const Cps2Game cps2_games[];
 extern const size_t cps2_game_count;
 
 const Cps2Game *cps2_find_game(const char *id);
+int cps2_open(const Cps2Game *game, const char *folder, Cps2Rom *rom,
+              char *error, size_t error_size);
 /* Archives are supplied in set-to-parent order. On failure out is empty. */
 int cps2_load(const Cps2Game *game, const Zip *archives, size_t archive_count,
               Cps2Rom *out, char *error, size_t error_size);

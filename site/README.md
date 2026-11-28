@@ -15,6 +15,7 @@ on a push to `main` that touches `site/`, on a published release, and by hand.
 ## Refreshing a system's list (where the games are)
 
     python tools/site_data.py cps1 "D:/roms/CAPCOM - Play System I"
+    python tools/site_data.py cps2 "<ROM-FOLDER>"
     python tools/site_data.py mastersystem "D:/roms/Sega - Master System - Mark III" --upload
 
 It runs every game in the system's headless program (`build/`), writes

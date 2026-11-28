@@ -4,5 +4,6 @@
   {"id": "genesis", "name": "Genesis / Mega Drive", "cpu": "68000 + Z80 · YM2612"},
   {"id": "mastersystem", "name": "Master System / Game Gear", "cpu": "Z80 · Sega and Codemasters mappers"},
   {"id": "atari2600", "name": "Atari 2600", "cpu": "6507 · bankswitching"},
-  {"id": "cps1", "name": "Capcom Play System I", "cpu": "Arcade · 68000 + Z80 · YM2151, OKI and Q-Sound"}
+  {"id": "cps1", "name": "Capcom Play System I", "cpu": "Arcade · 68000 + Z80 · YM2151, OKI and Q-Sound"},
+  {"id": "cps2", "name": "Capcom Play System II", "cpu": "Arcade · 68000 + Z80 · QSound"}
 ]
