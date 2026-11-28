@@ -61,3 +61,14 @@ The optional capture is a 384×224 PPM. The headless runner is opt-in.
 Machine runs look for `qsound.zip` in the ROM folder. Set `CPS2_PCM` to
 capture signed 16-bit little-endian stereo at the native QSound rate
 (60 MHz / 2496, approximately 24,038 Hz).
+
+## Compatibility
+
+The [CPS-2 roadmap](https://github.com/Viper-Bit/retrocast/issues/67) tracks
+the phases. The [verification log](docs/verification-log.md) records the
+reference checks and the [compatibility list](docs/compatibility.md) covers
+the full ROM catalog.
+
+```powershell
+python tools/cps2_boot.py build/cps2-headless/cps2_headless.exe 'D:/roms/CAPCOM - Play System II'
+```
