@@ -78,6 +78,37 @@ static void play(Cps2Machine *machine, uint64_t at, int fight)
     machine->inputs[0] |= 0x0011;
     cps2_machine_run(machine, at + 1050 * frame);
 }
+
+static int boot_probe(Cps2Machine *machine, uint64_t until)
+{
+    const uint64_t interval = 16 * 262 * 1024;
+    uint32_t first = 0;
+    int seen = 0, changed = 0;
+    for (uint64_t target = interval; !machine->cpu.halted;) {
+        if (target > until)
+            target = until;
+        cps2_machine_run(machine, target);
+        const uint32_t *pixels = machine->frame;
+        for (size_t i = 1; i < sizeof(machine->frame) / sizeof(*pixels); ++i) {
+            if (pixels[i] == pixels[0])
+                continue;
+            uint32_t crc = zip_crc32((const uint8_t *)pixels, sizeof(machine->frame));
+            changed |= seen && crc != first;
+            if (!seen)
+                first = crc;
+            seen = 1;
+            break;
+        }
+        if (target == until)
+            break;
+        target += until - target < interval ? until - target : interval;
+    }
+    if (machine->cpu.halted)
+        fputs("68000 halted during boot\n", stderr);
+    else if (!changed)
+        fputs("No changing, non-uniform video during boot\n", stderr);
+    return machine->cpu.halted || !changed ? -1 : 0;
+}
 #endif
 
 static int check(const Cps2Game *game, const char *folder, uint64_t cycles)
@@ -152,7 +183,12 @@ static int check(const Cps2Game *game, const char *folder, uint64_t cycles)
             }
             printf("reset pc %06x sp %06x\n", (unsigned)(machine->cpu.pc - 4),
                    (unsigned)machine->cpu.a[7]);
-            cps2_machine_run(machine, cycles);
+            if (getenv("CPS2_BOOT_PROBE")) {
+                if (boot_probe(machine, cycles))
+                    status = EXIT_FAILURE;
+            } else {
+                cps2_machine_run(machine, cycles);
+            }
             const char *script = getenv("CPS2_PLAY");
             if (script)
                 play(machine, cycles, strcmp(script, "idle") != 0);
