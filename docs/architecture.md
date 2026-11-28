@@ -153,8 +153,10 @@ that are its own. The frontend does the rest.
   window), too weak to decide alone: the `.a26` extension confirms it.
   The best score wins; the extension adds 20 (ties, and the Atari); two
   sure answers or none is an error, and `--system` decides. The build's
-  `ROMS` list uses the same rules (`cmake/detect_system.cmake`;
-  `tests/test_detect.py` runs both on the same files).
+  `ROMS` list uses `cmake/detect_system.cmake`. The SDL detector recognizes
+  CPS-2 ZIPs by program chip size and CRC, and the loader selects the
+  revision by its MAME set name. CPS-2 has its own opcode-image
+  recompile workflow.
 - **Two systems on one CPU**: the NES and the Atari 2600 both run the
   shared 6502, the Genesis and the Master System the Z80, each with its own
   bus functions; each gets its own copy of the interpreter
@@ -165,10 +167,10 @@ that are its own. The frontend does the rest.
   folder while one system uses it, and moves here when a second needs it.
   Now: the FM operator of the Yamaha OPN / OPM chips (`fm.c`), under the
   Genesis' YM2612 and the CPS-1's YM2151; the Q-Sound chip (`qsound.c`),
-  for the CPS-1 now and the CPS-2 next.
+  shared by CPS-1 and CPS-2.
 - **Shared chips that are not sound** (`core/devices/`), by the same rule:
   the 93C46 serial EEPROM (`eeprom93c46.c`; the CPS-1's Q-Sound board and
-  Pang! 3, the CPS-2 next).
+  Pang! 3, and CPS-2).
 - **Shared plumbing** (`core/`): a whole file read (`file.c`), the
   headless programs' pictures and sound (`capture.c`: PPM and WAV), zips
   (`zip.c`), recordings (`input_log.c`), detection (`detect.c`). A

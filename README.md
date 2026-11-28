@@ -26,7 +26,8 @@ own.
 ## How it works
 1. Each system has a recompiler (`systems/nes/recomp/` → `nesrecomp`, `systems/gb/recomp/`
    → `gbrecomp`, `systems/genesis/recomp/` → `mdrecomp`, `systems/mastersystem/recomp/`
-   → `smsrecomp`, also for the Game Gear, `systems/cps1/recomp/` → `cps1recomp`; C, built and run by CMake). It finds the reachable code and
+   → `smsrecomp`, also for the Game Gear, `systems/cps1/recomp/` → `cps1recomp`,
+   `systems/cps2/recompile.c` → `cps2_recompile`; C, built and run by CMake). It finds the reachable code and
    emits one C function per basic block, plus the ROM itself. Before that,
    the build plays the game for a while in the interpreter to find code
    static analysis cannot.
@@ -121,17 +122,17 @@ names drop "(...)"/"[...]" tags from the file name.
 Keyboard (player 1): arrows, X = A, Z = B, S = X, A = Y, Q = L, W = R,
 Enter = Start, Right Shift = Select, F5 = reset, Esc = quit. Gamepads:
 in the order connected, players 1-4 (3 and 4 where the game has them,
-CPS-1), hot-plug; D-pad or left stick, East =
+CPS-1 and CPS-2), hot-plug; D-pad or left stick, East =
 A, South = B, North = X, West = Y, shoulders = L and R, Back = Select,
 Start. Each system reads the buttons its pad has (the NES and Game Boy:
 A, B, Select, Start and the directions; the Genesis: A on Y, B on B, C on
 A, X on L, Y on X, Z on R, Mode on Select; the Master System: button 1
-on B, button 2 on A, the console's Pause on Start; the CPS-1: buttons
-1-3 on B, A and X, a coin on Select, Start).
+on B, button 2 on A, the console's Pause on Start; CPS-1 and CPS-2: buttons
+1–3 on B, A and X, a coin on Select, and Start).
 
 | Key | Action |
 |-----|--------|
-| F2 / F4 | save / load state (`ROM.state`; one slot) |
+| F2 / F4 | save / load state on supported systems (`ROM.state`; one slot) |
 | F10 | TV frame on/off |
 | F11 or Alt+Enter | fullscreen on/off |
 

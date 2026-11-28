@@ -9,8 +9,8 @@ calls, so every system with the same CPU uses the same code.
 | 6502 (the NES's 2A03) | NES and Famicom Disk System | SingleStepTests 2A03, nestest | [6502/](6502/) |
 | 6507 (a 6502: 13 address lines, no IRQ or NMI, decimal mode) | Atari 2600, its own copy of the 6502 | NMOS decimal vectors | [6502/](6502/) |
 | SM83 | Game Boy and Game Boy Color | SingleStepTests sm83 | [sm83/](sm83/) |
-| Z80 | Genesis / Mega Drive and CPS-1 (sound CPU), Master System / Mark III and Game Gear (main CPU) | SingleStepTests z80 | [z80/](z80/) |
-| 68000 | Genesis / Mega Drive and CPS-1 (main CPU) | SingleStepTests m68000 | [m68k/](m68k/) |
+| Z80 | Genesis / Mega Drive, CPS-1, and CPS-2 (sound CPU), Master System / Mark III and Game Gear (main CPU) | SingleStepTests z80 | [z80/](z80/) |
+| 68000 | Genesis / Mega Drive, CPS-1, and CPS-2 (main CPU) | SingleStepTests m68000 | [m68k/](m68k/) |
 
 ## What a CPU folder holds
 - The instruction templates, written once: the opcode table and C per
@@ -58,7 +58,7 @@ share one program. What makes that work:
   the copies cost nothing at run time, and the generated switch and
   recompiled code are the same bytes for both. The Z80 (`z80_library`,
   `Z80_PREFIX`) and the 68000 (`m68k_library`, `M68K_PREFIX`) work the same
-  way, for the Genesis next to the Master System and the CPS-1.
+  way for the Genesis, Master System, CPS-1, and CPS-2.
 - **Names inside one file** still clash and do not need to: the `FLAG_*`
   enums of `cpu6502.h` and `sm83_cpu.h`, the static helpers of the ops
   headers (`rd`, `wr`, `fetch_k`, `op_ADC`, ...) and the 6502's template

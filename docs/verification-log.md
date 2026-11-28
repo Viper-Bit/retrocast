@@ -8,7 +8,8 @@ Checks of one system: [NES](../systems/nes/docs/verification-log.md),
 [Genesis](../systems/genesis/docs/verification-log.md),
 [Atari 2600](../systems/atari2600/docs/verification-log.md),
 [Master System and Game Gear](../systems/mastersystem/docs/verification-log.md),
-[CPS-1](../systems/cps1/docs/verification-log.md).
+[CPS-1](../systems/cps1/docs/verification-log.md),
+[CPS-2](../systems/cps2/docs/verification-log.md).
 
 ## 2026-11-22 · One program for every system: retrocast, system detection
 - **Same output**: every generated file of a build of all systems (the

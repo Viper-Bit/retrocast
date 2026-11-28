@@ -2,7 +2,7 @@ retrocast is a static recompiler for retro consoles and arcade boards: it transl
 
 Systems: NES and Famicom Disk System (6502), Game Boy and Game Boy Color (SM83), Genesis / Mega Drive (68000 and Z80), Atari 2600 (6507), Master System / Mark III and Game Gear (Z80), Capcom Play System I (68000 and Z80), and Capcom Play System II (68000 and Z80).
 
-No games are included: bring your own legally dumped ROMs and disk images (disk games also need the FDS BIOS; Game Boy games need no BIOS). CPS-1 games are MAME / FBNeo zips, matched by their chips' CRCs whatever their names; the Q-Sound games also need `qsound.zip`.
+No games are included: bring your own legally dumped ROMs and disk images (disk games also need the FDS BIOS; Game Boy games need no BIOS). CPS-1 games are MAME / FBNeo ZIPs matched by chip CRC. CPS-2 uses named MAME set ZIPs and any required parent ZIPs. QSound games on both boards need `qsound.zip`.
 
 ## Downloads
 
@@ -27,4 +27,4 @@ Windows (x64, arm64), Linux (x64, arm64; glibc 2.35+), macOS (Apple Silicon). Ea
 
 **Do not share recompiled programs: they contain the game.**
 
-Supported cartridges and known limitations: [NES](https://github.com/Viper-Bit/retrocast/blob/main/systems/nes/README.md#mappers), [Game Boy](https://github.com/Viper-Bit/retrocast/blob/main/systems/gb/README.md#not-yet), [Genesis](https://github.com/Viper-Bit/retrocast/blob/main/systems/genesis/README.md#status), [Atari 2600](https://github.com/Viper-Bit/retrocast/blob/main/systems/atari2600/README.md#status), [Master System and Game Gear](https://github.com/Viper-Bit/retrocast/blob/main/systems/mastersystem/README.md#status), [CPS-1](https://github.com/Viper-Bit/retrocast/blob/main/systems/cps1/README.md#status).
+Supported games and known limitations: [NES](https://github.com/Viper-Bit/retrocast/blob/main/systems/nes/README.md#mappers), [Game Boy](https://github.com/Viper-Bit/retrocast/blob/main/systems/gb/README.md#not-yet), [Genesis](https://github.com/Viper-Bit/retrocast/blob/main/systems/genesis/README.md#status), [Atari 2600](https://github.com/Viper-Bit/retrocast/blob/main/systems/atari2600/README.md#status), [Master System and Game Gear](https://github.com/Viper-Bit/retrocast/blob/main/systems/mastersystem/README.md#status), [CPS-1](https://github.com/Viper-Bit/retrocast/blob/main/systems/cps1/README.md#status), [CPS-2](https://github.com/Viper-Bit/retrocast/blob/main/systems/cps2/README.md#status).
