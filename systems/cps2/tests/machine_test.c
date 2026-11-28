@@ -53,6 +53,20 @@ int main(void)
         return EXIT_FAILURE;
     }
     int sound_ok = check_sound_bus(machine);
+    m68k_write(&machine->cpu, 0xfffff8, 0x1234, 5, 3);
+    int output_ok = m68k_read(&machine->cpu, 0x400008, 5, 3) == 0;
+    cps2_machine_destroy(machine);
+    Cps2Game phoenix = game;
+    phoenix.machine = "dead_cps2comm";
+    rom.game = &phoenix;
+    if (cps2_machine_init(machine, &rom)) {
+        free(machine);
+        return EXIT_FAILURE;
+    }
+    m68k_write(&machine->cpu, 0xfffff8, 0x1234, 5, 3);
+    m68k_write(&machine->cpu, 0x400008, 0x00cd, 5, 1);
+    output_ok = output_ok && m68k_read(&machine->cpu, 0xfffff8, 5, 3) == 0x12cd &&
+                m68k_read(&machine->cpu, 0x400008, 5, 3) == 0x12cd;
     m68k_write(&machine->cpu, 0x804140, 0xffff, 5, 3);
     m68k_write(&machine->cpu, 0x800142, 0x8081, 5, 3);
     int multiplier_ok = m68k_read(&machine->cpu, 0x804144, 5, 3) == 0x7f7f &&
@@ -61,7 +75,7 @@ int main(void)
     m68k_write(&machine->cpu, 0x8040e0, 1, 5, 1);
     m68k_write(&machine->cpu, 0x70e000, 0xabcd, 5, 3);
     cps2_machine_run(machine, 241 * 1024);
-    int ok = sound_ok && multiplier_ok && machine->cpu.d[0] == 42 && !machine->cpu.halted &&
+    int ok = sound_ok && output_ok && multiplier_ok && machine->cpu.d[0] == 42 && !machine->cpu.halted &&
              machine->objects[0][0] == 0xab && machine->objects[0][1] == 0xcd &&
              machine->cpu.ipl == 6 && machine->rendered == 224;
     cps2_machine_destroy(machine);

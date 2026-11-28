@@ -29,6 +29,9 @@ int cps2_machine_set_recomp(Cps2Machine *s, const Cps2Recomp *program)
 
 static uint8_t *mapped_ram(Cps2Machine *s, uint32_t a, int write)
 {
+    /* MAME's dead_cps2_map shares the object outputs at the top of work RAM. */
+    if (s->dead_board && a >= 0xfffff0 && a <= 0xfffffb)
+        return s->output + (a - 0xfffff0);
     if (a >= 0xff0000)
         return s->work + (a - 0xff0000);
     if (a >= 0x900000 && a <= 0x92ffff)
@@ -125,6 +128,8 @@ void m68k_reset_out(M68k *c) { (void)c; }
 int cps2_machine_init(Cps2Machine *s, const Cps2Rom *rom)
 {
     memset(s, 0, sizeof(*s));
+    const char *board = rom->game->machine;
+    s->dead_board = board && (!strcmp(board, "dead_cps2") || !strcmp(board, "dead_cps2comm"));
     s->program = cps2_region(rom, "maincpu", &s->program_size);
     if (!s->program || s->program_size < 8 || s->program_size > 0x400000 || s->program_size % 2)
         return -1;

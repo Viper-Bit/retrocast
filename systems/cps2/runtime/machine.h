@@ -35,7 +35,7 @@ typedef struct {
     uint8_t work[0x10000], graphics[0x30000], objects[2][0x2000];
     uint8_t output[12], cps_a[64], cps_b[64], shared[0x1000];
     uint16_t inputs[3]; /* raw port levels, active low except EEPROM DO */
-    uint8_t object_bank, sound_control;
+    uint8_t object_bank, sound_control, dead_board;
     uint16_t raster_reload[2], raster_counter[2], scanline;
     uint64_t line_clock, raster_clock;
     uint8_t latched_objects[0x2000];
