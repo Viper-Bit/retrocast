@@ -13,7 +13,7 @@ import json
 import subprocess
 import sys
 
-SYSTEMS = ["nes", "gb", "genesis", "atari2600", "mastersystem", "cps1"]  # as in CMakeLists.txt SYSTEMS
+SYSTEMS = ["nes", "gb", "genesis", "atari2600", "mastersystem", "cps1"]  # CPS-2 runs in the CI data job
 CPUS = {"6502": ["nes", "atari2600"], "sm83": ["gb"], "m68k": ["genesis", "cps1"], "z80": ["genesis", "mastersystem", "cps1"]}  # cpu/<name>/ -> systems (CMakeLists.txt CPU_<system>)
 DOCS = ("docs/", "dist/", ".github/release-notes.md", ".github/workflows/release.yml", "tools/make_release.py")
 
