@@ -57,8 +57,16 @@ uint16_t m68k_read(M68k *c, uint32_t a, unsigned fc, unsigned strobe)
             return cps2_opcode(s, a);
         return be16(s->program + a);
     }
-    if ((a & 0xffbffe) == 0x800150 || (a & 0xffbffe) == 0x800152)
+    switch (a & 0xffbffe) {
+    case 0x800144:
+    case 0x800146: {
+        uint32_t product = (uint32_t)be16(s->cps_b) * be16(s->cps_b + 2);
+        return (uint16_t)(product >> ((a & 2) ? 16 : 0));
+    }
+    case 0x800150:
+    case 0x800152:
         return s->raster_counter[(a >> 1) & 1];
+    }
     const uint8_t *ram = mapped_ram(s, a, 0);
     if (ram)
         return be16(ram);
