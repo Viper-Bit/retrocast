@@ -10,6 +10,71 @@
 #include <string.h>
 
 #ifdef CPS2_CHECK_MACHINE
+#ifdef CPS2_HAS_RECOMP
+extern const Cps2Recomp cps2_recomp_program;
+#endif
+static Cps2Machine *reference;
+static int mismatch;
+
+static int write_opcodes(const Cps2Machine *machine, const char *path)
+{
+    if (machine->program_size < 256)
+        return -1;
+    FILE *file = fopen(path, "wb");
+    if (!file)
+        return -1;
+    int failed = fwrite(machine->program, 1, 256, file) != 256;
+    for (uint32_t a = 0; a < machine->program_size; a += 2) {
+        uint16_t word = cps2_opcode(machine, a);
+        fputc(word >> 8, file);
+        fputc(word & 255, file);
+    }
+    failed |= ferror(file);
+    return fclose(file) || failed ? -1 : 0;
+}
+
+static void scrub(Cps2Machine *state)
+{
+    state->cpu.bus = state->audio_cpu.bus = NULL;
+    memset(state->cpu.abort, 0, sizeof(state->cpu.abort));
+    state->program = state->audio_program = state->sound.rom = NULL;
+    state->opcodes = NULL;
+    state->sound.dsp = NULL;
+    state->tiles = NULL;
+    state->recomp = NULL;
+    state->executed = NULL;
+    state->audio_sample = NULL;
+    state->audio_context = NULL;
+    state->native_clocks = 0;
+}
+
+static void run(Cps2Machine *machine, uint64_t until)
+{
+    if (!reference) {
+        cps2_machine_run(machine, until);
+        return;
+    }
+    static Cps2Machine actual, expected;
+    const uint64_t interval = 16 * 1024;
+    memcpy(reference->inputs, machine->inputs, sizeof(machine->inputs));
+    while (machine->cpu.cycles < until && !machine->cpu.halted && !mismatch) {
+        uint64_t slice = until - machine->cpu.cycles;
+        uint64_t target = machine->cpu.cycles + (slice < interval ? slice : interval);
+        cps2_machine_run(machine, target);
+        cps2_machine_run(reference, target);
+        memcpy(&actual, machine, sizeof(actual));
+        memcpy(&expected, reference, sizeof(expected));
+        scrub(&actual);
+        scrub(&expected);
+        if (memcmp(&actual, &expected, sizeof(actual))) {
+            fprintf(stderr, "CPS-2 lockstep mismatch at clock %llu (PC %06x vs %06x)\n",
+                    (unsigned long long)machine->cpu.cycles, (unsigned)machine->cpu.pc,
+                    (unsigned)reference->cpu.pc);
+            mismatch = 1;
+        }
+    }
+}
+
 static int load_sound(Cps2Machine *machine, const Cps2Rom *rom, const char *folder)
 {
     size_t capacity = strlen(folder) + sizeof("/qsound.zip");
@@ -61,22 +126,22 @@ static void play(Cps2Machine *machine, uint64_t at, int fight)
     /* Pulse coin, start, character select, and in-game input. */
     const uint64_t frame = 262 * 1024;
     machine->inputs[2] &= (uint16_t)~0x1000;
-    cps2_machine_run(machine, at + 2 * frame);
+    run(machine, at + 2 * frame);
     machine->inputs[2] |= 0x1000;
-    cps2_machine_run(machine, at + 90 * frame);
+    run(machine, at + 90 * frame);
     machine->inputs[2] &= (uint16_t)~0x0100;
-    cps2_machine_run(machine, at + 98 * frame);
+    run(machine, at + 98 * frame);
     machine->inputs[2] |= 0x0100;
-    cps2_machine_run(machine, at + 240 * frame);
+    run(machine, at + 240 * frame);
     machine->inputs[0] &= (uint16_t)~0x0011;
-    cps2_machine_run(machine, at + 248 * frame);
+    run(machine, at + 248 * frame);
     machine->inputs[0] |= 0x0011;
-    cps2_machine_run(machine, at + 1020 * frame);
+    run(machine, at + 1020 * frame);
     if (fight)
         machine->inputs[0] &= (uint16_t)~0x0011;
-    cps2_machine_run(machine, at + 1040 * frame);
+    run(machine, at + 1040 * frame);
     machine->inputs[0] |= 0x0011;
-    cps2_machine_run(machine, at + 1050 * frame);
+    run(machine, at + 1050 * frame);
 }
 
 static int boot_probe(Cps2Machine *machine, uint64_t until)
@@ -87,7 +152,7 @@ static int boot_probe(Cps2Machine *machine, uint64_t until)
     for (uint64_t target = interval; !machine->cpu.halted;) {
         if (target > until)
             target = until;
-        cps2_machine_run(machine, target);
+        run(machine, target);
         const uint32_t *pixels = machine->frame;
         for (size_t i = 1; i < sizeof(machine->frame) / sizeof(*pixels); ++i) {
             if (pixels[i] == pixels[0])
@@ -111,7 +176,7 @@ static int boot_probe(Cps2Machine *machine, uint64_t until)
 }
 #endif
 
-static int check(const Cps2Game *game, const char *folder, uint64_t cycles)
+static int check(const Cps2Game *game, const char *folder, uint64_t cycles, int diff)
 {
     size_t depth = 0;
     for (const Cps2Game *g = game; g; g = g->parent ? cps2_find_game(g->parent) : NULL)
@@ -172,6 +237,34 @@ static int check(const Cps2Game *game, const char *folder, uint64_t cycles)
             cps2_machine_destroy(machine);
             status = EXIT_FAILURE;
         } else {
+            const char *image = getenv("CPS2_OPCODE_IMAGE");
+            const char *trace = getenv("CPS2_EXECUTED_PCS");
+            if (trace)
+                machine->executed = calloc(machine->program_size, 1);
+            if (trace && !machine->executed) {
+                fputs("Could not allocate executed-PC bitmap\n", stderr);
+                status = EXIT_FAILURE;
+                goto machine_done;
+            }
+            if (image && write_opcodes(machine, image)) {
+                fprintf(stderr, "Could not write opcode image: %s\n", image);
+                status = EXIT_FAILURE;
+            }
+#ifdef CPS2_HAS_RECOMP
+            if (!cps2_machine_set_recomp(machine, &cps2_recomp_program)) {
+                fputs("Generated code does not match this opcode image\n", stderr);
+                status = EXIT_FAILURE;
+            }
+#endif
+            if (diff) {
+                reference = malloc(sizeof(*reference));
+                if (!reference || cps2_machine_init(reference, &rom) ||
+                    load_sound(reference, &rom, folder)) {
+                    fputs("Could not initialize lockstep interpreter\n", stderr);
+                    status = EXIT_FAILURE;
+                    goto machine_done;
+                }
+            }
             const char *audio_path = getenv("CPS2_PCM");
             FILE *audio = audio_path ? fopen(audio_path, "wb") : NULL;
             if (audio) {
@@ -187,7 +280,7 @@ static int check(const Cps2Game *game, const char *folder, uint64_t cycles)
                 if (boot_probe(machine, cycles))
                     status = EXIT_FAILURE;
             } else {
-                cps2_machine_run(machine, cycles);
+                run(machine, cycles);
             }
             const char *script = getenv("CPS2_PLAY");
             if (script)
@@ -197,6 +290,16 @@ static int check(const Cps2Game *game, const char *folder, uint64_t cycles)
                    (unsigned)zip_crc32((const uint8_t *)machine->frame, sizeof(machine->frame)));
             if (machine->cpu.halted)
                 status = EXIT_FAILURE;
+            if (diff) {
+                if (mismatch || !machine->native_clocks) {
+                    fputs("Lockstep failed or no native code ran\n", stderr);
+                    status = EXIT_FAILURE;
+                } else {
+                    printf("Lockstep passed, %llu native clocks of %llu\n",
+                           (unsigned long long)machine->native_clocks,
+                           (unsigned long long)machine->cpu.cycles);
+                }
+            }
             if (audio) {
                 int failed = ferror(audio);
                 if (fclose(audio) || failed)
@@ -207,12 +310,32 @@ static int check(const Cps2Game *game, const char *folder, uint64_t cycles)
                 perror(capture);
                 status = EXIT_FAILURE;
             }
+            if (trace) {
+                FILE *file = fopen(trace, "wb");
+                if (!file) {
+                    perror(trace);
+                    status = EXIT_FAILURE;
+                } else {
+                    int failed = fwrite(machine->executed, 1, machine->program_size, file)
+                                 != machine->program_size;
+                    if (fclose(file) || failed)
+                        status = EXIT_FAILURE;
+                }
+            }
+machine_done:
+            if (reference) {
+                cps2_machine_destroy(reference);
+                free(reference);
+                reference = NULL;
+            }
+            free(machine->executed);
             cps2_machine_destroy(machine);
         }
         free(machine);
     }
 #else
     (void)cycles;
+    (void)diff;
 #endif
     cps2_unload(&rom);
 done:
@@ -229,13 +352,18 @@ done:
 int main(int argc, char **argv)
 {
     int valid = argc == 3;
+    int diff = 0;
 #ifdef CPS2_CHECK_MACHINE
     valid |= argc == 4;
+#ifdef CPS2_HAS_RECOMP
+    diff = argc == 5 && !strcmp(argv[4], "--diff");
+    valid |= diff;
+#endif
 #endif
     const Cps2Game *game = valid ? cps2_find_game(argv[2]) : NULL;
     if (!game) {
         fprintf(stderr, "Usage: %s ROM_FOLDER SET_ID [CYCLES]\n", argv[0]);
         return EXIT_FAILURE;
     }
-    return check(game, argv[1], argc == 4 ? strtoull(argv[3], NULL, 10) : 0);
+    return check(game, argv[1], argc >= 4 ? strtoull(argv[3], NULL, 10) : 0, diff);
 }
