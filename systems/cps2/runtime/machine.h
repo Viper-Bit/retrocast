@@ -51,6 +51,7 @@ void cps2_machine_run(Cps2Machine *machine, uint64_t until);
 int cps2_machine_set_recomp(Cps2Machine *machine, const Cps2Recomp *program);
 uint16_t cps2_opcode(const Cps2Machine *machine, uint32_t address);
 int cps2_sound_init(Cps2Machine *machine, const Cps2Rom *rom, const Zip *archive);
+int cps2_sound_open(Cps2Machine *machine, const Cps2Rom *rom, const char *folder);
 void cps2_sound_run(Cps2Machine *machine);
 void cps2_sound_control(Cps2Machine *machine, uint8_t value);
 int cps2_video_init(Cps2Machine *machine, const Cps2Rom *rom);

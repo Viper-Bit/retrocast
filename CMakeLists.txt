@@ -210,6 +210,7 @@ if(TESTS)
     set(DETECTOR_atari2600 a26_detector atari2600_cart)
     set(DETECTOR_mastersystem sms_detector smscore)
     set(DETECTOR_cps1 cps1_detector cps1core)
+    set(DETECTOR_cps2 cps2_detector cps2_catalog)
     set(text "#include \"detect.h\"
     ")
     set(items "")

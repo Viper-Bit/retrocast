@@ -1,6 +1,6 @@
 retrocast - static recompiler for NES, Famicom Disk System, Game Boy, Game Boy Color,
 Genesis / Mega Drive, Atari 2600, Master System, Game Gear and Capcom arcade
-games (CPS-1 and headless CPS-2)
+games (CPS-1 and CPS-2)
 https://github.com/Viper-Bit/retrocast
 
 No games are included. Use your own legally dumped games (.nes, .fds, .gb, .gbc,
@@ -25,7 +25,7 @@ WHAT IS IN HERE
     Atari 2600                 atari2600_headless  atari2600recomp
     Master System, Game Gear   sms_headless        smsrecomp
     CPS-1                      cps1_headless       cps1recomp
-    CPS-2 (headless)           cps2_headless       cps2_recompile
+    CPS-2                      cps2_headless       cps2_recompile
 
     *_headless      Plays a game without a window, for scripts and checks
                     (frames to run, pictures, sound, recordings, ...).

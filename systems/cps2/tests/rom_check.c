@@ -75,26 +75,6 @@ static void run(Cps2Machine *machine, uint64_t until)
     }
 }
 
-static int load_sound(Cps2Machine *machine, const Cps2Rom *rom, const char *folder)
-{
-    size_t capacity = strlen(folder) + sizeof("/qsound.zip");
-    char *path = malloc(capacity);
-    if (!path)
-        return -1;
-    snprintf(path, capacity, "%s/qsound.zip", folder);
-    size_t size;
-    uint8_t *bytes = file_read(path, &size);
-    free(path);
-    Zip archive;
-    int status = -1;
-    if (bytes && !zip_open(&archive, bytes, size)) {
-        status = cps2_sound_init(machine, rom, &archive);
-        zip_close(&archive);
-    }
-    free(bytes);
-    return status;
-}
-
 static void write_sample(void *context, const int16_t sample[2])
 {
     FILE *file = context;
@@ -178,48 +158,13 @@ static int boot_probe(Cps2Machine *machine, uint64_t until)
 
 static int check(const Cps2Game *game, const char *folder, uint64_t cycles, int diff)
 {
-    size_t depth = 0;
-    for (const Cps2Game *g = game; g; g = g->parent ? cps2_find_game(g->parent) : NULL)
-        ++depth;
-    Zip *archives = calloc(depth + 1, sizeof(*archives));
-    uint8_t **data = calloc(depth + 1, sizeof(*data));
-    size_t count = 0;
-    int status = EXIT_FAILURE;
-    if (!archives || !data) {
-        fputs("out of memory\n", stderr);
-        goto done;
-    }
-
-    for (const char *id = game->id; id;) {
-        size_t capacity = strlen(folder) + strlen(id) + sizeof("/.zip");
-        char *path = malloc(capacity);
-        if (!path) {
-            fputs("out of memory\n", stderr);
-            goto done;
-        }
-        snprintf(path, capacity, "%s/%s.zip", folder, id);
-        size_t size;
-        uint8_t *bytes = file_read(path, &size);
-        if (bytes) {
-            if (zip_open(&archives[count], bytes, size)) {
-                fprintf(stderr, "%s: invalid ZIP\n", path);
-                free(bytes);
-                free(path);
-                goto done;
-            }
-            data[count++] = bytes;
-        }
-        free(path);
-        const Cps2Game *entry = cps2_find_game(id);
-        id = entry ? entry->parent : NULL;
-    }
-
     Cps2Rom rom;
     char error[256];
-    if (cps2_load(game, archives, count, &rom, error, sizeof(error))) {
+    if (cps2_open(game, folder, &rom, error, sizeof(error))) {
         fprintf(stderr, "%s\n", error);
-        goto done;
+        return EXIT_FAILURE;
     }
+    int status;
     for (size_t i = 0; i < game->count; ++i) {
         const Cps2Region *region = &game->regions[i];
         printf("%s %u %08x\n", region->tag, (unsigned)region->size,
@@ -232,7 +177,7 @@ static int check(const Cps2Game *game, const char *folder, uint64_t cycles, int 
         if (!machine || cps2_machine_init(machine, &rom)) {
             fputs("Could not initialize CPS-2 machine\n", stderr);
             status = EXIT_FAILURE;
-        } else if (load_sound(machine, &rom, folder)) {
+        } else if (cps2_sound_open(machine, &rom, folder)) {
             fputs("CPS-2 sound needs audiocpu, qsound, and qsound.zip (CRC d6cf5ef5)\n", stderr);
             cps2_machine_destroy(machine);
             status = EXIT_FAILURE;
@@ -259,7 +204,7 @@ static int check(const Cps2Game *game, const char *folder, uint64_t cycles, int 
             if (diff) {
                 reference = malloc(sizeof(*reference));
                 if (!reference || cps2_machine_init(reference, &rom) ||
-                    load_sound(reference, &rom, folder)) {
+                    cps2_sound_open(reference, &rom, folder)) {
                     fputs("Could not initialize lockstep interpreter\n", stderr);
                     status = EXIT_FAILURE;
                     goto machine_done;
@@ -338,14 +283,6 @@ machine_done:
     (void)diff;
 #endif
     cps2_unload(&rom);
-done:
-    while (count) {
-        --count;
-        zip_close(&archives[count]);
-        free(data[count]);
-    }
-    free(archives);
-    free(data);
     return status;
 }
 

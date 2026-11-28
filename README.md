@@ -21,7 +21,7 @@ own.
 | Master System / Mark III | Z80, Sega and Codemasters mappers, cartridge RAM, VDP (mode 4) and PSG, NTSC and PAL, two pads and Pause; recompiled (Z80) | [systems/mastersystem/README.md](systems/mastersystem/README.md) |
 | Game Gear | a mode of the Master System: 160x144 LCD, 12-bit palette, Start on port $00; recompiled (Z80) | [systems/mastersystem/README.md](systems/mastersystem/README.md) |
 | Capcom Play System I (arcade) | in progress: 210 sets (the plain boards, the Q-Sound games, Pang! 3, most bootlegs) play in `retrocast`, all boot-tested: zips, 68000 and Z80, CPS-A/CPS-B picture, YM2151, OKI and Q-Sound sound, save states, up to four players; recompiled (68000) | [systems/cps1/README.md](systems/cps1/README.md) |
-| Capcom Play System II (arcade) | headless runner and 68000 recompiler; 323 of 324 sets showed boot progress | [systems/cps2/README.md](systems/cps2/README.md) |
+| Capcom Play System II (arcade) | SDL window, headless runner, and 68000 recompiler; 323 of 324 sets showed boot progress | [systems/cps2/README.md](systems/cps2/README.md) |
 
 ## How it works
 1. Each system has a recompiler (`systems/nes/recomp/` → `nesrecomp`, `systems/gb/recomp/`

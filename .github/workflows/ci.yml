@@ -46,7 +46,7 @@ jobs:
       - name: Build and check the CPS-2 ROM loader
         run: |
           python -m unittest tests.test_cps2_rom_audit
-          gcc -std=c11 -Wall -Wextra -Werror -Icore -Isystems/cps2/runtime systems/cps2/tests/rom_check.c systems/cps2/runtime/{load,games}.c core/{zip,file}.c -o "$RUNNER_TEMP/cps2-rom-check"
+          gcc -std=c11 -Wall -Wextra -Werror -Icore -Isystems/cps2/runtime systems/cps2/tests/rom_check.c systems/cps2/runtime/{load,open,games}.c core/{zip,file}.c -o "$RUNNER_TEMP/cps2-rom-check"
           mkdir "$RUNNER_TEMP/empty-roms"
           if "$RUNNER_TEMP/cps2-rom-check" "$RUNNER_TEMP/empty-roms" ssf2u 2>"$RUNNER_TEMP/cps2-error"; then exit 1; fi
           grep -Fx 'ssf2u maincpu ssfu.03a: missing or damaged chip' "$RUNNER_TEMP/cps2-error"
@@ -133,7 +133,7 @@ jobs:
         run: |
           for /f "usebackq delims=" %%i in (`"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" -latest -property installationPath`) do set VSDIR=%%i
           call "%VSDIR%\VC\Auxiliary\Build\vcvars64.bat" || exit /b 1
-          cmake -S . -B build -G Ninja -DCMAKE_C_COMPILER=cl -DWERROR=ON -DTESTS=ON "-DSYSTEMS=${{ needs.changes.outputs.cmake }}" || exit /b 1
+          cmake -S . -B build -G Ninja -DCMAKE_C_COMPILER=cl -DWERROR=ON -DTESTS=ON -DCPS2_HEADLESS=ON "-DSYSTEMS=${{ needs.changes.outputs.cmake }}" || exit /b 1
           cmake --build build
       - name: Test system detection
         env:

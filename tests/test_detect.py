@@ -5,6 +5,7 @@ must give the same answer."""
 import io
 import os
 import shutil
+import struct
 import subprocess
 import tempfile
 import unittest
@@ -124,7 +125,7 @@ class TestDetect(unittest.TestCase):
 
     def test_c_detectors(self):
         built_ids = subprocess.run([RUNNER, "--systems"], capture_output=True, text=True).stdout.split()
-        if sorted(built_ids) != sorted(CMAKE_ID.values()):
+        if not set(CMAKE_ID.values()).issubset(built_ids):
             self.skipTest("needs every system built (SYSTEMS), not " + " ".join(built_ids))
         for i, (name, data, want) in enumerate(CASES):
             with self.subTest(file=name, want=want):
@@ -134,6 +135,22 @@ class TestDetect(unittest.TestCase):
                     self.assertIn("--system", r.stderr)
                 else:
                     self.assertEqual((r.returncode, r.stdout.strip()), (0, want), r.stderr)
+
+    def test_cps2_program_chip(self):
+        built_ids = subprocess.run([RUNNER, "--systems"], capture_output=True, text=True).stdout.split()
+        if "cps2" not in built_ids:
+            self.skipTest("CPS-2 detector is absent")
+        file = io.BytesIO()
+        with zipfile.ZipFile(file, "w") as archive:
+            archive.writestr("renamed.bin", b"x")
+        raw = bytearray(file.getvalue())
+        central = raw.index(b"PK\x01\x02")
+        # Detection reads the central directory. The ROM loader checks actual bytes.
+        struct.pack_into("<I", raw, central + 16, 0xaf654792)
+        struct.pack_into("<I", raw, central + 24, 524288)
+        result = subprocess.run([RUNNER, self.write("cps2", "ssf2.zip", raw)],
+                                capture_output=True, text=True)
+        self.assertEqual((result.returncode, result.stdout.strip()), (0, "cps2"), result.stderr)
 
     @unittest.skipUnless(shutil.which("cmake"), "no cmake")
     def test_cmake_rules_agree(self):
@@ -169,8 +186,9 @@ class TestCps1(unittest.TestCase):
         self.assertEqual((r.returncode, r.stdout.strip()), (0, "cps1"), r.stderr)
         r = self.cmake(game)
         self.assertEqual((r.returncode, r.stderr.strip()), (0, "cps1"))
-        if os.path.exists(CPS2_ZIP):  # another board's zip: neither takes it
-            self.assertNotEqual(subprocess.run([RUNNER, CPS2_ZIP], capture_output=True).returncode, 0)
+        if os.path.exists(CPS2_ZIP):
+            result = subprocess.run([RUNNER, CPS2_ZIP], capture_output=True, text=True)
+            self.assertNotEqual(result.stdout.strip(), "cps1")
             r = self.cmake(CPS2_ZIP)
             self.assertNotEqual(r.returncode, 0)
             self.assertIn("not a game", r.stderr)

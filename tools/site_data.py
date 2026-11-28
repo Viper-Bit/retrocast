@@ -11,7 +11,7 @@ workflow downloads. Needs Pillow; 7-Zip for .7z archives.
 import argparse, concurrent.futures, datetime, hashlib, json, os, re, shutil, subprocess, sys, tempfile, zipfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BUILD = os.path.join(ROOT, "build")
+BUILD = os.environ.get("RETROCAST_BUILD", os.path.join(ROOT, "build"))
 EXE = ".exe" if os.name == "nt" else ""
 SEVENZIP = shutil.which("7z") or r"C:\Program Files\7-Zip\7z.exe"
 # program, the game files it takes, frames to the title screen, whether it is played (play_args)
@@ -22,6 +22,7 @@ SYSTEMS = {
     "mastersystem": ("sms_headless", (".sms", ".gg"), 600, True),
     "atari2600": ("atari2600_headless", (".a26", ".bin"), 300, True),
     "cps1": ("cps1_headless", (".zip",), 1200, True),
+    "cps2": ("cps2_headless", (".zip",), 1950, False),
 }
 STOPPED = re.compile(r"\bhalted\b|jammed=1|result: (halted|locked)")
 RANK = {"ok": 0, "partial": 1, "no": 2}
@@ -166,8 +167,66 @@ def collect(system, folder):
     return out
 
 
+def cps2_site(folders, frames, images):
+    from cps2_boot import probe
+    from cps2_rom_audit import TABLE, read_table, stack
+
+    catalog = read_table(TABLE)
+    groups = {}
+    for gid in catalog:
+        parent = tuple(stack(catalog, gid))[-1]
+        parent = parent if parent in catalog else gid
+        groups.setdefault(parent, []).append(gid)
+    runner = os.path.abspath(os.path.join(BUILD, "cps2_headless" + EXE))
+    if not os.path.isfile(runner):
+        raise FileNotFoundError(runner)
+    folders = [os.path.abspath(folder) for folder in folders]
+
+    def statuses(gid):
+        for folder in folders:
+            if probe(runner, folder, gid, 10)[0] == "Boot progress":
+                return folder
+        return None
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+        booted = dict(zip(catalog, pool.map(statuses, catalog)))
+
+    def entry(item):
+        parent, members = item
+        versions = [parent] + sorted(gid for gid in members if gid != parent)
+        compatible = [gid for gid in versions if booted[gid]]
+        image = None
+        if compatible:
+            gid = compatible[0]
+            with tempfile.TemporaryDirectory() as work:
+                ppm = os.path.join(work, "frame.ppm")
+                env = {k: v for k, v in os.environ.items()
+                       if k not in {"CPS2_PLAY", "CPS2_PCM", "CPS2_BOOT_PROBE",
+                                    "CPS2_OPCODE_IMAGE", "CPS2_EXECUTED_PCS"}}
+                env["CPS2_FRAME"] = ppm
+                for n in (frames, frames + 120, frames + 240):
+                    result = subprocess.run([runner, booted[gid], gid, str(n * 262 * 1024)],
+                                            env=env, capture_output=True, timeout=120)
+                    if result.returncode == 0 and os.path.isfile(ppm):
+                        with open(ppm, "rb") as file:
+                            usable = colours(file.read()) > 2
+                        if usable:
+                            image = image_name(gid)
+                            thumbnail(ppm, os.path.join(images, "cps2", image + ".webp"))
+                            break
+        return {"title": title_of(catalog[parent]["title"]), "id": parent,
+                "status": "ok" if compatible else "no", "versions": versions, "image": image,
+                "failing": [gid for gid in versions if not booted[gid]]}
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+        return list(pool.map(entry, groups.items()))
+
+
 def make(system, folders, frames=None, images=None):
     frames = frames or SYSTEMS[system][2]
+    if system == "cps2":
+        write_data(system, cps2_site(folders, frames, images), images)
+        return
     games = {}
     for folder in folders:
         games.update(collect(system, folder))
@@ -198,6 +257,10 @@ def make(system, folders, frames=None, images=None):
         img = next((result[v][1] for v in vs if result[v][1]), None)
         entries.append({"title": t, "id": vs[0], "status": st, "versions": vs, "image": img,
                         "failing": [v for v in vs if result[v][0] != "ok"]})
+    write_data(system, entries, images)
+
+
+def write_data(system, entries, images):
     entries.sort(key=lambda e: e["title"].lower())
     data = {"system": system, "made": datetime.date.today().isoformat(), "games": entries}
     path = os.path.join(images, "data", system + ".json")
