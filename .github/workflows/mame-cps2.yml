@@ -1,0 +1,45 @@
+name: MAME check (CPS-2)
+
+on:
+  schedule:
+    - cron: '0 6 2 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+      - name: Regenerate from MAME's latest release
+        run: |
+          tag=$(gh api repos/mamedev/mame/releases/latest --jq .tag_name)
+          echo "TAG=$tag" >> "$GITHUB_ENV"
+          mkdir mame
+          curl -fsSL "https://raw.githubusercontent.com/mamedev/mame/$tag/src/mame/capcom/cps2.cpp" -o mame/cps2.cpp
+          if python3 tools/cps2_table.py mame/cps2.cpp "$tag" --out new_games.c > gen.log 2>&1; then
+            python3 tools/cps2_mame_diff.py systems/cps2/runtime/games.c new_games.c > changes.md
+          else
+            { echo "The generator failed on MAME's source:"; echo '```'; tail -20 gen.log; echo '```'; } > changes.md
+          fi
+          cat changes.md
+      - name: Open or update the issue
+        run: |
+          if grep -qx "no change" changes.md; then echo "games.c matches $TAG"; exit 0; fi
+          title="CPS-2: MAME's game table changed"
+          {
+            echo "MAME's latest release, **$TAG**, differs from \`systems/cps2/runtime/games.c\`:"
+            echo
+            cat changes.md
+            echo
+            echo "Regenerate with \`python tools/cps2_table.py mame/cps2.cpp $TAG\` and rerun the CPS-2 audit and boot sweep."
+            echo
+            echo "_Written by the scheduled MAME check (.github/workflows/mame-cps2.yml)._"
+          } > body.md
+          num=$(gh issue list --state open --search "\"$title\" in:title" --json number,title --jq ".[] | select(.title == \"$title\") | .number" | head -1)
+          if [ -n "$num" ]; then gh issue edit "$num" --body-file body.md; else gh issue create --title "$title" --body-file body.md; fi

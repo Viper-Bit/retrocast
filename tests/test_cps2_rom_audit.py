@@ -1,3 +1,5 @@
+import subprocess
+import sys
 import tempfile
 import unittest
 import zipfile
@@ -8,6 +10,17 @@ from tools.cps2_rom_audit import TABLE, audit, read_table
 
 
 class TestCps2RomAudit(unittest.TestCase):
+    def test_mame_diff_reports_region_and_crc(self):
+        tool = TABLE.parents[3] / "tools" / "cps2_mame_diff.py"
+        with tempfile.TemporaryDirectory() as temp:
+            changed = Path(temp) / "games.c"
+            changed.write_text(TABLE.read_text(encoding="utf-8").replace(
+                "0xaf654792", "0xaf654793", 1), encoding="utf-8")
+            actual = subprocess.check_output(
+                [sys.executable, tool, TABLE, changed], text=True, encoding="utf-8")
+            self.assertEqual(actual.strip(), "- **ssf2 / maincpu** removed ssfe-03b "
+                             "(CRC af654792), added ssfe-03b (CRC af654793)")
+
     def test_compiled_table(self):
         games = read_table(TABLE)
         self.assertEqual(len(games), 324)

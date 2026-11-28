@@ -30,7 +30,8 @@ KIT_FILES = ["CMakeLists.txt", "cmake", "core", "cpu", "systems"]
 # name each (tests/test_release_docs.py).
 PROGRAMS = ("retrocast", "nes_headless", "nesrecomp", "gb_headless", "gbrecomp",
             "genesis_headless", "mdrecomp", "atari2600_headless", "atari2600recomp",
-            "sms_headless", "smsrecomp", "cps1_headless", "cps1recomp")
+            "sms_headless", "smsrecomp", "cps1_headless", "cps1recomp",
+            "cps2_headless", "cps2_recompile")
 
 def run(*cmd, cwd=None):
     print("+", " ".join(cmd), flush=True)

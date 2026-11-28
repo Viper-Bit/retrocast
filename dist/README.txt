@@ -1,6 +1,6 @@
 retrocast - static recompiler for NES, Famicom Disk System, Game Boy, Game Boy Color,
-Genesis / Mega Drive, Atari 2600, Master System, Game Gear and Capcom Play
-System I (CPS-1) arcade games
+Genesis / Mega Drive, Atari 2600, Master System, Game Gear and Capcom arcade
+games (CPS-1 and headless CPS-2)
 https://github.com/Viper-Bit/retrocast
 
 No games are included. Use your own legally dumped games (.nes, .fds, .gb, .gbc,
@@ -9,7 +9,7 @@ No games are included. Use your own legally dumped games (.nes, .fds, .gb, .gbc,
 
 WHAT IS IN HERE
 
-  retrocast       Plays a game of any of these systems in the built-in
+  retrocast       Plays a game of the SDL-supported systems in the built-in
                   interpreter. Usage: retrocast path/to/game
                   The system is read from the file itself (its header);
                   --system nes|gb|md|a26|sms|gg picks one when the file does not
@@ -25,11 +25,17 @@ WHAT IS IN HERE
     Atari 2600                 atari2600_headless  atari2600recomp
     Master System, Game Gear   sms_headless        smsrecomp
     CPS-1                      cps1_headless       cps1recomp
+    CPS-2 (headless)           cps2_headless       cps2_recompile
 
     *_headless      Plays a game without a window, for scripts and checks
                     (frames to run, pictures, sound, recordings, ...).
     *recomp         Turns a game into C source (the kit below runs it).
     Run one without arguments for its options.
+
+    CPS-2 usage: cps2_headless ROM_FOLDER SET_ID [CYCLES]
+    Keep the named MAME game and parent ZIPs in ROM_FOLDER, plus qsound.zip
+    when running the machine. See kit/systems/cps2/README.md for captures and
+    recompiling.
 
   kit/            Everything needed to build a recompiled game into a
                   native program (see below), with SDL3 prebuilt.

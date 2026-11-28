@@ -27,14 +27,19 @@ def read_table(path):
             rows.append(row)
         arrays[name] = rows
     games = {}
-    for name, parent, _, _, _, _, title, regions, _ in arrays["cps2_games"]:
+    for name, parent, machine, inputs, init, rotation, title, regions, _ in arrays["cps2_games"]:
         chips = set()
-        for tag, _, _, entries, _ in arrays[regions]:
-            for chip, crc, length, _, _, _, wiring in (arrays[entries] if entries != "NULL" else []):
+        layouts = {}
+        for tag, length, erase, entries, _ in arrays[regions]:
+            loads = arrays[entries] if entries != "NULL" else []
+            layouts[tag] = (length, erase, loads)
+            for chip, crc, length, _, _, _, wiring in loads:
                 if wiring != "CPS2_FILL":
                     key = None if wiring == "CPS2_UNDUMPED" else (int(length), crc[2:])
                     chips.add((tag, chip, key))
-        games[name] = {"parent": None if parent == "NULL" else parent, "title": title, "chips": chips}
+        games[name] = {"parent": None if parent == "NULL" else parent, "title": title,
+                       "machine": machine, "inputs": inputs, "init": init, "rotation": rotation,
+                       "chips": chips, "layouts": layouts}
     return games
 
 

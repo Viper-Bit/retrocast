@@ -21,6 +21,7 @@ own.
 | Master System / Mark III | Z80, Sega and Codemasters mappers, cartridge RAM, VDP (mode 4) and PSG, NTSC and PAL, two pads and Pause; recompiled (Z80) | [systems/mastersystem/README.md](systems/mastersystem/README.md) |
 | Game Gear | a mode of the Master System: 160x144 LCD, 12-bit palette, Start on port $00; recompiled (Z80) | [systems/mastersystem/README.md](systems/mastersystem/README.md) |
 | Capcom Play System I (arcade) | in progress: 210 sets (the plain boards, the Q-Sound games, Pang! 3, most bootlegs) play in `retrocast`, all boot-tested: zips, 68000 and Z80, CPS-A/CPS-B picture, YM2151, OKI and Q-Sound sound, save states, up to four players; recompiled (68000) | [systems/cps1/README.md](systems/cps1/README.md) |
+| Capcom Play System II (arcade) | headless runner and 68000 recompiler; 323 of 324 sets showed boot progress | [systems/cps2/README.md](systems/cps2/README.md) |
 
 ## How it works
 1. Each system has a recompiler (`systems/nes/recomp/` → `nesrecomp`, `systems/gb/recomp/`
@@ -48,8 +49,8 @@ Details: [docs/architecture.md](docs/architecture.md); plans:
 Windows (x64, arm64), Linux (x64, arm64; glibc 2.35+) and macOS (arm64):
 `retrocast`, which plays a game of any system in the interpreter; per
 system a headless program (`nes_headless`, `gb_headless`, `genesis_headless`,
-`atari2600_headless`, `sms_headless`, `cps1_headless`) and a recompiler (`nesrecomp`,
-`gbrecomp`, `mdrecomp`, `atari2600recomp`, `smsrecomp`, `cps1recomp`); and a **kit** that recompiles your games
+`atari2600_headless`, `sms_headless`, `cps1_headless`, `cps2_headless`) and a recompiler (`nesrecomp`,
+`gbrecomp`, `mdrecomp`, `atari2600recomp`, `smsrecomp`, `cps1recomp`, `cps2_recompile`); and a **kit** that recompiles your games
 into native programs with only CMake and a C compiler installed (SDL3 comes
 prebuilt). `README.txt` in the archive explains both. Archives are made by
 `tools/make_release.py` (`.github/workflows/release.yml`: push a tag `v*`
@@ -84,7 +85,7 @@ without it `cmake --build` builds Debug, which is too slow to play.
 Ninja and Makefiles ignore the flag and build Release anyway. Programs are
 put in `build/` with every generator (no `Release/` or `Debug/` subfolder).
 Headless (no SDL3): add `-DFRONTEND=OFF`. Only some systems:
-`-DSYSTEMS=gb` (default `nes;gb;genesis;atari2600;mastersystem;cps1`; `mastersystem` includes the Game Gear). Warnings as errors: `-DWERROR=ON`. Test programs: `-DTESTS=ON` ([Contributing](#contributing)). On Windows the game programs open
+`-DSYSTEMS=gb` (default `nes;gb;genesis;atari2600;mastersystem;cps1;cps2`; `mastersystem` includes the Game Gear). Warnings as errors: `-DWERROR=ON`. Test programs: `-DTESTS=ON` ([Contributing](#contributing)). On Windows the game programs open
 no console window; use the `_headless` programs for text output.
 
 ## Recompiling a game

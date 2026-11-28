@@ -50,9 +50,9 @@ jobs:
           mkdir "$RUNNER_TEMP/empty-roms"
           if "$RUNNER_TEMP/cps2-rom-check" "$RUNNER_TEMP/empty-roms" ssf2u 2>"$RUNNER_TEMP/cps2-error"; then exit 1; fi
           grep -Fx 'ssf2u maincpu ssfu.03a: missing or damaged chip' "$RUNNER_TEMP/cps2-error"
-      - name: Build the opt-in CPS-2 machine
+      - name: Build and check the CPS-2 machine
         run: |
-          cmake -S . -B "$RUNNER_TEMP/cps2-build" -DFRONTEND=OFF -DCPS2_HEADLESS=ON -DSYSTEMS= -DTESTS=ON -DWERROR=ON
+          cmake -S . -B "$RUNNER_TEMP/cps2-build" -DFRONTEND=OFF -DSYSTEMS=cps2 -DTESTS=ON -DWERROR=ON
           cmake --build "$RUNNER_TEMP/cps2-build" --target cps2_headless cps2_recompile cps2_machine_test --parallel 2
           "$RUNNER_TEMP/cps2-build/cps2_machine_test"
           python -c 'from pathlib import Path; import sys; code = bytes.fromhex("00fffffc00000100702a60fe"); Path(sys.argv[1]).write_bytes(code[:8].ljust(256, bytes(1)) + code[:8].ljust(256, bytes(1)) + code[8:])' "$RUNNER_TEMP/cps2.op"
